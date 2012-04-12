@@ -107,6 +107,7 @@ define("CANCEL","cancel");
 define("LOYALTY","Loyalty:"); 
 define("CALCULATED_IN","Calculated in");
 define("SEVER_TIME","Server time:");  
+define("MILISECS","ms");
 
 //QUEST
 define("Q_CONTINUE","Continue with the next task.");
@@ -351,6 +352,20 @@ define("MASS_SENT","Mass IGM was sent");
        $lang['forum'] = "Forum";
        $lang['register'] = "Register";
        $lang['login'] = "Login";
+
+/*
+|--------------------------------------------------------------------------
+|   top_menu 
+|--------------------------------------------------------------------------
+*/
+		$lang['header'] = array (
+							0 => 'Village overview',
+							1 => 'Vilage centre',
+							2 => 'Map',
+							3 => 'Statistics',
+							4 => 'Reports',
+							5 => 'Messages',
+							6 => 'Plus menu');
 
 
 ?>
