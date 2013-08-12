@@ -11,14 +11,14 @@
 
 include_once("GameEngine/Data/hero_full.php"); 
 
-if (isset($_POST['name'])) { 
-	$_POST['name'] = stripslashes($_POST['name']);
+if (isset($_POST['name'])) {
+     $_POST['name'] = stripslashes($_POST['name']);
      mysql_query("UPDATE ".TB_PREFIX."hero SET `name`='".($_POST['name'])."' where `uid`='".$session->uid."'") or die("ERROR:".mysql_error()); 
         $hero = mysql_query("SELECT * FROM " . TB_PREFIX . "hero WHERE `uid` = " . $session->uid . ""); 
         $hero_info = mysql_fetch_array($hero); 
         echo "Hero name has been changed"; 
     } 
-     
+  
     $hero = $units->Hero($session->uid); 
 ?>
 
@@ -32,7 +32,8 @@ if (isset($_POST['name'])) {
 					echo "<a href=\"build.php?id=".$id."&rename\">".$hero_info['name']."</a></form>"; 
 				} 
 			?>
-			Level <?php echo $hero_info['level']; ?> <span class="info">( <?php echo"<img class=\"unit u".$hero_info['unit']."\" src=\"img/x.gif\" alt=\"".$technology->getUnitName($hero_info['unit'])."\" title=\"".$technology->getUnitName($hero_info['unit'])."\" /> ".$technology->getUnitName($hero_info['unit']); ?> )</span></th>
+			
+  Level <?php echo $hero_info['level']; ?> <span class="info">( <?php echo"<img class=\"unit u".$hero_info['unit']."\" src=\"img/x.gif\" alt=\"".$technology->getUnitName($hero_info['unit'])."\" title=\"".$technology->getUnitName($hero_info['unit'])."\" /> ".$technology->getUnitName($hero_info['unit']); ?> )</span></th>
 	</tr></thead> 
     <tbody><tr> 
         <th>Offence</th> 
@@ -147,6 +148,12 @@ if (isset($_POST['name'])) {
         <td class="val">100%</td> 
 		<td class="xp"><img class="bar" src="img/x.gif" style="width:200px;" alt="100%" title="100%" /></td>
 		<td class="up"></td> 
+		<!-- //fix delete hero -->
+					<?php 
+//					echo"<a href=\"build.php?id=".$id."&active=1\">Active</a>"; 
+					echo "<div class=\"abort\"><a href=\"build.php?id=".$id."&delete=1\"><img src=\"img/x.gif\" class=\"del\" title=\"Delete Hero\" alt=\"Delete Hero\" /></a></div>";
+					?>
+		<!-- //end fix -->
         <td class="rem"><?php echo $hero_info['points']; ?></td> 
 	<?php } ?>
     </tr> 
@@ -164,8 +171,24 @@ if (isset($_POST['name'])) {
     Your hero has conquered <b><?php echo $database->VillageOasisCount($village->wid); ?></b> <a href="build.php?id=<?php echo $id; ?>&land">oases</a>.</p> 
 	 
     <?php  
+
+	//FIX hero
+      if($_GET['active'] == 1){
+            mysql_query("UPDATE ".TB_PREFIX."hero SET `dead` = '0', `health` = '100', `trainingtime` = '".$training_time2."' WHERE `uid` = '".$session->uid."'");
+            mysql_query("UPDATE " . TB_PREFIX . "units SET hero = 1 WHERE vref = ".$village->wid."");
+            header("Location: build.php?id=".$id."");
+    }
+	
+	if($_GET['delete'] == 1){
+		mysql_query("UPDATE " . TB_PREFIX . "units SET hero = 0 WHERE vref = ".$village->wid."");
+            mysql_query("DELETE FROM ".TB_PREFIX."hero  WHERE `uid` = '".$session->uid."'");
+            header("Location: build.php?id=".$id."");
+    }
+	
+	//end FIX
+
      
-    if(isset($_GET['add'])) { 
+    	if(isset($_GET['add'])) { 
             if($_GET['add'] == "reset") { 
                 if($hero_info['level'] <= 3){ 
                       if($hero_info['attack'] != 0 OR $hero_info['defence'] != 0 OR $hero_info['attackbonus'] != 0 OR $hero_info['defencebonus'] != 0 OR $hero_info['regeneration'] != 0){ 
