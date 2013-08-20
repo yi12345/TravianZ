@@ -63,7 +63,7 @@ break;
 case 3:
 $tt =  "+25% lumber and +25% crop per hour\" title=\"+25% lumber and +25% crop per hour";
 $ttt = "<td class=\"ico\"><img class=\"r1\" src=\"img/x.gif\" title=\"".LUMBER."\"> 25% ".LUMBER."</td>
-		<td class=\"ico\"><img class=\"r4\" src=\"img/x.gif\" title=\"".CROP."\"> 25% ".CROP."</td>";
+		<tr><td class=\"ico\"><img class=\"r4\" src=\"img/x.gif\" title=\"".CROP."\"> 25% ".CROP."</td></tr>";
 break;
 case 4:
 case 5:
@@ -73,7 +73,7 @@ break;
 case 6:
 $tt =  "+25% clay and +25% crop per hour\" title=\"+25% clay and +25% crop per hour";
 $ttt = "<td class=\"ico\"><img class=\"r2\" src=\"img/x.gif\" title=\"".CLAY."\"> 25% ".CLAY."</td>
-		<td class=\"ico\"><img class=\"r4\" src=\"img/x.gif\" title=\"".CROP."\"> 25% ".CROP."</td>";
+		<tr><td class=\"ico\"><img class=\"r4\" src=\"img/x.gif\" title=\"".CROP."\"> 25% ".CROP."</td></tr>";
 break;
 case 7:
 case 8:
@@ -83,7 +83,7 @@ break;
 case 9:
 $tt =  "+25% iron and +25% crop per hour\" title=\"+25% iron and +25% crop per hour";
 $ttt = "<td class=\"ico\"><img class=\"r3\" src=\"img/x.gif\" title=\"".IRON."\"> 25% ".IRON."</td>
-		<td class=\"ico\"><img class=\"r4\" src=\"img/x.gif\" title=\"".CROP."\"> 25% ".CROP."</td>";
+		<tr><td class=\"ico\"><img class=\"r4\" src=\"img/x.gif\" title=\"".CROP."\"> 25% ".CROP."</td></tr>";
 break;
 case 10:
 case 11:
@@ -469,7 +469,7 @@ if($type==18 or $type==19 or $type==20 or $type==21){
         $enough_cp = false;
       }
       
-			$otext = ($basearray['occupied'] == 1)? "occupied" : "unoccupied"; 
+			$otext = ($oasis['name']); 
 			if($village->unitarray['u'.$session->tribe.'0'] >= 3 AND $enough_cp) {
         $test = "<a href=\"a2b.php?id=".$_GET['d']."&amp;s=1\">&raquo;  Found new village.</a>";
       } elseif($village->unitarray['u'.$session->tribe.'0'] >= 3 AND !$enough_cp) {
@@ -487,7 +487,7 @@ if($type==18 or $type==19 or $type==20 or $type==21){
 		"&raquo; Raid $otext oasis. (build a rally point)" : 
 		
 		
-		"<a href=\"a2b.php?z=".$_GET['d']."&o\">&raquo; Raid $otext oasis.</a>" :
+		"<a href=\"a2b.php?z=".$_GET['d']."&o\">&raquo; Raid $otext.</a>" :
 		"$test"
 			?>
 		</tr>

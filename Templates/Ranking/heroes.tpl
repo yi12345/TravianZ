@@ -8,7 +8,7 @@
 \** --------------------------------------------------- **/
 		if(!is_numeric($_SESSION['search'])) {
 		?>
-			<center><font color=orange size=2><p class=\"error\">The user <b>"<?php echo $_SESSION['search']; ?>"</b> does not exist or has no hero.</p></font></center>
+			<center><font color=orange size=2><p class=\"error\">The hero <b>"<?php echo $_SESSION['search']; ?>"</b> does not exist.</p></font></center>
 		<?php
 			$search = 0;
 		} else {
@@ -46,7 +46,7 @@
         	$ranking = $ranking->getRank();
         	for($i = $start; $i < ($start + 20); $i++) {
         		if(isset($ranking[$i]['name']) && $ranking[$i] != "pad") {
-        			if($ranking[$i]['uid'] == $session->uid) {
+        			if($i == $search) {
         				echo "<tr class=\"hl \"><td class=\"ra  fc\" >";
         			} else {
         				echo "<tr><td class=\"ra \" >";

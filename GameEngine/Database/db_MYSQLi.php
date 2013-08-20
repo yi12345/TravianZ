@@ -23,10 +23,12 @@ class MYSQLi_DB {
 
 	function register($username, $password, $email, $tribe, $act) {
 		$time = time();
-        $timep = time() + PROTECTION;
-		if(strtotime(START_TIME) > time()){
-		$timep = (strtotime(START_TIME) + PROTECTION);
+		$stime = strtotime(START_DATE)-strtotime(date('m/d/Y'))+strtotime(START_TIME);
+		if($stime > time()){
+		$time = $stime;
 		}
+		$timep = $time + PROTECTION;
+		$time = time();
 		$q = "INSERT INTO " . TB_PREFIX . "users (username,password,access,email,timestamp,tribe,act,protect,lastupdate,regtime) VALUES ('$username', '$password', " . USER . ", '$email', $time, $tribe, '$act', $timep, $time, $time)";
 		if(mysql_query($this->connection, $q)) {
 			return mysql_insert_id($this->connection);
@@ -526,17 +528,21 @@ class MYSQLi_DB {
 	}
 
 	function populateOasisUnits($wid, $high) {
-		$basearray = $this->getMInfo($wid);
 		$basearray = $this->getOasisInfo($wid);
-		if($basearray2['high'] == 0){
+		if($high == 0){
 		  $max = rand(15,30);
-		  }elseif($basearray2['high'] == 1){
-		  $max = rand(70,90);
-		  }elseif($basearray2['high'] == 2){
-		  $max = rand(100,140);
+		  }elseif($high == 1){
+		  $max = rand(50,70);
+		  }elseif($high == 2){
+		  $max = rand(90,120);
+		  }
+		  $max2 = 0;
+		  $rand = rand(0,3);
+		  if($rand == 1){
+		  $max2 = 3;
 		  }
 		  //each Troop is a Set for oasis type like mountains have rats spiders and snakes fields tigers elphants clay wolves so on stonger one more not so less
-		  switch($basearray['oasistype']) {
+		  switch($basearray['type']) {
 			case 1:
 			case 2:
 			  //+25% lumber per hour
@@ -545,7 +551,7 @@ class MYSQLi_DB {
 			  break;
 			case 3:
 			  //+25% lumber and +25% crop per hour
-			  $q = "UPDATE " . TB_PREFIX . "units SET  u35 = u35 + '".rand(0,5)."', u36 = u36 + '".rand(0,5)."', u37 = u37 + '".rand(0,5)."', u38 = u38 + '".rand(0,5)."' WHERE vref = '" . $wid . "' AND (u36 <= ".$max." OR u37 <= ".$max." OR u38 <= ".$max.")";
+			  $q = "UPDATE " . TB_PREFIX . "units SET  u35 = u35 + '".rand(0,5)."', u36 = u36 + '".rand(0,5)."', u37 = u37 + '".rand(0,5)."', u38 = u38 + '".rand(0,5)."', u40 = u40 + '".rand(0,$max2)."' WHERE vref = '" . $wid . "' AND (u36 <= ".$max." OR u37 <= ".$max." OR u38 <= ".$max.")";
 			  $result = mysqli_query($this->connection, $q);
 			  break;
 			case 4:
@@ -556,7 +562,7 @@ class MYSQLi_DB {
 			  break;
 			case 6:
 			  //+25% clay and +25% crop per hour
-			  $q = "UPDATE " . TB_PREFIX . "units SET u36 = u36 + '".rand(0,5)."', u37 = u37 + '".rand(0,5)."', u38 = u38 + '".rand(0,5)."' WHERE vref = '" . $wid . "' AND (u36 <= ".$max." OR u37 <= ".$max." OR u38 <= ".$max.")";
+			  $q = "UPDATE " . TB_PREFIX . "units SET u36 = u36 + '".rand(0,5)."', u37 = u37 + '".rand(0,5)."', u38 = u38 + '".rand(0,5)."', u40 = u40 + '".rand(0,$max2)."' WHERE vref = '" . $wid . "' AND (u36 <= ".$max." OR u37 <= ".$max." OR u38 <= ".$max.")";
 			  $result = mysqli_query($this->connection, $q);
 			  break;
 			case 7:
@@ -567,7 +573,7 @@ class MYSQLi_DB {
 			  break;
 			case 9:
 			  //+25% iron and +25% crop
-			  $q = "UPDATE " . TB_PREFIX . "units SET u31 = u31 + '".rand(0,5)."', u32 = u32 + '".rand(0,5)."', u34 = u34 + '".rand(0,5)."' WHERE vref = '" . $wid . "' AND (u31 <= ".$max." OR u32 <= ".$max." OR u34 <= ".$max.")";
+			  $q = "UPDATE " . TB_PREFIX . "units SET u31 = u31 + '".rand(0,5)."', u32 = u32 + '".rand(0,5)."', u34 = u34 + '".rand(0,5)."', u40 = u40 + '".rand(0,$max2)."' WHERE vref = '" . $wid . "' AND (u31 <= ".$max." OR u32 <= ".$max." OR u34 <= ".$max.")";
 			  $result = mysqli_query($this->connection, $q);
 			  break;
 			case 10:
@@ -578,7 +584,7 @@ class MYSQLi_DB {
 			  break;
 			case 12:
 			  //+50% crop per hour
-			  $q = "UPDATE " . TB_PREFIX . "units SET u33 = u33 + '".rand(0,5)."', u37 = u37 + '".rand(0,5)."', u38 = u38 + '".rand(0,5)."', u39 = u39 + '".rand(0,5)."' WHERE vref = '" . $wid . "' AND (u33 <= ".$max." OR u37 <= ".$max." OR u38 <= ".$max.")";
+			  $q = "UPDATE " . TB_PREFIX . "units SET u33 = u33 + '".rand(0,5)."', u37 = u37 + '".rand(0,5)."', u38 = u38 + '".rand(0,5)."', u39 = u39 + '".rand(0,5)."', u40 = u40 + '".rand(0,$max2)."' WHERE vref = '" . $wid . "' AND (u33 <= ".$max." OR u37 <= ".$max." OR u38 <= ".$max." OR u39 <= ".$max.")";
 			  $result = mysqli_query($this->connection, $q);
 			  break;
 		  }
@@ -1416,13 +1422,33 @@ class MYSQLi_DB {
 		}
 	}
 
-	function modifyResource($vid, $wood, $clay, $iron, $crop, $mode) {
-		if(!$mode) {
-			$q = "UPDATE " . TB_PREFIX . "vdata set wood = wood - $wood, clay = clay - $clay, iron = iron - $iron, crop = crop - $crop where wref = $vid";
-		} else {
-			$q = "UPDATE " . TB_PREFIX . "vdata set wood = wood + $wood, clay = clay + $clay, iron = iron + $iron, crop = crop + $crop where wref = $vid";
-		}
-		return mysqli_query($this->connection, $q);
+	 function modifyResource($vid, $wood, $clay, $iron, $crop, $mode) {
+    $q="SELECT wood,clay,iron,crop,maxstore,maxcrop from " . TB_PREFIX . "vdata where wref = ".$vid."";
+                $result = mysqli_query($this->connection, $q);
+    $checkres= $this->mysqli_fetch_all($result);
+                if(!$mode){
+    $nwood=$checkres[0]['wood']-$wood;
+    $nclay=$checkres[0]['clay']-$clay;
+    $niron=$checkres[0]['iron']-$iron;
+    $ncrop=$checkres[0]['crop']-$crop;
+    if($nwood<0 or $nclay<0 or $niron<0 or $ncrop<0){$shit=true;}
+    $dwood=($nwood<0)?0:$nwood;
+    $dclay=($nclay<0)?0:$nclay;
+    $diron=($niron<0)?0:$niron;
+    $dcrop=($ncrop<0)?0:$ncrop;
+    }else{
+    $nwood=$checkres[0]['wood']+$wood;
+    $nclay=$checkres[0]['clay']+$clay;
+    $niron=$checkres[0]['iron']+$iron;
+    $ncrop=$checkres[0]['crop']+$crop;
+    $dwood=($nwood>$checkres[0]['maxstore'])?$checkres[0]['maxstore']:$nwood;
+    $dclay=($nclay>$checkres[0]['maxstore'])?$checkres[0]['maxstore']:$nclay;
+    $diron=($niron>$checkres[0]['maxstore'])?$checkres[0]['maxstore']:$niron;
+    $dcrop=($ncrop>$checkres[0]['maxcrop'])?$checkres[0]['maxcrop']:$ncrop;
+    }
+    if(!$shit){
+    $q = "UPDATE " . TB_PREFIX . "vdata set wood = $dwood, clay = $dclay, iron = $diron, crop = $dcrop where wref = ".$vid;
+    return mysqli_query($this->connection, $q); }else{return false;}
 	}
 
 	function modifyOasisResource($vid, $wood, $clay, $iron, $crop, $mode) {
@@ -1447,7 +1473,11 @@ class MYSQLi_DB {
 	}
 
 	function getVSumField($uid, $field) {
+		if($field != "cp"){
 		$q = "SELECT sum(" . $field . ") FROM " . TB_PREFIX . "vdata where owner = $uid";
+		}else{
+		$q = "SELECT sum(" . $field . ") FROM " . TB_PREFIX . "vdata where owner = $uid and natar = 0";
+		}
 		$result = mysqli_query($this->connection, $q);
 		$row = mysqli_fetch_row($result);
 		return $row[0];
@@ -1458,12 +1488,18 @@ class MYSQLi_DB {
 		$q = "UPDATE " . TB_PREFIX . "vdata set lastupdate = $time where wref = $vid";
 		return mysqli_query($this->connection, $q);
 	}
+
 	function updateOasis($vid) {
 		$time = time();
 		$q = "UPDATE " . TB_PREFIX . "odata set lastupdated = $time where wref = $vid";
 		return mysqli_query($this->connection, $q);
 	}
-
+	
+	function updateOasis2($vid, $time) {
+		$time = time();
+		$q = "UPDATE " . TB_PREFIX . "odata set lastupdated2 = lastupdated2 + $time where wref = $vid";
+		return mysqli_query($this->connection, $q);
+	}
 
 	function setVillageName($vid, $name) {
 		if(!empty($name))
@@ -1893,9 +1929,15 @@ class MYSQLi_DB {
 		$dbarray = mysqli_fetch_array($result, MYSQLI_BOTH);
 		$q = "UPDATE ".TB_PREFIX."bdata SET timestamp = $time WHERE id = '".$dbarray['id']."'";
 		$this->query($q);
-		$q2 = "SELECT * FROM " . TB_PREFIX . "bdata where wid = $wid and loopcon = 1 and field <= 18 order by master,timestamp ASC";
-		if(mysqli_num_rows($q2) > 0){
+
+		$tribe = $this->getUserField($this->getVillageField($wid, "owner"), "tribe", 0);
+		if($tribe == 1){
+		$q2 = "SELECT * FROM " . TB_PREFIX . "bdata where wid = $wid and loopcon = 1 and field >= 19 order by master,timestamp ASC";
+		}else{
+		$q2 = "SELECT * FROM " . TB_PREFIX . "bdata where wid = $wid and loopcon = 1 order by master,timestamp ASC";
+		}
 		$result2 = mysqli_query($q2);
+		if(mysqli_num_rows($result2) > 0){
 		$dbarray2 = mysql_fetch_array($result2);
 		$wc_time = $dbarray['timestamp'];
 		$q2 = "UPDATE ".TB_PREFIX."bdata SET timestamp = timestamp - $wc_time WHERE id = '".$dbarray2['id']."'";
@@ -2377,7 +2419,7 @@ class MYSQLi_DB {
 
 		if(!$mode) {
 			$barracks = array(1,2,3,11,12,13,14,21,22,31,32,33,34,35,36,37,38,39,40,41,42,43,44);
-			$greatbarracks = array(61,62,63,71,72,73,84,81,82,91,92,93,94,95,96,97,98,99,100,101,102,103,104);
+			$greatbarracks = array(61,62,63,71,72,73,74,81,82,91,92,93,94,95,96,97,98,99,100,101,102,103,104);
 			$stables = array(4,5,6,15,16,23,24,25,26,45,46);
 			$greatstables = array(64,65,66,75,76,83,84,85,86,105,106);
 			$workshop = array(7,8,17,18,27,28,47,48);
@@ -2440,12 +2482,7 @@ class MYSQLi_DB {
 	$time += $queued[count($queued) - 1]['timestamp'] - $now;
 	$time2 += $queued[count($queued) - 1]['timestamp'] - $now;
 	}
-	if($queued[count($queued) - 1]['unit'] == $unit){
-	$time = $amt*$queued[count($queued) - 1]['eachtime'];
-			$q = "UPDATE " . TB_PREFIX . "training SET amt = amt + $amt, timestamp = timestamp + $time WHERE id = ".$queued[count($queued) - 1]['id']."";
-	}else{
 			$q = "INSERT INTO " . TB_PREFIX . "training values (0,$vid,$unit,$amt,$pop,$time,$each,$time2)";
-	}
 		} else {
 			$q = "DELETE FROM " . TB_PREFIX . "training where id = $vid";
 		}
@@ -2820,7 +2857,7 @@ class MYSQLi_DB {
 			$wid = $row['id'];
 			$basearray = $this->getOMInfo($wid);
 			//We switch type of oasis and instert record with apropriate infomation.
-			$q = "INSERT into " . TB_PREFIX . "odata VALUES ('" . $basearray['id'] . "'," . $basearray['oasistype'] . ",0,800,800,800,800,800,800," . time() . ",100,2,'Unoccupied Oasis',".rand(0,2).")";
+			$q = "INSERT into " . TB_PREFIX . "odata VALUES ('" . $basearray['id'] . "'," . $basearray['oasistype'] . ",0,800,800,800,800,800,800," . time() . "," . time() . ",100,2,'Unoccupied Oasis',".rand(0,2).")";
 			$result = mysqli_query($this->connection, $q);
 		}
 	}

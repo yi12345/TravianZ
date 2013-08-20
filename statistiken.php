@@ -15,6 +15,7 @@ include("GameEngine/Village.php");
 $__start = $generator->pageLoadTimeStart();
 if(isset($_GET['rank'])){ $_POST['rank']==$_GET['rank']; }
 $_GET['aid'] = $session->alliance;
+$_GET['hero'] = count($database->getHero($session->uid));
 $ranking->procRankReq($_GET);
 $ranking->procRank($_POST);
 if(isset($_GET['newdid'])) {
@@ -157,10 +158,11 @@ include("Templates/res.tpl");
 <div id="stime">
 <div id="ltime">
 <div id="ltimeWrap">
-<?php echo CALCULATED_IN;?> <b><?php
-echo round(($generator->pageLoadTimeEnd()-$start)*1000);
+Calculated in <b><?php
+echo round(($generator->pageLoadTimeEnd()-$__start)*1000);
 ?></b> ms
-<br /><?php echo SEVER_TIME;?> <span id="tp1" class="b"><?php echo date('H:i:s'); ?></span>
+
+<br />Server time: <span id="tp1" class="b"><?php echo date('H:i:s'); ?></span>
 </div>
 	</div>
 </div>

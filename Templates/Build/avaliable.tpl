@@ -116,12 +116,12 @@ if($wall == 0 && $wall1 == 0) {
 if((($warehouse == 0 && $warehouse1 == 0) || $warehouse == 20) && $mainbuilding >= 1 && $id != 39 && $id != 40) {
 include("avaliable/warehouse.tpl");
 }
-if($mainbuilding >= 10 && $village->capital == 0 && $largeA['owner'] == $session->uid || $normalA['vref'] == $village->wid ) {
+if($mainbuilding >= 10 && $warehouse == 20 && $village->capital == 0 && $largeA['owner'] == $session->uid || $normalA['vref'] == $village->wid ) {
     include("avaliable/greatwarehouse.tpl");
 }
-if($mainbuilding >= 10 && $village->capital == 0 && $largeA['owner'] == $session->uid || $normalA['vref'] == $village->wid ) {
+if($mainbuilding >= 10 && $granary == 20 && $village->capital == 0 && $largeA['owner'] == $session->uid || $normalA['vref'] == $village->wid ) {
     include("avaliable/greatgranary.tpl");
-}
+}  
 if((($trapper == 0 && $trapper1 == 0) || $trapper == 20) && $rallypoint >= 1 && $session->tribe == 3 && $id != 39 && $id != 40) {
 include("avaliable/trapper.tpl");
 }
@@ -149,22 +149,39 @@ include("avaliable/grainmill.tpl");
 if($granary >= 1 && $warehouse >= 1 && $mainbuilding >= 3 && $market == 0 && $market1 == 0 && $id != 39 && $id != 40) {
 include("avaliable/marketplace.tpl");
 }
-//fix residence
-if($mainbuilding >= 5 && $residence == 0 && $residence1 == 0  && $id != 39 && $id != 40 && $palace == 0 && $palace1 == 0) {
+if($mainbuilding >= 5 && $residence == 0 && $residence1 == 0 && $id != 39 && $id != 40 && $palace == 0) {
 include("avaliable/residence.tpl");
 }
 if($academy == 0 && $academy1 == 0 && $mainbuilding >= 3 && $barrack >= 3 && $id != 39 && $id != 40) {
 include("avaliable/academy.tpl");
 }
-//fix palace
-if($palace == 0 && $palace1 == 0 && $embassy >= 1 && $mainbuilding >= 5 && $id != 39 && $id != 40 && $residence == 0 && $residence1 == 0) {
+
+if($palace == 0 && $palace1 == 0 && $village->natar == 0 && $embassy >= 1 && $mainbuilding >= 5 && $id != 39 && $id != 40 && $residence == 0 && $residence1 == 0) {
 
 //Fix Castle
 //id user
 $user = $session->uid;
 
+//connect to DB
+mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);
+mysql_select_db(SQL_DB);
+
+//loop search village user
+$query = mysql_query("SELECT * FROM ".TB_PREFIX."vdata WHERE owner = ".$user."");
+while($villaggi_array = mysql_fetch_array($query)){
+
+	//loop structure village
+	$query1 = mysql_query("SELECT * FROM ".TB_PREFIX."fdata WHERE vref = ".$villaggi_array['wref']."");
+	$strutture= mysql_fetch_array($query1);
+
 //search Castle in array structure village 
-$test =	in_array(26, $database->caststruc($user));
+$test =	in_array(26,$strutture);
+if ($test){	
+	break;
+	}
+
+}
+
 
 //if Castle no ready include palace.tpl
 if (!$test){
@@ -173,16 +190,18 @@ if (!$test){
 
 //end Fix
 }
+
+
 if($blacksmith == 0 && $blacksmith1 == 0 && $academy >= 3 && $mainbuilding >= 3 && $id != 39 && $id != 40) {
 include("avaliable/blacksmith.tpl");
 }
-if($stonemasonslodge == 0 && $stonemasonslodge1 == 0 && $palace >= 3 && $mainbuilding >= 5 && $id != 39 && $id != 40 && $village->capital == 1) {
+if($stonemasonslodge == 0 && $stonemasonslodge1 == 0 && $palace >= 3 && $mainbuilding >= 5 && $id != 39 && $id != 40) {
 include("avaliable/stonemason.tpl");
 }
 if($stable == 0 && $stable1 == 0 && $blacksmith >= 3 && $academy >= 5 && $id != 39 && $id != 40) {
 include("avaliable/stable.tpl");
 }
-if($treasury == 0 && $treasury1 == 0 && $mainbuilding >= 10  && $id != 39 && $id != 40) {
+if($treasury == 0 && $treasury1 == 0 && $village->natar == 0 && $mainbuilding >= 10  && $id != 39 && $id != 40) {
 include("avaliable/treasury.tpl");
 }
 if($brickyard == 0 && $brickyard1 == 0 && $claypit >= 10 && $mainbuilding >= 5  && $id != 39 && $id != 40 ) {
@@ -212,7 +231,7 @@ if($tradeoffice == 0 && $tradeoffice1 == 0 && $market == 20 && $stable >= 10  &&
 if($session->tribe == 1 && $horsedrinkingtrough == 0 && $horsedrinkingtrough1 == 0 && $rallypoint >= 10 && $stable == 20  && $id != 39 && $id != 40) {
     include("avaliable/horsedrinking.tpl");
 }
-if($session->tribe == 2 && $brewery == 0 && $brewery1 == 0 && $rallypoint >= 10 && $granary == 20  && $id != 39 && $id != 40) {
+if($session->tribe == 2 && $village->capital == 1 && $brewery == 0 && $brewery1 == 0 && $rallypoint >= 10 && $granary == 20  && $id != 39 && $id != 40) {
     include("avaliable/brewery.tpl");
 }
 if($greatbarracks == 0 && $greatbarracks1 == 0 && $barrack == 20 && $village->capital == 0 && $id != 39 && $id != 40) {
@@ -230,19 +249,19 @@ if($id != 39 && $id != 40) {
 
 <div id="build_list_soon" class="hide">
 <?php
-if($rallypoint == 0 && $session->tribe == 3 && $trapper == 0) {
+if($rallypoint == 0 && $session->tribe == 3 && $trapper == 0 ) {
 include("soon/trapper.tpl");
 }
-if($mainbuilding < 10 && $village->capital == 0 && $largeA['owner'] == $session->uid || $normalA['vref'] == $village->wid) {
+if($mainbuilding < 10 && $warehouse < 10 && $village->capital == 0 && $largeA['owner'] == $session->uid || $normalA['vref'] == $village->wid ) {
     include("soon/greatwarehouse.tpl");
 }
-if($mainbuilding < 10 && $village->capital == 0 && $largeA['owner'] == $session->uid || $normalA['vref'] == $village->wid) {
+if($mainbuilding < 10 && $granary < 10 && $village->capital == 0 && $largeA['owner'] == $session->uid || $normalA['vref'] == $village->wid ) {
     include("soon/greatgranary.tpl");
 } 
 if($hero == 0 && ($mainbuilding <= 2 || $rallypoint == 0)){
     include("soon/hero.tpl");
 }
-if($barrack == 0 && ($rallypoint == 0 || $mainbuilding <= 2)) {
+if($barrack == 0 && ($rallypoint == 0 || $mainbuilding <= 2) ) {
     include("soon/barracks.tpl");
 }
 if($armoury == 0 && ($mainbuilding <= 2 || $academy == 0)) {
@@ -254,14 +273,13 @@ if($cropland <= 4) {
 if($marketplace == 0 && ($mainbuilding <= 2 || $granary <= 0 || $warehouse <= 0)) {
    include("soon/marketplace.tpl");
 }
-if($residence == 0 && $palace == 0 && $mainbuilding <= 4) {
+if($residence == 0 && $mainbuilding <= 4) {
    include("soon/residence.tpl");
 }
 if($academy == 0 && ($mainbuilding <= 2 || $barrack <= 2)) {
    include("soon/academy.tpl");
 }
-if($embassy == 0 || $mainbuilding >= 2 && $mainbuilding <= 4 && $palace == 0 && $residence == 0) {
-
+if($embassy == 0 || $mainbuilding >= 2 && $mainbuilding <= 4 && $village->natar == 0) {
 //Fix Castle
 //id user
 $user = $session->uid;
@@ -292,18 +310,18 @@ if (!$test){
 	include("soon/palace.tpl");
 }
 
-   //end Fix
+//end Fix
 }
 if($blacksmith == 0 && ($academy <= 2 || $mainbuilding <= 2)) {
    include("soon/blacksmith.tpl");
 }
-if($stonemasonslodge == 0 && $palace <= 2  && $palace != 0 && $mainbuilding >= 2 && $mainbuilding <= 4 && $residence == 0) {
+if($stonemasonslodge == 0 && $palace <= 2  && $palace != 0 && $mainbuilding >= 2 && $mainbuilding <= 4 && $residence == 0 && $village->capital == 1) {
    include("soon/stonemason.tpl");
 }
 if($stable == 0 && (($blacksmith <= 2 && $blacksmith != 0) || ($academy >= 2 && $academy <= 4))) {
    include("soon/stable.tpl");
 }
-if($treasury == 0 && $mainbuilding <= 9 && $mainbuilding >= 5) {
+if($treasury == 0 && $mainbuilding <= 9 && $mainbuilding >= 5 && $village->natar == 0) {
    include("soon/treasury.tpl");
 }
 if($brickyard == 0 && $claypit <= 9  && $claypit >= 5 && $mainbuilding >= 2  && $mainbuilding <= 4) {
@@ -333,7 +351,7 @@ if($tradeoffice == 0 && $market <= 19 && $market >= 10 || $stable >= 5 && $stabl
 if($session->tribe == 1 && $horsedrinkingtrough == 0 && $rallypoint <= 9 && $rallypoint >= 5 || $stable <= 19 && $stable >= 10 && $session->tribe == 1) {
     include("soon/horsedrinking.tpl");
     }
-if($brewery == 0 && $rallypoint <= 9 && $rallypoint >= 5 || $granary <= 19 && $granary >= 10 && $session->tribe == 2) {
+if($brewery == 0 && $village->capital == 1 && $rallypoint <= 9 && $rallypoint >= 5 || $granary <= 19 && $granary >= 10 && $session->tribe == 2) {
     include("soon/brewery.tpl");
 }
 if($greatbarracks == 0 && $barrack >= 18 && $village->capital == 0) {
@@ -354,43 +372,13 @@ if($greatworkshop == 0 && $workshop >= 18 && $village->capital == 0 && GREAT_WKS
     if($academy == 0 && ($mainbuilding == 1 || $barrack == 0)) {
     include("soon/academy.tpl");
     }
-    if($palace == 0 && ($embassy == 0 || $mainbuilding <= 2)) {
-	//Fix Castle
-	//id user
-	$user = $session->uid;
-
-	//connect to DB
-	mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);
-	mysql_select_db(SQL_DB);
-
-	//loop search village user
-	$query = mysql_query("SELECT * FROM ".TB_PREFIX."vdata WHERE owner = ".$user."");
-	while($villaggi_array = mysql_fetch_array($query)){
-
-		//loop structure village
-		$query1 = mysql_query("SELECT * FROM ".TB_PREFIX."fdata WHERE vref = ".$villaggi_array['wref']."");
-		$strutture= mysql_fetch_array($query1);
-
-	//search Castle in array structure village 
-	$test =	in_array(26,$strutture);
-	if ($test){	
-		break;
-		}
-
-	}
-
-
-	//if Castle no ready include palace.tpl
-	if (!$test){
-		include("soon/palace.tpl");
-	}
-
-	   //end Fix
+    if($palace == 0 && ($embassy == 0 || $mainbuilding <= 2) && $village->natar == 0) {
+    include("soon/palace.tpl");
     }
     if($blacksmith == 0 && ($academy == 0 || $mainbuilding == 1)) {
     include("soon/blacksmith.tpl");
     }
-    if($stonemason == 0 && ($palace == 0 || $mainbuilding <= 2) && $residence == 0 && $village->capital == 1) {
+    if($stonemason == 0 && ($palace == 0 || $mainbuilding <= 2) && $residence == 0) {
     include("soon/stonemason.tpl");
     }
     if($stable == 0 && ($blacksmith == 0 || $academy <= 2)) {
@@ -426,7 +414,7 @@ if($greatworkshop == 0 && $workshop >= 18 && $village->capital == 0 && GREAT_WKS
     if($session->tribe == 1 && $horsedrinkingtrough == 0 && ($rallypoint <= 5 || $stable <= 10)) {
     include("soon/horsedrinking.tpl");
     }
-    if($brewery == 0 && ($rallypoint <= 5 || $granary <= 10) && $session->tribe == 2) {
+    if($brewery == 0 && ($rallypoint <= 5 || $granary <= 10) && $session->tribe == 2 && $village->capital == 1) {
     include("soon/brewery.tpl");
     }
     if($greatbarracks == 0 && $barrack >= 15 && $village->capital == 0) {
@@ -438,7 +426,6 @@ if($greatworkshop == 0 && $workshop >= 18 && $village->capital == 0 && GREAT_WKS
     if($greatworkshop == 0 && $workshop >= 15 && $village->capital == 0 && GREAT_WKS) {
         include("soon/greatworkshop.tpl");
     }
-	}
     ?>
     </div><script language="JavaScript" type="text/javascript">
 function show_build_list(list) {
@@ -477,4 +464,7 @@ function show_build_list(list) {
     }
 }
 </script>
+<?php 
+}
+?>
 </div>

@@ -54,13 +54,21 @@
         } else if($hero_info['unit'] == 26) {
         	$name = "Haeduan";
         }
-        
+        if($hero_info['level'] <= 60){
         $wood = (${'h'.$hero_info['unit'].'_full'}[$hero_info['level']]['wood']);
         $clay = (${'h'.$hero_info['unit'].'_full'}[$hero_info['level']]['clay']);
         $iron = (${'h'.$hero_info['unit'].'_full'}[$hero_info['level']]['iron']);
         $crop = (${'h'.$hero_info['unit'].'_full'}[$hero_info['level']]['crop']);
         $training_time = $generator->getTimeFormat(round((${'h'.$hero_info['unit'].'_full'}[$hero_info['level']]['time']) / SPEED * $artefact_bonus2 / $artefact_bonus));
         $training_time2 = time() + round((${'h'.$hero_info['unit'].'_full'}[$hero_info['level']]['time']) / SPEED * $artefact_bonus2 / $artefact_bonus);
+		}else{
+        $wood = (${'h'.$hero_info['unit'].'_full'}[60]['wood']);
+        $clay = (${'h'.$hero_info['unit'].'_full'}[60]['clay']);
+        $iron = (${'h'.$hero_info['unit'].'_full'}[60]['iron']);
+        $crop = (${'h'.$hero_info['unit'].'_full'}[60]['crop']);
+        $training_time = $generator->getTimeFormat(round((${'h'.$hero_info['unit'].'_full'}[60]['time']) / SPEED * $artefact_bonus2 / $artefact_bonus));
+        $training_time2 = time() + round((${'h'.$hero_info['unit'].'_full'}[60]['time']) / SPEED * $artefact_bonus2 / $artefact_bonus);
+		}
 ?>
 
     <table cellpadding="1" cellspacing="1" class="build_details">
@@ -166,8 +174,8 @@
             mysql_query("UPDATE ".TB_PREFIX."hero SET `inrevive` = '1', `trainingtime` = '".$training_time2."', `wref` = '".$village->wid."' WHERE `uid` = '".$session->uid."'");
 			mysql_query("UPDATE " . TB_PREFIX . "vdata SET `wood` = `wood` - ".$wood." WHERE `wref` = '" . $village->wid . "'");
 			mysql_query("UPDATE " . TB_PREFIX . "vdata SET `clay` = `clay` - ".$clay." WHERE `wref` = '" . $village->wid . "'");
-			mysql_query("UPDATE " . TB_PREFIX . "vdata SET `iron` = `wood` - ".$iron." WHERE `wref` = '" . $village->wid . "'");
-			mysql_query("UPDATE " . TB_PREFIX . "vdata SET `crop` = `wood` - ".$crop." WHERE `wref` = '" . $village->wid . "'");
+			mysql_query("UPDATE " . TB_PREFIX . "vdata SET `iron` = `iron` - ".$iron." WHERE `wref` = '" . $village->wid . "'");
+			mysql_query("UPDATE " . TB_PREFIX . "vdata SET `crop` = `crop` - ".$crop." WHERE `wref` = '" . $village->wid . "'");
             header("Location: build.php?id=".$id."");
 			}else{
 			header("Location: banned.php"); 

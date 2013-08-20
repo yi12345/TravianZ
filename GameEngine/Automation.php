@@ -154,55 +154,55 @@ class Automation {
 		$this->pruneResource();
 		$this->pruneOResource();
 		$this->checkWWAttacks();
-		if(!file_exists("GameEngine/Prevention/culturepoints.txt") or time()-filemtime("GameEngine/Prevention/culturepoints.txt")>10) {
+		if(!file_exists("GameEngine/Prevention/culturepoints.txt") or time()-filemtime("GameEngine/Prevention/culturepoints.txt")>50) {
 			$this->culturePoints();
 		}
 		if(!file_exists("GameEngine/Prevention/updatehero.txt") or time()-filemtime("GameEngine/Prevention/updatehero.txt")>50) {
 			$this->updateHero();
 		}
-		if(!file_exists("GameEngine/Prevention/cleardeleting.txt") or time()-filemtime("GameEngine/Prevention/cleardeleting.txt")>10) {
+		if(!file_exists("GameEngine/Prevention/cleardeleting.txt") or time()-filemtime("GameEngine/Prevention/cleardeleting.txt")>50) {
 			$this->clearDeleting();
 		}
-		if (! file_exists("GameEngine/Prevention/build.txt") or time() - filemtime("GameEngine/Prevention/build.txt") > 10)
+		if (! file_exists("GameEngine/Prevention/build.txt") or time() - filemtime("GameEngine/Prevention/build.txt")>50)
 		{
 			$this->buildComplete();
 		}
 		$this->MasterBuilder();
-		if (! file_exists("GameEngine/Prevention/demolition.txt") or time() - filemtime("GameEngine/Prevention/demolition.txt") > 10)
+		if (! file_exists("GameEngine/Prevention/demolition.txt") or time() - filemtime("GameEngine/Prevention/demolition.txt")>50)
 		{
 			$this->demolitionComplete();
 		}
 		$this->updateStore();
 		$this->delTradeRoute();
 		$this->TradeRoute();
-		if(!file_exists("GameEngine/Prevention/market.txt") or time()-filemtime("GameEngine/Prevention/market.txt")>10) {
+		if(!file_exists("GameEngine/Prevention/market.txt") or time()-filemtime("GameEngine/Prevention/market.txt")>50) {
 			$this->marketComplete();
 		}
-		if(!file_exists("GameEngine/Prevention/research.txt") or time()-filemtime("GameEngine/Prevention/research.txt")>10) {
+		if(!file_exists("GameEngine/Prevention/research.txt") or time()-filemtime("GameEngine/Prevention/research.txt")>50) {
 			$this->researchComplete();
 		}
-		if(!file_exists("GameEngine/Prevention/training.txt") or time()-filemtime("GameEngine/Prevention/training.txt")>10) {
+		if(!file_exists("GameEngine/Prevention/training.txt") or time()-filemtime("GameEngine/Prevention/training.txt")>50) {
 			$this->trainingComplete();
 		}
-		if(!file_exists("GameEngine/Prevention/starvation.txt") or time()-filemtime("GameEngine/Prevention/starvation.txt")>10) {
+		if(!file_exists("GameEngine/Prevention/starvation.txt") or time()-filemtime("GameEngine/Prevention/starvation.txt")>50) {
 			$this->starvation();
 		}
-		if(!file_exists("GameEngine/Prevention/celebration.txt") or time()-filemtime("GameEngine/Prevention/celebration.txt")>10) {
+		if(!file_exists("GameEngine/Prevention/celebration.txt") or time()-filemtime("GameEngine/Prevention/celebration.txt")>50) {
 			$this->celebrationComplete();
 		}
-		if(!file_exists("GameEngine/Prevention/sendunits.txt") or time()-filemtime("GameEngine/Prevention/sendunits.txt")>10) {
+		if(!file_exists("GameEngine/Prevention/sendunits.txt") or time()-filemtime("GameEngine/Prevention/sendunits.txt")>50) {
 			$this->sendunitsComplete();
 		}
 		if(!file_exists("GameEngine/Prevention/loyalty.txt") or time()-filemtime("GameEngine/Prevention/loyalty.txt")>50) {
 			$this->loyaltyRegeneration();
 		}
-		if(!file_exists("GameEngine/Prevention/sendreinfunits.txt") or time()-filemtime("GameEngine/Prevention/sendreinfunits.txt")>10) {
+		if(!file_exists("GameEngine/Prevention/sendreinfunits.txt") or time()-filemtime("GameEngine/Prevention/sendreinfunits.txt")>50) {
 			$this->sendreinfunitsComplete();
 		}
-		if(!file_exists("GameEngine/Prevention/returnunits.txt") or time()-filemtime("GameEngine/Prevention/returnunits.txt")>51) {
+		if(!file_exists("GameEngine/Prevention/returnunits.txt") or time()-filemtime("GameEngine/Prevention/returnunits.txt")>50) {
 			$this->returnunitsComplete();
 		}
-		if(!file_exists("GameEngine/Prevention/settlers.txt") or time()-filemtime("GameEngine/Prevention/settlers.txt")>10) {
+		if(!file_exists("GameEngine/Prevention/settlers.txt") or time()-filemtime("GameEngine/Prevention/settlers.txt")>50) {
 			$this->sendSettlersComplete();
 		}
 		$this->updateGeneralAttack();
@@ -329,7 +329,7 @@ class Automation {
 			foreach($needDelete as $need) {
 				$needVillage = $database->getVillagesID($need['uid']);
 				foreach($needVillage as $village) {
-					$q = "DELETE FROM ".TB_PREFIX."abdata where wref = ".$village;
+					$q = "DELETE FROM ".TB_PREFIX."abdata where vref = ".$village;
 					$database->query($q);
 					$q = "DELETE FROM ".TB_PREFIX."bdata where wid = ".$village;
 					$database->query($q);
@@ -614,10 +614,8 @@ class Automation {
 			$q = "UPDATE ".TB_PREFIX."fdata set f".$indi['field']." = ".$indi['level'].", f".$indi['field']."t = ".$indi['type']." where vref = ".$indi['wid'];
 			if($database->query($q)) {
 				$level = $database->getFieldLevel($indi['wid'],$indi['field']);
-				$pop = $this->getPop($indi['type'],($level-1));
-				$database->modifyPop($indi['wid'],$pop[0],0);
+				$this->recountPop($indi['wid']);
 				$this->procClimbers($database->getVillageField($indi['wid'],'owner'));
-				$database->addCP($indi['wid'],$pop[1]);
 
 					if($indi['type'] == 10) {
 					  $max=$database->getVillageField($indi['wid'],"maxstore");
@@ -697,8 +695,9 @@ class Automation {
 				$unitarrays = $this->getAllUnits($indi['wid']);
 				$village = $database->getVillage($indi['wid']);
 				$upkeep = $village['pop'] + $this->getUpkeep($unitarrays, 0);
-				if ($crop < $upkeep){
-					// add starv data
+				$starv = $database->getVillageField($indi['wid'],"starv");
+				if ($crop < $upkeep && $starv == 0){
+				// add starv data
 					$database->setVillageField($indi['wid'], 'starv', $upkeep);
 					$database->setVillageField($indi['wid'], 'starvupdate', $time);
 				}
@@ -973,7 +972,7 @@ class Automation {
 					if($res!=0){
 					$reference = $database->sendResource($resource[0],$resource[1],$resource[2],$resource[3],$reqMerc,0);
 					$database->modifyResource($from,$resource[0],$resource[1],$resource[2],$resource[3],0);
-					$database->addMovement(0,$from,$to,$reference,micrtime(true),microtime(true)+$timetaken,$send);
+					$database->addMovement(0,$from,$to,$reference,microtime(true),microtime(true)+$timetaken,$send);
 					}
 				}
 		}
@@ -991,6 +990,7 @@ class Automation {
 		$q = "SELECT * FROM ".TB_PREFIX."movement, ".TB_PREFIX."attacks where ".TB_PREFIX."movement.ref = ".TB_PREFIX."attacks.id and ".TB_PREFIX."movement.proc = '0' and ".TB_PREFIX."movement.sort_type = '3' and ".TB_PREFIX."attacks.attack_type != '2' and endtime < $time ORDER BY endtime ASC";
 		$dataarray = $database->query_return($q);
 		$totalattackdead = 0;
+		$data_num = 0;
 		foreach($dataarray as $data) {
 			//set base things
 			//$battle->resolveConflict($data);
@@ -1028,7 +1028,7 @@ class Automation {
 						$cannotsend = 1;
 						}
 						}
-						if($evasion == 1 && $maxevasion > 0 && $gold > 1 && $cannotsend == 0 && $dataarray[0]['attack_type'] > 2){
+						if($evasion == 1 && $maxevasion > 0 && $gold > 1 && $cannotsend == 0 && $dataarray[$data_num]['attack_type'] > 2){
 						$totaltroops = 0;
 						for($i=1;$i<=10;$i++){
 						$playerunit += $i;
@@ -1094,7 +1094,7 @@ class Automation {
 											$spys = array(4,14,23,44);
 										for($i=$start;$i<=$end;$i++) {
 											$y = $i-$u;
-											$Attacker['u'.$i] = $dataarray[0]['t'.$y];
+											$Attacker['u'.$i] = $dataarray[$data_num]['t'.$y];
 												//there are catas
 												if(in_array($i,$catapult)) {
 												$catp += $Attacker['u'.$i];
@@ -1113,7 +1113,7 @@ class Automation {
 												$spy_pic = $i;
 												}
 												}
-												 $Attacker['uhero'] = $dataarray[0]['t11'];
+												 $Attacker['uhero'] = $dataarray[$data_num]['t11'];
 												$hero_pic = "hero";
 									//need to set these variables.
 									$def_wall = $database->getFieldLevel($data['to'],40);
@@ -1130,17 +1130,17 @@ class Automation {
 									}
 
 									//type of attack
-									if($dataarray[0]['attack_type'] == 1){
+									if($dataarray[$data_num]['attack_type'] == 1){
 										$type = 1;
 										$scout = 1;
 									}
-									if($dataarray[0]['attack_type'] == 2){
+									if($dataarray[$data_num]['attack_type'] == 2){
 										$type = 2;
 									}
-									if($dataarray[0]['attack_type'] == 3){
+									if($dataarray[$data_num]['attack_type'] == 3){
 										$type = 3;
 									}
-									if($dataarray[0]['attack_type'] == 4){
+									if($dataarray[$data_num]['attack_type'] == 4){
 										$type = 4;
 									}
 
@@ -1250,7 +1250,7 @@ class Automation {
 											$spys = array(4,14,23,44);
 										for($i=$start;$i<=$end;$i++) {
 											$y = $i-$u;
-											$Attacker['u'.$i] = $dataarray[0]['t'.$y];
+											$Attacker['u'.$i] = $dataarray[$data_num]['t'.$y];
 												//there are catas
 												if(in_array($i,$catapult)) {
 												$catp += $Attacker['u'.$i];
@@ -1269,7 +1269,7 @@ class Automation {
 												$spy_pic = $i;
 												}
 												}
-											   $Attacker['uhero'] = $dataarray[0]['t11'];
+											   $Attacker['uhero'] = $dataarray[$data_num]['t11'];
 												$hero_pic = "hero";
 									//need to set these variables.
 									$def_wall = 1;
@@ -1281,17 +1281,17 @@ class Automation {
 
 
 									//type of attack
-									if($dataarray[0]['attack_type'] == 1){
+									if($dataarray[$data_num]['attack_type'] == 1){
 										$type = 1;
 										$scout = 1;
 									}
-									if($dataarray[0]['attack_type'] == 2){
+									if($dataarray[$data_num]['attack_type'] == 2){
 										$type = 2;
 									}
-									if($dataarray[0]['attack_type'] == 3){
+									if($dataarray[$data_num]['attack_type'] == 3){
 										$type = 3;
 									}
-									if($dataarray[0]['attack_type'] == 4){
+									if($dataarray[$data_num]['attack_type'] == 4){
 										$type = 4;
 									}
 
@@ -2457,8 +2457,9 @@ if($data['t11'] > 0){
 					}
 $palaceimg = "<img src=\"".GP_LOCATE."img/g/g26.gif\" height=\"20\" width=\"15\" alt=\"Palace\" title=\"Palace\" />";
 $crannyimg = "<img src=\"".GP_LOCATE."img/g/g23.gif\" height=\"20\" width=\"15\" alt=\"Cranny\" title=\"Cranny\" />";
+$wallimg = "<img src=\"".GP_LOCATE."img/g/g33Icon.gif\" height=\"20\" width=\"15\" alt=\"Wall\" title=\"Wall\" />";
 				$info_spy = "".$spy_pic.",".$palaceimg." Residance/Palace Level : ".$rplevel."
-				<br>".$crannyimg." Cranny level: ".$crannylevel."<br><br>Wall Level : ".$walllevel."";
+				<br>".$crannyimg." Cranny level: ".$crannylevel."<br>".$wallimg." Wall Level : ".$walllevel.""; 
 
 				}
 
@@ -2648,7 +2649,7 @@ $crannyimg = "<img src=\"".GP_LOCATE."img/g/g23.gif\" height=\"20\" width=\"15\"
 				}
 				
 				$database->setMovementProc($data['moveid']);
-				if($chiefing_village != 1 && $village_destroyed != 1){
+				if($chiefing_village != 1){
 				$database->addMovement(4,$to['wref'],$from['wref'],$data['ref'],$AttackArrivalTime,$endtime);
 				// send the bounty on type 6.
 				if($type !== 1)
@@ -2662,7 +2663,7 @@ $crannyimg = "<img src=\"".GP_LOCATE."img/g/g23.gif\" height=\"20\" width=\"15\"
 					$database->modifyPointsAlly($targetally,'RR',$totalstolentaken );
 					$database->modifyPointsAlly($ownally,'RR',$totalstolengain);
 				}
-				}else if($chiefing_village == 1){
+				}else{
 				$database->addEnforce2($data,$owntribe,$troopsdead1,$troopsdead2,$troopsdead3,$troopsdead4,$troopsdead5,$troopsdead6,$troopsdead7,$troopsdead8,$troopsdead9,$troopsdead10,$troopsdead11);
 				}
 			}
@@ -2801,7 +2802,8 @@ $crannyimg = "<img src=\"".GP_LOCATE."img/g/g23.gif\" height=\"20\" width=\"15\"
 				$unitarrays = $this->getAllUnits($to['wref']);
 				$getvillage = $database->getVillage($to['wref']);
 				$village_upkeep = $getvillage['pop'] + $this->getUpkeep($unitarrays, 0);
-				if ($crop < $village_upkeep){
+				$starv = $database->getVillageField($to['wref'],"starv");
+				if ($crop < $village_upkeep && $starv == 0){
 					// add starv data
 					$database->setVillageField($to['wref'], 'starv', $village_upkeep);
 					$database->setVillageField($to['wref'], 'starvupdate', time());
@@ -2816,7 +2818,7 @@ $crannyimg = "<img src=\"".GP_LOCATE."img/g/g23.gif\" height=\"20\" width=\"15\"
 				##############ISUE: Lag, fixed3####################################################
 				#### PHP.NET manual: unset() destroy more than one variable unset($foo1, $foo2, $foo3);######
 				################################################################################
-
+			$data_num++;
 			unset(
 			$Attacker
 			,$Defender
@@ -2824,6 +2826,7 @@ $crannyimg = "<img src=\"".GP_LOCATE."img/g/g23.gif\" height=\"20\" width=\"15\"
 			,$unitssend_att
 			,$unitssend_def
 			,$battlepart
+			,$unitlist
 			,$unitsdead_def
 			,$dead
 			,$steal
@@ -3643,7 +3646,8 @@ $crannyimg = "<img src=\"".GP_LOCATE."img/g/g23.gif\" height=\"20\" width=\"15\"
 				$unitarrays = $this->getAllUnits($train['vref']);
 				$village = $database->getVillage($train['vref']);
 				$upkeep = $village['pop'] + $this->getUpkeep($unitarrays, 0);
-				if ($crop < $upkeep){
+				$starv = $database->getVillageField($train['vref'],"starv");
+				if ($crop < $upkeep && $starv == 0){
 					// add starv data
 					$database->setVillageField($train['vref'], 'starv', $upkeep);
 					$database->setVillageField($train['vref'], 'starvupdate', $time);
@@ -3832,7 +3836,7 @@ $crannyimg = "<img src=\"".GP_LOCATE."img/g/g23.gif\" height=\"20\" width=\"15\"
 				}
 				$herolevel = $hdata['level'];
 				for($i = $herolevel+1; $i < 100; $i++){
-					if($hdata['experience'] > $hero_levels[$i]){
+					if($hdata['experience'] >= $hero_levels[$i]){
 					mysql_query("UPDATE " . TB_PREFIX ."hero SET level = $i WHERE heroid = '".$hdata['heroid']."'");
 					if($i < 99){
 					mysql_query("UPDATE " . TB_PREFIX ."hero SET points = points + 5 WHERE heroid = '".$hdata['heroid']."'");
@@ -4120,6 +4124,7 @@ $crannyimg = "<img src=\"".GP_LOCATE."img/g/g23.gif\" height=\"20\" width=\"15\"
 								$maxcount = $enforce['u'.$i];
 								$maxtype = $i;
 								$enf = $enforce['id'];
+								$enf_vill = $enforce['from'];
 							}
 							$totalunits += $enforce['u'.$i];
 							}
@@ -4149,32 +4154,85 @@ $crannyimg = "<img src=\"".GP_LOCATE."img/g/g23.gif\" height=\"20\" width=\"15\"
 				}
 				if($difcrop > 0){
 					$killunits = floor($difcrop/18000);
-					if($killunits > 0){
+					while($killunits > 0){
 					if (isset($enf)){
-						if($killunits < $maxcount){
+						if($killunits <= $maxcount){
 							$database->modifyEnforce($enf, $maxtype, $killunits, 0);
+							if($maxtype == "hero" && $maxcount > 0){
+							$heroid = $database->getHeroField($database->getVillageField($enf_vill,"owner"),"heroid");
+							$database->modifyHero("dead", 1, $heroid);
+							}
 							$database->setVillageField($starv['wref'], 'starv', $upkeep);
 							$database->setVillageField($starv['wref'], 'starvupdate', $time);
 						}else{
+							$database->modifyUnit($starv['wref'], array($maxtype), array($killunits), array(0));
+							$killunits -= $maxcount;
+							foreach ($enforcearray as $enforce){
+								for($i = 0 ; $i <= 50 ; $i++){
+									$units = $enforce['u'.$i];
+									if($enforce['u'.$i] > $maxcount){
+										$maxcount = $enforce['u'.$i];
+										$maxtype = $i;
+										$enf = $enforce['id'];
+									}
+									$totalunits += $enforce['u'.$i];
+									}
+							}
+							if($totalunits == 0){
+							$maxcount = $enforce['hero'];
+							$maxtype = "hero";
+							if($maxcount <= $killunits){
+							$heroid = $database->getHeroField($database->getVillageField($enf_vill,"owner"),"heroid");
+							$database->modifyHero("dead", 1, $heroid);
 							$database->deleteReinf($enf);
+							$killunits -= $maxcount;
+							}
+							}
 							$database->setVillageField($starv['wref'], 'starv', $upkeep);
 							$database->setVillageField($starv['wref'], 'starvupdate', $time);
 						}
 					}else{
-						if($killunits < $maxcount){
+						if($killunits <= $maxcount){
 							$database->modifyUnit($starv['wref'], array($maxtype), array($killunits), array(0));
+							$killunits = 0;
+							if($maxtype == "hero" && $maxcount > 0){
+							$heroid = $database->getHeroField($database->getVillageField($starv['wref'],"owner"),"heroid");
+							$database->modifyHero("dead", 1, $heroid);
+							}
 							$database->setVillageField($starv['wref'], 'starv', $upkeep);
 							$database->setVillageField($starv['wref'], 'starvupdate', $time);
-						}elseif($killunits > $maxcount){
-							$killunits = $maxcount;
-							$database->modifyUnit($starv['wref'], array($maxtype), array($killunits), array(0));
+						}else{
+							$database->modifyUnit($starv['wref'], array($maxtype), array($maxcount), array(0));
+							if($maxtype != "hero"){
+							$killunits -= $maxcount;
+							$unitarray['u'.$maxtype] = 0;
+							$maxcount = 0;
+							for($i = 0 ; $i <= 50 ; $i++){
+								$units = $unitarray['u'.$i];
+								if($unitarray['u'.$i] > $maxcount){
+									$maxcount = $unitarray['u'.$i];
+									$maxtype = $i;
+								}
+								$totalunits += $unitarray['u'.$i];
+							}
+							if($totalunits == 0){
+							$maxcount = $unitarray['hero'];
+							$maxtype = "hero";
+							}
+							}else{
+							if($maxcount > 0){
+							$heroid = $database->getHeroField($database->getVillageField($starv['wref'],"owner"),"heroid");
+							$database->modifyHero("dead", 1, $heroid);
+							}
+							$killunits = 0;
+							}
 							$database->setVillageField($starv['wref'], 'starv', $upkeep);
 							$database->setVillageField($starv['wref'], 'starvupdate', $time);
 						}
 					}
 					}
+					}
 				}
-			}
 				$crop = $database->getCropProdstarv($starv['wref']);
 				if ($crop > $upkeep){
 					$database->setVillageField($starv['wref'], 'starv', 0);
@@ -4339,11 +4397,12 @@ $crannyimg = "<img src=\"".GP_LOCATE."img/g/g23.gif\" height=\"20\" width=\"15\"
 	private function regenerateOasisTroops() {
 		global $database;
 		$time = time();
-		$q = "SELECT * FROM " . TB_PREFIX . "odata where conqured = 0 and $time - lastupdated > 3600";
+		$time2 = NATURE_REGTIME;
+		$q = "SELECT * FROM " . TB_PREFIX . "odata where conqured = 0 and lastupdated2 + $time2 < $time";
 		$array = $database->query_return($q);
 		foreach($array as $oasis) {
 			$database->populateOasisUnits($oasis['wref'],$oasis['high']);
-			$database->updateOasis($oasis['wref']);
+			$database->updateOasis2($oasis['wref'], $time2);
 		}
 	}
 

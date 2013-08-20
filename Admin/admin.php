@@ -105,6 +105,9 @@ $up_avl = $latest - $ver ;
 												<a href="?p=server_info">Server Info</a>
 												<a href="?p=online">Online Users</a>
 												<a href="?p=notregistered">Players Not Activated</a>
+												<a href="?p=[]inactive">Players Inactivate</a>
+												<a href="?p=report">Players Reported</a>
+												<a href="?p=map">Map</a>
 												<br />
 												<a href="#"><b>Search</b></a>
 												<a href="?p=search">General Search</a>
