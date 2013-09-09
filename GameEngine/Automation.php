@@ -3045,8 +3045,19 @@ $wallimg = "<img src=\"".GP_LOCATE."img/g/g33Icon.gif\" height=\"20\" width=\"15
 						$heroid = $database->getHero($database->getVillageField($data['from'],"owner"),1);
 						$database->modifyHero("wref",$data['to'],$heroid,0);
 						$HeroTransfer = 1;
+					}else{ 
+			// hero goes to reinforce other player village 
+						$check = $database->getEnforce($data['to'], $data['from']); 
+				if (isset($check['id'])) { 
+			//if there are troops of the same owner hero, then hero is added to them 
+						$database->modifyEnforce($check['id'], "hero", 1, 1); 
+					}else{ 
+			// the hero is the only troop that reinforces 
+					$data['t11']=1; $database->addEnforce($data); 
+						} 
 					}
 				}
+			}
 			} if(!$HeroTransfer)
 		   {
   //check if there is defence from town in to town
