@@ -1,13 +1,15 @@
 <?php
 
-/** --------------------------------------------------- **\
- * | ********* DO NOT REMOVE THIS COPYRIGHT NOTICE ********* |
- * +---------------------------------------------------------+
- * | Credits:     All the developers including the leaders:  |
- * |              Advocaite & Dzoki & Donnchadh              |
- * |                                                         |
- * | Copyright:   TravianX Project All rights reserved       |
- * \** --------------------------------------------------- **/
+################################################################################
+##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
+## --------------------------------------------------------------------------- ##
+##  Filename       db_MYSQL.php                                                ##
+##  Developed by:  Advocaite & Dzoki & Donnchadh                     	       ##
+##  Fixed by:      Shadow - Doubleing Troops , STARVATION , HERO FIXED COMPL.  ##
+##  License:       TravianZ Project                                            ##
+##  Copyright:     TravianZ (c) 2012-2013. All rights reserved.                ##
+##                                                                             ##
+#################################################################################
 
 
 class MYSQL_DB {
@@ -20,7 +22,7 @@ class MYSQL_DB {
 
 	function register($username, $password, $email, $tribe, $act) {
 		$time = time();
-		$stime = strtotime(START_DATE)-strtotime(date('m/d/Y'))+strtotime(START_TIME);
+        $stime = strtotime(START_DATE)-strtotime(date('m/d/Y'))+strtotime(START_TIME);
 		if($stime > time()){
 		$time = $stime;
 		}
@@ -37,7 +39,7 @@ class MYSQL_DB {
 	function activate($username, $password, $email, $tribe, $locate, $act, $act2) {
 		$time = time();
 		$q = "INSERT INTO " . TB_PREFIX . "activate (username,password,access,email,tribe,timestamp,location,act,act2) VALUES ('$username', '$password', " . USER . ", '$email', $tribe, $time, $locate, '$act', '$act2')";
-		if(mysql_query($q, $this->connection)) {
+				if(mysql_query($q, $this->connection)) {
 			return mysql_insert_id($this->connection);
 		} else {
 			return false;
@@ -180,6 +182,12 @@ class MYSQL_DB {
 			$result = mysql_query($q, $this->connection);
 			return $this->mysql_fetch_all($result);
 	}
+
+	function getUnstarvation(){
+      			$q = "SELECT * FROM " . TB_PREFIX . "vdata where starv = 0 and starvupdate = 0";
+      			$result = mysql_query($q, $this->connection);
+      			return $this->mysql_fetch_all($result);
+  	} 
 
 	function getActivateField($ref, $field, $mode) {
 		if(!$mode) {
@@ -480,7 +488,8 @@ class MYSQL_DB {
 			if($OasisInfo['conqured'] == 0 || $OasisInfo['conqured'] != 0 && $OasisInfo['loyalty'] < 99 / min(3,(4-$this->VillageOasisCount($OasisInfo['conqured']))) && $troopcount == 0) {
 				$CoordsVillage = $this->getCoor($vref);
 				$CoordsOasis = $this->getCoor($wref);
-								$max = 2 * WORLD_MAX + 1;
+				//if(abs($CoordsOasis['x']-$CoordsVillage['x'])<=3 && abs($CoordsOasis['y']-$CoordsVillage['y'])<=3) {
+				$max = 2 * WORLD_MAX + 1;
                 		$x1 = intval($CoordsOasis['x']);
                 		$y1 = intval($CoordsOasis['y']);
                 		$x2 = intval($CoordsVillage['x']);
@@ -536,14 +545,14 @@ class MYSQL_DB {
 		if($high == 0){
 		  $max = rand(15,30);
 		  }elseif($high == 1){
-		  $max = rand(50,70);
-		  }elseif($high == 2){
-		  $max = rand(90,120);
-		  }
-		  $max2 = 0;
-		  $rand = rand(0,3);
-		  if($rand == 1){
-		  $max2 = 3;
+	          $max = rand(50,70);
+      		  }elseif($high == 2){
+	      	  $max = rand(90,120);	
+      		  }
+      		  $max2 = 0;
+      		  $rand = rand(0,3);
+      		  if($rand == 1){
+      		  $max2 = 3;
 		  }
 		  //each Troop is a Set for oasis type like mountains have rats spiders and snakes fields tigers elphants clay wolves so on stonger one more not so less
 		  switch($basearray['type']) {
@@ -591,8 +600,8 @@ class MYSQL_DB {
 			  $q = "UPDATE " . TB_PREFIX . "units SET u33 = u33 + '".rand(0,5)."', u37 = u37 + '".rand(0,5)."', u38 = u38 + '".rand(0,5)."', u39 = u39 + '".rand(0,5)."', u40 = u40 + '".rand(0,$max2)."' WHERE vref = '" . $wid . "' AND (u33 <= ".$max." OR u37 <= ".$max." OR u38 <= ".$max." OR u39 <= ".$max.")";
 			  $result = mysql_query($q, $this->connection);
 			  break;
-		  }
-	}
+			  }
+		}
 
 	function populateOasisUnits2() {
 	$q2 = "SELECT * FROM " . TB_PREFIX . "wdata where oasistype != 0";
@@ -681,6 +690,7 @@ class MYSQL_DB {
 			return false;
 		}
 	}
+ 
 
 	function getProfileVillages($uid) {
 		$q = "SELECT capital,wref,name,pop,created from " . TB_PREFIX . "vdata where owner = $uid order by pop desc";
@@ -813,6 +823,24 @@ class MYSQL_DB {
 		$result = mysql_query($q, $this->connection);
 		return $this->mysql_fetch_all($result);
 	}
+
+	//fix market log	
+	function getMarketLog() {
+        	$q = "SELECT id,wid,log from " . TB_PREFIX . "market_log where id != 0 ORDER BY id ASC";
+        	$result = mysql_query($q, $this->connection);
+        	return $this->mysql_fetch_all($result);
+        }
+	function getMarketLogVillage($village) {
+		$q = "SELECT wref,owner,name from " . TB_PREFIX . "vdata where wref =$village ";
+        	$result = mysql_query($q, $this->connection);
+        	return $this->mysql_fetch_all($result);
+        }
+	function getMarketLogUsers($id_user) {
+        	$q = "SELECT id,username from " . TB_PREFIX . "users where id =$id_user ";
+        	$result = mysql_query($q, $this->connection);
+        	return $this->mysql_fetch_all($result);
+        }
+	//end fix
 
 	function getCoor($wref) {
 		if ($wref !=""){
@@ -1425,44 +1453,66 @@ class MYSQL_DB {
 			return $dbarray['tag'];
 		}
 	}
-	//////////////////// ADDED BY BRAINIAC - THANK YOU
+
+	/////////////ADDED BY BRAINIAC - THANK YOU
+
 	 function modifyResource($vid, $wood, $clay, $iron, $crop, $mode) {
-    $q="SELECT wood,clay,iron,crop,maxstore,maxcrop from " . TB_PREFIX . "vdata where wref = ".$vid."";
+    		$q="SELECT wood,clay,iron,crop,maxstore,maxcrop from " . TB_PREFIX . "vdata where wref = ".$vid."";
                 $result = mysql_query($q, $this->connection);
-    $checkres= $this->mysql_fetch_all($result);
+    		$checkres= $this->mysql_fetch_all($result);
                 if(!$mode){
-    $nwood=$checkres[0]['wood']-$wood;
-    $nclay=$checkres[0]['clay']-$clay;
-    $niron=$checkres[0]['iron']-$iron;
-    $ncrop=$checkres[0]['crop']-$crop;
-    if($nwood<0 or $nclay<0 or $niron<0 or $ncrop<0){$shit=true;}
-    $dwood=($nwood<0)?0:$nwood;
-    $dclay=($nclay<0)?0:$nclay;
-    $diron=($niron<0)?0:$niron;
-    $dcrop=($ncrop<0)?0:$ncrop;
-    }else{
-    $nwood=$checkres[0]['wood']+$wood;
-    $nclay=$checkres[0]['clay']+$clay;
-    $niron=$checkres[0]['iron']+$iron;
-    $ncrop=$checkres[0]['crop']+$crop;
-    $dwood=($nwood>$checkres[0]['maxstore'])?$checkres[0]['maxstore']:$nwood;
-    $dclay=($nclay>$checkres[0]['maxstore'])?$checkres[0]['maxstore']:$nclay;
-    $diron=($niron>$checkres[0]['maxstore'])?$checkres[0]['maxstore']:$niron;
-    $dcrop=($ncrop>$checkres[0]['maxcrop'])?$checkres[0]['maxcrop']:$ncrop;
-    }
-    if(!$shit){
-    $q = "UPDATE " . TB_PREFIX . "vdata set wood = $dwood, clay = $dclay, iron = $diron, crop = $dcrop where wref = ".$vid;
-    return mysql_query($q, $this->connection); }else{return false;}
-   }
+    		$nwood=$checkres[0]['wood']-$wood;
+    		$nclay=$checkres[0]['clay']-$clay;
+    		$niron=$checkres[0]['iron']-$iron;
+    		$ncrop=$checkres[0]['crop']-$crop;
+    		if($nwood<0 or $nclay<0 or $niron<0 or $ncrop<0){$shit=true;}
+    		$dwood=($nwood<0)?0:$nwood;
+    		$dclay=($nclay<0)?0:$nclay;
+    		$diron=($niron<0)?0:$niron;
+    		$dcrop=($ncrop<0)?0:$ncrop;
+    	}else{
+    		$nwood=$checkres[0]['wood']+$wood;
+    		$nclay=$checkres[0]['clay']+$clay;
+    		$niron=$checkres[0]['iron']+$iron;
+    		$ncrop=$checkres[0]['crop']+$crop;
+    		$dwood=($nwood>$checkres[0]['maxstore'])?$checkres[0]['maxstore']:$nwood;
+    		$dclay=($nclay>$checkres[0]['maxstore'])?$checkres[0]['maxstore']:$nclay;
+    		$diron=($niron>$checkres[0]['maxstore'])?$checkres[0]['maxstore']:$niron;
+    		$dcrop=($ncrop>$checkres[0]['maxcrop'])?$checkres[0]['maxcrop']:$ncrop;
+    		}
+    	if(!$shit){
+    		$q = "UPDATE " . TB_PREFIX . "vdata set wood = $dwood, clay = $dclay, iron = $diron, crop = $dcrop where wref = ".$vid;
+    			return mysql_query($q, $this->connection); }else{return false;}
+   	}
 
 	function modifyOasisResource($vid, $wood, $clay, $iron, $crop, $mode) {
-		if(!$mode) {
-			$q = "UPDATE " . TB_PREFIX . "odata set wood = wood - $wood, clay = clay - $clay, iron = iron - $iron, crop = crop - $crop where wref = $vid";
-		} else {
-			$q = "UPDATE " . TB_PREFIX . "odata set wood = wood + $wood, clay = clay + $clay, iron = iron + $iron, crop = crop + $crop where wref = $vid";
-		}
-		return mysql_query($q, $this->connection);
-	}
+		$q="SELECT wood,clay,iron,crop,maxstore,maxcrop from " . TB_PREFIX . "odata where wref = ".$vid."";
+                $result = mysql_query($q, $this->connection);
+    		$checkres= $this->mysql_fetch_all($result);
+                if(!$mode){
+    		$nwood=$checkres[0]['wood']-$wood;
+    		$nclay=$checkres[0]['clay']-$clay;
+    		$niron=$checkres[0]['iron']-$iron;
+    		$ncrop=$checkres[0]['crop']-$crop;
+    		if($nwood<0 or $nclay<0 or $niron<0 or $ncrop<0){$shit=true;}
+    		$dwood=($nwood<0)?0:$nwood;
+    		$dclay=($nclay<0)?0:$nclay;
+    		$diron=($niron<0)?0:$niron;
+    		$dcrop=($ncrop<0)?0:$ncrop;
+    	}else{
+    		$nwood=$checkres[0]['wood']+$wood;
+    		$nclay=$checkres[0]['clay']+$clay;
+    		$niron=$checkres[0]['iron']+$iron;
+    		$ncrop=$checkres[0]['crop']+$crop;
+    		$dwood=($nwood>$checkres[0]['maxstore'])?$checkres[0]['maxstore']:$nwood;
+    		$dclay=($nclay>$checkres[0]['maxstore'])?$checkres[0]['maxstore']:$nclay;
+    		$diron=($niron>$checkres[0]['maxstore'])?$checkres[0]['maxstore']:$niron;
+    		$dcrop=($ncrop>$checkres[0]['maxcrop'])?$checkres[0]['maxcrop']:$ncrop;
+    		}
+    	if(!$shit){
+    		$q = "UPDATE " . TB_PREFIX . "odata set wood = $dwood, clay = $dclay, iron = $diron, crop = $dcrop where wref = ".$vid;
+    			return mysql_query($q, $this->connection); }else{return false;}
+   	}
 
 	function getFieldLevel($vid, $field) {
 		$q = "SELECT f" . $field . " from " . TB_PREFIX . "fdata where vref = $vid";
@@ -1493,15 +1543,16 @@ class MYSQL_DB {
 		return mysql_query($q, $this->connection);
 	}
 
+
 	function updateOasis($vid) {
 		$time = time();
 		$q = "UPDATE " . TB_PREFIX . "odata set lastupdated = $time where wref = $vid";
 		return mysql_query($q, $this->connection);
 	}
-	
-	function updateOasis2($vid, $time) {
+
+	function updateOasis2($vid) {
 		$time = time();
-		$q = "UPDATE " . TB_PREFIX . "odata set lastupdated2 = lastupdated2 + $time where wref = $vid";
+		$q = "UPDATE " . TB_PREFIX . "odata set lastupdated2 = $time where wref = $vid";
 		return mysql_query($q, $this->connection);
 	}
 
@@ -1933,7 +1984,6 @@ class MYSQL_DB {
 		$dbarray = mysql_fetch_array($result);
 		$q = "UPDATE ".TB_PREFIX."bdata SET timestamp = $time WHERE id = '".$dbarray['id']."'";
 		$this->query($q);
-
 		$tribe = $this->getUserField($this->getVillageField($wid, "owner"), "tribe", 0);
 		if($tribe == 1){
 		$q2 = "SELECT * FROM " . TB_PREFIX . "bdata where wid = $wid and loopcon = 1 and field >= 19 order by master,timestamp ASC";
@@ -2423,6 +2473,7 @@ class MYSQL_DB {
 
 		if(!$mode) {
 			$barracks = array(1,2,3,11,12,13,14,21,22,31,32,33,34,35,36,37,38,39,40,41,42,43,44);
+			// fix by brainiac - THANK YOU
 			$greatbarracks = array(61,62,63,71,72,73,74,81,82,91,92,93,94,95,96,97,98,99,100,101,102,103,104);
 			$stables = array(4,5,6,15,16,23,24,25,26,45,46);
 			$greatstables = array(64,65,66,75,76,83,84,85,86,105,106);
@@ -2486,7 +2537,13 @@ class MYSQL_DB {
 	$time += $queued[count($queued) - 1]['timestamp'] - $now;
 	$time2 += $queued[count($queued) - 1]['timestamp'] - $now;
 	}
+	// TROOPS MAKE SUM IN BARAKS , ETC
+	//if($queued[count($queued) - 1]['unit'] == $unit){
+	//$time = $amt*$queued[count($queued) - 1]['eachtime'];
+	//$q = "UPDATE " . TB_PREFIX . "training SET amt = amt + $amt, timestamp = timestamp + $time WHERE id = ".$queued[count($queued) - 1]['id']."";
+	//}else{
 			$q = "INSERT INTO " . TB_PREFIX . "training values (0,$vid,$unit,$amt,$pop,$time,$each,$time2)";
+	//}
 		} else {
 			$q = "DELETE FROM " . TB_PREFIX . "training where id = $vid";
 		}
@@ -3361,6 +3418,52 @@ class MYSQL_DB {
 		$q = "DELETE from " . TB_PREFIX . "prisoners where id = '$id'";
 		mysql_query($q, $this->connection);
 	}
+
+	/***************************
+	Function to get Hero Dead
+	Made by: Shadow and brainiacX
+	***************************/
+
+ 	function getHeroDead($id) {
+    		$q = "SELECT dead FROM " . TB_PREFIX . "hero WHERE `uid` = $id";
+    		$result = mysql_query($q, $this->connection);
+    		$notend= mysql_fetch_array($result);
+     		return $notend['dead'];
+   	}
+
+	/***************************
+	Function to check Hero Not in Village
+	Made by: Shadow and brainiacX
+	***************************/
+
+	function HeroNotInVil($id) {
+                $heronum=0;
+    		$outgoingarray = $this->getMovement(3, $id, 0);
+    		if(!empty($outgoingarray)) {
+     		foreach($outgoingarray as $out) {
+      		$heronum += $out['t11'];
+     		}
+    	}
+    		$returningarray = $this->getMovement(4, $id, 1);
+    		if(!empty($returningarray)) {
+     		foreach($returningarray as $ret) {
+      		if($ret['attack_type'] != 1) {
+       		$heronum += $ret['t11'];
+      		}
+     		}
+    	}
+    		return $heronum;
+   	}
+
+	/***************************
+	Function to Kill hero if not found
+	Made by: Shadow and brainiacX
+	***************************/
+
+       function KillMyHero($id) {
+  	       $q = "UPDATE " . TB_PREFIX . "hero set dead = 1 where uid = ".$id;
+               return mysql_query($q, $this->connection);
+       }
 };
 
 $database = new MYSQL_DB;
