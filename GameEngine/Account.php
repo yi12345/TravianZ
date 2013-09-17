@@ -102,7 +102,7 @@ class Account {
 			if(AUTH_EMAIL){
 			$act = $generator->generateRandStr(10);
 			$act2 = $generator->generateRandStr(5);
-				$uid = $database->activate($_POST['name'],md5($_POST['pw']),$_POST['email'],$_POST['vid'],$_POST['kid'],$act,$act2);
+				$uid = $database->activate($_POST['name'],md5($_POST['pw']),$_POST['email'],$_POST['vid'],$_POST['kid'],$act,$act2,$_POST['reflink']);
 				if($uid) {
 
 					$mailer->sendActivate($_POST['email'],$_POST['name'],$_POST['pw'],$act);
@@ -110,7 +110,7 @@ class Account {
 				}
 			}
 			else {
-				$uid = $database->register($_POST['name'],md5($_POST['pw']),$_POST['email'],$_POST['vid'],$act);
+				$uid = $database->register($_POST['name'],md5($_POST['pw']),$_POST['email'],$_POST['vid'],$act,$_POST['reflink']);
 				if($uid) {
 					setcookie("COOKUSR",$_POST['name'],time()+COOKIE_EXPIRE,COOKIE_PATH);
 					setcookie("COOKEMAIL",$_POST['email'],time()+COOKIE_EXPIRE,COOKIE_PATH);
@@ -131,7 +131,7 @@ class Account {
 			$result = mysql_query($q, $database->connection);
 			$dbarray = mysql_fetch_array($result);
 			if($dbarray['act'] == $_POST['id']) {
-				$uid = $database->register($dbarray['username'],$dbarray['password'],$dbarray['email'],$dbarray['tribe'],"");
+				$uid = $database->register($dbarray['username'],$dbarray['password'],$dbarray['email'],$dbarray['tribe'],"",$dbarray['reflink']);
 				if($uid) {
 				$database->unreg($dbarray['username']);
 				$this->generateBase($dbarray['kid'],$uid,$dbarray['username']);
