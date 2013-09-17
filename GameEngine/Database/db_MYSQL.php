@@ -18,7 +18,7 @@ class MYSQL_DB {
 		mysql_select_db(SQL_DB, $this->connection) or die(mysql_error());
 	}
 
-	function register($username, $password, $email, $tribe, $act) {
+	function register($username, $password, $email, $tribe, $act, $reflink) {
 		$time = time();
 		$stime = strtotime(START_DATE)-strtotime(date('m/d/Y'))+strtotime(START_TIME);
 		if($stime > time()){
@@ -26,7 +26,7 @@ class MYSQL_DB {
 		}
 		$timep = $time + PROTECTION;
 		$time = time();
-		$q = "INSERT INTO " . TB_PREFIX . "users (username,password,access,email,timestamp,tribe,act,protect,lastupdate,regtime) VALUES ('$username', '$password', " . USER . ", '$email', $time, $tribe, '$act', $timep, $time, $time)";
+		$q = "INSERT INTO " . TB_PREFIX . "users (username,password,access,email,timestamp,tribe,act,protect,lastupdate,regtime,reflink) VALUES ('$username', '$password', " . USER . ", '$email', $time, $tribe, '$act', $timep, $time, $time, '$reflink')";
 		if(mysql_query($q, $this->connection)) {
 			return mysql_insert_id($this->connection);
 		} else {
@@ -34,9 +34,9 @@ class MYSQL_DB {
 		}
 	}
 
-	function activate($username, $password, $email, $tribe, $locate, $act, $act2) {
+	function activate($username, $password, $email, $tribe, $locate, $act, $act2, $reflink) {
 		$time = time();
-		$q = "INSERT INTO " . TB_PREFIX . "activate (username,password,access,email,tribe,timestamp,location,act,act2) VALUES ('$username', '$password', " . USER . ", '$email', $tribe, $time, $locate, '$act', '$act2')";
+		$q = "INSERT INTO " . TB_PREFIX . "activate (username,password,access,email,tribe,timestamp,location,act,act2,reflink) VALUES ('$username', '$password', " . USER . ", '$email', $tribe, $time, $locate, '$act', '$act2', '$reflink')";
 		if(mysql_query($q, $this->connection)) {
 			return mysql_insert_id($this->connection);
 		} else {

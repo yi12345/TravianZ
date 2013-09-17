@@ -110,6 +110,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%activate` (
   `timestamp` int(11) unsigned NOT NULL DEFAULT '0',
   `location` text NOT NULL,
   `act2` varchar(10) NOT NULL,
+  `reflink` int(4) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -1466,6 +1467,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%users` (
   `friend18wait` int(11) unsigned NOT NULL,
   `friend19wait` int(11) unsigned NOT NULL,
   `maxevasion` mediumint(3) unsigned NOT NULL,
+  `reflink` int(4) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
