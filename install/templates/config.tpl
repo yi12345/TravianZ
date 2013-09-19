@@ -4,6 +4,11 @@ if(isset($_GET['c']) && $_GET['c'] == 1) {
 echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php check cmod.</span></div><br>";
 }
 ?>
+<br \>
+<body onLoad="show_clock()">
+
+<center><script language="javascript" src="liveclock.js"></script></center>
+
 <form action="process.php" method="post" id="dataform">
 
 	<p>
@@ -48,15 +53,15 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
 	<td><span class="f9 c6">Beginners protection length:</span></td><td>
 				<select name="beginner">
 				<option value="7200">2 hours</option>
-				<option value="10800">3 hours</option>
-				<option value="18000">5 hours</option>
-				<option value="28800">8 hours</option>
-				<option value="36000">10 hours</option>
+        			<option value="10800">3 hours</option>
+        			<option value="18000">5 hours</option>
+        			<option value="28800">8 hours</option>
+        			<option value="36000">10 hours</option>
 				<option value="43200" selected="selected">12 hours</option>
 				<option value="86400">24 hours (1 day)</option>
-				<option value="172800">48 hours (2 days)</option>
-				<option value="259200">72 hours (3 days)</option>
-				<option value="432000">120 hours (5 days)</option>
+        			<option value="172800">48 hours (2 days)</option>
+        			<option value="259200">72 hours (3 days)</option>
+        			<option value="432000">120 hours (5 days)</option> 
 				</select>
 		</td></tr><tr></tr>
 	<td><span class="f9 c6">Plus account length:</span></td><td>
@@ -84,28 +89,27 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
 				</select>
 		</td></tr><tr></tr>
 	<td><span class="f9 c6">Nature troops regeneration time:</span></td><td>
-				<select name="nature_regtime">
-				<option value="28800">8 hours</option>
-				<option value="36000">10 hours</option>
-				<option value="43200" selected="selected">12 hours</option>
-				<option value="57600">16 hours</option>
-				<option value="72000">20 hours</option>
-				<option value="86400">24 hours</option>
-				</select>
-		</td></tr><tr></tr>
-    <tr class="hover">
-        <td>Medals interval:</td>
-				<select name="medalinterval">
-				<option value="0">none</option>
-				<option value="(3600*24)">1 day</option>
-				<option value="(3600*24*2)">2 days</option>
-				<option value="(3600*24*3)">3 days</option>
-				<option value="(3600*24*4)">4 days</option>
-				<option value="(3600*24*5)">5 days</option>
-				<option value="(3600*24*6)">6 days</option>
-				<option value="(3600*24*7)" selected="selected">7 days</option>
-				</select>
-    </tr>
+        <select name="nature_regtime">
+        <option value="28800">8 hours</option>
+        <option value="36000">10 hours</option>
+        <option value="43200" selected="selected">12 hours</option>
+        <option value="57600">16 hours</option>
+        <option value="72000">20 hours</option>
+        <option value="86400">24 hours</option>
+        </select>
+    </td></tr><tr></tr> 
+	<td><span class="f9 c6">Medal Interval:</span></td><td>
+        <select name="medalinterval">
+        <option value="0">none</option>
+        <option value="(3600*24)">1 day</option>
+        <option value="(3600*24*2)">2 days</option>
+        <option value="(3600*24*3)">3 days</option>
+        <option value="(3600*24*4)">4 days</option>
+        <option value="(3600*24*5)">5 days</option>
+        <option value="(3600*24*6)">6 days</option>
+        <option value="(3600*24*7)" selected="selected">7 days</option>
+        </select>
+    </td></tr><tr></tr> 
 	<td><span class="f9 c6">Storage Multipler:</span></td><td width="140"><input type="text" name="storage_multiplier" id="storage_multiplier" value="1"></td></tr><tr>
 	<td><span class="f9 c6">Tourn Threshold:</span></td><td width="140"><input type="text" name="ts_threshold" id="ts_threshold" value="20"></td></tr><tr>
 	<td><span class="f9 c6">Great Workshop:</span></td><td>
@@ -153,6 +157,22 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
 	</table>
 	</p>
 
+		<p>
+	<span class="f10 c">ADMIN RELATED</span>
+	<table>
+	<tr><td><span class="f9 c6">Admin Name:</span></td><td><input type="text" name="aname" id="aname"></td></tr>
+	<tr><td><span class="f9 c6">Admin Email:</span></td><td><input name="aemail" type="text" id="aemail"></td></tr>
+
+	<td><span class="f9 c6">Admin Rank:</span></td><td>
+				<select name="admin_rank">
+				<option value="True">No</option>
+				<option value="False" selected="selected">Yes</option>
+				</select>
+		</td></tr><tr></tr>
+	</table>
+	</p>
+
+
 	<p>
 	<span class="f10 c">SQL RELATED</span>
 	<table><tr>
@@ -168,34 +188,27 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
 	</table>
 	</p>
 
-<!-- <LEFT BOX - ADMIN RELATED>
 
-	<span><center><strong>ADMIN RELATED</strong></center></span><br />
-	<span class="f9 c6 cc2">Admin Name:</span><span class="cc3"><input type="text" name="aname" id="aname"></span><br /><br />
-	<span class="f9 c6 cc2">Admin Email:</span><span class="cc3"><input name="aemail" type="text" id="aemail"></span><br /><br />
-	<span class="f9 c6 cc2">Admin rank:</span><span class="cc3" style="position: absolute;right:20%;"><select name="admin_rank">
-	  <option value="false">No</option>
-	  <option value="true" selected="selected">Yes</option></select></span><br /><br />
+		<p>
+	<span class="f10 c">GPACK RELATED</span>
+	<table>
+	<td><span class="f9 c6">Gpack:</span></td><td>
+				<select name="gpack">
+				<option value="True" selected="selected">No</option>
+				<option value="False">Yes</option>
+				</select>
+		</td></tr><tr></tr>
+	<td><span class="f9 c6">Gpack Design:</span></td><td>
+				<select name="gp_locate">
+				<option value="gpack/travian_default/" selected="selected">Travian Default</option>
+				<option value="gpack/travianx_v1/">TravianX v1 by Dzoki</option>
+				</select>
+		</td></tr><tr></tr>
 
-<!-- </LEFT BOX - ADMIN RELATED> -->
+	</table>
+	</p>
 
-<!-- <RIGHT BOX - GPACK RELATED>
-
-	<span><center><strong>GPACK RELATED</strong></center></span><br />
-
-
-	<span class="f9 c6 c2">GPack:</span><span class="c3"><select name="gpack">
-	  <option value="false" selected="selected">No</option>
-	  <option value="true" disabled="disabled">Yes</option></select></span><br /><br />
-	<span class="f9 c6 c2">GPack Design:</span><span class="c3"><select name="gp_locate">
-	  <option value="gpack/travian_default/" selected="selected">Travian Default
-	  <option value="gpack/travianx_v1/">TravianX v1 by Dzoki</option></select></span><br /><br />
-
--->
-<!-- </RIGHT BOX - GPACK RELATED> -->
-
-
-	<p>
+<p>
 	<span class="f10 c">NEWSBOX OPTIONS</span>
 	<table><tr>
 	<td><span class="f9 c6">Newsbox 1:</span></td><td><select name="box1">
