@@ -247,6 +247,29 @@ $neutral = (($neutralarray[0]['alli1']>0 and $neutralarray[0]['alli2']>0 and $do
 	$i++;
 	$i2++;
 	$coorindex+=1;
+	
+	/* HERE MUST APPER REDSWORDS , etc */
+	
+	    	$vid = $maparray[$index]['id'];
+		$incoming_attacks = $database->getMovement(3,$vid,1);
+		$att = '';
+
+		if (count($incoming_attacks) > 0) {
+			$inc_atts = count($incoming_attacks);
+				if($incoming_attacks[$i]['attack_type'] == 2) {
+					$inc_atts -= 1;
+				}
+			if($inc_atts > 0) {
+				$att = '<img style="margin-right:45px;" class="att1" src="img/x.gif" />';
+			}
+		}
+
+    if($session->plus) {
+    echo $att;
+    }
+    
+    	/* HERE MUST APPER REDSWORDS , etc */
+
 }
 ?>
 
