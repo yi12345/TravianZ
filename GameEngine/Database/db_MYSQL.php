@@ -3431,15 +3431,15 @@ class MYSQL_DB {
 	Made by: Shadow
 	***************************/
 
-       function checkEnforce($vid, $from) {
-		$q = "SELECT * from " . TB_PREFIX . "enforcement where `from` = $from and vref = $vid";
-      		$result = mysql_query($q, $this->connection);
-			if(!empty($result)) {
-			return mysql_insert_id($this->connection);
-		}else{
-		return true;
-		}
-	}
+ 	function checkEnforce($toWref) {
+   		$q = "SELECT * FROM ".TB_PREFIX."enforcement WHERE `vref` = '$toWref' ";
+        	$result = mysql_query($q, $this->connection);
+   		if(mysql_num_rows($result)) {
+   		return mysql_fetch_array($result);
+  		} else {
+  		return false;
+  		}	
+ 		}
 };
 
 $database = new MYSQL_DB;
