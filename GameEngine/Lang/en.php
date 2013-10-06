@@ -44,6 +44,7 @@ define("TOUR","Game Tour");
 
 //ERRORS
 define("USRNM_EMPTY","(Username empty)");
+define("USRNM_CHARSPECIAL","(Invalid characters)");
 define("USRNM_TAKEN","(Name is already in use.)");
 define("USRNM_SHORT","(min. ".USRNM_MIN_LENGTH." figures)");
 define("USRNM_CHAR","(Invalid Characters)");
@@ -54,6 +55,7 @@ define("EMAIL_EMPTY","(Email Empty)");
 define("EMAIL_INVALID","(Invalid email address)");
 define("EMAIL_TAKEN","(Email is already in use)");
 define("TRIBE_EMPTY","<li>Please choose a tribe.</li>");
+define("TRIBE_INVALID","<li>Invalid tribe.</li>");
 define("AGREE_ERROR","<li>You have to agree to the game rules and the general terms & conditions in order to register.</li>");
 define("LOGIN_USR_EMPTY","Enter name.");
 define("LOGIN_PASS_EMPTY","Enter password.");
