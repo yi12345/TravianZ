@@ -4,17 +4,18 @@
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
-##  Project:       TravianZ                        		       	       ##
-##  Version:       01.09.2013 						       ##
+##  Project:       TravianZ                        		       	       		   ##
+##  Version:       01.09.2013 						       					   ##
 ##  Filename       mapview.php                                                 ##
-##  Developed by:  Advocaite , yi12345 , Shadow , MisterX		       ##
-##  Fixed by:      Shadow & MisterX - Attack image view on map		       ##
+##  Developed by:  Advocaite , yi12345 , Shadow , MisterX		       		   ##
+##  Fixed by:      Shadow & MisterX - Attack image view on map & script hack   ##
 ##  License:       TravianZ Project                                            ##
 ##  Copyright:     TravianZ (c) 2010-2013. All rights reserved.                ##
-##  URLs:          http://travian.shadowss.ro 				       ##
-##  Source code:   http://github.com/Shadowss/TravianZ-by-Shadow/	       ##
+##  URLs:          http://travian.shadowss.ro 				       			   ##
+##  Source code:   http://github.com/Shadowss/TravianZ-by-Shadow/	       	   ##
 ##                                                                             ##
 #################################################################################
+
 
 
 if(isset($_GET['z'])) {
@@ -147,7 +148,7 @@ $neutral = (($neutralarray[0]['alli1']>0 and $neutralarray[0]['alli2']>0 and $do
 //echo in_array($targetalliance,$friendarray);
 	$image = ($donnees['map_occupied'] == 1 && $donnees['map_fieldtype'] > 0)?(($donnees['ville_user'] == $session->uid)? ($donnees['ville_pop']>=100? $donnees['ville_pop']>= 250?$donnees['ville_pop']>=500? 'b30': 'b20' :'b10' : 'b00') : (($targetalliance != 0)? ($friend==1? ($donnees['ville_pop']>=100? $donnees['ville_pop']>= 250?$donnees['ville_pop']>=500? 'b31': 'b21' :'b11' : 'b01') : ($war==1? ($donnees['ville_pop']>=100? $donnees['ville_pop']>= 250?$donnees['ville_pop']>=500? 'b32': 'b22' :'b12' : 'b02') : ($neutral==1? ($donnees['ville_pop']>=100? $donnees['ville_pop']>= 250?$donnees['ville_pop']>=500? 'b35': 'b25' :'b15' : 'b05') : ($targetalliance == $session->alliance? ($donnees['ville_pop']>=100? $donnees['ville_pop']>= 250?$donnees['ville_pop']>=500? 'b33': 'b23' :'b13' : 'b03') : ($donnees['ville_pop']>=100? $donnees['ville_pop']>= 250?$donnees['ville_pop']>=500? 'b34': 'b24' :'b14' : 'b04'))))) : ($donnees['ville_pop']>=100? $donnees['ville_pop']>= 250?$donnees['ville_pop']>=500? 'b34': 'b24' :'b14' : 'b04'))) : $donnees['map_image'];
 
-	// Map Attacks by Shadow & MisterX
+	// Map Attacks by Shadow and MisterX
 
     	$att = '';
     	if($session->plus) {
@@ -157,11 +158,11 @@ $neutral = (($neutralarray[0]['alli1']>0 and $neutralarray[0]['alli2']>0 and $do
         if ($database->checkAttack($wref,$toWref) != 0) {
 		$att = '<span class=\'m3\' ></span>';
         }elseif ($database->checkEnforce($wref,$toWref) != 0) {
-		$att = '<span class=\'m9\' ></span>';
-		}elseif ($database->checkScout($wref,$toWref) != 0) {
-		$att = '<span class=\'m6\' ></span>';
-		}
-    	}
+  		$att = '<span class=\'m9\' ></span>';
+        }elseif ($database->checkScout($wref,$toWref) != 0) {
+                $att = '<span class=\'m6\' ></span>';
+	}
+	}
 
 	// Map content
 	if($donnees['ville_user']==3 && $donnees['ville_name']=='WW Buildingplan'){
@@ -171,14 +172,14 @@ $neutral = (($neutralarray[0]['alli1']>0 and $neutralarray[0]['alli2']>0 and $do
 	}
 
 	//Map create
-	$map_gen .= "<area id='a_".$row."_".$i."' shape='poly' coords='".$coorarray[$coorindex]."' title='".$donnees['ville_name']."' href='karte.php?d=".$donnees['map_id']."&c=".$generator->getMapCheck($donnees['map_id'])."' />\n";
+	$map_gen .= "<area id='a_".$row."_".$i."' shape='poly' coords='".$coorarray[$coorindex]."' title='".htmlspecialchars($donnees['ville_name'])."' href='karte.php?d=".$donnees['map_id']."&c=".$generator->getMapCheck($donnees['map_id'])."' />\n";
 
 	//Javascript map info
 	if($yrow!=7){
 		$map_js .= "[".$donnees['map_x'].",".$donnees['map_y'].",".$donnees['map_fieldtype'].",". ((!empty($donnees['map_oasis'])) ? $donnees['map_oasis'] : 0) .",\"d=".$donnees['map_id']."&c=".$generator->getMapCheck($donnees['map_id'])."\",\"".$image."\"";
 		if($donnees['map_occupied']){
 			if($donnees['map_fieldtype'] != 0){
-				$map_js.= ",\"".$donnees['ville_name']."\",\"".$donnees['user_username']."\",\"".$donnees['ville_pop']."\",\"".$donnees['aliance_name']."\",\"".$donnees['user_tribe']."\"]\n";
+				$map_js.= ",\"".htmlspecialchars($donnees['ville_name'])."\",\"".htmlspecialchars($donnees['user_username'])."\",\"".$donnees['ville_pop']."\",\"".htmlspecialchars($donnees['aliance_name'])."\",\"".$donnees['user_tribe']."\"]\n";
 			}
 		}
 		elseif($donnees['map_oasis'] != 0){
