@@ -1,11 +1,17 @@
 <?php
+
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
-##  Filename       Account.php                                                 ##
-##  Developed by:  Songer & Dzoki                                              ##
-##  License:       TravianX Project                                            ##
-##  Copyright:     TravianX (c) 2010-2011. All rights reserved.                ##
+##  Project:       TravianZ                        		       	       ##
+##  Version:       01.09.2013 						       ##
+##  Filename       Account.php	                                               ##
+##  Developed by:  Songer , Dzoki , Advocaite , yi12345 , Shadow  	       ##
+##  Fixed by:      Shadow - Vacation mode & registration hack		       ##
+##  License:       TravianZ Project                                            ##
+##  Copyright:     TravianZ (c) 2010-2013. All rights reserved.                ##
+##  URLs:          http://travian.shadowss.ro 				       ##
+##  Source code:   http://github.com/Shadowss/TravianZ-by-Shadow/	       ##
 ##                                                                             ##
 #################################################################################
 
@@ -45,6 +51,9 @@ class Account {
 		if(!isset($_POST['name']) || trim($_POST['name']) == "") {
 			$form->addError("name",USRNM_EMPTY);
 		}
+		if(!isset($_POST['name']) || htmlspecialchars($_POST['name']) == ""){
+            $form->addError("name", USRNM_CHARSPECIAL);
+        	}
 		else {
 			if(strlen($_POST['name']) < USRNM_MIN_LENGTH) {
 				$form->addError("name",USRNM_SHORT);
@@ -89,6 +98,12 @@ class Account {
 		if(!isset($_POST['vid'])) {
 			$form->addError("tribe",TRIBE_EMPTY);
 		}
+		if(($_POST['vid'] > 3 ) || ($_POST['vid'] < 1)){
+            		$form->addError("tribe",TRIBE_INVALID);
+        	}
+        	if(($_POST['kid'] > 4) || ($_POST['kid'] < 0)) {
+            		$form->addError("tribe",TRIBE_INVALID);
+        	}
 		if(!isset($_POST['agb'])) {
 			$form->addError("agree",AGREE_ERROR);
 		}
@@ -102,21 +117,21 @@ class Account {
 			if(AUTH_EMAIL){
 			$act = $generator->generateRandStr(10);
 			$act2 = $generator->generateRandStr(5);
-				$uid = $database->activate($_POST['name'],md5($_POST['pw']),$_POST['email'],$_POST['vid'],$_POST['kid'],$act,$act2);
+				$uid = $database->activate(htmlspecialchars($_POST['name']),md5($_POST['pw']),$_POST['email'],$_POST['vid'],$_POST['kid'],$act,$act2);
 				if($uid) {
 
-					$mailer->sendActivate($_POST['email'],$_POST['name'],$_POST['pw'],$act);
+					$mailer->sendActivate($_POST['email'],htmlspecialchars($_POST['name']),$_POST['pw'],$act);
 					header("Location: activate.php?id=$uid&q=$act2");
 				}
 			}
 			else {
-				$uid = $database->register($_POST['name'],md5($_POST['pw']),$_POST['email'],$_POST['vid'],$act);
+				$uid = $database->register(htmlspecialchars($_POST['name']),md5($_POST['pw']),$_POST['email'],$_POST['vid'],$act);
 				if($uid) {
-					setcookie("COOKUSR",$_POST['name'],time()+COOKIE_EXPIRE,COOKIE_PATH);
+					setcookie("COOKUSR",htmlspecialchars($_POST['name']),time()+COOKIE_EXPIRE,COOKIE_PATH);
 					setcookie("COOKEMAIL",$_POST['email'],time()+COOKIE_EXPIRE,COOKIE_PATH);
 					$database->updateUserField($uid,"act","",1);
 					$database->updateUserField($uid,"invited",$_POST['invited'],1);
-					$this->generateBase($_POST['kid'],$uid,$_POST['name']);
+					$this->generateBase($_POST['kid'],$uid,htmlspecialchars($_POST['name']));
 					header("Location: login.php");
 				}
 			}
