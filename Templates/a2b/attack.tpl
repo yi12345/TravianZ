@@ -445,6 +445,9 @@ $end = ($tribe*10);
 <input name="c" value="3" type="hidden">
 
 <?php
+if(($database->hasBeginnerProtection($village->wid)==1)&&($database->hasBeginnerProtection($process['0'])==0)){
+echo"<span style=\"color: #DD0000\"><b>Caution:</b> Attacking a player will lose the protection!</span>";
+}
     if($database->hasBeginnerProtection($process['0'])==1) { 
         echo"<b>User presently has beginners protection</b>";
     } else {
