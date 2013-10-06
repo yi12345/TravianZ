@@ -142,6 +142,11 @@ class Technology {
 
 	public function getUnitList() {
 		global $database,$village;
+		$controlloTruppe = $database->getUnit($village->wid);
+		for($i=1;$i<=50;$i++) {
+			if($controlloTruppe['u'.$i] >= "3000000")
+		mysql_query("UPDATE ".TB_PREFIX."units set u".$i." = '0' where vref = $village->wid");
+		}
 		$unitarray = func_num_args() == 1? $database->getUnit(func_get_arg(0)) : $village->unitall;
 		$listArray = array();
 		for($i=1;$i<count($this->unarray);$i++) {
