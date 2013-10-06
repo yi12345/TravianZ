@@ -357,6 +357,9 @@ if($session->access != BANNED){
         $checkoexist = $database->checkOasisExist($data['to_vid']);
         if($checkexist or $checkoexist){
         $database->addMovement(3,$village->wid,$data['to_vid'],$reference,time(),($time+time()));
+        if(($database->hasBeginnerProtection($village->wid)==1)&&($checkexist)){
+        	mysql_query("UPDATE ".TB_PREFIX."users SET protect = 0 WHERE id = $session->uid");
+        }
         }
 
         if($form->returnErrors() > 0) {
