@@ -13,10 +13,10 @@ $search = $_SESSION['search'];
 			<thead>
 				<tr>
 					<th colspan="5">
-						The largest alliances						<div id="submenu"><a title="Top 10" href="statistiken.php?id=43"><img class="btn_top10" src="img/x.gif" alt="Top 10"></a><a title="defender" href="statistiken.php?id=42"><img class="btn_def" src="img/x.gif" alt="defender"></a><a title="attacker" href="statistiken.php?id=41"><img class="btn_off" src="img/x.gif" alt="attacker"></a></div>		    
+						Крупнейшие альянсы						<div id="submenu"><a title="Топ 10" href="statistiken.php?id=43"><img class="btn_top10" src="img/x.gif" alt="Top 10"></a><a title="защитники недели" href="statistiken.php?id=42"><img class="btn_def" src="img/x.gif" alt="defender"></a><a title="Нападающие недели" href="statistiken.php?id=41"><img class="btn_off" src="img/x.gif" alt="attacker"></a></div>		    
 					</th>
 				</tr>
-		<tr><td></td><td>Alliance</td><td>Player</td><td>&Oslash;</td><td>Points</td></tr>
+		<tr><td></td><td>Альянс</td><td>кол-во игроков</td><td>&Oslash;</td><td>Очки</td></tr>
 		</thead><tbody>  
         <?php
         if(isset($_GET['rank'])){
@@ -47,7 +47,7 @@ $search = $_SESSION['search'];
             }
         }
         else {
-        	echo "<td class=\"none\" colspan=\"5\">No alliance's found</td>";
+        	echo "<td class=\"none\" colspan=\"5\">Альянсов не обнаружено</td>";
         }
         ?>
  </tbody>
