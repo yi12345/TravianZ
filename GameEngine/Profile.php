@@ -30,6 +30,14 @@ class Profile {
 				header("Location: banned.php");
 				}
 				break;
+                case "p4":
+				// Vacation mode - by advocaite and Shadow
+				if($session->access!=BANNED){
+				$this->setvactionmode($post);
+				}else{
+				header("Location: banned.php");
+				}
+				break;
 			}
 		}
 		if(isset($post['s'])) {
@@ -80,7 +88,9 @@ class Profile {
 		$database->submitProfile($database->RemoveXSS($post['uid']),$database->RemoveXSS($post['mw']),$database->RemoveXSS($post['ort']),$database->RemoveXSS($birthday),$database->RemoveXSS($post['be2']),$database->RemoveXSS($post['be1']));
 		$varray = $database->getProfileVillages($post['uid']);
 		for($i=0;$i<=count($varray)-1;$i++) {
-			$database->setVillageName($database->RemoveXSS($varray[$i]['wref']),$post['dname'.$i]);
+					 $k = "".$post['dname'.$i]."";
+                     $name = preg_replace("/[^a-zA-Z0-9_-\s]/", "", $k);
+                     $database->setVillageName($database->RemoveXSS($varray[$i]['wref']),$name);
 		}
 		header("Location: spieler.php?uid=".$post['uid']);
 	}
@@ -90,13 +100,44 @@ class Profile {
 		$database->gpack($database->RemoveXSS($session->uid),$database->RemoveXSS($post['custom_url']));
 		header("Location: spieler.php?uid=".$session->uid);
 	}
-
+	
+		/*******************************************************
+		Function to vacation mode - by advocaite and Shadow
+		References: 
+		********************************************************/
+	
+	private function setvactionmode($post){
+		global $database,$session,$form;
+		$set =false;
+		if($post['vac'] && $post['vac_days'] >=2 && $post['vac_days'] <=14) {
+		$database->setvacmode($post['uid'],$post['vac_days']);
+		$set =true;
+		}
+		else {
+		echo "Minimum days is 2";die();exit();
+		}
+		if($set){
+        unset($_SESSION['wid']);
+		$database->activeModify(addslashes($session->username),1);
+		$database->UpdateOnline("logout") or die(mysql_error());
+		$session->Logout();
+		header("Location: login.php");
+		}else{
+		header("Location: spieler.php?s=5");
+		}
+		}
+		
+		/*******************************************************
+		Function to vacation mode - by advocaite and Shadow
+		References: 
+		********************************************************/
+		
 	private function updateAccount($post) {
 		global $database,$session,$form;
 		if($post['pw2'] == $post['pw3']) {
 			if($database->login($session->username,$post['pw1'])) {
 				if ($_POST['uid'] != $session->uid){
-                      			die("Hacking Attempr");
+                      			die("Hacking Attemp");
                 		} else {
 				$database->updateUserField($post['uid'],"password",md5($post['pw2']),1);
 			}
