@@ -1,24 +1,30 @@
 <?php
 
-/*-------------------------------------------------------*\ 
-| ********* DO NOT REMOVE THIS COPYRIGHT NOTICE ********* | 
-+---------------------------------------------------------+ 
-| Developed by:  Manni < manuel_mannhardt@web.de >        | 
-|                Dzoki < dzoki.travian@gmail.com >        |
-| Reworked by: 	 Esfomeado < vps1992@live.com.pt >        |
-| Copyright:     TravianX Project All rights reserved     | 
-\*-------------------------------------------------------*/ 
+#################################################################################
+##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
+## --------------------------------------------------------------------------- ##
+##  Project:       TravianZ      					       		 		  	   ##
+##  Version:       01.09.2013 						       	 				   ##
+##  Filename       37_hero.tpl                                                 ##
+##  Developed by:  Dzoki , Manni , Esfomeado                                   ##
+##  Fixed by:      Shadow / Skype : cata7007                                   ##
+##  License:       TravianZ Project                                            ##
+##  Copyright:     TravianZ (c) 2010-2013. All rights reserved.                ##
+##  URLs:          http://travian.shadowss.ro 				       	 		   ##
+##  Source code:   http://github.com/Shadowss/TravianZ-by-Shadow/	       	   ##
+##                                                                             ##
+#################################################################################
 
 include_once("GameEngine/Data/hero_full.php"); 
 
-if (isset($_POST['name'])) { 
-	$_POST['name'] = stripslashes($_POST['name']);
+if (isset($_POST['name'])) {
+     $_POST['name'] = stripslashes($_POST['name']);
      mysql_query("UPDATE ".TB_PREFIX."hero SET `name`='".($_POST['name'])."' where `uid`='".$session->uid."'") or die("ERROR:".mysql_error()); 
         $hero = mysql_query("SELECT * FROM " . TB_PREFIX . "hero WHERE `uid` = " . $session->uid . ""); 
         $hero_info = mysql_fetch_array($hero); 
         echo "Hero name has been changed"; 
     } 
-     
+  
     $hero = $units->Hero($session->uid); 
 ?>
 
@@ -32,9 +38,31 @@ if (isset($_POST['name'])) {
 					echo "<a href=\"build.php?id=".$id."&rename\">".$hero_info['name']."</a></form>"; 
 				} 
 			?>
-			Level <?php echo $hero_info['level']; ?> <span class="info">( <?php echo"<img class=\"unit u".$hero_info['unit']."\" src=\"img/x.gif\" alt=\"".$technology->getUnitName($hero_info['unit'])."\" title=\"".$technology->getUnitName($hero_info['unit'])."\" /> ".$technology->getUnitName($hero_info['unit']); ?> )</span></th>
+			
+  Level <?php echo $hero_info['level']; ?> <span class="info">( <?php echo"<img class=\"unit u".$hero_info['unit']."\" src=\"img/x.gif\" alt=\"".$technology->getUnitName($hero_info['unit'])."\" title=\"".$technology->getUnitName($hero_info['unit'])."\" /> ".$technology->getUnitName($hero_info['unit']); ?> )</span></th>
 	</tr></thead> 
     <tbody><tr> 
+		<tr>
+			<td>
+
+				<?php 
+				// Added by Shadow - cata7007@gmail.com / Skype : cata7007
+				if($session->userinfo['tribe'] == 1) {
+				echo"<center><img src=\"gpack/travian_default/img/q/introRomans.jpg\" alt=\"".$technology->getUnitName($hero_info['unit'])."\" title=\"".$technology->getUnitName($hero_info['unit'])."\" />";
+				} else if($session->userinfo['tribe'] == 2) {
+				echo"<center><img src=\"gpack/travian_default/img/q/introTeutons.jpg\" alt=\"".$technology->getUnitName($hero_info['unit'])."\" title=\"".$technology->getUnitName($hero_info['unit'])."\" />";
+				} else if($session->userinfo['tribe'] == 3) {
+				echo"<center><img src=\"gpack/travian_default/img/q/introGauls.jpg\" alt=\"".$technology->getUnitName($hero_info['unit'])."\" title=\"".$technology->getUnitName($hero_info['unit'])."\" />";
+				} ?>
+
+
+
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<table id="" cellpadding="1" cellspacing="1"> 
+
         <th>Offence</th> 
         <td class="val"><?php echo $hero['atk']; ?></td> 
         <td class="xp"><img class="bar" src="img/x.gif" style="width:<?php echo (2*$hero_info['attack'])+1; ?>px;" alt="<?php echo $hero['atk']; ?>" title="<?php echo $hero['atk']; ?>" /></td> 
@@ -143,15 +171,27 @@ if (isset($_POST['name'])) {
 		<td class="up"></td> 
         <td class="rem"><?php echo $hero_info['points']; ?></td> 
 	<?php }else{ ?>
+    <tr> 
         <th title="until the next level">Experience:</th> 
         <td class="val">100%</td> 
-		<td class="xp"><img class="bar" src="img/x.gif" style="width:200px;" alt="100%" title="100%" /></td>
-		<td class="up"></td> 
+        <td class="xp"><img class="bar" src="img/x.gif" style="width:200px;" alt="100%" title="100%" /></td>
+        <td class="up"> 
+		<!-- //fix delete hero -->
+					<?php 
+					//echo"<a href=\"build.php?id=".$id."&active=1\">Active</a>"; 
+					echo "<div class=\"abort\"><a href=\"build.php?id=".$id."&delete=1\"><img src=\"img/x.gif\" class=\"del\" title=\"Delete Hero\" alt=\"Delete Hero\" /></a></div>";
+					?>
+		<!-- //end fix -->
+		</td>  
         <td class="rem"><?php echo $hero_info['points']; ?></td> 
-	<?php } ?>
+    </tr> 
+    <?php } ?>
     </tr> 
     </tbody> 
     </table> 
+				</tr>
+			    </tbody> 
+		    </table>
 	<?php if(isset($_GET['e'])){ 
         echo "<p><font size=\"1\" color=\"red\"><b>Error: name too short</b></font></p>"; 
     } 
@@ -164,12 +204,28 @@ if (isset($_POST['name'])) {
     Your hero has conquered <b><?php echo $database->VillageOasisCount($village->wid); ?></b> <a href="build.php?id=<?php echo $id; ?>&land">oases</a>.</p> 
 	 
     <?php  
+	// Added by Shadow - cata7007@gmail.com / Skype : cata7007
+	//FIX hero
+      if($_GET['active'] == 1){
+            mysql_query("UPDATE ".TB_PREFIX."hero SET `dead` = '0', `health` = '100', `trainingtime` = '".$training_time2."' WHERE `uid` = '".$session->uid."'");
+            mysql_query("UPDATE " . TB_PREFIX . "units SET hero = 1 WHERE vref = ".$village->wid."");
+            header("Location: build.php?id=".$id."");
+    }
+	
+	if($_GET['delete'] == 1){
+		mysql_query("UPDATE " . TB_PREFIX . "units SET hero = 0 WHERE vref = ".$village->wid."");
+            mysql_query("DELETE FROM ".TB_PREFIX."hero  WHERE `uid` = '".$session->uid."'");
+            header("Location: build.php?id=".$id."");
+    }
+	
+	//end FIX
+
      
-    if(isset($_GET['add'])) { 
+    	if(isset($_GET['add'])) { 
             if($_GET['add'] == "reset") { 
                 if($hero_info['level'] <= 3){ 
                       if($hero_info['attack'] != 0 OR $hero_info['defence'] != 0 OR $hero_info['attackbonus'] != 0 OR $hero_info['defencebonus'] != 0 OR $hero_info['regeneration'] != 0){ 
-                    mysql_query("UPDATE " . TB_PREFIX . "hero SET `points` = '".(($hero_info['level']*5)+10)."' WHERE `uid` = '" . $session->uid . "'"); 
+                    mysql_query("UPDATE " . TB_PREFIX . "hero SET `points` = '".(($hero_info['level']*5)+5)."' WHERE `uid` = '" . $session->uid . "'"); 
                     mysql_query("UPDATE " . TB_PREFIX . "hero SET `attack` = '0' WHERE `uid` = '" . $session->uid . "'"); 
                     mysql_query("UPDATE " . TB_PREFIX . "hero SET `defence` = '0' WHERE `uid` = '" . $session->uid . "'"); 
                     mysql_query("UPDATE " . TB_PREFIX . "hero SET `attackbonus` = '0' WHERE `uid` = '" . $session->uid . "'"); 
