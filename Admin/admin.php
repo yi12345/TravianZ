@@ -1,20 +1,27 @@
 <?php
 #################################################################################
-##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
+##                                                                             ##
+##              -= YOU MUST NOT REMOVE OR CHANGE THIS NOTICE =-                ##
+##                                                                             ##
 ## --------------------------------------------------------------------------- ##
-##  Filename       admin.php                                                   ##
+##                                                                             ##
+##  Project:       TravianZ                                                    ##
+##  Version:       05.03.2014                                                  ##
+##  Filename:      Admin/admin.php     				                           ##
 ##  Developed by:  Dzoki                                                       ##
-##  Reworked:      aggenkeech                                                  ##
-##  License:       TravianX Project                                            ##
-##  Copyright:     TravianX (c) 2010-2012. All rights reserved.                ##
+##  Edited by:     Shadow and ronix                                            ##
+##  License:       Creative Commons BY-NC-SA 3.0                               ##
+##  Copyright:     TravianZ (c) 2014 - All rights reserved                     ##
+##  URLs:          http://travian.shadowss/ro                                  ##
+##  Source code:   https://github.com/Shadowss/TravianZ	                       ##
 ##                                                                             ##
 #################################################################################
 
 session_start();
-include("../GameEngine/Database.php");
-include("../GameEngine/Admin/database.php");
-include("../GameEngine/config.php");
-include("../GameEngine/Data/buidata.php");
+include_once("../GameEngine/Database.php");
+include_once ("../GameEngine/Lang/" . LANG . ".php");
+include_once("../GameEngine/Admin/database.php");
+include_once("../GameEngine/Data/buidata.php"); 
 
 class timeFormatGenerator
 {
@@ -53,10 +60,58 @@ $up_avl = $latest - $ver ;
 		<link rel=stylesheet type="text/css" href="../img/img.css">
 		<script src="/mt-full.js?423cb"  type="text/javascript"></script>
 		<script src="ajax.js" type="text/javascript"></script>
+		<script src="../new.js?0faaa" type="text/javascript"></script>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta http-equiv="imagetoolbar" content="no">
 	</head>
 	<body>
+    <script type="text/javascript">
+                init_local();
+                function getMouseCoords(e) {
+                    var coords = {};
+                    if (!e) var e = window.event;
+                    if (e.pageX || e.pageY)     {
+                        coords.x = e.pageX;
+                        coords.y = e.pageY;
+                    }
+                    else if (e.clientX || e.clientY)     {
+                        coords.x = e.clientX + document.body.scrollLeft
+                            + document.documentElement.scrollLeft;
+                        coords.y = e.clientY + document.body.scrollTop
+                            + document.documentElement.scrollTop;
+                    }
+                    return coords;
+                }
+
+                function med_mouseMoveHandler(e, desc_string){
+                    var coords = getMouseCoords(e);
+                    med_showDescription(coords, desc_string);
+                }
+
+                function med_closeDescription(){
+                    var layer = document.getElementById("medal_mouseover");
+                    layer.className = "hide";
+                }
+
+                function init_local(){
+                    med_init();
+                }
+
+                function med_init(){
+                    layer = document.createElement("div");
+                    layer.id = "medal_mouseover";
+                    layer.className = "hide";
+                    document.body.appendChild(layer);
+                }
+
+                function med_showDescription(coords, desc_string){
+                    var layer = document.getElementById("medal_mouseover");
+                    layer.style.top = (coords.y + 25)+ "px";
+                    layer.style.left = (coords.x - 20) + "px";
+                    layer.className = "";
+                    layer.innerHTML = desc_string;
+                }
+               </script>
 		<script language="javascript">
 			function aktiv() {this.srcElement.className='fl1'; }
 			function inaktiv() {event.srcElement.className='fl2'; }
@@ -75,6 +130,11 @@ $up_avl = $latest - $ver ;
 			function hideStuff(id) {
 				document.getElementById(id).style.display = 'none';
 			}
+			function go_url(url) {
+				location=url;
+				return(false);
+			}			
+			
 		</script>
 		<div id="ltop1">
 			<div style="position:relative; width:231px; height:100px; float:left;">
@@ -97,7 +157,7 @@ $up_avl = $latest - $ver ;
 												<a href="<?php echo HOMEPAGE; ?>">Server Homepage</a>
 												<a href="admin.php">Control Panel Home</a>
 												<a href="<?php echo SERVER; ?>dorf1.php">Return to the server</a>
-												<a href="?p=update"><font color="Red"><b>Server Update (<?php echo $up_avl; ?>)</font></b></a>
+												<!-- <a href="?p=update"><font color="Red"><b>Server Update (<?php echo $up_avl; ?>)</font></b></a>-->
 												<br />
 												<a href="?action=logout">Logout</a>
 												<br />
@@ -105,7 +165,7 @@ $up_avl = $latest - $ver ;
 												<a href="?p=server_info">Server Info</a>
 												<a href="?p=online">Online Users</a>
 												<a href="?p=notregistered">Players Not Activated</a>
-												<a href="?p=[]inactive">Players Inactivate</a>
+												<a href="?p=inactive">Players Inactivate</a>
 												<a href="?p=report">Players Reported</a>
 												<a href="?p=map">Map</a>
 												<br />
@@ -134,6 +194,9 @@ $up_avl = $latest - $ver ;
 												<a href="#"><b>Res Bonus</b></a>
 												<a href="?p=givePlusRes">Give All Res Bonus</a>
 												<a href="?p=maintenenceResetPlusBonus">Reset Res Bonus</a>
+												<br />
+												<a href="#"><b>Users</b></a>
+												<a href="?p=addUsers">Create Users</a>
 												<br />
 												<a href="#"><b>Natars</b></a>
 												<a href="?p=natarend">Add WW Villages</a>

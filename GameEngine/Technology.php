@@ -229,47 +229,66 @@ class Technology {
 		return $ownunit;
 	}
 
-	function getAllUnits($base,$InVillageOnly=False,$mode=0) {
-		global $database;
-		$ownunit = $database->getUnit($base);
-		$ownunit['u99'] -= $ownunit['u99'];
-		$ownunit['u99o'] -= $ownunit['u99o'];
-		$enforcementarray = $database->getEnforceVillage($base,0);
-		if(count($enforcementarray) > 0) {
-			foreach($enforcementarray as $enforce) {
-				for($i=1;$i<=50;$i++) {
-					$ownunit['u'.$i] += $enforce['u'.$i];
-				}
-				$ownunit['hero'] += $enforce['hero'];
-			}
-		}
-		if($mode==0){
-		$prisoners = $database->getPrisoners($base);
-		if(!empty($prisoners)) {
-		foreach($prisoners as $prisoner){
-			$owner = $database->getVillageField($base,"owner");
-			$ownertribe = $database->getUserField($owner,"tribe",0);
-			$start = ($ownertribe-1)*10+1;
-			$end = ($ownertribe*10);
-			for($i=$start;$i<=$end;$i++) {
-			$j = $i-$start+1;
-			$ownunit['u'.$i] += $prisoner['t'.$j];
-			}
-			$ownunit['hero'] += $prisoner['t11'];
-		}
-		}
-		}
-		if(!$InVillageOnly) {
-			$movement = $database->getVillageMovement($base);
-			if(!empty($movement)) {
-				for($i=1;$i<=50;$i++) {
-					$ownunit['u'.$i] += $movement['u'.$i];
-				}
-				$ownunit['hero'] += $movement['hero'];
-			}
-		}
-		return $ownunit;
-	}
+    function getAllUnits($base,$InVillageOnly=False,$mode=0) {
+        global $database;
+        $ownunit = $database->getUnit($base);
+        $ownunit['u99'] -= $ownunit['u99'];
+        $ownunit['u99o'] -= $ownunit['u99o'];
+        $enforcementarray = $database->getEnforceVillage($base,0);
+        if(count($enforcementarray) > 0) {
+            foreach($enforcementarray as $enforce) {
+                for($i=1;$i<=50;$i++) {
+                    $ownunit['u'.$i] += $enforce['u'.$i];
+                }
+                $ownunit['hero'] += $enforce['hero'];
+            }
+        }
+        if ($mode==0) {
+            $enforceoasis=$database->getOasisEnforce($base,0);
+            if(count($enforceoasis) > 0) {
+                foreach($enforceoasis as $enforce) {
+                    for($i=1;$i<=50;$i++) {
+                        $ownunit['u'.$i] += $enforce['u'.$i];
+                    }
+                    $ownunit['hero'] += $enforce['hero'];
+                }
+            }
+            $enforceoasis1=$database->getOasisEnforce($base,1);
+            if(count($enforceoasis1) > 0) {
+                foreach($enforceoasis1 as $enforce) {
+                    for($i=1;$i<=50;$i++) {
+                        $ownunit['u'.$i] += $enforce['u'.$i];
+                    }
+                    $ownunit['hero'] += $enforce['hero'];
+                }
+            }            
+            
+            $prisoners = $database->getPrisoners($base,1);
+            if(!empty($prisoners)) {
+                foreach($prisoners as $prisoner){
+                    $owner = $database->getVillageField($base,"owner");
+                    $ownertribe = $database->getUserField($owner,"tribe",0);
+                    $start = ($ownertribe-1)*10+1;
+                    $end = ($ownertribe*10);
+                    for($i=$start;$i<=$end;$i++) {
+                        $j = $i-$start+1;
+                        $ownunit['u'.$i] += $prisoner['t'.$j];
+                    }
+                    $ownunit['hero'] += $prisoner['t11'];
+                }
+            }
+        }
+        if(!$InVillageOnly) {
+            $movement = $database->getVillageMovement($base);
+            if(!empty($movement)) {
+                for($i=1;$i<=50;$i++) {
+                    $ownunit['u'.$i] += $movement['u'.$i];
+                }
+                $ownunit['hero'] += $movement['hero'];
+            }
+        }
+        return $ownunit;
+    }
 
 	public function meetTRequirement($unit) {
 		global $session;
@@ -699,10 +718,11 @@ private function trainUnit($unit,$amt,$great=false) {
 	}
 
 	public function finishTech() {
-		global $database,$village;
-		$q = "UPDATE ".TB_PREFIX."research SET timestamp=".(time()-1)." WHERE vref = ".$village->wid;
-		$database->query($q);
-	}
+        	global $database,$village;
+        	$q = "UPDATE ".TB_PREFIX."research SET timestamp=".(time()-1)." WHERE vref = ".$village->wid;
+        	$result = $database->query($q);
+        	return mysql_affected_rows();
+    	}  
 
 	public function calculateAvaliable($id,$resarray=array()) {
 		global $village,$generator,${'r'.$id};
@@ -738,9 +758,10 @@ private function trainUnit($unit,$amt,$great=false) {
 						$fail='1';
 						}
 					}
-			if($fail==0){
-			$database->deleteReinf($id);
-			}
+        if ($enforce['hero']>0) $fail='1';
+        if($fail==0){
+            $database->deleteReinf($id);
+        }
 
 	}
 

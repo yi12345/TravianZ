@@ -1500,6 +1500,10 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%users` (
   `friend18wait` int(11) unsigned NOT NULL,
   `friend19wait` int(11) unsigned NOT NULL,
   `maxevasion` mediumint(3) unsigned NOT NULL,
+  `village_select` bigint(20) DEFAULT NULL,
+  `vac_time` varchar(255) NOT NULL,
+  `vac_mode` int(2) unsigned NOT NULL DEFAULT '0',
+  `vactwoweeks` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
@@ -1535,6 +1539,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%vdata` (
 `crop` float(12,2) NOT NULL,
 `maxcrop` int(11) unsigned NOT NULL,
 `lastupdate` int(11) unsigned NOT NULL,
+`lastupdate2` int(11) unsigned NOT NULL,  
 `loyalty` float(9,6) unsigned NOT NULL DEFAULT '100',
 `exp1` int(11) NOT NULL,
 `exp2` int(11) NOT NULL,

@@ -10,7 +10,6 @@
 #################################################################################
 
 include("GameEngine/Village.php");
-include("GameEngine/Units.php");
 
 $start = $generator->pageLoadTimeStart();
 if(isset($_GET['newdid'])) {
@@ -51,7 +50,7 @@ if(isset($_GET['o'])) {
 	$o = preg_replace("/[^a-zA-Z0-9_-]/","",$_GET['o']);
 	$oid = preg_replace("/[^a-zA-Z0-9_-]/","",$_GET['z']);
 	$too = $database->getOasisField($oid,"conqured");
-	if($too['conqured'] == 0){$disabledr ="disabled=disabled"; $disabled ="disabled=disabled";}else{
+	if($too == 0){$disabledr ="disabled=disabled"; $disabled ="disabled=disabled";}else{
 	$disabledr ="";
 	if($session->sit == 0){
 	$disabled ="";
@@ -153,7 +152,8 @@ if(isset($_GET['o'])) {
 			} else
 				if(isset($r)) {
 					$enforce = $database->getEnforceArray($r, 0);
-					if($enforce['from'] == $village->wid) {
+					$enforceoasis=$database->getOasisEnforceArray($r, 0);
+					if($enforce['from'] == $village->wid || $enforceoasis['conqured']==$village->wid) {
 						$to = $database->getVillage($enforce['from']);
 						$ckey = $r;
 						include ("Templates/a2b/sendback_" . $database->getUserField($to['owner'], 'tribe', 0) . ".tpl");

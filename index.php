@@ -19,6 +19,7 @@
 
 if(!file_exists('GameEngine/config.php')) {
 header("Location: install/");
+exit;
 }
 
 include ("GameEngine/config.php");
@@ -49,7 +50,7 @@ include ("GameEngine/Lang/".LANG.".php");
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Powered by ZravianX - <?php echo SERVER_NAME; ?></title>
+	<title><?php echo SERVER_NAME; ?></title>
 	<link rel="shortcut icon" href="favicon.ico" />
 	<link rel="stylesheet" type="text/css" href="gpack/travian/main.css" />
 	<link rel="stylesheet" type="text/css" href="gpack/travian/flaggs.css" />
@@ -77,7 +78,7 @@ include ("GameEngine/Lang/".LANG.".php");
 			show_flags('', '', region_list);
 			</script>
 		</div>
-		<div id="header"><h1><?php echo WELCOME; ?></h1></div>
+		<div id="header"><h1><?php echo $lang['index'][0][1]; ?></h1></div>
 		<div id="navigation">
 			<a href="index.php" class="home"><img src="img/x.gif" alt="Travian" /></a>
 			<table class="menu">
@@ -123,9 +124,9 @@ include ("GameEngine/Lang/".LANG.".php");
 
 									<td><?php
 
-										   $users = mysql_num_rows(mysql_query("SELECT * FROM " . TB_PREFIX . "users WHERE tribe!=0 AND tribe!=4 AND tribe!=5"));
-										   echo $users;
-
+											$return=mysql_query("SELECT * FROM " . TB_PREFIX . "users WHERE tribe!=0 AND tribe!=4 AND tribe!=5");
+											$users=(!empty($return))? mysql_num_rows($return):0;
+											echo $users;
 									?></td>
 								</tr>
 
@@ -138,7 +139,8 @@ include ("GameEngine/Lang/".LANG.".php");
 
 									<td><?php
 
-										   $active = mysql_num_rows(mysql_query("SELECT * FROM " . TB_PREFIX . "users WHERE " . time() . "-timestamp < (3600*24) AND tribe!=0 AND tribe!=4 AND tribe!=5"));
+										   $return = mysql_query("SELECT * FROM " . TB_PREFIX . "users WHERE " . time() . "-timestamp < (3600*24) AND tribe!=0 AND tribe!=4 AND tribe!=5");
+										   $active=(!empty($return))? mysql_num_rows($return):0;
 										   echo $active;
 
 									?></td>
@@ -153,7 +155,8 @@ include ("GameEngine/Lang/".LANG.".php");
 
 									<td><?php
 
-										   $online = mysql_num_rows(mysql_query("SELECT * FROM " . TB_PREFIX . "users WHERE " . time() . "-timestamp < (60*10) AND tribe!=0 AND tribe!=4 AND tribe!=5"));
+										   $return = mysql_query("SELECT * FROM " . TB_PREFIX . "users WHERE " . time() . "-timestamp < (60*10) AND tribe!=0 AND tribe!=4 AND tribe!=5");
+										   $online=(!empty($return))? mysql_num_rows($return):0;
 										   echo $online;
 
 									?></td>
@@ -203,7 +206,7 @@ include ("GameEngine/Lang/".LANG.".php");
 					<li><a href="spielregeln.php"><?php echo SPIELREGELN; ?></a>|</li>
 					<li><a href="agb.php"><?php echo AGB; ?></a>|</li>
 					<li><a href="impressum.php"><?php echo IMPRINT; ?></a></li>
-					<li class="copyright">&copy; 2011 - ZravianX - All rights reserved</li>
+					<li class="copyright">&copy; 2011-2014 - TravianZ - All rights reserved</li>
 				</ul>
 			</div>
 		</div>
@@ -214,7 +217,7 @@ include ("GameEngine/Lang/".LANG.".php");
 			<h2><?php echo CHOOSE; ?></h2>
 			<a href="#" class="closer"><img class="dynamic_img" alt="Close" src="img/un/x.gif" /></a>
 			<ul class="world_list">
-				<li class="w_big c3" style="background-image:url('img/en/welten/en1_big_g.jpg');">
+				<li class="w_big c3" style="background-image:url('img/en/welten/en1_big.jpg');">
 					<a href="login.php"><img class="w_button" src="img/un/x.gif" alt="World" title="<?php echo $users; echo "&nbsp;"; echo PLAYERS; echo "&nbsp;|&nbsp;"; echo $active; echo "&nbsp;"; echo ACTIVE; echo "&nbsp;|&nbsp;"; echo $online; echo "&nbsp;"; echo ONLINE; ?>" /></a>
 					<div class="label_players c0"><?php echo PLAYERS; ?>:</div>
 					<div class="label_online c0"><?php echo ONLINE; ?>:</div>

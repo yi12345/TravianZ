@@ -17,31 +17,31 @@ mb_internal_encoding("UTF-8"); // Add for utf8 varriables.
 ##                                                                             ##
 #################################################################################
 
-if(!file_exists('GameEngine/config.php') && !file_exists('../../GameEngine/config.php') && !file_exists('../../config.php')) {
+if(file_exists('GameEngine/config.php') || file_exists('../../GameEngine/config.php') || file_exists('../../config.php') || file_exists('../GameEngine/config.php')) {
+}else{
 header("Location: install/");
 }
 
 $script_name = ($_SERVER['REQUEST_URI'] == 'karte.php') ? 'karte' : $_SERVER['REQUEST_URI'];
-include ("Battle.php");
-include ("Data/buidata.php");
-include ("Data/cp.php");
-include ("Data/cel.php");
-include ("Data/resdata.php");
-include ("Data/unitdata.php");
-include ("Data/hero_full.php");
-include ("config.php");
-include ("Database.php");
-include ("Mailer.php");
-include ("Form.php");
-include ("Generator.php");
-include ("Multisort.php");
-include ("Ranking.php");
-include ("Automation.php");
-include ("Lang/" . LANG . ".php");
-include ("Logging.php");
-include ("Message.php");
-include ("Alliance.php");
-include ("Profile.php");
+include_once ("Battle.php");
+include_once ("Data/buidata.php");
+include_once ("Data/cp.php");
+include_once ("Data/cel.php");
+include_once ("Data/resdata.php");
+include_once ("Data/unitdata.php");
+include_once ("Data/hero_full.php");
+include_once ("config.php");
+include_once ("Database.php");
+include_once ("Mailer.php");
+include_once ("Form.php");
+include_once ("Generator.php");
+include_once ("Multisort.php");
+include_once ("Ranking.php");
+include_once ("Lang/" . LANG . ".php");
+include_once ("Logging.php");
+include_once ("Message.php");
+include_once ("Alliance.php");
+include_once ("Profile.php");
 
 class Session {
 
@@ -61,7 +61,7 @@ class Session {
 
 			function Session() {
 				$this->time = time();
-				session_start();
+				if (!isset($_SESSION)) session_start();
 
 				$this->logged_in = $this->checkLogin();
 
@@ -85,16 +85,27 @@ class Session {
 				$_SESSION['checker'] = $generator->generateRandStr(3);
 				$_SESSION['mchecker'] = $generator->generateRandStr(5);
 				$_SESSION['qst'] = $database->getUserField($_SESSION['username'], "quest", 1);
-				if(!isset($_SESSION['wid'])) {
-					$query = mysql_query('SELECT * FROM `' . TB_PREFIX . 'vdata` WHERE `owner` = ' . $database->getUserField($_SESSION['username'], "id", 1) . ' LIMIT 1');
-					$data = mysql_fetch_assoc($query);
-					$_SESSION['wid'] = $data['wref'];
-				} else
-					if($_SESSION['wid'] == '') {
-						$query = mysql_query('SELECT * FROM `' . TB_PREFIX . 'vdata` WHERE `owner` = ' . $database->getUserField($_SESSION['username'], "id", 1) . ' LIMIT 1');
-						$data = mysql_fetch_assoc($query);
-						$_SESSION['wid'] = $data['wref'];
-					}
+                $result = mysql_query("SELECT village_select FROM `". TB_PREFIX."users` WHERE `username`='".$_SESSION['username']."'");
+                $dbarray = mysql_fetch_assoc($result);
+                $selected_village=$dbarray['village_select'];
+                if(!isset($_SESSION['wid'])) {
+                    if($selected_village!='') {
+                        $query = mysql_query('SELECT * FROM `' . TB_PREFIX . 'vdata` WHERE `wref` = '.$selected_village);
+                    }else{
+                        $query = mysql_query('SELECT * FROM `' . TB_PREFIX . 'vdata` WHERE `owner` = ' . $database->getUserField($_SESSION['username'], "id", 1) . ' LIMIT 1');
+                    }
+                    $data = mysql_fetch_assoc($query);
+                    $_SESSION['wid'] = $data['wref'];
+                } else
+                    if($_SESSION['wid'] == '') {
+                        if($selected_village!='') {
+                            $query = mysql_query('SELECT * FROM `' . TB_PREFIX . 'vdata` WHERE `wref` = '.$selected_village);
+                        }else{
+                            $query = mysql_query('SELECT * FROM `' . TB_PREFIX . 'vdata` WHERE `owner` = ' . $database->getUserField($_SESSION['username'], "id", 1) . ' LIMIT 1');
+                        }
+                        $data = mysql_fetch_assoc($query);
+                        $_SESSION['wid'] = $data['wref'];
+                    }
 				$this->PopulateVar();
 
 				$logging->addLoginLog($this->uid, $_SERVER['REMOTE_ADDR']);
@@ -154,14 +165,22 @@ class Session {
      				$result2 = mysql_query($q2, $database->connection);
      				$he2=mysql_fetch_array($result2);
      				$hero+=$he2[0];
-     				$hero+=$database->HeroNotInVil($myvill); // check if hero is not in village (come back from attack , raid , etc.)
+     				$q3 = "SELECT SUM(t11) from " . TB_PREFIX . "prisoners where `from` = ".$myvill;   // check if hero is prisoner
+					$result3 = mysql_query($q3, $database->connection);
+					$he3=mysql_fetch_array($result3);
+					$hero+=$he3[0];
+					$hero+=$database->HeroNotInVil($myvill); // check if hero is not in village (come back from attack , raid , etc.)  
      				}
-     				if(!$database->getHeroDead($this->uid) and !$hero){ // check if hero is already dead
-					}elseif(!$database->getHeroInRevive($this->uid) and !$hero){ // check if hero is already in revive
-					}elseif(!$database->getHeroInTraining($this->uid) and !$hero){ // check if hero is in training
-      				$database->KillMyHero($this->uid);
+     				$yes=true; //fix by ronix
+            if($database->getHeroDead($this->uid) and !$hero){ // check if hero is already dead
+                $yes=false;
+            }elseif($database->getHeroInRevive($this->uid) and !$hero){ // check if hero is already in revive
+                $yes=false;
+            }elseif($database->getHeroInTraining($this->uid) and !$hero){ // check if hero is in training
+                $yes=false;
+            } 
+            if($yes and !$hero) $database->KillMyHero($this->uid);
 				} 
-     		}
 
 			private function PopulateVar() {
 				global $database;
@@ -197,7 +216,7 @@ class Session {
 				if($this->userarray['b4'] > $this->time) {
 					$this->bonus4 = 1;
 				}
-                                $this->CheckHeroReal();
+                $this->CheckHeroReal();
 			}
 
 			private function SurfControl(){

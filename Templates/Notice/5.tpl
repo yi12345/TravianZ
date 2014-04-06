@@ -1,7 +1,36 @@
 <?php
+############################################################
+##              DO NOT REMOVE THIS NOTICE                 ##
+##                     FIX BY RONIX                       ##
+##                       TRAVIANZ                         ##
+############################################################
 $dataarray = explode(",",$message->readingNotice['data']);
 if(isset($dataarray[147]) and $dataarray[147]!=0){$colspan="11";}else{$colspan="10";}
 if(isset($dataarray[149]) and $dataarray[149]!=0){$colspan2="11";}else{$colspan2="10";}
+//attacker
+if ($database->getUserField($dataarray[0],'username',0)!="??") {
+	$user_url="<a href=\"spieler.php?uid=".$database->getUserField($dataarray[0],'id',0)."\">".$database->getUserField($dataarray[0],'username',0)."</a>";
+}else{
+	$user_url="<font color=\"grey\"><b>??</b></font>";
+}
+if($database->getVillageField($dataarray[1],'name')!="??") {
+	$from_url="<a href=\"karte.php?d=".$dataarray[1]."&c=".$generator->getMapCheck($dataarray[1])."\">".$database->getVillageField($dataarray[1],'name')."</a>";
+}else{
+	$from_url="<font color=\"grey\"><b>??</b></font>";
+}
+//defender
+if ($database->getUserField($dataarray[28],'username',0)!="??") {
+	$defuser_url="<a href=\"spieler.php?uid=".$database->getUserField($dataarray[28],'id',0)."\">".$database->getUserField($dataarray[28],'username',0)."</a>";
+}else{
+	$defuser_url="<font color=\"grey\"><b>??</b></font>";
+}
+if($database->isVillageOases($dataarray[29])){
+    $deffrom_url="<a href=\"karte.php?d=".$dataarray[29]."&c=".$generator->getMapCheck($dataarray[29])."\">".$dataarray[30]."</a>";
+}elseif($database->getVillageField($dataarray[29],'name')!="??") {
+    $deffrom_url="<a href=\"karte.php?d=".$dataarray[29]."&c=".$generator->getMapCheck($dataarray[29])."\">".$database->getVillageField($dataarray[29],'name')."</a>";
+}else{
+    $deffrom_url="<font color=\"grey\"><b>??</b></font>";
+}
 ?>
 <table cellpadding="1" cellspacing="1" id="report_surround">
 			<thead>
@@ -23,7 +52,7 @@ if(isset($dataarray[149]) and $dataarray[149]!=0){$colspan2="11";}else{$colspan2
 		<table cellpadding="1" cellspacing="1" id="attacker"><thead>
 <tr>
 <td class="role">Attacker</td>
-<td colspan="<?php echo $colspan; ?>"><a href="spieler.php?uid=<?php echo $database->getUserField($dataarray[0],"id",0); ?>"><?php echo $database->getUserField($dataarray[0],"username",0); ?></a> from the village <a href="karte.php?d=<?php echo $dataarray[1]."&amp;c=".$generator->getMapCheck($dataarray[1]); ?>"><?php echo $database->getVillageField($dataarray[1],"name"); ?></a></td>
+<td colspan="<?php echo $colspan ?>"><?php echo $user_url;?> from the village <?php echo $from_url;?></td>
 </tr>
 </thead>
 <tbody class="units">
@@ -62,24 +91,24 @@ for($i=13;$i<=22;$i++) {
     }
 }
 if(isset($dataarray[147]) and $dataarray[147]!=0){
-	if ($dataarray[148]==0){$tdclass='class="none"';}
-	echo "<td $tdclass>$dataarray[148]</td>";
+    if ($dataarray[148]==0) $tdclass='class="none"'; else $tdclass='';
+    echo "<td $tdclass>$dataarray[148]</td>";
 }
-if($dataarray[151] != 0 or $dataarray[152] != 0 or $dataarray[153] != 0 or $dataarray[154] != 0 or $dataarray[155] != 0 or $dataarray[156] != 0 or $dataarray[157] != 0 or $dataarray[158] != 0 or $dataarray[159] != 0 or $dataarray[160] != 0){
+if($dataarray[151] != 0 or $dataarray[152] != 0 or $dataarray[153] != 0 or $dataarray[154] != 0 or $dataarray[155] != 0 or $dataarray[156] != 0 or $dataarray[157] != 0 or $dataarray[158] != 0 or $dataarray[159] != 0 or $dataarray[160] != 0 or $dataarray[161] != 0){
 echo "</tr><tr><th>Prisoners</th>";
 for($i=151;$i<=160;$i++) {
-	if($dataarray[$i] == 0) {
-    	echo "<td class=\"none\">0</td>";
+    if($dataarray[$i] == 0) {
+        echo "<td class=\"none\">0</td>";
     }
     else {
-    	echo "<td>".$dataarray[$i]."</td>";
+        echo "<td>".$dataarray[$i]."</td>";
     }
 }
 if(isset($dataarray[147]) and $dataarray[147]!=0){
-	if ($dataarray[161]==0){$tdclass='class="none"';}
-	echo "<td $tdclass>$dataarray[161]</td>";
+    if ($dataarray[161]==0) $tdclass='class="none"'; else $tdclass='';
+    echo "<td $tdclass>$dataarray[161]</td>";
 }
-}
+}  
 echo "</tr></tbody>";
 if ($dataarray[139]!='' and $dataarray[140]!=''){ //ram
 ?>
@@ -115,7 +144,20 @@ if ($dataarray[162]!='' and $dataarray[162]!=''){ //release prisoners
     
     <?php echo $dataarray[162]; ?>
     </td></tr></tbody>
-<?php } ?>
+<?php }
+if ($dataarray[165]!='' and $dataarray[166]!=''){ //hero
+?>
+    <tbody class="goods"><tr><th>Information</th><td colspan="<?php echo $colspan; ?>">
+    <img class="unit u<?php echo $dataarray[165]; ?>" src="img/x.gif" alt="Hero" title="Hero" />
+    <?php echo $dataarray[166]; ?>
+    </td></tr></tbody>
+<?php } 
+if(isset($dataarray[164]) && $dataarray[164] !=''){ //troop not return
+?>
+	<tbody class="goods"><tr><th>Information</th><td colspan="<?php echo $colspan; ?>">
+	<?php echo $dataarray[164]; ?>
+    </td></tr></tbody>
+<?php }?>
 	<tbody class="goods"><tr><th>Bounty</th><td colspan="<?php echo $colspan; ?>">
 	<div class="res"><img class="r1" src="img/x.gif" alt="Lumber" title="Lumber" /><?php echo $dataarray[23]; ?> | <img class="r2" src="img/x.gif" alt="Clay" title="Clay" /><?php echo $dataarray[24]; ?> | <img class="r3" src="img/x.gif" alt="Iron" title="Iron" /><?php echo $dataarray[25]; ?> | <img class="r4" src="img/x.gif" alt="Crop" title="Crop" /><?php echo $dataarray[26]; ?></div><div class="carry"><img class="car" src="img/x.gif" alt="carry" title="carry" /><?php echo ($dataarray[23]+$dataarray[24]+$dataarray[25]+$dataarray[26])."/".$dataarray[27]; ?></div>
     </td></tr></tbody></table>
@@ -129,13 +171,7 @@ $start=1; ?>
 	<thead>
 	<tr>
 	<td class="role">Defender</th>
-	<?php
-	if($targettribe == '1' and isset($dataarray[149]) and $dataarray[149]!=0){
-	?>
-	<td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='1'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> from the village <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo"Reinforcement"; } ?></td>
-	<?php }else{ ?>
-	<td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='1'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> from the village <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo"Reinforcement"; } ?></td>
-	<?php } ?>
+	<td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='1'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>	
 	</tr></thead>
 	<tbody class="units">
 	<tr>
@@ -184,13 +220,7 @@ $start=11;?>
 	<thead>
 	<tr>
 	<td class="role">Defender</th>
-	<?php
-	if($targettribe == '2' and isset($dataarray[149]) and $dataarray[149]!=0){
-	?>
-	<td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='2'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> from the village <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo"Reinforcement"; } ?></td>
-	<?php }else{ ?>
-	<td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='2'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> from the village <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo"Reinforcement"; } ?></td>
-	<?php } ?>
+	<td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='2'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>	
 	</tr></thead>
 	<tbody class="units">
 	<tr>
@@ -238,13 +268,7 @@ $start=21; ?>
 	<thead>
 	<tr>
 	<td class="role">Defender</th>
-	<?php
-	if($targettribe == '3' and isset($dataarray[149]) and $dataarray[149]!=0){
-	?>
-	<td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='3'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> from the village <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo"Reinforcement"; } ?></td>
-	<?php }else{ ?>
-	<td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='3'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> from the village <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo"Reinforcement"; } ?></td>
-	<?php } ?>
+	<td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='3'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>	
 	</tr></thead>
 	<tbody class="units">
 	<tr>
@@ -293,13 +317,7 @@ $start=31; ?>
 	<thead>
 	<tr>
 	<td class="role">Defender</th>
-	<?php
-	if($targettribe == '4' and isset($dataarray[149]) and $dataarray[149]!=0){
-	?>
-	<td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='4'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> from the village <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo"Reinforcement"; } ?></td>
-	<?php }else{ ?>
-	<td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='4'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> from the village <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo"Reinforcement"; } ?></td>
-	<?php } ?>
+	<td colspan="10"><?php if($targettribe=='4'){ echo'<a href="spieler.php?uid=">'.$database->getUserField($dataarray[28],"username",0).'</a> from the village <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo"Reinforcement"; } ?></td>
 	</tr></thead>
 	<tbody class="units">
 	<tr>
@@ -310,9 +328,6 @@ $start=31; ?>
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-if($targettribe == '4' and isset($dataarray[149]) and $dataarray[149]!=0){
-	echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";
-}
 echo "</tr><tr><th>Troops</th>";
 for($i=98;$i<=107;$i++) {
 	if($dataarray[$i] == 0) {
@@ -322,9 +337,6 @@ for($i=98;$i<=107;$i++) {
     	echo "<td>".$dataarray[$i]."</td>";
     }
 }
-if($targettribe == '4' and isset($dataarray[149]) and $dataarray[149]!=0){
-	echo "<td>$dataarray[149]</td>";
-}
 echo "<tr><th>Casualties</th>";
 for($i=108;$i<=117;$i++) {
 	if($dataarray[$i] == 0) {
@@ -333,10 +345,6 @@ for($i=108;$i<=117;$i++) {
     else {
     	echo "<td>".$dataarray[$i]."</td>";
     }
-}
-if($targettribe == '4' and isset($dataarray[149]) and $dataarray[149]!=0){
-	if ($dataarray[150]==0){$tdclass1='class="none"';}
-	echo "<td $tdclass1>$dataarray[150]</td>";
 }
 ?>
 </tr></tbody></table>
@@ -348,13 +356,7 @@ $start=41; ?>
 	<thead>
 	<tr>
 	<td class="role">Defender</th>
-	<?php
-	if($targettribe == '5' and isset($dataarray[149]) and $dataarray[149]!=0){
-	?>
-	<td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='5'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> from the village <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo"Reinforcement"; } ?></td>
-	<?php }else{ ?>
-	<td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='5'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> from the village <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo"Reinforcement"; } ?></td>
-	<?php } ?>
+	<td colspan="10"><?php if($targettribe=='5'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>	
 	</tr></thead>
 	<tbody class="units">
 	<tr>
@@ -365,9 +367,6 @@ $start=41; ?>
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-if($targettribe == '5' and isset($dataarray[149]) and $dataarray[149]!=0){
-	echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";
-}
 echo "</tr><tr><th>Troops</th>";
 for($i=119;$i<=128;$i++) {
 	if($dataarray[$i] == 0) {
@@ -377,9 +376,6 @@ for($i=119;$i<=128;$i++) {
     	echo "<td>".$dataarray[$i]."</td>";
     }
 }
-if($targettribe == '5' and isset($dataarray[149]) and $dataarray[149]!=0){
-	echo "<td>$dataarray[149]</td>";
-}
 echo "<tr><th>Casualties</th>";
 for($i=129;$i<=138;$i++) {
 	if($dataarray[$i] == 0) {
@@ -388,10 +384,6 @@ for($i=129;$i<=138;$i++) {
     else {
     	echo "<td>".$dataarray[$i]."</td>";
     }
-}
-if($targettribe == '5' and isset($dataarray[149]) and $dataarray[149]!=0){
-	if ($dataarray[150]==0){$tdclass1='class="none"';}
-	echo "<td $tdclass1>$dataarray[150]</td>";
 }
 ?>
 </tr></tbody></table>

@@ -179,7 +179,7 @@
 				while(1) {
 					if(count($this->rankarray) > 1) {
 						$key = key($this->rankarray);
-						if($this->rankarray[$key]["id"] == $id) {
+						if(isset ($this->rankarray[$key]["id"]) && $this->rankarray[$key]["id"] === $id) {
 							return $key;
 							break;
 						} else {
@@ -531,7 +531,7 @@
 
 					array_push($holder, $value);
 				}
-				$holder = $multisort->sorte($holder, "'totalap'", false, 2);
+				$holder = $multisort->sorte($holder, "'Aap'", false, 2);
 				$newholder = array("pad");
 				foreach($holder as $key) {
 					array_push($newholder, $key);
@@ -559,7 +559,7 @@
 
 					array_push($holder, $value);
 				}
-				$holder = $multisort->sorte($holder, "'totaldp'", false, 2);
+				$holder = $multisort->sorte($holder, "'Adp'", false, 2);
 				$newholder = array("pad");
 				foreach($holder as $key) {
 					array_push($newholder, $key);
