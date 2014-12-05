@@ -32,7 +32,7 @@ define("SUPPORT","支援");
 define("UPDATE_T_10","更新前10名");
 define("SYSTEM_MESSAGE","系統公告");
 define("TRAVIAN_PLUS","Travian <b><span class=\"plus_g\">P</span><span class=\"plus_o\">l</span><span class=\"plus_g\">u</span><span class=\"plus_o\">s</span></span></span></b>");
-define("CONTACT","聯絡我們!");
+define("CONTACT","聯絡我們！");
 define("GAME_RULES","遊戲規定");
 
 //MENU
@@ -45,27 +45,27 @@ define("TOUR","遊戲瀏覽");
 
 
 //ERRORS
-define("USRNM_EMPTY","(Username empty)");
-define("USRNM_TAKEN","(Name is already in use.)");
-define("USRNM_SHORT","(min. ".USRNM_MIN_LENGTH." figures)");
-define("USRNM_CHAR","(Invalid Characters)");
-define("PW_EMPTY","(Password empty)");
-define("PW_SHORT","(min. ".PW_MIN_LENGTH." figures)");
-define("PW_INSECURE","(Password insecure. Please choose a more secure one.)");
-define("EMAIL_EMPTY","(Email Empty)");
-define("EMAIL_INVALID","(Invalid email address)");
-define("EMAIL_TAKEN","(Email is already in use)");
-define("TRIBE_EMPTY","<li>Please choose a tribe.</li>");
-define("AGREE_ERROR","<li>You have to agree to the game rules and the general terms & conditions in order to register.</li>");
-define("LOGIN_USR_EMPTY","Enter name.");
-define("LOGIN_PASS_EMPTY","Enter password.");
-define("EMAIL_ERROR","Email does not match existing");
-define("PASS_MISMATCH","Passwords do not match");
-define("ALLI_OWNER","Please appoint an alliance owner before deleting");
-define("SIT_ERROR","Sitter already set");
-define("USR_NT_FOUND","Name does not exist.");
-define("LOGIN_PW_ERROR","The password is wrong.");
-define("WEL_TOPIC","Useful tips & information ");
+define("USRNM_EMPTY","(玩家名稱空白)");
+define("USRNM_TAKEN","(玩家名稱已存在)");
+define("USRNM_SHORT","(玩家名稱至少 ".USRNM_MIN_LENGTH." 字)");
+define("USRNM_CHAR","(無效文字)");
+define("PW_EMPTY","(密碼空白)");
+define("PW_SHORT","(密碼至少 ".PW_MIN_LENGTH." 字)");
+define("PW_INSECURE","(密碼不安全. 請使用一個更有保障的)");
+define("EMAIL_EMPTY","(電子郵件地址空白)");
+define("EMAIL_INVALID","(電子郵件地址無效)");
+define("EMAIL_TAKEN","(電子郵件已存在)");
+define("TRIBE_EMPTY","<li>請選擇一個種族</li>");
+define("AGREE_ERROR","<li>你必須同意以上遊戲規則以及一般條款條件，才能進行註冊，本伺服器保留任何權力。</li>");
+define("LOGIN_USR_EMPTY","輸入玩家名稱");
+define("LOGIN_PASS_EMPTY","輸入密碼");
+define("EMAIL_ERROR","電子郵件不正確");
+define("PASS_MISMATCH","密碼不正確");
+define("ALLI_OWNER","在刪除前，請先指派一名委任盟主");
+define("SIT_ERROR","照看者已設立");
+define("USR_NT_FOUND","玩家名稱不存在");
+define("LOGIN_PW_ERROR","密碼不正確");
+define("WEL_TOPIC","錦囊妙計");
 define("ATAG_EMPTY","Tag empty");
 define("ANAME_EMPTY","Name empty");
 define("ATAG_EXIST","Tag taken");
