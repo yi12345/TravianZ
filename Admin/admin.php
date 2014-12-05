@@ -54,7 +54,7 @@ $up_avl = $latest - $ver ;
 <html>
 	<head>
 		<link REL="shortcut icon" HREF="favicon.ico"/>
-		<title>Admin Panel</title>
+		<title>管理頁面</title>
 		<link rel=stylesheet type="text/css" href="../img/admin/admin.css">
 		<link rel=stylesheet type="text/css" href="../img/admin/acp.css">
 		<link rel=stylesheet type="text/css" href="../img/img.css">

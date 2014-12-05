@@ -19,29 +19,29 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 <table id="member">
 	<thead>
 		<tr>
-		<th>Server Settings <a href="admin.php?p=editServerSet"><img src="../img/admin/edit.gif" title="Edit Setting"></a></th>
+		<th>伺服器設定 <a href="admin.php?p=editServerSet"><img src="../img/admin/edit.gif" title="Edit Setting"></a></th>
 		</tr>
 	</thead>
 </table>
 
 <table id="profile">
 	<tr>
-		<td class="b">Variable</td>
-		<td class="b">Value</td>
+		<td class="b">變數</td>
+		<td class="b">內容</td>
 	</tr>
 	<tr>
-		<td>Server Name</td>
+		<td>伺服器名稱</td>
 		<td><?php echo SERVER_NAME;?></td>
 	</tr>
 	<tr>
-		<td>Server Started</td>
-		<td><?php echo "Date:".START_DATE." Time:".START_TIME; //date("d.m.y H:i",COMMENCE);?></td>
+		<td>伺服器啟動時間</td>
+		<td><?php echo "日期:".START_DATE." 時間:".START_TIME; //date("d.m.y H:i",COMMENCE);?></td>
 	</tr>
-	<tr>	
-		<td>Server Timezone</td>
+	<tr>
+		<td>伺服器時區</td>
 		<td><?php echo TIMEZONE;?></td>
 	</tr>
-        	<td>Language</td>
+        	<td>語言</td>
         	<td><?php if(LANG == 'en'){ echo "English"; } ?>
         	<?php if(LANG == 'nl'){ echo "Dutch"; } ?>
         	<?php if(LANG == 'es'){ echo "Spain"; } ?>
@@ -49,7 +49,7 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
         	<?php if(LANG == 'ru'){ echo "Russian"; } ?>
         	</td>
 	<tr>
-		<td>Server Speed</td>
+		<td>伺服器速度</td>
 		<td><?php echo ''.SPEED.'x';?></td>
 	</tr>
 	<tr>
@@ -81,7 +81,7 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 		<td><?php echo NATARS_UNITS;?></td>
 	</tr>
 	<tr>
-		<td>Map Size</td>
+		<td>地圖尺寸</td>
 		<td><?php echo WORLD_MAX;?>x<?php echo WORLD_MAX;?></td>
 	</tr>
 	<tr>
@@ -98,11 +98,11 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 	</tr>
 	<tr>
 		<td>Activation Mail</td>
-		<td><?php if(AUTH_EMAIL == true) { echo "<b><font color='Green'>Enabled</font></b>"; } else { echo "<b><font color='Red'>Disabled</font></b>"; } ?></td>
+		<td><?php if(AUTH_EMAIL == true) { echo "<b><font color='Green'>啟用</font></b>"; } else { echo "<b><font color='Red'>停用</font></b>"; } ?></td>
 	</tr>
 	<tr>
 		<td>Quest</td>
-		<td><?php if(QUEST == true) { echo "<b><font color='Green'>Enabled</font></b>"; } else { echo "<b><font color='Red'>Disabled</font></b>"; } ?></td>
+		<td><?php if(QUEST == true) { echo "<b><font color='Green'>啟用</font></b>"; } else { echo "<b><font color='Red'>停用</font></b>"; } ?></td>
 	</tr>
 	<tr>
 		<td>Quest Type</td>
@@ -114,7 +114,7 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 	</tr>
 	<tr>
 		<td>World Wonder - Statistics</td>
-		<td><?php if(WW == true) { echo "<b><font color='Green'>Enabled</font></b>"; } else if(WW == false) { echo "<b><font color='Red'>Disabled</font></b>"; } ?></td>
+		<td><?php if(WW == true) { echo "<b><font color='Green'>啟用</font></b>"; } else if(WW == false) { echo "<b><font color='Red'>停用</font></b>"; } ?></td>
 	</tr>
 	<tr>
 		<td><b><font color='#71D000'>P</font><font color='#FF6F0F'>l</font><font color='#71D000'>u</font><font color='#FF6F0F'>s</font></b> account duration</td>
@@ -138,13 +138,13 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 	</tr>
 	<tr>
 		<td>Great Workshop</td>
-		<td><?php if(GREAT_WKS == true) { echo "<b><font color='Green'>Enabled</font></b>"; } else { echo "<b><font color='Red'>Disabled</font></b>"; } ?></td>
+		<td><?php if(GREAT_WKS == true) { echo "<b><font color='Green'>啟用</font></b>"; } else { echo "<b><font color='Red'>停用</font></b>"; } ?></td>
 	</tr>
 	<tr>
 		<td>Show Natars in Statistics</td>
 		<td><?php if(SHOW_NATARS == true) { echo "<b><font color='blue'>True</font></b>"; } else { echo "<b><font color='Red'>False</font></b>"; } ?></td>
 	<tr>
-		<td>Peace system</td>
+		<td>和平系統</td>
 		<td>
 			<?php
 			$peace_array=array("None","Normal","Christmas","New Year","Easter");
@@ -154,136 +154,136 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 	</tr>
 	<tr>
 		<td>Graphic Pack</td>
-		<td><?php if(GP_ENABLE == true) { echo "<b><font color='Green'>Enabled</font></b>"; } else { echo "<b><font color='Red'>Disabled</font></b>"; } ?></td>
+		<td><?php if(GP_ENABLE == true) { echo "<b><font color='Green'>啟用</font></b>"; } else { echo "<b><font color='Red'>停用</font></b>"; } ?></td>
 	</tr>
 	<tr>
 	<tr>
-		<td>Error Reporting</td>
-		<td><b><?php echo (ERROR_REPORT=="error_reporting (0);")? "No": "Yes";?></b></td>
+		<td>錯誤顯示</td>
+		<td><b><?php echo (ERROR_REPORT=="error_reporting (0);")? "否": "是";?></b></td>
 	</tr>
 	</table>
 
 	<table id="member">
 		<thead>
 			<tr>
-				<th>Log Settings <a href="admin.php?p=editLogSet"><img src="../img/admin/edit.gif" title="Edit Log Setting"></a></th>
+				<th>Log 設定 <a href="admin.php?p=editLogSet"><img src="../img/admin/edit.gif" title="Edit Log Setting"></a></th>
 			</tr>
 		</thead>
 	</table>
 
   <table id="profile">
   <tr>
-		<td class="b">Variable</td>
-		<td class="b">Value</td>
+		<td class="b">變數</td>
+		<td class="b">內容</td>
 	</tr>
 	<tr>
-		<td>Log Build</td>
-		<td><?php if(LOG_BUILD == true) { echo "<b><font color='Green'>Enabled</font></b>"; } else if(LOG_BUILD == false){ echo "<b><font color='Red'>Disabled</font></b>"; } ?></td>
+		<td>記錄建築行為</td>
+		<td><?php if(LOG_BUILD == true) { echo "<b><font color='Green'>啟用</font></b>"; } else if(LOG_BUILD == false){ echo "<b><font color='Red'>停用</font></b>"; } ?></td>
 	</tr>
 	<tr>
-		<td>Log Technology</td>
-		<td><?php if(LOG_TECH == true) { echo "<b><font color='Green'>Enabled</font></b>"; } else if(LOG_TECH == false){ echo "<b><font color='Red'>Disabled</font></b>"; } ?></td>
+		<td>記錄科技研發</td>
+		<td><?php if(LOG_TECH == true) { echo "<b><font color='Green'>啟用</font></b>"; } else if(LOG_TECH == false){ echo "<b><font color='Red'>停用</font></b>"; } ?></td>
 	</tr>
 	<tr>
-		<td>Log Login</td>
-		<td><?php if(LOG_LOGIN == true) { echo "<b><font color='Green'>Enabled</font></b>"; } else if(LOG_LOGIN == false){ echo "<b><font color='Red'>Disabled</font></b>";  } ?></td>
+		<td>記錄登入行為</td>
+		<td><?php if(LOG_LOGIN == true) { echo "<b><font color='Green'>啟用</font></b>"; } else if(LOG_LOGIN == false){ echo "<b><font color='Red'>停用</font></b>";  } ?></td>
 	</tr>
 	<tr>
-		<td>Log Gold</td>
-		<td><?php if(LOG_GOLD_FIN == true) { echo "<b><font color='Green'>Enabled</font></b>"; } else if(LOG_GOLD_FIN == false){ echo "<b><font color='Red'>Disabled</font></b>"; } ?></td>
+		<td>紀錄黃金</td>
+		<td><?php if(LOG_GOLD_FIN == true) { echo "<b><font color='Green'>啟用</font></b>"; } else if(LOG_GOLD_FIN == false){ echo "<b><font color='Red'>停用</font></b>"; } ?></td>
 	</tr>
 	<tr>
-		<td>Log Admin</td>
-		<td><?php if(LOG_ADMIN == true) { echo "<b><font color='Green'>Enabled</font></b>"; } else if(LOG_ADMIN == false){ echo "<b><font color='Red'>Disabled</font></b>";  } ?></td>
+		<td>記錄管理行為</td>
+		<td><?php if(LOG_ADMIN == true) { echo "<b><font color='Green'>啟用</font></b>"; } else if(LOG_ADMIN == false){ echo "<b><font color='Red'>停用</font></b>";  } ?></td>
 	</tr>
 	<tr>
-		<td>Log War</td>
-		<td><?php if(LOG_WAR == true) {	echo "<b><font color='Green'>Enabled</font></b>"; } else if(LOG_WAR == false){ echo "<b><font color='Red'>Disabled</font></b>"; } ?></td>
+		<td>記錄戰爭行為</td>
+		<td><?php if(LOG_WAR == true) {	echo "<b><font color='Green'>啟用</font></b>"; } else if(LOG_WAR == false){ echo "<b><font color='Red'>停用</font></b>"; } ?></td>
 	</tr>
 	<tr>
-		<td>Log Market</td>
-		<td><?php if(LOG_MARKET == true) { echo "<b><font color='Green'>Enabled</font></b>"; } else if(LOG_MARKET == false){ echo "<b><font color='Red'>Disabled</font></b>"; } ?></td>
+		<td>記錄市場行為</td>
+		<td><?php if(LOG_MARKET == true) { echo "<b><font color='Green'>啟用</font></b>"; } else if(LOG_MARKET == false){ echo "<b><font color='Red'>停用</font></b>"; } ?></td>
 	</tr>
 	<tr>
-		<td>Log Illegal</td>
-		<td><?php if(LOG_ILLEGAL == true) { echo "<b><font color='Green'>Enabled</font></b>"; } else if(LOG_ILLEGAL == false){ echo "<b><font color='Red'>Disabled</font></b>";  } ?></td>
+		<td>記錄非法行為</td>
+		<td><?php if(LOG_ILLEGAL == true) { echo "<b><font color='Green'>啟用</font></b>"; } else if(LOG_ILLEGAL == false){ echo "<b><font color='Red'>停用</font></b>";  } ?></td>
 	</tr>
 </table>
 
 <table id="member">
 	<thead>
 		<tr>
-			<th>Newsbox Settings <a href="admin.php?p=editNewsboxSet"><img src="../img/admin/edit.gif" title="Edit Newsbox Setting"></a></th>
+			<th>資訊設定<a href="admin.php?p=editNewsboxSet"><img src="../img/admin/edit.gif" title="Edit Newsbox Setting"></a></th>
 		</tr>
 	</thead>
 </table>
 
 <table id="profile">
 	<tr>
-		<td class="b">Variable</td>
-		<td class="b">Value</td>
+		<td class="b">變數</td>
+		<td class="b">內容</td>
 	</tr>
 	<tr>
-		<td>Newsbox 1</td>
-		<td><?php if(NEWSBOX1 == true){ echo "<b><font color='Green'>Enabled</font></b>"; } else if(NEWSBOX1 == false){ echo "<b><font color='Red'>Disabled</font></b>"; } ?> </td>
+		<td>資訊 1</td>
+		<td><?php if(NEWSBOX1 == true){ echo "<b><font color='Green'>啟用</font></b>"; } else if(NEWSBOX1 == false){ echo "<b><font color='Red'>停用</font></b>"; } ?> </td>
 	</tr>
 	<tr>
-		<td>Newsbox 2</td>
-		<td><?php if(NEWSBOX2 == true){ echo "<b><font color='Green'>Enabled</font></b>"; } else if(NEWSBOX2 == false){ echo "<b><font color='Red'>Disabled</font></b>"; } ?> </td>
+		<td>資訊 2</td>
+		<td><?php if(NEWSBOX2 == true){ echo "<b><font color='Green'>啟用</font></b>"; } else if(NEWSBOX2 == false){ echo "<b><font color='Red'>停用</font></b>"; } ?> </td>
 	</tr>
 	<tr>
-		<td>Newsbox 3</td>
-		<td><?php if(NEWSBOX3 == true){ echo "<b><font color='Green'>Enabled</font></b>"; } else if(NEWSBOX3 == false){ echo "<b><font color='Red'>Disabled</font></b>"; } ?> </td>
+		<td>資訊 3</td>
+		<td><?php if(NEWSBOX3 == true){ echo "<b><font color='Green'>啟用</font></b>"; } else if(NEWSBOX3 == false){ echo "<b><font color='Red'>停用</font></b>"; } ?> </td>
 	</tr>
 	<tr>
 	<!--<td>Home 1</td>
-		<td><?php if(HOME1 == true){ echo "<b><font color='Green'>Enabled</font></b>"; } else if(HOME1 == false){ echo "<b><font color='Red'>Disabled</font></b>"; } ?> </td>
+		<td><?php if(HOME1 == true){ echo "<b><font color='Green'>啟用</font></b>"; } else if(HOME1 == false){ echo "<b><font color='Red'>停用</font></b>"; } ?> </td>
 	</tr>
 	<tr>
 	<td>Home 2</td>
-		<td><?php if(HOME2 == true){ echo "<b><font color='Green'>Enabled</font></b>"; } else if(HOME2 == false){ echo "<b><font color='Red'>Disabled</font></b>"; } ?> </td>
+		<td><?php if(HOME2 == true){ echo "<b><font color='Green'>啟用</font></b>"; } else if(HOME2 == false){ echo "<b><font color='Red'>停用</font></b>"; } ?> </td>
 	</tr>
 	<tr>
 	<td>Home 3</td>
-		<td><?php if(HOME3 == true){ echo "<b><font color='Green'>Enabled</font></b>"; } else if(HOME3 == false){ echo "<b><font color='Red'>Disabled</font></b>"; } ?> </td>
+		<td><?php if(HOME3 == true){ echo "<b><font color='Green'>啟用</font></b>"; } else if(HOME3 == false){ echo "<b><font color='Red'>停用</font></b>"; } ?> </td>
 	</tr>-->
 </table>
 
 <table id="member">
 	<thead>
 		<tr>
-			<th>SQL Settings</th>
+			<th>SQL 設定</th>
 		</tr>
 	</thead>
 </table>
 
 <table id="profile">
 	<tr>
-		<td class="b">Variable</td>
-		<td class="b">Value</td>
+		<td class="b">變數</td>
+		<td class="b">內容</td>
 	</tr>
 	<tr>
-		<td>Hostname</td>
+		<td>主機名稱</td>
 		<td><?php echo SQL_SERVER;?></td>
 	</tr>
 	<tr>
-		<td>DB Username</td>
+		<td>DB 使用者</td>
 		<td><?php echo SQL_USER;?></td>
 	</tr>
 	<tr>
-		<td>DB Password</td>
+		<td>DB 密碼</td>
 		<td>*********</td>
 	</tr>
 	<tr>
-		<td>DB Name</td>
+		<td>DB 名稱</td>
 		<td><?php echo SQL_DB;?></td>
 	</tr>
 	<tr>
-		<td>Table Prefix</td>
+		<td>Table 前綴</td>
 		<td><?php echo TB_PREFIX;?></td>
 	</tr>
 	<tr>
-		<td>DB Type</td>
+		<td>DB 類型</td>
 		<td><?php if(DB_TYPE == 0) { echo "MYSQL"; } else if(DB_TYPE == 1) { echo "MYSQLi"; } ?></td>
 	</tr>
 </table>
@@ -291,49 +291,49 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 <table id="member">
   <thead>
 		<tr>
-			<th>Extra Settings <a href="admin.php?p=editExtraSet"><img src="../img/admin/edit.gif" title="Edit Extra Settings"></a></th>
+			<th>額外設定 <a href="admin.php?p=editExtraSet"><img src="../img/admin/edit.gif" title="Edit Extra Settings"></a></th>
 		</tr>
 	</thead>
 </table>
 
 <table id="profile">
 	<tr>
-		<td class="b">Variable</td>
-		<td class="b">Value</td>
+		<td class="b">變數</td>
+		<td class="b">內容</td>
 	</tr>
 	<tr>
-		<td>Limit Mailbox</td>
-		<td><?php if(LIMIT_MAILBOX == true){ echo "<b><font color='Green'>Enabled</font></b>"; } else if(LIMIT_MAILBOX == false){ echo "<b><font color='Red'>Disabled</font></b>"; } ?></td>
+		<td>限制郵箱</td>
+		<td><?php if(LIMIT_MAILBOX == true){ echo "<b><font color='Green'>啟用</font></b>"; } else if(LIMIT_MAILBOX == false){ echo "<b><font color='Red'>停用</font></b>"; } ?></td>
 	</tr>
 	<tr>
-		<td>Max number of mails</td>
-		<td><?php if(LIMIT_MAILBOX == true){ echo MAX_MAIL; } else if(LIMIT_MAILBOX == false){ echo "<font color='Gray'>Limit mailbox disabled</font>"; } ?></td>
+		<td>最大郵件數量</td>
+		<td><?php if(LIMIT_MAILBOX == true){ echo MAX_MAIL; } else if(LIMIT_MAILBOX == false){ echo "<font color='Gray'>郵件數量限制停用</font>"; } ?></td>
 	</tr>
 </table>
 
 <table id="member">
 	<thead>
 		<tr>
-			<th>Admin Information <a href="admin.php?p=editAdminInfo"><img src="../img/admin/edit.gif" title="Edit Admin Info"></a></th>
+			<th>管理資訊 <a href="admin.php?p=editAdminInfo"><img src="../img/admin/edit.gif" title="Edit Admin Info"></a></th>
 		</tr>
 	</thead>
 </table>
 <table id="profile">
   <tr>
-		<td class="b">Variable</td>
-		<td class="b">Value</td>
+		<td class="b">變數</td>
+		<td class="b">內容</td>
 	</tr>
 	<tr>
-		<td>Admin Email</td>
-		<td><?php if(ADMIN_EMAIL == ''){ echo "<b><font color='Red'>No admin email defined!</b></font>"; } else if(ADMIN_EMAIL != ''){ echo ADMIN_EMAIL; } ?></td>
+		<td>管理員郵件位址</td>
+		<td><?php if(ADMIN_EMAIL == ''){ echo "<b><font color='Red'>沒有指定管理員郵件位址!</b></font>"; } else if(ADMIN_EMAIL != ''){ echo ADMIN_EMAIL; } ?></td>
 	</tr>
 	<tr>
-		<td>Admin Name</td>
-		<td><?php if(ADMIN_NAME == ''){ echo "<b><font color='Red'>No admin name defined!</b></font>"; } else if(ADMIN_NAME != ''){ echo ADMIN_NAME; } ?></td>
+		<td>管理員名稱</td>
+		<td><?php if(ADMIN_NAME == ''){ echo "<b><font color='Red'>沒有指定管理員名稱!</b></font>"; } else if(ADMIN_NAME != ''){ echo ADMIN_NAME; } ?></td>
 	</tr>
 	<tr>
-		<td>Include Admin in Rank</td>
-		<td><?php if(INCLUDE_ADMIN == true){ echo "<b><font color='Green'>Enabled</font></b>"; } else if(INCLUDE_ADMIN == false){ echo "<b><font color='Red'>Disabled</font></b>"; } ?></td>
+		<td>管理員參與排名</td>
+		<td><?php if(INCLUDE_ADMIN == true){ echo "<b><font color='Green'>啟用</font></b>"; } else if(INCLUDE_ADMIN == false){ echo "<b><font color='Red'>停用</font></b>"; } ?></td>
 	</tr>
 </table>
 
