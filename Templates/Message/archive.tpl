@@ -1,14 +1,14 @@
 <div id="content"  class="messages">
-<h1>Messages</h1>
+<h1>短消息</h1>
 <?php 
 include("menu.tpl");
 ?>
 <form method="post" action="nachrichten.php" name="msg" ><input type="hidden" name="ft" value="m5" /><table cellpadding="1" cellspacing="1" id="overview">
 <thead>
 <tr>
-<th colspan="2">Subject</th>
-<th>Sender</th>
-<th class="sent"><a href="nachrichten.php?s=0&amp;t=3&amp;o=1">Sent</a></th>
+<th colspan="2">主旨</th>
+<th>發送者</th>
+<th class="sent"><a href="nachrichten.php?s=0&amp;t=3&amp;o=1">發送時間</a></th>
 </tr></thead><tfoot><tr><th>
 		<input class="check" type="checkbox" id="s10" name="s10" onclick="Allmsg(this.form);" />
 	</th>
@@ -52,7 +52,7 @@ include("menu.tpl");
     echo "<td class=\"sel\"><input class=\"check\" type=\"checkbox\" name=\"n".$name."\" value=\"".$message->archived[$i-1]['id']."\" /></td>
 		<td class=\"top\"><a href=\"nachrichten.php?id=".$message->archived[$i-1]['id']."\">".$message->archived[$i-1]['topic']."</a> ";
     if($message->archived[$i-1]['viewed'] == 0) {
-    echo "(new)";
+    echo "(新)";
     }
     $date = $generator->procMtime($message->archived[$i-1]['time']);
     echo "</td><td class=\"send\"><a href=\"spieler.php?uid=".$message->archived[$i-1]['owner']."\"><u>".$database->getUserField($message->archived[$i-1]['owner'],'username',0)."</u></a></td>
@@ -61,7 +61,7 @@ include("menu.tpl");
         $name++;
     }
     if(count($message->archived1) == 0) {
-    echo "<td colspan=\"4\" class=\"none\">There are no messages available in the archive.</td></tr>";
+    echo "<td colspan=\"4\" class=\"none\">無訊息</td></tr>";
     }
     ?>
     </tbody></table>

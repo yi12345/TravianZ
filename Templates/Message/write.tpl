@@ -1,5 +1,5 @@
 <div id="content"  class="messages">
-<h1>Messages</h1>
+<h1>短消息</h1>
 <?php 
 include("menu.tpl");
 $user = $database->getUserArray($session->uid, 1);

@@ -7,7 +7,7 @@ $report = $message->reading['report'];
 include("GameEngine/BBCode.php");
 ?>
 <div id="content"  class="messages">
-<h1>Messages</h1>
+<h1>短消息</h1>
 <?php 
 include("menu.tpl");
 ?>

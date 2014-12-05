@@ -6,9 +6,9 @@ $noticeClass = array("Scout Report","Won as attacker without losses","Won as att
 	class="row_table_data">
 	<thead>
 		<tr>
-			<th colspan="2">Subject:</th>
+			<th colspan="2">主旨</th>
 			<th class="sent">
-<a href="berichte.php?s=0&amp;o=1">Sent</a></th>
+<a href="berichte.php?s=0&amp;o=1">時間</a></th>
 		</tr>
 	</thead><tfoot>
 		<tr><th><?php

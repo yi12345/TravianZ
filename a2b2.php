@@ -66,7 +66,7 @@ $automation->isWinner();
 <?php include("Templates/Plus/pmenu.tpl"); ?>
 <h1>Account transactions</h1>
 <div id="products">
-<?        
+<?
 if ($amount == 199) {
 // Kontoauszug aufrufen f&uuml;r Goldpaket A
 $MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysql_error());

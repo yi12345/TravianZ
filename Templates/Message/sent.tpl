@@ -11,16 +11,16 @@
 
 ?>
 <div id="content"  class="messages">
-    <h1>Messages</h1>
+    <h1>短訊息</h1>
         <?php include("menu.tpl"); ?>
     <form method="post" action="nachrichten.php" name="msg">
     <input type="hidden" name="ft" value="m4" />
     <table cellpadding="1" cellspacing="1" id="overview">
         <thead><tr>
             <th></th>
-            <th>Subject</th>
-            <th>Recipient</th>
-            <th class="sent"><a href="nachrichten.php?t=2&s=0&amp;t=2&amp;o=1">Sent</a></th>
+            <th>主旨</th>
+            <th>接收者</th>
+            <th class="sent"><a href="nachrichten.php?t=2&s=0&amp;t=2&amp;o=1">時間</a></th>
             </tr></thead><tfoot><tr><th><?php
 		$MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysql_error());
 		$golds = mysql_fetch_array($MyGold);
@@ -68,7 +68,7 @@
     echo "<td class=\"sel\"><input class=\"check\" type=\"checkbox\" name=\"n".$name."\" value=\"".$message->sent1[$i-1]['id']."\" /></td>
 		<td class=\"top\"><a href=\"nachrichten.php?id=".$message->sent1[$i-1]['id']."\">".$message->sent1[$i-1]['topic']."</a> ";
     if($message->sent1[$i-1]['viewed'] == 0) {
-    echo "(unread)";
+    echo "(未讀)";
     }
     $date = $generator->procMtime($message->sent1[$i-1]['time']);
     echo "</td><td class=\"send\"><a href=\"spieler.php?uid=".$message->sent1[$i-1]['target']."\">".$database->getUserField($message->sent1[$i-1]['target'],'username',0)."</a></td>
