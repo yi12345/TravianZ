@@ -124,7 +124,7 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 		<td>+25% production duration</td>
 		<td><?php if(PLUS_PRODUCTION >= 86400){ echo ''.(PLUS_PRODUCTION/86400).' Days'; } else if(PLUS_PRODUCTION < 86400){ echo ''.(PLUS_PRODUCTION/3600).' Hours'; } ?></td>
 	</tr>
-	<tr>	
+	<tr>
 		<td>Nature Troops Regeneration Time</td>
 		<td><?php if(NATURE_REGTIME >= 86400){ echo ''.(NATURE_REGTIME/86400).' Days'; } else if(NATURE_REGTIME < 86400){ echo ''.(NATURE_REGTIME/3600).' Hours'; } ?></td>
 	</tr>

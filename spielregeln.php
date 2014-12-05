@@ -83,7 +83,7 @@ Inciting, manipulating, encouraging, assisting or conspiring with others to viol
 Each player may only own and play one account per server.
 <ul>
 <li><strong color="#3BAE18">&sect;1.1 Registration</strong><br />
-The e-mail address used for the registration of an account must be under the personal and exclusive control of the person who registered the account. The person owning the e-mail address used to register an account is considered the owner of the account, regardless of any other personal or alliance agreements. The owner of an account is fully responsible for all actions taken with the account. 
+The e-mail address used for the registration of an account must be under the personal and exclusive control of the person who registered the account. The person owning the e-mail address used to register an account is considered the owner of the account, regardless of any other personal or alliance agreements. The owner of an account is fully responsible for all actions taken with the account.
 </li>
 <li><strong color="#3BAE18">&sect;1.2 Password</strong><br />
 The owner of an account may not transfer the password of an account to any person playing on the same game world (server). Additionally, knowingly choosing the same password on the same game world as another person is illegal; any of these actions is considered multiaccounting, as defined in these rules.
@@ -123,11 +123,11 @@ Players using the same computer and wanting to access each other's account must 
 </ul>
 </li>
 <li><strong color="#2A720B">&sect;3 Use of externals</strong><br />
-The game must be played with an unmodified internet browser. The use of scripts or bots which automate is against the rules. 
+The game must be played with an unmodified internet browser. The use of scripts or bots which automate is against the rules.
 </li>
 </li>
 <li><strong color="#2A720B">&sect;4 Program errors</strong><br />
-Program errors (also called bugs) may not be used to one's benefit. Abuse can lead to a punishment of the account. 
+Program errors (also called bugs) may not be used to one's benefit. Abuse can lead to a punishment of the account.
 </li>
 </li>
 <li><strong color="#2A720B">&sect;5 Money transactions</strong><br />
@@ -149,7 +149,7 @@ Blackmailing players in a way that violates any of Travian's rules respective th
 Displaying battle reports or messages in public without consent of both concerned persons.
 </li>
 <li>No real world politics are allowed in names, messages and descriptions. </li>
-<li>Impersonation of officials or official positions is illegal in any way. 
+<li>Impersonation of officials or official positions is illegal in any way.
 </li>
 <li>Advertisement of any kind that has not been permitted by the Travian Team is impermissible. </li>
 </ol>
@@ -159,17 +159,17 @@ If there is an offence against these game rules, the Multihunters and, if necess
 <br />
 Resources, buildings, villages or troops lost during the time of suspension do not count as punishment and will not be replaced by the Travian Team. No player has the right to claim payment or replacement for Plus/Gold time lost due to suspension.
 <br />
-here is no special treatment for Travian Plus/Gold users regarding the game rules neither in the time needed to deal with the case nor in the punishment. 
+here is no special treatment for Travian Plus/Gold users regarding the game rules neither in the time needed to deal with the case nor in the punishment.
 <br /><br />
 Players may talk to the Multihunter who banned them or an Administrator either via IGM (ingame message) or e-mail. Bans, punishments or deletions are not to be discussed in public (e.g. Chat or Forums). Appeals must be written in English.
 <br />
-Additionally, the Travian Team will not provide information to persons other than the account owner. 
+Additionally, the Travian Team will not provide information to persons other than the account owner.
 <br /><br />
 Multi accounts on the speed server and multi accounts with less than 100 population may be deleted on sight with no warning.
 </li>
 </li>
 <li><strong color="#2A720B">&sect;8 Changing of rules</strong><br />
-The Travian Team reserves the right to change the rules at any time. 
+The Travian Team reserves the right to change the rules at any time.
 </li>
 <li><strong color="#2A720B">&sect;9 Correction clause</strong><br />
 If individual regulations of this set of rules should be ineffective, it does not affect the validity of the remaining regulations of this set of rules. The Administrators commit themselves to replace ineffective regulations with new regulations which replace the ineffective regulations as fast as possible.

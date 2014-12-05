@@ -25,8 +25,8 @@ $sessionaccess = $access['access'];
 
 if($sessionaccess != 9) die("<h1><font color=\"red\">Access Denied: You are not Admin!</font></h1>");
 
-mysql_query("UPDATE ".TB_PREFIX."users SET 
-	password = '".$pass."'  
+mysql_query("UPDATE ".TB_PREFIX."users SET
+	password = '".$pass."'
 	WHERE id = $id") or die(mysql_error());
 
 header("Location: ../../../Admin/admin.php?p=player&uid=".$id."");

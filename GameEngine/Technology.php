@@ -261,8 +261,8 @@ class Technology {
                     }
                     $ownunit['hero'] += $enforce['hero'];
                 }
-            }            
-            
+            }
+
             $prisoners = $database->getPrisoners($base,1);
             if(!empty($prisoners)) {
                 foreach($prisoners as $prisoner){
@@ -722,7 +722,7 @@ private function trainUnit($unit,$amt,$great=false) {
         	$q = "UPDATE ".TB_PREFIX."research SET timestamp=".(time()-1)." WHERE vref = ".$village->wid;
         	$result = $database->query($q);
         	return mysql_affected_rows();
-    	}  
+    	}
 
 	public function calculateAvaliable($id,$resarray=array()) {
 		global $village,$generator,${'r'.$id};

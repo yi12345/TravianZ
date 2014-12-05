@@ -42,8 +42,8 @@ else {
 		window.addEvent('domready', start);
 	</script>
 </head>
- 
- 
+
+
 <body class="v35 ie ie8">
 <div class="wrapper">
 <img style="filter:chroma();" src="img/x.gif" id="msfilter" alt="" />
@@ -84,9 +84,9 @@ include("Templates/Plus/3110.tpl");
 <div class="footer-stopper"></div>
 <div class="clear"></div>
 
-<?php 
-include("Templates/footer.tpl"); 
-include("Templates/res.tpl"); 
+<?php
+include("Templates/footer.tpl");
+include("Templates/res.tpl");
 ?>
 <div id="stime">
 <div id="ltime">
@@ -94,7 +94,7 @@ include("Templates/res.tpl");
 Calculated in <b><?php
 echo round(($generator->pageLoadTimeEnd()-$start)*1000);
 ?></b> ms
- 
+
 <br />Server time: <span id="tp1" class="b"><?php echo date('H:i:s'); ?></span>
 </div>
 	</div>

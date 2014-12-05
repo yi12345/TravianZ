@@ -44,7 +44,7 @@ function chkFormular () {
     alert("Enter your username!");
     document.Formular.Username.focus();
     return false;
-  }  
+  }
   if (document.Formular.Emailadress.value == "") {
     alert("Enter an emailadress!");
     document.Formular.Emailadress.focus();
@@ -65,7 +65,7 @@ function chkFormular () {
     document.Formular.Message.focus();
     return false;
   }
- 
+
 }
 </script>
 	   </head>
@@ -84,7 +84,7 @@ function chkFormular () {
 <br><br><b>Bug reports, login errors, general questions and feedback</b></p>
 
 <form name="Formular" class=""  method="post" action="mailme.php" onsubmit="return chkFormular()">
-		
+
 		<div id="group_support_username">
         <table class="form_table form_tablel_support" width="100%">
         <tr>
@@ -105,7 +105,7 @@ function chkFormular () {
 		<table class="form_table form_tablel_support" width="100%">
         <tr>
         <td class="form_table_label form_table_label_support_supportType"><label class="form_label" for="element_7">Category </label></td>
-		<td class="form_table_element form_table_element_support_supportType"><select id="element_7" name="Subject"> 
+		<td class="form_table_element form_table_element_support_supportType"><select id="element_7" name="Subject">
 			<option value="please select" selected="selected">please select...</option>
 			<option value="Bugreport" >Bugreport</option>
 			<option value="General question" >General question</option>
@@ -134,9 +134,9 @@ function chkFormular () {
         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
         </tr>
         </table>
-        </div>		
-		</form>	
- 
+        </div>
+		</form>
+
 </div>
 </br></br></br></br><div id="side_info">
 <?php

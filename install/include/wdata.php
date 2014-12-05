@@ -22,7 +22,7 @@ $y=(WORLD_MAX-$i);
 	if(($x == 0 & $y == 0) || ($x == WORLD_MAX & $y == WORLD_MAX)) {
         $typ='3';
         $otype='0';
-    	}else{  
+    	}else{
 	$rand=rand(1, 1000);
 		if("10" >= $rand){
 		$typ='1';

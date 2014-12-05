@@ -50,7 +50,7 @@ if(isset($_GET['fid'])){
 				header("Location: ".$_SERVER['PHP_SELF']);
 			}
 		}
-	}	
+	}
 }
 if(isset($_GET['aid']) or isset($_GET['fid']) or isset($_GET['fid2']) or $session->alliance!=0){
 ?>

@@ -35,7 +35,7 @@ class Building {
 		}
 		}
 	}
-	
+
 	public function canProcess($id,$tid) {
            	//add fix by ronix
                 global $session;
@@ -53,7 +53,7 @@ class Building {
                                 exit;
              		}
         	}
-    	}  
+    	}
 
     public function procBuild($get) {
         global $session, $village, $database;
@@ -75,7 +75,7 @@ class Building {
                 if($session->access==BANNED){
                     header("Location: banned.php");
                     exit;
-                }    
+                }
                 $level = $database->getResourceLevel($village->wid);
                 $database->addBuilding($village->wid, $get['id'], $get['master'], 1, $get['time'], 1, $level['f'.$get['id']] + 1 + count($database->getBuildingByField($village->wid,$get['id'])));
                 if($get['id'] > 18) {
@@ -83,7 +83,7 @@ class Building {
                 } else {
                     header("Location: dorf1.php");
                 }
-            }    
+            }
         }
         if(isset($get['a']) && $get['c'] == $session->checker && isset($get['id'])) {
             $session->changeChecker();
@@ -546,7 +546,7 @@ class Building {
             		break;
             		case 39:
             		if($this->getTypeLevel(15) >= 10) { return true; } else { return false; }
-            		break; 
+            		break;
 			case 40:
 			$wwlevel = $village->resarray['f99'];
 			if($wwlevel > 50){
@@ -712,7 +712,7 @@ class Building {
         global $database,$session,$logging,$village,$bid18,$bid10,$bid11,$technology,$_SESSION;
         if($session->access!=BANNED){
         $finish = 0;
-        
+
         foreach($this->buildArray as $jobs) {
         if($jobs['wid']==$village->wid){
             $finish=2;
@@ -766,7 +766,7 @@ class Building {
                 $logging->goldFinLog($village->wid);
                 $database->modifyGold($session->uid,2,0);
             }
-                        $stillbuildingarray = $database->getJobs($village->wid);  
+                        $stillbuildingarray = $database->getJobs($village->wid);
         if(count($stillbuildingarray) == 1) {
             if($stillbuildingarray[0]['loopcon'] == 1) {
                 //$q = "UPDATE ".TB_PREFIX."bdata SET loopcon=0,timestamp=".(time()+$stillbuildingarray[0]['timestamp']-$innertimestamp)." WHERE id=".$stillbuildingarray[0]['id'];
@@ -779,7 +779,7 @@ class Building {
         }else{
         header("Location: banned.php");
         }
-    }  
+    }
 
 	public function resourceRequired($id,$tid,$plus=1) {
 		$name = "bid".$tid;

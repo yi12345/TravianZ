@@ -84,11 +84,11 @@ class funct {
         }
         if (!$killhero){
             $killhero=$database->FindHeroInOasis($get['uid']);
-        }    
+        }
         if ($killhero) {
             $database->KillMyHero($get['uid']);
             $error="&kc=1";
-        }else $error="&e=1";    
+        }else $error="&e=1";
         header("Location: admin.php?p=player&uid=".$get['uid'].$error);
         exit;
       case "reviveHero":
@@ -101,14 +101,14 @@ class funct {
       case "addHero":
         $user = $database->getUserArray($get['uid'],1);
         $vilarray=$database->getVrefCapital($get['uid']);
-        
+
         $database->query("INSERT INTO ".TB_PREFIX."hero (`uid`, `wref`, `regeneration`, `unit`, `name`, `level`, `points`,
         `experience`, `dead`, `health`, `attack`, `defence`, `attackbonus`, `defencebonus`, `trainingtime`, `autoregen`,
         `intraining`) VALUES ('".$get['uid']."', '" . $vilarray['wref'] . "', '0', '".$get['u']."', '".addslashes($user['username'])."',
         '0', '5', '0', '0', '100', '0', '0', '0', '0', '".time()."', '50', '0')");
-        
+
         $database->query("UPDATE ".TB_PREFIX."units SET hero = 1 WHERE vref = ".$vilarray['wref']);
-        
+
         header("Location: admin.php?p=player&uid=".$get['uid']."&ac=1");
         exit;
 		}

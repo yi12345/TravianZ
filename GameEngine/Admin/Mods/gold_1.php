@@ -9,7 +9,7 @@
 ##                                                                             ##
 #################################################################################
 if (!isset($_SESSION)) session_start();
-if($_SESSION['access'] < 9) die("Access Denied: You are not Admin!");  
+if($_SESSION['access'] < 9) die("Access Denied: You are not Admin!");
 include_once("../../config.php");
 
 mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);

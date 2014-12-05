@@ -1,4 +1,4 @@
-<?php	
+<?php
 
 
 #################################################################################
@@ -16,7 +16,7 @@
 ##                                                                             ##
 #################################################################################
 
-		   
+
     //gp link
     $separator=isset($separator)? $separator:"";
     $gpack_load=isset($user['gpack'])? $user['gpack']:$database->getUserField($_SESSION['username'], 'gpack', 1);
@@ -24,7 +24,7 @@
     $gpack= $separator.GP_LOCATE;
     } else {
     $gpack= $separator.$gpack_load;
-    }  
+    }
 
 //de bird
 if($displayarray['protect'] > time()){
@@ -38,8 +38,8 @@ $nul1 = $nul2 = $nul3 = "0";
 if(strlen($remainingSeconds) <= 1){
 $nul1 = "0";}
 if(strlen($remainingMinutes) <= 1){
-$nul2 = "0";} 
-if(strlen($remainingHour) <= 1){ $nul3 = "0"; } 
+$nul2 = "0";}
+if(strlen($remainingHour) <= 1){ $nul3 = "0"; }
 $left="$nul3$remainingHour:$nul2$remainingMinutes:$nul1$remainingSeconds";
 $profiel = preg_replace("/\[#0]/is",'<img src="'.$gpack.'img/t/tn.gif" border="0" onmouseout="med_closeDescription()" onmousemove="med_mouseMoveHandler(arguments[0],\'<table><tr><td>This player has '.$left.' hours of beginners protection left.</td></tr></table>\')">', $profiel, 1);
 } else {
@@ -178,7 +178,7 @@ switch ($medal['categorie']) {
 		break;
      	 case "10":
         $titel="Rank Climbers of the week.";
-        $woord="Ranks"; 
+        $woord="Ranks";
         break;
          case "11":
         $titel="Receiving this medal shows that you were in the top 3 of the Rank Climbers of the week ".$medal['points']." in a row.";
@@ -204,7 +204,7 @@ switch ($medal['categorie']) {
         $titel="Receiving this medal shows that you were in the top 10 Rank Climbers of the week ".$medal['points']." in a row.";
         $bonus[$medal['id']]=1;
         break;
-        
+
 
 }
 

@@ -36,16 +36,16 @@ class Battle {
 				}
 				if(isset($post['a2_v5'])) {
 					array_push($target,5);
-				}					
+				}
 				$_POST['target'] = $target;
 				if(isset($post['h_off_bonus'])) {
 					if (intval($post['h_off_bonus'])>20) {$post['h_off_bonus']=20;}
 				}else $post['h_off_bonus']=0;
-				
+
 				if(isset($post['h_def_bonus'])) {
 					if (intval($post['h_def_bonus'])>20) {$post['h_def_bonus']=20;}
 				}else $post['h_def_bonus']=0;
-								
+
 				if(isset($post['a1_1'])) {
 					$sum = $sum2 = $post['walllevel'] = 0;
 					for($i=1;$i<=10;$i++) {
@@ -53,13 +53,13 @@ class Battle {
 					}
 					if($sum > 0) {
 						$post['palast'] = intval($post['palast']);
-						if($post['palast'] > 20) $post['palast'] = 20; 
+						if($post['palast'] > 20) $post['palast'] = 20;
 
 						if(isset($post['wall1'])) {
 							$post['wall1'] = intval($post['wall1']);
 							if ($post['wall1'] > 20) $post['wall1']=20;
 							if ($post['walllevel']==0) $post['walllevel']=$post['wall1'];
-						}	
+						}
 						if(isset($post['wall2'])) {
 							$post['wall2'] = intval($post['wall2']);
 							if ($post['wall2'] > 20) $post['wall2']=20;
@@ -99,15 +99,15 @@ class Battle {
 		$h_db = 1 + 0.010 * ($heroarray[0]['defencebonus']/5);
 		return array('heroid'=>$heroarray[0]['heroid'],'unit'=>$heroarray[0]['unit'],'atk'=>$h_atk,'di'=>$h_di,'dc'=>$h_dc,'ob'=>$h_ob,'db'=>$h_db,'health'=>$heroarray['health']);
 		}
-		
+
 		private function getBattleHeroSim($attbonus) {
 		global $database;
 		$h_atk =0;
 		$h_ob = 1 + 0.010 * $attbonus;
-		
+
 		return array('unit'=>16,'atk'=>$h_atk,'ob'=>$h_ob);
 		}
-		
+
 		private function simulate($post) {
 				//set the arrays with attacking and defending units
 				$attacker = array('u1'=>0,'u2'=>0,'u3'=>0,'u4'=>0,'u5'=>0,'u6'=>0,'u7'=>0,'u8'=>0,'u9'=>0,'u10'=>0,'u11'=>0,'u12'=>0,'u13'=>0,'u14'=>0,'u15'=>0,'u16'=>0,'u17'=>0,'u18'=>0,'u19'=>0,'u20'=>0,'u21'=>0,'u22'=>0,'u23'=>0,'u24'=>0,'u25'=>0,'u26'=>0,'u27'=>0,'u28'=>0,'u29'=>0,'u30'=>0,'u31'=>0,'u32'=>0,'u33'=>0,'u34'=>0,'u35'=>0,'u36'=>0,'u37'=>0,'u38'=>0,'u39'=>0,'u40'=>0,'u41'=>0,'u42'=>0,'u43'=>0,'u44'=>0,'u45'=>0,'u46'=>0,'u47'=>0,'u48'=>0,'u49'=>0,'u50'=>0);
@@ -115,7 +115,7 @@ class Battle {
 				$index = 1;
 				$offhero=intval($post['h_off_bonus']);
 				$hero_strenght=intval($post['h_off']);
-				$deffhero=intval($post['h_def_bonus']);		
+				$deffhero=intval($post['h_def_bonus']);
 				for($i=$start;$i<=($start+9);$i++) {
 						$attacker['u'.$i] = $post['a1_'.$index];
 						if($index <=8) {
@@ -123,7 +123,7 @@ class Battle {
 						}
 						$index += 1;
 				}
-				
+
 				$defender = array();
 				$defscout=0;
 				//fix by ronix
@@ -134,7 +134,7 @@ class Battle {
 								if($i == 4 || $i == 14 || $i == 23 || $i == 44){
 									$defscout+=$defender['u'.$i];
 								}
-								
+
 						}
 						else {
 								$defender['u'.$i] = 0;
@@ -166,10 +166,10 @@ class Battle {
 				if($scout ==1) {
 					$palast = 0; //no def point palace n residence when scout
 				}
-				
-				if(!$scout) 
+
+				if(!$scout)
 					return $this->calculateBattle($attacker,$defender,$wall,$post['a1_v'],$deftribe,$palast,$post['ew1'],$post['ew2'],$post['ktyp']+3,$def_ab,$att_ab1,$att_ab2,$att_ab3,$att_ab4,$att_ab5,$att_ab6,$att_ab7,$att_ab8,$post['kata'],$post['stonemason'],$walllevel,$offhero,$post['h_off'],$deffhero,0,0,0,0,0);
-				else 
+				else
 					return $this->calculateBattle($attacker,$defender,$wall,$post['a1_v'],$deftribe,$palast,$post['ew1'],$post['ew2'],1,$def_ab,$att_ab1,$att_ab2,$att_ab3,$att_ab4,$att_ab5,$att_ab6,$att_ab7,$att_ab8,$post['kata'],$post['stonemason'],$walllevel,0,0,0,0,0,0,0,0);
 				}
 
@@ -223,7 +223,7 @@ class Battle {
 		//1 raid 0 normal
 		function calculateBattle($Attacker,$Defender,$def_wall,$att_tribe,$def_tribe,$residence,$attpop,$defpop,$type,$def_ab,$att_ab1,$att_ab2,$att_ab3,$att_ab4,$att_ab5,$att_ab6,$att_ab7,$att_ab8,$tblevel,$stonemason,$walllevel,$offhero,$hero_strenght,$deffhero,$AttackerID,$DefenderID,$AttackerWref,$DefenderWref,$conqureby) {
 			global $bid34,$bid35,$database;
-				
+
 			// Define the array, with the units
 			$calvary = array(4,5,6,15,16,23,24,25,26,45,46);
 			$catapult = array(8,18,28,48);
@@ -235,8 +235,8 @@ class Battle {
 			$winner = false;
 			// at 0 all partial results
 			$cap = $ap = $dp = $cdp = $rap = $rdp = 0;
-				
-		
+
+
 			$att_artefact = count($database->getOwnUniqueArtefactInfo2($AttackerID,3,3,0));
 			$att_artefact1 = count($database->getOwnUniqueArtefactInfo2($AttackerWref,3,1,1));
 			$att_artefact2 = count($database->getOwnUniqueArtefactInfo2($AttackerID,3,2,0));
@@ -293,7 +293,7 @@ class Battle {
                     for ($i=1;$i<=50;$i++) {$def_ab[$i]=0;}
                     $fromvillage = $defenders['from'];
                     $enforcetribe = $database->getUserField($database->getVillageField($fromvillage,"owner"),"tribe",0);
-                    $ud=($enforcetribe-1)*10;                
+                    $ud=($enforcetribe-1)*10;
                     if($defenders['from']>0) { //don't check nature tribe
                         $armory = $database->getABTech($defenders['from']); // Armory level every village enforcement
                         $def_ab[$ud+1] = $armory['a1'];
@@ -316,7 +316,7 @@ class Battle {
                         $dp+=$datadef['dp'];
                         $cdp+=$datadef['cdp'];
                         $involve=$datadef['involve'];
-                    }            
+                    }
                     $reinfowner = $database->getVillageField($fromvillage,"owner");
                     $defhero = $this->getBattleHero($reinfowner);
                     //calculate def hero from enforcement
@@ -325,7 +325,7 @@ class Battle {
                         //$dp += $defhero['di'];
                         $dp *= $defhero['db'];
                         $cdp *= $defhero['db'];
-                    }    
+                    }
                 }
             }
 			// Calculate the total number of points Attacker
@@ -336,22 +336,22 @@ class Battle {
 			}else{
 				$abcount = 4;
 			}
-		
+
 			if($type == 1) {//scout
 
 					for($i=$start;$i<=$end;$i++) {
 						global ${'u'.$i};
 						$j = $i-$start+1;
 						if($Attacker['u'.$i]>0 && ($i == 4 || $i == 14 || $i == 23 || $i == 44)){
-							if(${'att_ab'.$abcount} > 0) { 
+							if(${'att_ab'.$abcount} > 0) {
 									$ap += (35 + (35 + 300 * ${'u'.$i}['pop'] / 7) * (pow(1.00697, ${'att_ab'.$abcount}) - 1)) * $Attacker['u'.$i];// ^ ($Attacker['u'.$i]/100);
 							}else{
 								$ap += $Attacker['u'.$i]*35;
 							}
-						}	
+						}
 						$involve += $Attacker['u'.$i];
 						$units['Att_unit'][$i] = $Attacker['u'.$i];
-						
+
 					}
 					$att_foolartefact = $database->getFoolArtefactInfo(3,$AttackerWref,$AttackerID);
 					if(count($att_foolartefact) > 0){
@@ -364,7 +364,7 @@ class Battle {
 							}
 						}
 					}
-					
+
 				}else{ //type=3 normal 4=raid
 					$abcount = 1;
 					for($i=$start;$i<=$end;$i++) {
@@ -401,7 +401,7 @@ class Battle {
 						$cap *= $atkhero['ob'];
 						$ap += $atkhero['atk'];
 					}
-			
+
 					if ($offhero!=0 || $hero_strenght!=0) {
 						$atkhero=$this->getBattleHeroSim($offhero);
 						$ap *= $atkhero['ob'];
@@ -413,67 +413,67 @@ class Battle {
 						$dp *= $dfdhero['ob'];
 						$cdp *= $dfdhero['ob'];
 					}
-				}	
+				}
              // Formula for calculating the bonus defensive wall and Residence
 
-            if($def_wall > 0) { 
-				// Set the factor calculation for the "wall" as the type of the civilization 
+            if($def_wall > 0) {
+				// Set the factor calculation for the "wall" as the type of the civilization
                 // Factor = 1030 Wall Roman
-                // Factor = 1020 Wall Teuton 
-                // Factor = 1025 Wall Goul 
-                $factor = ($def_tribe == 1)? 1.030 : (($def_tribe == 2)? 1.020 : 1.025); 
-                // Defense infantry = Infantry * Wall (%) 
-				// Defense calvary calvary = * Wall (%)                        
+                // Factor = 1020 Wall Teuton
+                // Factor = 1025 Wall Goul
+                $factor = ($def_tribe == 1)? 1.030 : (($def_tribe == 2)? 1.020 : 1.025);
+                // Defense infantry = Infantry * Wall (%)
+				// Defense calvary calvary = * Wall (%)
 				if ($dp>0 || $cdp >0) {
-					if($type==1) { 
+					if($type==1) {
 						$dp *=  pow($factor,$def_wall);
 						$dp1 = 10 * pow($factor,$def_wall) * $def_wall;
 						$dp +=$dp1;
 					}else{
-						$dp *= pow($factor,$def_wall); 
-						$cdp *= pow($factor,$def_wall); 
-					
+						$dp *= pow($factor,$def_wall);
+						$cdp *= pow($factor,$def_wall);
+
 						// Calculation of the Basic defense bonus "Residence"
-						$dp += ((2*(pow($residence,2)))*(pow($factor,$def_wall))); 
-						$cdp += ((2*(pow($residence,2)))*(pow($factor,$def_wall))); 
+						$dp += ((2*(pow($residence,2)))*(pow($factor,$def_wall)));
+						$cdp += ((2*(pow($residence,2)))*(pow($factor,$def_wall)));
 					}
 				} else {
-					$dp = 10 * pow($factor,$def_wall) * $def_wall; 
-					// Defense calvary calvary = * Wall (%) 
+					$dp = 10 * pow($factor,$def_wall) * $def_wall;
+					// Defense calvary calvary = * Wall (%)
 					$cdp = 10 * pow($factor,$def_wall) * $def_wall;
 					if($type!=1) {
-						// Calculation of the Basic defense bonus "Residence"  
-						$dp += ((2*(pow($residence,2)))*(pow($factor,$def_wall))); 
-						$cdp += ((2*(pow($residence,2)))*(pow($factor,$def_wall))); 
+						// Calculation of the Basic defense bonus "Residence"
+						$dp += ((2*(pow($residence,2)))*(pow($factor,$def_wall)));
+						$cdp += ((2*(pow($residence,2)))*(pow($factor,$def_wall)));
 					}else $cdp=0;
 				}
-            }elseif($type!=1) { 
-                // Calculation of the Basic defense bonus "Residence" 
-                $dp += (2*(pow($residence,2))); 
-                $cdp += (2*(pow($residence,2))); 
-            }  
+            }elseif($type!=1) {
+                // Calculation of the Basic defense bonus "Residence"
+                $dp += (2*(pow($residence,2)));
+                $cdp += (2*(pow($residence,2)));
+            }
 
 			// Formula for calculating points attackers (Infantry & Cavalry)
-				
+
 			if($AttackerWref != 0){
 				$rap = ($ap+$cap)+(($ap+$cap)/100*$bid35[$this->getTypeLevel(35,$AttackerWref)]['attri']);
 			}else{
 				$rap = $ap+$cap;
 			}
-				
+
 			// Formula for calculating Defensive Points
-				
-			if ($rap==0) 
+
+			if ($rap==0)
 				$rdp = ($dp) + ($cdp) + 10;
 			else
 				$rdp = ($dp * ($ap/$rap)) + ($cdp * ($cap/$rap)) + 10;
-					
-				
+
+
 			// The Winner is....:
 			$result['Attack_points'] = $rap;
 			$result['Defend_points'] = $rdp;
 			$winner = ($rap > $rdp);
-								
+
 			// Formula for calculating the Moral
 			if($attpop > $defpop) {
 				if ($rap < $rdp) {
@@ -501,12 +501,12 @@ class Battle {
 			if($type == 1){
 				$holder = pow((($rdp*$moralbonus)/$rap),$Mfactor);
 				if($holder>1) $holder=1;
-				if ($rdp>$rap) $holder=1;		
-				
+				if ($rdp>$rap) $holder=1;
+
 				// Attacker
 				$result[1] = $holder;
 				if ($att_tribe==5) $result[1] = 0; //Birds of Prey cannot die when scout
-						
+
 				// Defender
 				$result[2] = 0;
 			}else if($type == 2){
@@ -522,10 +522,10 @@ class Battle {
 				$catp -= round($catp*$result[1]/100);
 			}else if($type == 3){
 				// Attacker
-												
+
 				$result[1] = ($winner)? round(pow((($rdp*$moralbonus)/$rap),$Mfactor),8) : 1;
 				if ($result[1]>1) {$result[1]=1;$winner=false;$result['Winner'] = "defender";}
-						
+
 				// Defender
 				$result[2] = (!$winner)? round(pow(($rap/($rdp*$moralbonus)),$Mfactor),8) : 1;
 				if ($result[1]==1) {$result[2]=round(pow(($rap/($rdp*$moralbonus)),$Mfactor),8);}
@@ -577,13 +577,13 @@ class Battle {
 						}
 					}
 				}
-			
+
 				if($stonemason==0){
 					$need = round((($moralbonus * (pow($tblevel,2) + $tblevel + 1)) / (8 * (round(200 * pow(1.0205,$att_ab8))/200) / $strongerbuildings / $good_effect * $bad_effect)) + 0.5);
 				}else{
 					$need = round((($moralbonus * (pow($tblevel,2) + $tblevel + 1)) / (8 * (round(200 * pow(1.0205,$att_ab8))/200) / ($bid34[$stonemason]['attri']/100) / $strongerbuildings / $good_effect * $bad_effect)) + 0.5);
 				}
-				
+
 				// Number catapults to take down the building
 				$result[3] = $need;
 				//Number catapults nego
@@ -630,7 +630,7 @@ class Battle {
 
 				// Number catapults to action
 				$result[8] = $wctp;
-			
+
 			}
 
 			$result[6] = pow($rap/$rdp*$moralbonus,$Mfactor);
@@ -652,7 +652,7 @@ class Battle {
 				$hero_id=$fdb['heroid'];
 				$hero_health=$fdb['health'];
 				$damage_health=round(100*$result[1]);
-			
+
 				if ($hero_health<=$damage_health or $damage_health>90){
 					//hero die
 					$result['casualties_attacker']['11'] = 1;
@@ -727,7 +727,7 @@ class Battle {
 
 			$result['bounty'] = $max_bounty;
 
-			
+
 			return $result;
 		}
 
@@ -738,11 +738,11 @@ class Battle {
 			$dp=0;
 			$cdp=0;
 			$detected=0;
-			
+
 			for($y=4;$y<=54;$y++) {
 				if($y == 4 || $y == 14 || $y == 23 || $y == 44){
 					global ${'u'.$y};
-																				
+
 					if($defenders['u'.$y]>0 && $def_ab[$y] > 0) {
 						$dp +=  (20 + (20 + 300 * ${'u'.$y}['pop'] / 7) * (pow(1.00696, $def_ab[$y]) - 1)) * $defenders['u'.$y] * $defender_artefact;
 
@@ -761,17 +761,17 @@ class Battle {
 						if($defenders['u'.$y]>0) {
 							$dp +=  $defenders['u'.$y]* 20 * $defender_artefact;
 						}
-												
+
 						$units['Def_unit'][$y] = $defenders['u'.$y];
 						if($units['Def_unit'][$y] > 0){
 							$detected = 1;
 						}
 					}
 					$invol += $defenders['u'.$y]; //total troops
-					$units['Def_unit'][$y] = $defenders['u'.$y];						
+					$units['Def_unit'][$y] = $defenders['u'.$y];
 				}
 			}
-		
+
 			$datadef['dp']=$dp;
 			$datadef['cdp']=$cdp;
 			$datadef['detect']=($detected==1)? 1:0;
@@ -792,18 +792,18 @@ class Battle {
 					}else{
 						$dp += $defenders['u'.$y]*${'u'.$y}['di'];
 						$cdp += $defenders['u'.$y]*${'u'.$y}['dc'];
-					}	
-					
+					}
+
 				}
-				$invol += $defenders['u'.$y]; //total troops		
+				$invol += $defenders['u'.$y]; //total troops
 				$units['Def_unit'][$y] = $defenders['u'.$y];
 			}
 			$datadef['dp']=$dp;
 			$datadef['cdp']=$cdp;
 			$datadef['involve']=$invol;
-			
+
 			return $datadef;
-		
+
 		}
 };
 

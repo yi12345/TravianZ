@@ -21,7 +21,7 @@ session_start();
 include_once("../GameEngine/Database.php");
 include_once ("../GameEngine/Lang/" . LANG . ".php");
 include_once("../GameEngine/Admin/database.php");
-include_once("../GameEngine/Data/buidata.php"); 
+include_once("../GameEngine/Data/buidata.php");
 
 class timeFormatGenerator
 {
@@ -133,8 +133,8 @@ $up_avl = $latest - $ver ;
 			function go_url(url) {
 				location=url;
 				return(false);
-			}			
-			
+			}
+
 		</script>
 		<div id="ltop1">
 			<div style="position:relative; width:231px; height:100px; float:left;">

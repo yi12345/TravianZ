@@ -608,11 +608,11 @@ define("FOOL_UNIQUEVILLAGE","Manuscritos Prohibidos");
 define("ARTEFACT","Misteriosas Reliquias
 Mi se&ntilde;or, han aparecido misteriosas aldeas donde se dice que existen unos artefactos de gran poder, los ancianos del consejo las llaman reliquias.
 
-Completamente resguardadas por la poderosa raza Natares y su temido ej&eacute;rcito, pero no ser&aacute; impedimento para vos valeroso emperador, O s&iacute;. 
+Completamente resguardadas por la poderosa raza Natares y su temido ej&eacute;rcito, pero no ser&aacute; impedimento para vos valeroso emperador, O s&iacute;.
 
 Vuestros generales me han comentado que su ej&eacute;rcito crece y crece m&aacute;s, pronto podremos apoderarnos de esas reliquias, los talleres fabrican vuestras catapultas para destruir el tesoro que guarda la reliquia y vuestro mejor soldado nuestro h&eacute;roe se entrena cada vez m&aacute;s fuerte para poder traerle esta reliquia.
 
-Pero las tropas y los aldeanos necesitan de motivaci&oacute;n, usted mi se&ntilde;or debe de generar esa fuerza necesaria para llevarnos a todos al triunfo y a la gloria. 
+Pero las tropas y los aldeanos necesitan de motivaci&oacute;n, usted mi se&ntilde;or debe de generar esa fuerza necesaria para llevarnos a todos al triunfo y a la gloria.
 
 La mitad del camino ha llegado, la victoria est&aacute; en sus manos mi se&ntilde;or. ");
 

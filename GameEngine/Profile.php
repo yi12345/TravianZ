@@ -92,7 +92,7 @@ class Profile {
 				$name = preg_replace("/[^a-zA-Z0-9_-\s]/", "", $k);
 				$database->setVillageName($database->RemoveXSS($varray[$i]['wref']),$name);
         $database->setVillageName($database->RemoveXSS($varray[$i]['wref']),$k);
-		}  
+		}
 		header("Location: spieler.php?uid=".$post['uid']);
 	}
 
@@ -101,7 +101,7 @@ class Profile {
 		$database->gpack($database->RemoveXSS($session->uid),$database->RemoveXSS($post['custom_url']));
 		header("Location: spieler.php?uid=".$session->uid);
 	}
-	
+
 		/*******************************************************
 		Function to vacation mode - by advocaite and Shadow
 		References:

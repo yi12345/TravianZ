@@ -16,7 +16,7 @@ $id = $_POST['id'];
 
 $myFile = "../../config.php";
 $fh = fopen($myFile, 'w') or die("<br/><br/><br/>Can't open file: GameEngine\config.php");
-		
+
 		$T4=(T4_COMING==false)? "false":"true";
 		$LOG_BUILD=(LOG_BUILD==false)? "false":"true";
 		$LOG_TECH=(LOG_TECH==false)? "false":"true";
@@ -31,8 +31,8 @@ $fh = fopen($myFile, 'w') or die("<br/><br/><br/>Can't open file: GameEngine\con
 		$NEWSBOX3=(NEWSBOX3==false)? "false":"true";
 		$LIMIT_MAILBOX=(LIMIT_MAILBOX==false)? "false":"true";
 		$INCLUDE_ADMIN=(INCLUDE_ADMIN==false)? "false":"true";
-		
-				
+
+
 		$text = file_get_contents("constant_format.tpl");
 		$text = preg_replace("'%ERRORREPORT%'", $_POST['error'], $text);
 		$text = preg_replace("'%ERROR%'", $_POST['error'], $text);
@@ -53,7 +53,7 @@ $fh = fopen($myFile, 'w') or die("<br/><br/><br/>Can't open file: GameEngine\con
 		$text = preg_replace("'%TRAPPERCAP%'", $_POST['trappercap'], $text);
 		$text = preg_replace("'%VILLAGE_EXPAND%'", $_POST['village_expand'], $text);
 		$text = preg_replace("'%DEMOLISH%'", $_POST['demolish'], $text);
-		$text = preg_replace("'%STORAGE_MULTIPLIER%'", $_POST['storage_multiplier'], $text);		
+		$text = preg_replace("'%STORAGE_MULTIPLIER%'", $_POST['storage_multiplier'], $text);
 		$text = preg_replace("'%QUEST%'", $_POST['quest'], $text);
 		$text = preg_replace("'%QTYPE%'", $_POST['qtype'], $text);
 		$text = preg_replace("'%BEGINNER%'", $_POST['beginner'], $text);
@@ -77,7 +77,7 @@ $fh = fopen($myFile, 'w') or die("<br/><br/><br/>Can't open file: GameEngine\con
 		$text = preg_replace("'%LOGADMIN%'", $LOG_ADMIN, $text);
 		$text = preg_replace("'%LOGWAR%'", $LOG_WAR, $text);
 		$text = preg_replace("'%LOGMARKET%'", $LOG_MARKET, $text);
-		$text = preg_replace("'%LOGILLEGAL%'", $LOG_ILLEGAL, $text);		
+		$text = preg_replace("'%LOGILLEGAL%'", $LOG_ILLEGAL, $text);
 		$text = preg_replace("'%BOX1%'", $NEWSBOX1, $text);
 		$text = preg_replace("'%BOX2%'", $NEWSBOX2, $text);
 		$text = preg_replace("'%BOX3%'", $NEWSBOX3, $text);
@@ -86,18 +86,18 @@ $fh = fopen($myFile, 'w') or die("<br/><br/><br/>Can't open file: GameEngine\con
 		$text = preg_replace("'%SPASS%'", SQL_PASS, $text);
 		$text = preg_replace("'%SDB%'", SQL_DB, $text);
 		$text = preg_replace("'%PREFIX%'", TB_PREFIX, $text);
-		$text = preg_replace("'%CONNECTT%'", DB_TYPE, $text);		
+		$text = preg_replace("'%CONNECTT%'", DB_TYPE, $text);
 		$text = preg_replace("'%LIMIT_MAILBOX%'", $LIMIT_MAILBOX, $text);
 		$text = preg_replace("'%MAX_MAILS%'", MAX_MAIL, $text);
-		$text = preg_replace("'%ARANK%'", $INCLUDE_ADMIN, $text);		
+		$text = preg_replace("'%ARANK%'", $INCLUDE_ADMIN, $text);
 		$text = preg_replace("'%AEMAIL%'", ADMIN_EMAIL, $text);
 		$text = preg_replace("'%ANAME%'", ADMIN_NAME, $text);
 		$text = preg_replace("'%UTRACK%'", "", $text);
 		$text = preg_replace("'%UTOUT%'", "", $text);
 		$text = preg_replace("'%DOMAIN%'", DOMAIN, $text);
 		$text = preg_replace("'%HOMEPAGE%'", HOMEPAGE, $text);
-		$text = preg_replace("'%SERVER%'", SERVER, $text);		
-	
+		$text = preg_replace("'%SERVER%'", SERVER, $text);
+
 		fwrite($fh, $text);
 		fclose($fh);
 

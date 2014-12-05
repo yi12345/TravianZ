@@ -17,7 +17,7 @@
 // | Author: Kai Ratzeburg <ice-x@live.de>                                |
 // +----------------------------------------------------------------------+
 
-// Source Code Highlight 
+// Source Code Highlight
 /* Security Fix; Only dev
 if(isset($_GET['show_source']))
 {
@@ -41,7 +41,7 @@ class Security
     // Instance of the security class.
     protected static $instance;
     protected $magic_quotes_gpc = FALSE;
-    
+
     /**
      * Gets the instance of the Security class.
      *
@@ -53,11 +53,11 @@ class Security
         {
             //return new Security;
         }
-        
+
         //return self::$instance;
     }
-    
-    
+
+
     /**
      * Constructor. Sanitizes global data GET, POST and COOKIE data.
      * Also makes sure those pesty magic quotes and register globals
@@ -76,13 +76,13 @@ class Security
                 // Dear lord!! This is bad and deprected. Sort it out ;)
                 set_magic_quotes_runtime(0);
             }
-            
+
             if(get_magic_quotes_gpc())
             {
                 // This is also bad and deprected. See http://php.net/magic_quotes for more information.
                 $this->magic_quotes_gpc = TRUE;
             }
-            
+
             // Check for register globals and prevent security issues from arising.
             if(ini_get('register_globals'))
             {
@@ -91,13 +91,13 @@ class Security
                     // No no no.. just kill the script here and now
                     exit('Illegal attack on global variable.');
                 }
-                
+
                 // Get rid of REQUEST
                 $_REQUEST = array();
-                
+
                 // The following globals are standard and shouldn't really be removed
                 $preserve = array('GLOBALS', '_REQUEST', '_GET', '_POST', '_FILES', '_COOKIE', '_SERVER', '_ENV', '_SESSION');
-                
+
                 // Same effect as disabling register_globals
                 foreach($GLOBALS as $key => $value)
                 {
@@ -105,14 +105,14 @@ class Security
                     {
                         global $$key;
                         $$key = NULL;
-                        
+
                         unset($GLOBALS[$key], $$key);
                     }
                 }
             }
-            
+
             // Sanitize global data
-            
+
             if(is_array($_POST))
             {
                 foreach($_POST as $key => $value)
@@ -124,7 +124,7 @@ class Security
             {
                 $_POST = array();
             }
-            
+
             if(is_array($_GET))
             {
                 foreach($_GET as $key => $value)
@@ -136,7 +136,7 @@ class Security
             {
                 $_GET = array();
             }
-            
+
             if(is_array($_COOKIE))
             {
                 foreach($_COOKIE as $key => $value)
@@ -148,15 +148,15 @@ class Security
             {
                 $_COOKIE = array();
             }
-            
+
             // Just make REQUEST a merge of POST and GET. Who really wants cookies in it anyway?
             $_REQUEST = array_merge($_GET, $_POST);
 
-            
+
             self::$instance = $this;
         }
     }
-    
+
     /**
      * Cross site filtering (XSS). Recursive.
      *
@@ -168,7 +168,7 @@ class Security
         // If its empty there is no point cleaning it :\
         if(empty($data))
             return $data;
-            
+
         // Recursive loop for arrays
         if(is_array($data))
         {
@@ -176,10 +176,10 @@ class Security
             {
                 $data[$key] = $this->xss_clean($data);
             }
-            
+
             return $data;
         }
-        
+
         // Fix &entity\n;
         $data = str_replace(array('&','<','>'), array('&','<','>'), $data);
         $data = preg_replace('/(&#*\w+)[\x00-\x20]+;/u', '$1;', $data);
@@ -209,10 +209,10 @@ class Security
             $data = preg_replace('#</*(?:applet|b(?:ase|gsound|link)|embed|frame(?:set)?|i(?:frame|layer)|l(?:ayer|ink)|meta|object|s(?:cript|tyle)|title|xml)[^>]*+>#i', '', $data);
         }
         while ($old_data !== $data);
-        
+
         return $data;
     }
-    
+
     /**
      * Enforces W3C specifications to prevent malicious exploitation.
      *
@@ -222,15 +222,15 @@ class Security
     protected function clean_input_keys($data)
     {
         $chars = PCRE_UNICODE_PROPERTIES ? '\pL' : 'a-zA-Z';
-        
+
         if ( ! preg_match('#^[' . $chars . '0-9:_.-]++$#uD', $data))
         {
             exit('Illegal key characters in global data');
         }
-        
+
         return $data;
     }
-    
+
     /**
      * Escapes data.
      *
@@ -246,18 +246,18 @@ class Security
             {
                 $new_array[$this->clean_input_keys($key)] = $this->clean_input_data($value);
             }
-            
+
             return $new_array;
         }
-        
+
         if($this->magic_quotes_gpc === TRUE)
         {
             // Get rid of those pesky magic quotes!
             $data = stripslashes($data);
         }
-        
+
         $data = $this->xss_clean($data);
-        
+
         return $data;
     }
 }

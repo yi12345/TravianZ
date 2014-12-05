@@ -4,14 +4,14 @@
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
 ##  Project:       TravianZ                                                    ##
-##  Version:       01.09.2013                    			       			   ## 
+##  Version:       01.09.2013                    			       			   ##
 ##  Filename       create_account.php                                          ##
-##  Developed by:  Dzoki , Advocaite , Donnchadh , yi12345 , Shadow , MisterX  ## 
+##  Developed by:  Dzoki , Advocaite , Donnchadh , yi12345 , Shadow , MisterX  ##
 ##  Fixed by:      Shadow & MisterX - Scouting all players , artefact names.   ##
 ##  License:       TravianZ Project                                            ##
 ##  Copyright:     TravianZ (c) 2010-2013. All rights reserved.                ##
 ##  URLs:          http://travian.shadowss.ro                		           ##
-##  Source code:   http://github.com/Shadowss/TravianZ-by-Shadow/              ## 
+##  Source code:   http://github.com/Shadowss/TravianZ-by-Shadow/              ##
 ##                                                                             ##
 #################################################################################
 
@@ -99,7 +99,7 @@ if($_POST['password'] != ""){
 
 /**
  * Creating account & capital village - Fixed by Shadow - cata7007@gmail.com / Skype : cata7007
- */ 
+ */
 
 		$username = "Natars";
 		$password = md5($_POST['password']);
@@ -156,7 +156,7 @@ if($_POST['password'] != ""){
             $database->addABTech($wid);
             $database->updateUserField($uid, "access", USER, 1);
         }
-                
+
         $wid = mysql_fetch_assoc(mysql_query("SELECT * FROM " . TB_PREFIX . "vdata WHERE owner = $uid"));
         $q = "UPDATE " . TB_PREFIX . "vdata SET pop = 834 WHERE owner = $uid";
         mysql_query($q) or die(mysql_error());
@@ -171,11 +171,11 @@ if($_POST['password'] != ""){
         mysql_query($q3) or die(mysql_error());
         $q4 = "UPDATE " . TB_PREFIX . "users SET desc2 = '$desc' WHERE id = $uid";
         mysql_query($q4) or die(mysql_error());
-		
+
 /**
  * SCOUTING ALL PLAYERS FIX BY MisterX
  */
- 
+
  		$natar = mysql_fetch_array(mysql_query("SELECT * FROM " . TB_PREFIX . "vdata WHERE owner = $uid and capital = 1"));
   		$multiplier = NATARS_UNITS;
   		$q = "SELECT * FROM " . TB_PREFIX . "vdata WHERE capital = '1' and owner > '5'";

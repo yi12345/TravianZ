@@ -36,7 +36,7 @@ for($i = 0; $i < $loops + 1; $i++)
 	{
 		if($row['plus'] < time()) { $plusbefore = time(); $addplus = $plusbefore + $plusdur; } elseif($row['plus'] > time()) { $plusbefore = $row['plus']; $addplus = $plusbefore + $plusdur; }
 		mysql_query("UPDATE ".TB_PREFIX."users SET
-			plus = '".$addplus."' 
+			plus = '".$addplus."'
 			WHERE id = '".$row['id']."'");
 	}
 }

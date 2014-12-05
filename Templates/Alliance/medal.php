@@ -1,4 +1,4 @@
-<?php			   
+<?php
 	//gp link
 	if($session->gpack == null || GP_ENABLE == false) {
 	$gpack= GP_LOCATE;
@@ -7,7 +7,7 @@
 	}
 
 
-  
+
 //de lintjes
 /******************************
 INDELING CATEGORIEEN:
@@ -24,10 +24,10 @@ INDELING CATEGORIEEN:
 ******************************/
 //$geregistreerd=date('d-m-Y', ($allianceinfo['timestamp']));
 
-$profiel = preg_replace("/\[war]/s",'At war with<br>'.$database->getAllianceWar($aid), $profiel, 1); 
-$profiel = preg_replace("/\[ally]/s",'Confederacies<br>'.$database->getAllianceDipProfile($aid,1), $profiel, 1); 
-$profiel = preg_replace("/\[nap]/s",'NAPs<br>'.$database->getAllianceDipProfile($aid,2), $profiel, 1); 
-$profiel = preg_replace("/\[diplomatie]/s",'Confederacies<br>'.$database->getAllianceDipProfile($aid,1).'<br>NAPs<br>'.$database->getAllianceDipProfile($aid,2).'<br>At war with<br>'.$database->getAllianceWar($aid), $profiel, 1); 
+$profiel = preg_replace("/\[war]/s",'At war with<br>'.$database->getAllianceWar($aid), $profiel, 1);
+$profiel = preg_replace("/\[ally]/s",'Confederacies<br>'.$database->getAllianceDipProfile($aid,1), $profiel, 1);
+$profiel = preg_replace("/\[nap]/s",'NAPs<br>'.$database->getAllianceDipProfile($aid,2), $profiel, 1);
+$profiel = preg_replace("/\[diplomatie]/s",'Confederacies<br>'.$database->getAllianceDipProfile($aid,1).'<br>NAPs<br>'.$database->getAllianceDipProfile($aid,2).'<br>At war with<br>'.$database->getAllianceWar($aid), $profiel, 1);
 
 
 foreach($varmedal as $medal) {

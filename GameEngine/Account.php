@@ -99,7 +99,7 @@ class Account {
             $form->addError("invt",$_POST['invited']);
             $_SESSION['errorarray'] = $form->getErrors();
             $_SESSION['valuearray'] = $_POST;
-            
+
 
             header("Location: anmelden.php");
         }
