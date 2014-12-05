@@ -37,20 +37,20 @@
 		if($jobs['master'] == 0){
         	echo "<tr><td class=\"ico\"><a href=\"?d=".$jobs['id']."&a=0&c=$session->checker\">";
             echo "<img src=\"img/x.gif\" class=\"del\" title=\"cancel\" alt=\"cancel\" /></a></td><td>";
-			echo $building->procResType($jobs['type'])." (Level ".$jobs['level'].")";
+			echo $building->procResType($jobs['type'])." (等級 ".$jobs['level'].")";
 			if($jobs['loopcon'] == 0) { $BuildingList[] = $jobs['field']; }
             if($jobs['loopcon'] == 1) {
-            	echo " (waiting loop)";
+            	echo " (等待貯列)";
             }
-            echo "</td><td>in <span id=\"timer".$timer."\">";
+            echo "</td><td>等候 <span id=\"timer".$timer."\">";
             echo $generator->getTimeFormat($jobs['timestamp']-time());
-            echo "</span> hrs.</td>";
-            echo "<td>done at ".date('H:i', $jobs['timestamp'])."</td></tr>";
+            echo "</span> 小時.</td>";
+            echo "<td>於".date('H:i', $jobs['timestamp'])." 完成</td></tr>";
             $timer +=1;
 		}else{
         	echo "<tr><td class=\"ico\"><a href=\"?d=".$jobs['id']."&a=0&c=$session->checker\">";
             echo "<img src=\"img/x.gif\" class=\"del\" title=\"cancel\" alt=\"cancel\" /></a></td><td>";
-			echo $building->procResType($jobs['type'])."<span class=\"none\"> (Level ".$jobs['level'].")</span>";
+			echo $building->procResType($jobs['type'])."<span class=\"none\"> (等級 ".$jobs['level'].")</span>";
 			}
       	}
         ?>
