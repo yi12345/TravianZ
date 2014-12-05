@@ -12,7 +12,7 @@ echo !$basearray['occupied']? ABANDVALLEY : $basearray['name']; echo " (".$basea
 echo !$oasis['conqured']? UNOCCUOASIS : OCCUOASIS; echo " (".$basearray['x']."|".$basearray['y'].")";
 $otext = !$oasis['conqured']? UNOCCUOASIS : OCCUOASIS;
 } ?></h1>
-<?php if($basearray['occupied'] && $basearray['capital']) { echo "<div id=\"dmain\">(capital)</div>"; }
+<?php if($basearray['occupied'] && $basearray['capital']) { echo "<div id=\"dmain\">(主村)</div>"; }
 if($uinfo['owner']==3 && $uinfo['name']==PLANVILLAGE){
 ?>
 <img src="img/x.gif" id="detailed_map" class="f99" alt="<?php echo PLANVILLAGE;?>" />
@@ -178,7 +178,7 @@ if($type==18 or $type==19 or $type==20 or $type==21){
 }
 }else{ ?>
 							<tr>
-					<td><?php echo THERENOINFO;?></td>
+					<td><?php echo 無資料;?></td>
 				</tr>
 
 <?php }
@@ -202,7 +202,7 @@ if($type==18 or $type==19 or $type==20 or $type==21){
 }
 }else{ ?>
 							<tr>
-					<td><?php echo THERENOINFO;?></td>
+					<td><?php echo 無資料;?></td>
 				</tr>
 <?php }} ?>
 </tbody>
@@ -214,29 +214,29 @@ if($type==18 or $type==19 or $type==20 or $type==21){
         <?php 
         $uinfo = $database->getUserArray($oasis['owner'],1); ?>
 		<tbody><tr>
-			<th>Tribe</th>
+			<th>種族</th>
 			<td><?php switch($uinfo['tribe']) { case 1: echo TRIBE1; break; case 2: echo TRIBE2; break; case 3: echo TRIBE3; break; case 4: echo TRIBE4; break; case 5: echo TRIBE5; break;} ?></td>
 		</tr>
 		<tr>
-			<th>Alliance</th>
+			<th>聯盟</th>
 			<?php if($uinfo['alliance'] == 0){
 			echo '<td>-</td>';
 			} else echo '
 			<td><a href="allianz.php?aid='.$uinfo['alliance'].' ">'.$database->getUserAlliance($oasis['owner']).'</a></td>'; ?>
 		</tr>
 		<tr>
-			<th>Owner</th>
+			<th>玩家</th>
 			<td><a href="spieler.php?uid=<?php echo $oasis['owner']; ?>"><?php echo $database->getUserField($oasis['owner'],'username',0); ?></a></td>
 		</tr>
 		<tr>
-			<th>Village</th>
+			<th>村莊</th>
 			<td><a href="karte.php?d=<?php echo $oasis['conqured'];?>&c=<?php echo $generator->getMapCheck($oasis['conqured']);?>"><?php echo $database->getVillageField($oasis['conqured'], "name");?> </a></td>
 		</tr></tbody>
 	</table>
 
 <table cellpadding="1" cellspacing="1" id="bonus" class="tableNone bonus">
 		<thead><tr>
-			<th>Bonus:</th>
+			<th>加成:</th>
 		</tr></thead>
 		<tbody>
 <?php
@@ -247,7 +247,7 @@ if($type==18 or $type==19 or $type==20 or $type==21){
 	
 <table cellpadding="1" cellspacing="1" id="troop_info" class="tableNone rep">
 		<thead><tr>
-			<th>Reports:</th>
+			<th>報告:</th>
 		</tr></thead>
 		<tbody>
 		<?php
@@ -277,7 +277,7 @@ if($type==18 or $type==19 or $type==20 or $type==21){
 }
 }else{ ?>
 							<tr>
-					<td><?php echo THERENOINFO;?></td>
+					<td><?php echo 無資料;?></td>
 				</tr>
 
 <?php }
@@ -301,7 +301,7 @@ if($type==18 or $type==19 or $type==20 or $type==21){
 }
 }else{ ?>
 							<tr>
-					<td><?php echo THERENOINFO;?></td>
+					<td><?php echo 無資料;?></td>
 				</tr>
 <?php }} ?>
 </tbody>
@@ -403,7 +403,7 @@ if($type==18 or $type==19 or $type==20 or $type==21 or $type==22){
 }
 }else{ ?>
 							<tr>
-					<td><?php echo THERENOINFO;?></td>
+					<td><?php echo 無資料;?></td>
 				</tr>
 
 <?php }
@@ -427,7 +427,7 @@ if($type==18 or $type==19 or $type==20 or $type==21){
 }
 }else{ ?>
 							<tr>
-					<td><?php echo THERENOINFO;?></td>
+					<td><?php echo 無資料;?></td>
 				</tr>
 
 <?php }} ?>

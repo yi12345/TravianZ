@@ -402,7 +402,7 @@ if (isset($neutralarray[0])) {
 	<div id="mbig">
 		<div id="lightframe">
 			<div id="darkframe"><a id="map_popclose" onClick="Close();"><img src="img/x.gif" alt="close Map" title="close Map"></a>
-				<h1>Map(<span id="x"><?php echo $x;?></span>|<span id="y"><?php echo $y;?></span>)</h1>
+				<h1>大地圖(<span id="x"><?php echo $x;?></span>|<span id="y"><?php echo $y;?></span>)</h1>
 				<div id="map">
 					<script type="text/javascript">
 						var text_k = {}

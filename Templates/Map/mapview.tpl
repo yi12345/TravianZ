@@ -219,7 +219,7 @@ if (isset($neutralarray[0])) {
 }
 ?>
 <div id="content"  class="map">
-	<h1>Map(<span id="x"><?php echo $x;?></span>|<span id="y"><?php echo $y;?></span>)</h1>
+	<h1>地圖(<span id="x"><?php echo $x;?></span>|<span id="y"><?php echo $y;?></span>)</h1>
 	<div id="map">
 		<script type="text/javascript">
 			var text_k = {}
@@ -275,7 +275,7 @@ if (isset($neutralarray[0])) {
 				<span>x </span><input id="mcx" class="text" name="xp" value="<?php echo $x ?>" maxlength="4"/>
 				<span>y </span><input id="mcy" class="text" name="yp" value="<?php echo $y ?>" maxlength="4"/>
 				<input type="image" id="btn_ok" class="dynamic_img" value="ok" name="s1" src="img/x.gif" alt="OK" /><br />
-				<?php if($session->goldclub != 0){echo "<a href=\"crop_finder.php\"><img src=\"".GP_LOCATE."img/misc/cropfinder.gif\" /> Crop Finder</a>";}?>
+				<?php if($session->goldclub != 0){echo "<br><a href=\"crop_finder.php\"><img src=\"".GP_LOCATE."img/misc/cropfinder.gif\" /> 農田探測器</a>";}?>
 			</form>
 		</div>
 		<table cellpadding="1" cellspacing="1" id="map_infobox" class="default"><thead><tr><th colspan="2"><?php echo DETAIL;?></th></tr></thead><tbody><tr><th><?php echo PLAYER;?></th><td>-</td></tr><tr><th><?php echo POP;?></th><td>-</td></tr><tr><th><?php echo ALLIANCE;?></th><td></td></tr></tbody></table>
