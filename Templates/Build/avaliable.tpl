@@ -85,7 +85,7 @@ $greatgranary1 = $database->getBuildingByType2($village->wid,39);
 $greatworkshop1 = $database->getBuildingByType2($village->wid,42);
 
 ?>
-<div id="build" class="gid0"><h1>Construct new building</h1>
+<div id="build" class="gid0"><h1>建造新建築物</h1>
 <?php
 if($mainbuilding == 0 && $mainbuilding1 == 0 && $id != 39  && $id != 40) {
     include("avaliable/mainbuilding.tpl");
@@ -245,7 +245,7 @@ if($greatworkshop == 0 && $greatworkshop1 == 0 && $workshop == 20 && $village->c
 }
 if($id != 39 && $id != 40) {
 ?>
-<p class="switch"><a id="soon_link" href="javascript:show_build_list('soon');">show soon available buildings</a></p>
+<p class="switch"><a id="soon_link" href="javascript:show_build_list('soon');">顯示即將可以建造的建築物</a></p>
 
 <div id="build_list_soon" class="hide">
 <?php
@@ -442,24 +442,24 @@ function show_build_list(list) {
     if (build_list.className == 'hide') {
         build_list.className = '';
         if (link == soon_link) {
-            link.innerHTML = 'hide soon available buildings';
+            link.innerHTML = '隱藏即將可以建造的建築物';
             if (all_link !== null) {
                 all_link.className = '';
             }
         } else {
-            link.innerHTML = 'hide more';
+            link.innerHTML = '隱藏更多';
         }
     } else {
         build_list.className = 'hide';
         if (link == soon_link) {
-            link.innerHTML = 'show soon available buildings';
+            link.innerHTML = '顯示即將可以建造的建築物';
             if (all_link !== null) {
-                all_link.innerHTML = 'show more';
+                all_link.innerHTML = '顯示更多';
                 all_link.className = 'hide';
                 build_list_all.className = 'hide';
             }
         } else {
-            link.innerHTML = 'show more';
+            link.innerHTML = '顯示更多';
         }
     }
 }
