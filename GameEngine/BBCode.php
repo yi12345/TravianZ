@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include_once ("config.php");
 include_once ("Lang/".LANG.".php");

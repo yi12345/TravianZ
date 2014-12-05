@@ -203,8 +203,8 @@
             return $key;
             break;
         }
-       }    
-      }  
+       }
+      }
 						if(!next($this->rankarray)) {
 						if($field != "userid"){
 							return $name;
@@ -214,7 +214,7 @@
 							break;
 						}
 						}
-					
+
 				}
 			}
 
@@ -263,7 +263,7 @@
 			)allitag
 			FROM " . TB_PREFIX . "users
 			WHERE " . TB_PREFIX . "users.access < " . (INCLUDE_ADMIN ? "10" : "8") . "
-			AND " . TB_PREFIX . "users.tribe <= 3 ORDER BY totalpop DESC, totalvillages DESC, userid DESC";	
+			AND " . TB_PREFIX . "users.tribe <= 3 ORDER BY totalpop DESC, totalvillages DESC, userid DESC";
 			}
 
 			$result = (mysql_query($q));

@@ -317,7 +317,7 @@ class Message {
 
 	private function sendAMessage($topic,$text) {
 		global $session,$database;
-		
+
 		// Vulnerability closed by Shadow
 
 		$q = "SELECT * FROM ".TB_PREFIX."mdata WHERE owner='".$session->uid."' AND time > ".time()." - 60";
@@ -327,7 +327,7 @@ class Message {
 		return; //flood
 
 		// Vulnerability closed by Shadow
-			
+
 		$allmembersQ = mysql_query("SELECT id FROM ".TB_PREFIX."users WHERE alliance='".$session->alliance."'");
 		$userally = $database->getUserField($session->uid,"alliance",0);
 		$permission=mysql_fetch_array(mysql_query("SELECT opt7 FROM ".TB_PREFIX."ali_permission WHERE uid='".$session->uid."'"));

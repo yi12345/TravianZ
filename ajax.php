@@ -43,7 +43,7 @@ switch($_GET['f']) {
         $qact3=preg_replace("/[^a-zA-Z0-9_-]/","",$_GET['qact3']);
     	}else {
         $qact3=null;
-    	}  
+    	}
     if (!isset($_SESSION)) {
         session_start();
     }
@@ -51,7 +51,7 @@ switch($_GET['f']) {
         include("Templates/Ajax/quest_core.tpl");
     }else{
         include("Templates/Ajax/quest_core25.tpl");
-    }    
+    }
         break;
 }
 ?>

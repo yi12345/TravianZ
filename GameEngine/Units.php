@@ -140,7 +140,7 @@ class Units {
                     $coor = $database->getCoor($id);
                     }
                 }
-		
+
                 // People search by coordinates
                 // We confirm and seek coordinate coordinates Village
         if(isset($post['x']) && isset($post['y']) && $post['x'] != "" && $post['y'] != "") {
@@ -154,15 +154,15 @@ class Units {
 			}
 				//END Vaction mode check
             }
-        }   
-        if (!empty($coor)) {    
+        }
+        if (!empty($coor)) {
             if ($session->tribe == 1){$Gtribe = "";}elseif  ($session->tribe == 2){$Gtribe = "1";}elseif ($session->tribe ==  3){$Gtribe = "2";}elseif ($session->tribe == 4){$Gtribe = "3";}elseif  ($session->tribe == 5){$Gtribe = "4";}
             for($i=1; $i<12; $i++){
                 if(isset($post['t'.$i])){
                     if ($i<10) $troophave=$village->unitarray['u'.$Gtribe.$i];
                     if ($i==10)$troophave=$village->unitarray['u'.floor(intval($Gtribe)+1)*$i];
                     if ($i==11)$troophave=$village->unitarray['hero'];
-                                        
+
                     if (intval($post['t'.$i]) > $troophave){
                         $form->addError("error","You can't send more units than you have");
                         break;
@@ -174,7 +174,7 @@ class Units {
                     if(preg_match('/[^0-9]/',$post['t'.$i])){
                         $form->addError("error","Special characters can't entered");
                         break;
-                    } 
+                    }
                 }
             }
         }
@@ -229,15 +229,15 @@ class Units {
                   }
 
     }
-    
+
     public function returnTroops($wref,$mode=0) {
         global $database;
         if (!mode) {
             $getenforce=$database->getEnforceVillage($wref,0);
             foreach($getenforce as $enforce) {
-                $this->processReturnTroops($enforce);    
+                $this->processReturnTroops($enforce);
             }
-        }    
+        }
         //check oasis
         $getenforce1=$database->getOasisEnforce($wref,1);
         foreach($getenforce1 as $enforce) {
@@ -250,7 +250,7 @@ class Units {
             $database->populateOasisUnits($getenforce1[0]['vref'],$getenforce1[0]['high']);
             $q = "UPDATE ".TB_PREFIX."odata SET conqured=0,wood=800,iron=800,clay=800,maxstore=800,crop=800,maxcrop=800,lastupdated=". time().",lastupdated2=".time().",loyalty=100,owner=2,name='Unoccupied Oasis' WHERE conqured=$wref";
             $database->query($q);
-        }    
+        }
     }
 
     private function processReturnTroops($enforce) {
@@ -261,7 +261,7 @@ class Units {
         else if ($database->getUserField($to['owner'],'tribe',0) == '3'){ $Gtribe =  "2"; }
         else if ($database->getUserField($to['owner'],'tribe',0) ==  '4'){ $Gtribe = "3"; }
         else if  ($database->getUserField($to['owner'],'tribe',0) == '5'){ $Gtribe =  "4"; }
-                    
+
         $start = ($database->getUserField($to['owner'],'tribe',0)-1)*10+1;
         $end = ($database->getUserField($to['owner'],'tribe',0)*10);
 
@@ -275,7 +275,7 @@ class Units {
 
         //find slowest unit.
         for($i=$start;$i<=$end;$i++){
-        
+
             if(intval($enforce['u'.$i]) > 0){
                 if($unitarray) { reset($unitarray); }
                 $unitarray = $GLOBALS["u".$i];
@@ -293,7 +293,7 @@ class Units {
         }else{
             $enforce['hero']='0';
         }
-            
+
         $artefact = count($database->getOwnUniqueArtefactInfo2($from['owner'],2,3,0));
         $artefact1 = count($database->getOwnUniqueArtefactInfo2($enforce['from'],2,1,1));
         $artefact2 = count($database->getOwnUniqueArtefactInfo2($from['owner'],2,2,0));
@@ -307,7 +307,7 @@ class Units {
             $fastertroops = 1;
         }
         $time = round($generator->procDistanceTime($fromCor,$toCor,min($speeds),$enforce['from'])/$fastertroops);
-            
+
         $foolartefact2 = $database->getFoolArtefactInfo(2,$enforce['from'],$from['owner']);
         if(count($foolartefact2) > 0){
             foreach($foolartefact2 as $arte){
@@ -321,9 +321,9 @@ class Units {
         }
         $reference =  $database->addAttack($enforce['from'],$enforce['u'.$start],$enforce['u'.($start+1)],$enforce['u'.($start+2)],$enforce['u'.($start+3)],$enforce['u'.($start+4)],$enforce['u'.($start+5)],$enforce['u'.($start+6)],$enforce['u'.($start+7)],$enforce['u'.($start+8)],$enforce['u'.($start+9)],$enforce['hero'],2,0,0,0,0);
         $database->addMovement(4,$enforce['vref'],$enforce['from'],$reference,time(),($time+time()));
-        $database->deleteReinf($enforce['id']);    
+        $database->deleteReinf($enforce['id']);
     }
-    
+
     private function sendTroops($post) {
         global $form, $database, $village, $generator, $session;
 
@@ -462,7 +462,7 @@ if($session->access != BANNED){
         $good_artefact = 1;
         }
         }
-        } 
+        }
         }else{
         $artefact_2 = count($database->getOwnUniqueArtefactInfo2($to_owner,7,3,0));
         $artefact1_2 = count($database->getOwnUniqueArtefactInfo2($data['to_vid'],7,1,1));
@@ -476,11 +476,11 @@ if($session->access != BANNED){
         $good_artefact = 1;
         }
         }
-        }  
         }
-        
+        }
+
         if (isset($post['ctar1'])){
-			if($artefact_2 > 0 or $artefact1_2  > 0 or $artefact2_2 > 0 or $good_artefact == 1){            
+			if($artefact_2 > 0 or $artefact1_2  > 0 or $artefact2_2 > 0 or $good_artefact == 1){
 				if ($post['ctar1'] != 40 or $post['ctar1'] != 27 and $iswwvilla == 1){
         $post['ctar1'] = 99;
         }else{
@@ -489,11 +489,11 @@ if($session->access != BANNED){
         }else{
         $post['ctar1'] = $post['ctar1'];
         }
-        }else{ 
+        }else{
         $post['ctar1'] = 0;
         }
         if (isset($post['ctar2'])){
-            if($artefact_2 > 0 or $artefact1_2  > 0 or $artefact2_2 > 0 or $good_artefact == 1){ 
+            if($artefact_2 > 0 or $artefact1_2  > 0 or $artefact2_2 > 0 or $good_artefact == 1){
                 if ($post['ctar2'] != 40 or $post['ctar2'] != 27 and $iswwvilla == 1){
         $post['ctar2'] = 99;
         }else{
@@ -502,11 +502,11 @@ if($session->access != BANNED){
 		}else{
 		$post['ctar2'] = $post['ctar2'];
 		}
-		}else{ 
+		}else{
 		$post['ctar2'] = 0;}
         if (isset($post['spy'])){
 		$post['spy'] = $post['spy'];
-		}else{ 
+		}else{
 		$post['spy'] = 0;
 		}
         $abdata = $database->getABTech($village->wid);
@@ -671,7 +671,7 @@ if($session->access != BANNED){
 header("Location: banned.php");
 }
     }
-    
+
     public function Settlers($post) {
         global $form, $database, $village, $session;
         if($session->access != BANNED){

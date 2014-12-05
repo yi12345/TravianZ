@@ -30,18 +30,18 @@ $access = $_POST['access'];
 $dur = $_POST['protect'] * 86400;
 $protection = (time() + $dur);
 
-mysql_query("UPDATE ".TB_PREFIX."users SET 
+mysql_query("UPDATE ".TB_PREFIX."users SET
 	access = ".$access.",
-	gold = ".$_POST['gold'].",	
+	gold = ".$_POST['gold'].",
 	sit1 = '".$_POST['sitter1']."',
 	sit2 = '".$_POST['sitter2']."',
 	protect = '".$protection."',
 	cp = ".$_POST['cp'].",
-	ap = '".$_POST['off']."', 
-	dp = '".$_POST['def']."', 
-	RR = '".$_POST['res']."', 
-	apall = '".$_POST['ooff']."', 
-	dpall = '".$_POST['odef']."' 
+	ap = '".$_POST['off']."',
+	dp = '".$_POST['def']."',
+	RR = '".$_POST['res']."',
+	apall = '".$_POST['ooff']."',
+	dpall = '".$_POST['odef']."'
 	WHERE id = ".$id."") or die(mysql_error());
 
 header("Location: ../../../Admin/admin.php?p=player&uid=".$id."");

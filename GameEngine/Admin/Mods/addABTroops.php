@@ -14,8 +14,8 @@ if($_SESSION['access'] < 9) die("Access Denied: You are not Admin!");
 include_once("../../Database.php");
 
 $id = $_POST['id'];
-$village = $database->getVillage($id);  
-$user = $database->getUserArray($village['owner'],1);  
+$village = $database->getVillage($id);
+$user = $database->getUserArray($village['owner'],1);
 $atech="";
 $btech="";
 for($i=1; $i<9; $i++) {

@@ -26,8 +26,8 @@ if($sessionaccess != 9) die("<h1><font color=\"red\">Access Denied: You are not 
 
 $access = $_POST['access'];
 
-mysql_query("UPDATE ".TB_PREFIX."users SET 
-	access = ".$access." 
+mysql_query("UPDATE ".TB_PREFIX."users SET
+	access = ".$access."
 	WHERE id = ".$id."") or die(mysql_error());
 
 header("Location: ../../../Admin/admin.php?p=player&uid=".$id."");
