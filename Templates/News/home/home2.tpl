@@ -1,1 +1,1 @@
-<b><center>TravianX</center></b>
+<b><center>OC Travian</center></b>
