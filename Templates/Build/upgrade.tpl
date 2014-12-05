@@ -29,18 +29,18 @@ if($session->userinfo['gold'] >= 3 && $building->getTypeLevel(17) >= 1) {
 <?php
     if($id <= 18) {
     if($session->gold >= 1 && $village->master == 0){
-        echo "<a class=\"build\" href=\"dorf1.php?master=$bid&id=$id&time=$mastertime&c=$session->checker\">Constructing with master builder </a>";
+        echo "<a class=\"build\" href=\"dorf1.php?master=$bid&id=$id&time=$mastertime&c=$session->checker\">雇用大師進行建造 </a>";
         echo '<font color="#B3B3B3">(costs: <img src="'.GP_LOCATE.'img/a/gold_g.gif" alt="Gold" title="Gold"/>1)</font>';
     }else{
-        echo "<span class=\"none\">Constructing with master builder</span>";
+        echo "<span class=\"none\">雇用大師進行建造</span>";
         echo '<font color="#B3B3B3">(costs: <img src="'.GP_LOCATE.'img/a/gold_g.gif" alt="Gold" title="Gold"/>1)</font>';
     }
     }else{
     if($session->gold >= 1 && $village->master == 0){
-        echo "<a class=\"build\" href=\"dorf2.php?master=$bid&id=$id&time=$mastertime&c=$session->checker\">Constructing with master builder </a>";
+        echo "<a class=\"build\" href=\"dorf2.php?master=$bid&id=$id&time=$mastertime&c=$session->checker\">雇用大師進行建造 </a>";
         echo '<font color="#B3B3B3">(costs: <img src="'.GP_LOCATE.'img/a/gold_g.gif" alt="Gold" title="Gold"/>1)</font>';
     }else{
-        echo "<span class=\"none\">Constructing with master builder</span>";
+        echo "<span class=\"none\">雇用大師進行建造</span>";
         echo '<font color="#B3B3B3">(costs: <img src="'.GP_LOCATE.'img/a/gold_g.gif" alt="Gold" title="Gold"/>1)</font>';
     }
     }
@@ -53,18 +53,18 @@ if($session->userinfo['gold'] >= 3 && $building->getTypeLevel(17) >= 1) {
 <?php
     if($id <= 18) {
     if($session->gold >= 1 && $village->master == 0){
-        echo "<a class=\"build\" href=\"dorf1.php?master=$bid&id=$id&time=$mastertime&c=$session->checker\">Constructing with master builder </a>";
+        echo "<a class=\"build\" href=\"dorf1.php?master=$bid&id=$id&time=$mastertime&c=$session->checker\">雇用大師進行建造 </a>";
         echo '<font color="#B3B3B3">(costs: <img src="'.GP_LOCATE.'img/a/gold_g.gif" alt="Gold" title="Gold"/>1)</font>';
     }else{
-        echo "<span class=\"none\">Constructing with master builder</span>";
+        echo "<span class=\"none\">雇用大師進行建造</span>";
         echo '<font color="#B3B3B3">(costs: <img src="'.GP_LOCATE.'img/a/gold_g.gif" alt="Gold" title="Gold"/>1)</font>';
     }
     }else{
     if($session->gold >= 1 && $village->master == 0){
-        echo "<a class=\"build\" href=\"dorf2.php?master=$bid&id=$id&time=$mastertime&c=$session->checker\">Constructing with master builder </a>";
+        echo "<a class=\"build\" href=\"dorf2.php?master=$bid&id=$id&time=$mastertime&c=$session->checker\">雇用大師進行建造 </a>";
         echo '<font color="#B3B3B3">(costs: <img src="'.GP_LOCATE.'img/a/gold_g.gif" alt="Gold" title="Gold"/>1)</font>';
     }else{
-        echo "<span class=\"none\">Constructing with master builder</span>";
+        echo "<span class=\"none\">雇用大師進行建造</span>";
         echo '<font color="#B3B3B3">(costs: <img src="'.GP_LOCATE.'img/a/gold_g.gif" alt="Gold" title="Gold"/>1)</font>';
     }
     }
@@ -91,18 +91,18 @@ if($session->userinfo['gold'] >= 3 && $building->getTypeLevel(17) >= 1) {
 <?php
     if($id <= 18) {
     if($session->gold >= 1 && $village->master == 0){
-        echo "<a class=\"build\" href=\"dorf1.php?master=$bid&id=$id&time=$mastertime&c=$session->checker\">雇用大師建造 </a>";
+        echo "<a class=\"build\" href=\"dorf1.php?master=$bid&id=$id&time=$mastertime&c=$session->checker\">雇用大師進行建造 </a>";
         echo '<font color="#B3B3B3">(costs: <img src="'.GP_LOCATE.'img/a/gold_g.gif" alt="Gold" title="Gold"/>1)</font>';
     }else{
-        echo "<span class=\"none\">雇用大師建造 </span>";
+        echo "<span class=\"none\">雇用大師進行建造 </span>";
         echo '<font color="#B3B3B3">(costs: <img src="'.GP_LOCATE.'img/a/gold_g.gif" alt="Gold" title="Gold"/>1)</font>';
     }
     }else{
     if($session->gold >= 1 && $village->master == 0){
-        echo "<a class=\"build\" href=\"dorf2.php?master=$bid&id=$id&time=$mastertime&c=$session->checker\">雇用大師建造 </a>";
+        echo "<a class=\"build\" href=\"dorf2.php?master=$bid&id=$id&time=$mastertime&c=$session->checker\">雇用大師進行建造 </a>";
         echo '<font color="#B3B3B3">(costs: <img src="'.GP_LOCATE.'img/a/gold_g.gif" alt="Gold" title="Gold"/>1)</font>';
     }else{
-        echo "<span class=\"none\">雇用大師建造</span>";
+        echo "<span class=\"none\">雇用大師進行建造</span>";
         echo '<font color="#B3B3B3">(需要花費: <img src="'.GP_LOCATE.'img/a/gold_g.gif" alt="Gold" title="Gold"/>1)</font>';
     }
     }
