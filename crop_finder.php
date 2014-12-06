@@ -337,7 +337,7 @@ include("Templates/links.tpl");
 <div id="stime">
 <div id="ltime">
 <div id="ltimeWrap">
-Calculated in <b><?php
+運算耗時  <b><?php
 
    echo round(($generator->pageLoadTimeEnd() - $start) * 1000);
 
