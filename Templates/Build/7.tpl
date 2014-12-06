@@ -14,7 +14,7 @@ include("next.tpl");
 			<td><b><?php echo $bid7[$village->resarray['f'.$id]]['attri']; ?></b> Percent</td>
 		</tr>
 		<tr>
-		<?php 
+		<?php
         if(!$building->isMax($village->resarray['f'.$id.'t'],$id)) {
 		$next = $village->resarray['f'.$id]+1+$loopsame+$doublebuild+$master;
 		if($next<=5){
@@ -31,7 +31,7 @@ include("next.tpl");
             ?>
 		</tr>
 	</table>
-<?php 
+<?php
 include("upgrade.tpl");
 ?>
 </p></div>

@@ -1,5 +1,5 @@
 <!--
-** 
+**
 ** - TravianX -
 ** DO NOT REMOVE COPYRIGHT NOTICE!
 -->
@@ -34,10 +34,10 @@ function loadProductGroup(group_id) {
 			<div>Gold Shop</div>
 			</td>
 			<td class="desc">
-			Basically, we reserve the ordered amount of gold immediately after the payment. If there are any problems, please send an email to our 
+			Basically, we reserve the ordered amount of gold immediately after the payment. If there are any problems, please send an email to our
 			<a href="mailto:payments@travianist.com">payment account</a>. <br /><br /><b>Username<br />Payment Method<br />Ordered Package<br />
 			Date and time</b><br /><br />We strive to ensure speedy processing!<br />
-                            
+
                             </td>
 
 		</tr>
@@ -187,7 +187,7 @@ function loadProductGroup(group_id) {
 					</tr>
 									</tbody>
 			</table>
-			    			   
+
 			   <!-- <table class="product lang_ltr lang_de" cellpadding="1" cellspacing="1">
 				<thead>
 					<tr>
@@ -217,7 +217,7 @@ function loadProductGroup(group_id) {
 					</tr>
 									</tbody>
 			</table>-->
-			    
+
 
 
 <div class="clear"></div>

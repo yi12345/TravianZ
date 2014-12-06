@@ -12,7 +12,7 @@
 $ranking->procRankReq($_GET);
 $_GET['uid'] = preg_replace("/[^0-9]/","",$_GET['uid']);
 $displayarray = $database->getUserArray($_GET['uid'],1);
- 
+
 
 $varmedal = $database->getProfileMedal($_GET['uid']);
 
@@ -42,7 +42,7 @@ include("menu2.tpl");
     <tr>
         <th colspan="2">Player <?php echo $displayarray['username']; ?></th>
     </tr>
-<?php if($displayarray['access']==ADMIN){ echo "<tr><th colspan='2'><font color='Red'><center><b>This player is Admin.</b></font></center></th></tr>"; } ?>      
+<?php if($displayarray['access']==ADMIN){ echo "<tr><th colspan='2'><font color='Red'><center><b>This player is Admin.</b></font></center></th></tr>"; } ?>
 <?php if($displayarray['access']==MULTIHUNTER){ echo "<tr><th colspan='2'><font color='Blue'><center><b>This player is Multihunter.</b></font></center></th></tr>"; } ?>
 <?php if($displayarray['access']==BANNED){ echo "<tr><th colspan='2'><font color='Green'><center><b>This player is BANNED.</b></font></center></th></tr>"; } ?>
 <?php if($displayarray['vac_mode']==1){ echo "<tr><th colspan='2'><font color='Maroon'><center><b>This player is on VACATION.</b></font></center></th></tr>"; } ?>
@@ -58,7 +58,7 @@ include("menu2.tpl");
     <tr>
         <td class="details">
             <table cellpadding="0" cellspacing="0">
- 
+
 <?php if($displayarray['access']==BANNED){ echo "<tr><td colspan='2'><center><b>Banned</b></center></td></tr>"; } ?>
 
 			<tr>
@@ -68,7 +68,7 @@ include("menu2.tpl");
             </tr>
             <tr>
                 <th>Tribe</th>
-                <td><?php 
+                <td><?php
                 if($displayarray['tribe'] == 1) {
                 echo "Roman";
                 }
@@ -80,7 +80,7 @@ include("menu2.tpl");
                 }
 				else if($displayarray['tribe'] == 4) {
                 echo "Nature";
-                
+
                 }else if($displayarray['tribe'] == 5) {
                 echo "Natars";
                 }				?></td>
@@ -105,7 +105,7 @@ include("menu2.tpl");
                 <th>Population</th>
                 <td><?php echo $totalpop; ?></td>
             </tr>
-            <?php 
+            <?php
 			//Date of Birth
             if(isset($displayarray['birthday']) && $displayarray['birthday'] != 0) {
 			$age = date('Y') - substr($displayarray['birthday'],0,4);
@@ -138,7 +138,7 @@ include("menu2.tpl");
                 } else {
              echo "<td colspan=\"2\"> <a href=\"nachrichten.php?t=1&amp;id=".$_GET['uid']."\">&raquo; Write message</a></td>";
 			 }
-                ?>                
+                ?>
             </tr>
 			<!--<tr><td colspan="2"><a href="nachrichten.php?t=1&id=0"><font color="Red">&raquo; Report Player</font></a></td></tr>-->
             <tr>
@@ -151,9 +151,9 @@ include("menu2.tpl");
         </td>
         <td class="desc1" >
             <div><?php echo nl2br($profiel[1]); ?>
-            
+
             </div>
-            
+
             </div>
         </td>
 
@@ -171,7 +171,7 @@ include("menu2.tpl");
         <td>Coordinates</td>
     </tr>
     </thead><tbody>
-    <?php 
+    <?php
     foreach($varray as $vil) {
     	$coor = $database->getCoor($vil['wref']);
     	echo "<tr><td class=\"nam\"><a href=\"karte.php?d=".$vil['wref']."&amp;c=".$generator->getMapCheck($vil['wref'])."\">".$vil['name']."</a>";

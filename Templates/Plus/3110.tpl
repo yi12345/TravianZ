@@ -18,11 +18,11 @@ $free = $session->uid;
 			</td>
 			<td class="desc">
 							Pay by online banktransfer               <br />
-                
+
             				<a href="#"
 					onclick="window.open('http://billing.micropayment.de/ebank2pay/event/?account=56387&project=trvnx&theme=default&gfx=x-surfer&bgcolor=ffffff&title=travianix+2000+Gold&amount=4999&currency=EUR&paytext=travianix+2000+Gold','nsrpay','scrollbars=yes,status=yes,resizable=yes,toolbar=yes,width=800,height=600');return false;">
 				<img src="img/bezahlung/ebank2pay2.png" style="width:181px; height:38px;" alt="ebank2pay" /></a>
-						
+
 			<br />
                 More information about micropayent can be found here:                                <a href="https://www.micropayment.de/" target="_blank"><br />More Info</a>
                                             </td>
@@ -67,7 +67,7 @@ $free = $session->uid;
 			</td>
 			<td class="desc">
 							Mit Skrill (moneybookers) kannst du mit deiner Kreditkarte oder per Überweisung von deinem Konto zahlen.                <br />
-                
+
             				<? echo'<form action="https://www.moneybookers.com/app/payment.pl" target="_blank">
  <input type="hidden" name="pay_to_email" value="novgorodschi@icloud.com">
  <input type="hidden" name="recipient_description" value="netsoundradio">
@@ -118,7 +118,7 @@ $free = $session->uid;
  <input type="hidden" name="submit_id" value="Submit">
  <input type="image" src="img/bezahlung/skrill.png" alt="Absenden">
 </form>';?>
-						
+
 			<br />
                                             </td>
 

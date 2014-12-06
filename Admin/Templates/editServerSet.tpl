@@ -68,7 +68,7 @@ function refresh(tz) {
                                 <option value="zh_tw" <?php if (LANG=="zh_tw") echo "selected";?>>Taiwan</option>
                             </select>
                         </td>
-					</tr>				
+					</tr>
 					<tr>
 						<td>Server Speed</td>
 						<td><input class="fm" name="speed" value="<?php echo SPEED;?>" style="width: 20%;"></td>
@@ -76,7 +76,7 @@ function refresh(tz) {
 					<tr>
 						<td>Troop Speed</td>
 						<td><input class="fm" name="incspeed" value="<?php echo INCREASE_SPEED;?>" style="width: 20%;"></td>
-					</tr>					
+					</tr>
 						<td>Evasion Speed</td>
 						<td><input class="fm" name="evasionspeed" value="<?php echo EVASION_SPEED;?>" style="width: 20%;"></td>
 					</tr>
@@ -129,7 +129,7 @@ function refresh(tz) {
 								<option value="432000" <?php if (PROTECTION=="432000") echo "selected";?>>120 hours (5 days)</option>
 							</select>
 						</td>
-					</tr>	
+					</tr>
 					<tr>
 						<td>Register Open</td>
 						<td>
@@ -143,17 +143,17 @@ function refresh(tz) {
 						<td>Activation Mail</td>
 						<td>
 							<select name="activate">
-								<option value="true" <?php if (AUTH_EMAIL==true) echo "selected";?>>Yes</option>
-								<option value="false" <?php if (AUTH_EMAIL==false) echo "selected";?>>No</option>
+								<option value="true" <?php if (AUTH_EMAIL==true) echo "selected";?>>是</option>
+								<option value="false" <?php if (AUTH_EMAIL==false) echo "selected";?>>否</option>
 							</select>
 						</td>
 					</tr>
-					<tr>	
+					<tr>
 						<td>Quest</td>
 						<td>
 							<select name="quest">
-								<option value="true" <?php if(QUEST == true) echo "selected";?>>Yes</option>
-								<option value="false" <?php if(QUEST == false) echo "selected";?>>No</option>
+								<option value="true" <?php if(QUEST == true) echo "selected";?>>是</option>
+								<option value="false" <?php if(QUEST == false) echo "selected";?>>否</option>
 							</select>
 						</td>
 					</tr>
@@ -244,7 +244,7 @@ function refresh(tz) {
 							</select>
 						</td>
 					</tr>
-					<tr> 
+					<tr>
 						<td>Tourn Threshold</td>
 						<td><input class="fm" name="ts_threshold" value="<?php echo TS_THRESHOLD;?>" style="width: 20%;"></td>
 					</tr>
@@ -282,16 +282,16 @@ function refresh(tz) {
 						<td>Graphic Pack</td>
 						<td>
 							<select name="gpack">
-								<option value="true" <?php if(GP_ENABLE==true) echo "selected";?>>Yes</option>
-								<option value="false" <?php if(GP_ENABLE==false) echo "selected";?>>No</option>
+								<option value="true" <?php if(GP_ENABLE==true) echo "selected";?>>是</option>
+								<option value="false" <?php if(GP_ENABLE==false) echo "selected";?>>否</option>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<td>Error Reporting</td>
 						<td><select name="error">
-							<option value="error_reporting (E_ALL ^ E_NOTICE);" <?php if(ERROR_REPORT=="error_reporting (E_ALL ^ E_NOTICE);") echo "selected";?>>Yes</option>
-							<option value="error_reporting (0);" <?php if(ERROR_REPORT=="error_reporting (0);") echo "selected";?>>No</option>
+							<option value="error_reporting (E_ALL ^ E_NOTICE);" <?php if(ERROR_REPORT=="error_reporting (E_ALL ^ E_NOTICE);") echo "selected";?>>是</option>
+							<option value="error_reporting (0);" <?php if(ERROR_REPORT=="error_reporting (0);") echo "selected";?>>否</option>
 						</select>
 						</td>
 					</tr>

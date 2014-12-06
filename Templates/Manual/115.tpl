@@ -39,7 +39,7 @@
 </tr>
 </tbody></table>
 
-<img id="big_unit" class="big_u15" src="img/x.gif" alt="Paladin" title="Paladin" /><div id="t_desc">As they are equipped with heavy armour Paladins are a great defensive unit. Infantry will find it especially hard to get through his shield. 
+<img id="big_unit" class="big_u15" src="img/x.gif" alt="Paladin" title="Paladin" /><div id="t_desc">As they are equipped with heavy armour Paladins are a great defensive unit. Infantry will find it especially hard to get through his shield.
 <br /><br />
 Unfortunately their attacking capabilities are rather low and their speed, compared to other cavalry units, is below the average. Their training takes very long and is rather expensive..</div><div id="prereqs"><b>Prerequisites</b><br /><a href="manual.php?typ=4&amp;gid=22">Academy</a> Level 5, <a href="manual.php?typ=4&amp;gid=20">Stable</a> Level 3</div><map id="nav" name="nav">
  <area href="manual.php?typ=1&amp;s=14" title="back" coords="0,0,45,18" shape="rect" alt="" />

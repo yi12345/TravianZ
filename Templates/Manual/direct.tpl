@@ -1,5 +1,5 @@
 <h1><img class="point" src="img/x.gif" alt="" title="" /> direct links</h1>
- 
+
 		<p>With the direct links one can set links to any target and speed up the navigation.</p>
 		<table id="examples" cellpadding="1" cellspacing="1">
 			<thead><tr>

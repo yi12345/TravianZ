@@ -34,9 +34,9 @@ if($database->getVillageField($dataarray[1],'name')!="??") {
 </tr></thead><tbody><tr>
 <th>Resources</th>
 <td>
-	<img class="r1" src="img/x.gif" alt="Wood" title="Wood" /><?php echo $dataarray[2]; ?> | 
-	<img class="r2" src="img/x.gif" alt="Clay" title="Clay" /><?php echo $dataarray[3]; ?> | 
-	<img class="r3" src="img/x.gif" alt="Iron" title="Iron" /><?php echo $dataarray[4]; ?> | 
+	<img class="r1" src="img/x.gif" alt="Wood" title="Wood" /><?php echo $dataarray[2]; ?> |
+	<img class="r2" src="img/x.gif" alt="Clay" title="Clay" /><?php echo $dataarray[3]; ?> |
+	<img class="r3" src="img/x.gif" alt="Iron" title="Iron" /><?php echo $dataarray[4]; ?> |
 	<img class="r4" src="img/x.gif" alt="Crop" title="Crop" /><?php echo $dataarray[5]; ?>
 </td></tr></tbody>
 

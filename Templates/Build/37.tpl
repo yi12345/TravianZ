@@ -10,9 +10,9 @@
 
         $hero = mysql_query("SELECT * FROM " . TB_PREFIX . "hero WHERE `uid` = " . $session->uid . "");
         $hero_info = mysql_fetch_array($hero);
-        
+
         $define['reset_level'] = 3; // Until which level you are able to reset your points
-      
+
 ?>
 
 
@@ -23,8 +23,8 @@
 
         <p class="build_desc">In the Hero's mansion you can train your own hero and at level 10, 15 and 20 you can conquer oases with Hero in the immediate vicinity.</p>
 
-        
-        <?php           
+
+        <?php
         if($hero_info['unit'] == 1) {
         	$name = "Legionnaire";
         } else if($hero_info['unit'] == 2) {
@@ -72,7 +72,7 @@
             <?php echo "<tr class='next'><th>Hero will be ready in <span id=timer1>" . $timeleft . "</span></th></tr>"; ?>
             </tr>
         </thead>
-            
+
             <tr>
 			<?php
 				   echo "<tr>
@@ -82,7 +82,7 @@
 						$name ($name1)
 					</div>"
 			?>
-			
+
             </tr>
     </table>
 		<?php
@@ -95,5 +95,5 @@
         }
         }
         include ("upgrade.tpl"); ?>
-        
+
     </div>

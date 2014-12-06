@@ -1,4 +1,4 @@
-<?php 
+<?php
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
@@ -144,7 +144,7 @@ if($lala > 0){
 $aantal = count($database->getMovement(5,$village->wid,0));
 $aantal2 = $database->getMovement(5,$village->wid,0);
 if($aantal > 0){
-	if(!empty($NextArrival5)) { reset($NextArrival5); }	
+	if(!empty($NextArrival5)) { reset($NextArrival5); }
 			foreach($aantal2 as $receive) {
 				$action = 'att3';
 				$aclass = 'a3';
@@ -152,7 +152,7 @@ if($aantal > 0){
 				$short = ''.NEWVILLAGE.'';
 				$NextArrival5[] = $receive['endtime'];
 			}
-			
+
 	echo '<tr><td class="typ"><a href="build.php?id=39"><img src="img/x.gif" class="'.$action.'" alt="'.$title.'" title="'.$title.'" /></a><span class="'.$aclass.'">&raquo;</span></td>
 	<td><div class="mov"><span class="'.$aclass.'">'.$aantal.'&nbsp;'.$short.'</span></div><div class="dur_r">in&nbsp;<span id="timer'.$timer.'">'.$generator->getTimeFormat(min($NextArrival5)-time()).'</span>&nbsp;'.HOURS.'</div></div></td></tr>';
 	$timer += 1;
@@ -169,7 +169,7 @@ $aantal += count($database->getMovement(6,$conqured['wref'],0));
 $aantal2 = array_merge($database->getMovement(6,$conqured['wref'],0), $aantal2);
 }
 if($aantal > 0){
-	if(!empty($NextArrival6)) { reset($NextArrival6); }	
+	if(!empty($NextArrival6)) { reset($NextArrival6); }
 			foreach($aantal2 as $receive) {
 			if($receive['attack_type'] == 2){
 				$action = 'def3';
@@ -184,7 +184,7 @@ if($aantal > 0){
 			}
 				$NextArrival6[] = $receive['endtime'];
 			}
-			
+
 	echo '<tr><td class="typ"><a href="build.php?id=39"><img src="img/x.gif" class="'.$action.'" alt="'.$title.'" title="'.$title.'" /></a><span class="'.$aclass.'">&raquo;</span></td>
 	<td><div class="mov"><span class="'.$aclass.'">'.$aantal.'&nbsp;'.$short.'</span></div><div class="dur_r">in&nbsp;<span id="timer'.$timer.'">'.$generator->getTimeFormat(min($NextArrival6)-time()).'</span>&nbsp;'.HOURS.'</div></div></td></tr>';
 	$timer += 1;

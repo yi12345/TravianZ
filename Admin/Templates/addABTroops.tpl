@@ -16,10 +16,10 @@ if(isset($id))
 {
 	$village = $database->getVillage($id);
 	$user = $database->getUserArray($village['owner'],1);
-	$abtech = $database->getABTech($id); // Armory/blacksmith level	
+	$abtech = $database->getABTech($id); // Armory/blacksmith level
 	$units = $database->getUnit($village['wref']);
 	$coor = $database->getCoor($village['wref']);
-	
+
 	$tribe = $user['tribe'];
 	if($tribe ==1){ $img = 0;}
 	if($tribe ==2){ $img = 10;}
@@ -28,8 +28,8 @@ if(isset($id))
 	if($tribe ==5){ $img = 40;}
 	if($tribe ==6){ $img = 50;}
 	include("search2.tpl");
-?>				
-		
+?>
+
 <form action="../GameEngine/Admin/Mods/addABTroops.php" method="POST">
 <input type="hidden" name="id" id="id" value="<?php echo $_GET['did']; ?>">
 <input type="hidden" name="admid" id="admid" value="<?php echo $_SESSION['id']; ?>">
@@ -42,7 +42,7 @@ if(isset($id))
 	<td align="center">Armour</td>
 	<td align="center">Blackmith</td>
 	</tr>
-	<?php 
+	<?php
 	for($i=1; $i<9; $i++) {
 		echo '<tr>
 			<td class="addTroops"><img src="../img/un/u/'.($img+$i).'.gif"></img> '.$unarray[$img+$i].'</td>
@@ -56,7 +56,7 @@ if(isset($id))
 		<td style="border-right:none; text-align:left"><input name="back" type="image" id="btn_back" class="dynamic_img" src="img/x.gif" value="back" alt="back" onclick="return go_url('../Admin/admin.php?p=village&did=<?php echo $_GET["did"];?>')" /></td>
 		<td style="border-left:none; text-align:right" colspan="5"><input name="save" type="image" id="btn_save" class="dynamic_img" src="img/x.gif" value="save" alt="save" /></td>
 	</tr>
-	</thead>	
+	</thead>
 	</table>
 	</form>
-<?php }?>	
+<?php }?>

@@ -54,9 +54,9 @@
                     </tr>
                 </tbody>
             </table>
-        </div> 
-        <div class="clear"></div> 
-    </div>  
+        </div>
+        <div class="clear"></div>
+    </div>
     <div id="footer">
         <div class="container">
             <a href="#" class="logo"><img src="img/x.gif" alt="Travian Games" class="logo_traviangames" /></a>
@@ -70,4 +70,4 @@
             </ul>
         </div>
     </div>
-</div> 
+</div>

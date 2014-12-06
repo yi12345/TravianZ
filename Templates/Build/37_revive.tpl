@@ -22,7 +22,7 @@
 |                Dzoki < dzoki.travian@gmail.com >        |
 | Copyright:     TravianX Project All rights reserved     |
 \*-------------------------------------------------------*/
-    
+
     if($hero_info['unit'] == 1) {
         	$name = "Legionnaire";
         } else if($hero_info['unit'] == 2) {
@@ -77,11 +77,11 @@
                 <th colspan="2">Revive hero</th>
             </tr>
         </thead>
-    
+
     <?php
 	if($hero_info['inrevive'] == 1) {
     $timeleft = $generator->getTimeFormat($hero_info['trainingtime'] - time());
-                
+
 ?>
     <table id="distribution" cellpadding="1" cellspacing="1">
         <thead>
@@ -89,7 +89,7 @@
             <?php echo "<tr class='next'><th>Hero will be ready in <span id=timer1>" . $timeleft . "</span></th></tr>"; ?>
             </tr>
         </thead>
-            
+
             <tr>
 			<?php
 				   echo "<tr>
@@ -99,7 +99,7 @@
 						$name ($name1)
 					</div>"
 			?>
-			
+
             </tr>
     </table>
 	<?php }else{ if($hero_info['unit'] == 1 OR 11 OR 21){ ?>
@@ -119,7 +119,7 @@
 				        <?php echo $training_time; ?>
                     </div>
 				</td>
-				
+
                 <td class="val" width="20%"><center>
                 <?php
                 if($village->awood < $wood OR $village->aclay < $clay OR $village->airon < $iron OR $village->acrop < $crop) {
@@ -127,12 +127,12 @@
                 }else {
                     echo "<a href=\"build.php?id=".$id."&revive=1\">Revive</a>";
                 }
-                
+
                 ?></center></td>
             </tr>
         <?php }else { ?>
-        
-        
+
+
     <?php if($database->checkIfResearched($village->wid, 't'.$hero_info['unit']) != 0){ ?>
         <tr>
                 <td class="desc">
@@ -150,7 +150,7 @@
 				        <?php echo $training_time; ?>
                     </div>
 				</td>
-				
+
                 <td class="val" width="20%"><center>
                 <?php
                 if($village->awood < $wood OR $village->aclay < $clay OR $village->airon < $iron OR $village->acrop < $crop) {
@@ -158,17 +158,17 @@
                 }else {
                     echo "<a href=\"build.php?id=".$id."&revive=1\">Revive</a>";
                 }
-                
+
                 ?>
                 </center></td>
             </tr>
         <?php } }} ?>
-        
+
 </table>
 
 
     <?php
-    
+
     if($_GET['revive'] == 1 && $hero_info['inrevive'] == 0 && $hero_info['intraining'] == 0 && $hero_info['dead'] == 1){
 			if($session->access != BANNED){
             mysql_query("UPDATE ".TB_PREFIX."hero SET `inrevive` = '1', `trainingtime` = '".$training_time2."', `wref` = '".$village->wid."' WHERE `uid` = '".$session->uid."'");
@@ -178,7 +178,7 @@
 			mysql_query("UPDATE " . TB_PREFIX . "vdata SET `crop` = `crop` - ".$crop." WHERE `wref` = '" . $village->wid . "'");
             header("Location: build.php?id=".$id."");
 			}else{
-			header("Location: banned.php"); 
+			header("Location: banned.php");
 			}
     }
 	if($hero_info['inrevive'] == 0 && $hero_info['intraining'] == 0) {

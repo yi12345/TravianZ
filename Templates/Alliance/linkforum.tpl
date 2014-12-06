@@ -7,7 +7,7 @@ $aid = $session->alliance;
 }
 $allianceinfo = $database->getAlliance($aid);
 echo "<h1>".$allianceinfo['tag']." - ".$allianceinfo['name']."</h1>";
-include("alli_menu.tpl"); 
+include("alli_menu.tpl");
 ?>
 <form method="post" action="allianz.php">
 <input type="hidden" name="a" value="5">

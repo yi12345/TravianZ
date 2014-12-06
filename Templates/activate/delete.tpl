@@ -1,7 +1,7 @@
 <div id="content"  class="activate">
 <h1><img src="img/x.gif" class="anmelden" alt="register for the game"></h1>
 
-		
+
 		<h6>No email received?</h6>
 		In order to play Travian you need a valid email address to which the activation code can be send. There are exceptional cases when this email might not arrive.
 <p class="f10 e b">Following causes are possible:</p>
@@ -12,8 +12,8 @@
 <li>Wrong domain: There is e.g. no @aol.de, only @aol.com</li>
 <li>The email has been moved to the spam/junk folder</li>
 </ul>
-<br /><br />You can undo the registration and re-register with a <u>different email address</u>. 
-Then the activation code will be send again</div>				
+<br /><br />You can undo the registration and re-register with a <u>different email address</u>.
+Then the activation code will be send again</div>
 		<form action="activate.php" method="POST">
 		<input type="hidden" name="id" value="<?php echo $_GET['id']; ?>" />
 		<input type="hidden" name="ft" value="a3" />

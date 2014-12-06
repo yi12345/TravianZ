@@ -32,14 +32,14 @@ Submitting this form will create new Users<br>(and their home Villages) on your 
     Users created will be Farm1, Farm2, Farm3, Farm4, Farm5<br>
     <br>
     <br>
-    
+
     <?php
     $baseNameFontColor = "Black";
     $amountFontColor = "Black";
     $baseName = "Farm";
     $amount = 20;
-    
-    if(isset($_GET['e'])) 
+
+    if(isset($_GET['e']))
         {
             // If &e is set then &bn + &am should be as well
             $baseName = ($_GET['bn']);
@@ -93,16 +93,16 @@ Submitting this form will create new Users<br>(and their home Villages) on your 
                     // Should never reach here
                     $tribe = 'Unknown';
             }
-            
+
             echo '<br /><br />
                 <font color="Blue"><b>'
-                . $amount . 
+                . $amount .
                 '</b></font>
                  Users and Villages added using Base Name
                  <font color="Blue"><b>'
-                . $baseName . 
+                . $baseName .
                 '</b></font><br>';
-                
+
                 // Say if Beginners Protection was set for any Users created
                 if ($amount > 0)
                 {
@@ -123,16 +123,16 @@ Submitting this form will create new Users<br>(and their home Villages) on your 
                     }
                     $begMessage .= 'set for ' . $usersMessage . '<br>';
                     echo $begMessage;
-                    
+
                     // Say Tribes chosen
                     $tribeMessage = 'Tribe for ' . $usersMessage . ' was ';
                     $tribeMessage .= $tribe . '<br>';
-                    echo $tribeMessage; 
+                    echo $tribeMessage;
                 }
             if ($skipped > 0)
             {
                 echo '<font color="Red"><b>'
-                    . $skipped . 
+                    . $skipped .
                     '</b></font>
                      Users not created as the user name already exists
                     </b></font><br>';

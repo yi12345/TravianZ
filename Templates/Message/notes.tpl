@@ -1,6 +1,6 @@
 <div id="content"  class="messages">
 <h1>短消息</h1>
-<?php 
+<?php
 include("menu.tpl");
 ?>
 <form method="post" action="nachrichten.php">
@@ -11,5 +11,5 @@ include("menu.tpl");
 	&nbsp;</p>
 </div>
 </form>
- 
+
 </div>

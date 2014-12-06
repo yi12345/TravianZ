@@ -19,11 +19,11 @@ $free = $session->uid;
 			</td>
 			<td class="desc">
 							Pay by phone              <br />
-                
+
             				<a href="#"
 					onclick="window.open('http://billing.micropayment.de/call2pay/event/?account=56387&project=trvnx&theme=default&gfx=x-surfer&bgcolor=ffffff&title=travianix-1000+Gold&amount=1999','nsrpay','scrollbars=yes,status=yes,resizable=yes,toolbar=yes,width=800,height=600');return false;">
 				<img src="img/bezahlung/call2pay1.png" style="width:126px; height:38px;" alt="call2pay" /></a>
-						
+
 			<br />
                 More information about micropayent can be found here:                                <a href="https://www.micropayment.de/" target="_blank"><br />More Info</a>
                             </td>
@@ -47,11 +47,11 @@ $free = $session->uid;
 			</td>
 			<td class="desc">
 							Pay by online banktransfer               <br />
-                
+
             				<a href="#"
 					onclick="window.open('http://billing.micropayment.de/ebank2pay/event/?account=56387&project=trvnx&theme=default&gfx=x-surfer&bgcolor=ffffff&title=travianix+1000+Gold&amount=1999&currency=EUR&paytext=travianix+1000+Gold','nsrpay','scrollbars=yes,status=yes,resizable=yes,toolbar=yes,width=800,height=600');return false;">
 				<img src="img/bezahlung/ebank2pay2.png" style="width:181px; height:38px;" alt="ebank2pay" /></a>
-						
+
 			<br />
                 More information about micropayent can be found here:                                <a href="https://www.micropayment.de/" target="_blank"><br />More Info</a>
                                             </td>
@@ -146,7 +146,7 @@ $free = $session->uid;
  <input type="hidden" name="submit_id" value="Submit">
  <input type="image" src="img/bezahlung/skrill.png" alt="Absenden">
 </form>';?>
-						
+
 			<br />Mehr Information zu Skrill findest du hier:                                <a href="https://www.moneybookers.com/app/skrill.pl" target="_blank"><br />Weitere Infos</a>
                                             </td>
 

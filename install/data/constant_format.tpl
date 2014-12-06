@@ -95,8 +95,8 @@ define("STORAGE_BASE",800*STORAGE_MULTIPLIER);
 // ***** Quest
 // Ingame quest enabled/disabled.
 define("QUEST",%QUEST%);
-//quest type : 25 = Travian Official 
-//             37 = TravianZ Extended 
+//quest type : 25 = Travian Official
+//             37 = TravianZ Extended
 define("QTYPE",%QTYPE%);
 
 // ***** Beginners Protection
@@ -111,13 +111,13 @@ define("PROTECTION","%BEGINNER%");
 define("WW",%WW%);
 
 // ***** Show Natars in Statistics
-define("SHOW_NATARS",%SHOW_NATARS%); 
+define("SHOW_NATARS",%SHOW_NATARS%);
 
 // ***** Natars Units Multiplier
-define("NATARS_UNITS",%NATARS_UNITS%); 
+define("NATARS_UNITS",%NATARS_UNITS%);
 
 // ***** Nature troops regeneration time
-define("NATURE_REGTIME",%NATURE_REGTIME%); 
+define("NATURE_REGTIME",%NATURE_REGTIME%);
 
 // ***** Enable T4 is Coming screen
 define("T4_COMING",%T4_COMING%);
@@ -138,7 +138,7 @@ define("MEDALINTERVAL",%MEDALINTERVAL%);
 // ***** Great Workshop
 define("GREAT_WKS",%GREAT_WKS%);
 // ***** Tourn threshold
-define("TS_THRESHOLD",%TS_THRESHOLD%);  
+define("TS_THRESHOLD",%TS_THRESHOLD%);
 
 // ***** Register open/close
 define("REG_OPEN",%REG_OPEN%);
@@ -253,7 +253,7 @@ define("ADMIN_NAME", "%ANAME%");
 //   ****  DO NOT EDIT SETTINGS  ****   //
 //////////////////////////////////////////
 define("TRACK_USR","%UTRACK%");
-define("USER_TIMEOUT","%UTOUT%"); 
+define("USER_TIMEOUT","%UTOUT%");
 define("ALLOW_BURST",false);
 define("BASIC_MAX",1);
 define("INNER_MAX",1);
@@ -269,8 +269,8 @@ define("AUTH",1);
 define("USER",2);
 define("MULTIHUNTER",8);
 define("ADMIN",9);
-define("COOKIE_EXPIRE", 60*60*24*7); 
-define("COOKIE_PATH", "/"); 
+define("COOKIE_EXPIRE", 60*60*24*7);
+define("COOKIE_PATH", "/");
 
 
 ////////////////////////////////////////////

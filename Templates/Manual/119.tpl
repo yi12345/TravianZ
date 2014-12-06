@@ -39,7 +39,7 @@
 </tr>
 </tbody></table>
 
-<img id="big_unit" class="big_u19" src="img/x.gif" alt="Chief" title="Chief" /><div id="t_desc">Out of their midst the Teutons choose their Chief. To be chosen, bravery and strategy aren't enough; you also have to be a formidable speaker as it is the Chief's primary objective to convince the population of foreign villages to join the Chief's tribe. 
+<img id="big_unit" class="big_u19" src="img/x.gif" alt="Chief" title="Chief" /><div id="t_desc">Out of their midst the Teutons choose their Chief. To be chosen, bravery and strategy aren't enough; you also have to be a formidable speaker as it is the Chief's primary objective to convince the population of foreign villages to join the Chief's tribe.
 <br /><br />
 The more often the Chief speaks to the population of a village the more the loyalty of the village sinks until it finally joins the chief's tribe.</div><div id="prereqs"><b>Prerequisites</b><br /><a href="manual.php?typ=4&amp;gid=16">Rally Point</a> Level 5, <a href="manual.php?typ=4&amp;gid=22">Academy</a> Level 20</div><map id="nav" name="nav">
  <area href="manual.php?typ=1&amp;s=18" title="back" coords="0,0,45,18" shape="rect" alt="" />

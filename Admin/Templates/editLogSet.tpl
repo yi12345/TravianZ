@@ -28,8 +28,8 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 					<td width="50%">Log Building</td>
 					<td width="50%">
 						<select name="log_build">
-							<option value="true" <?php if (LOG_BUILD==true) echo "selected";?>>Yes</option>
-							<option value="false" <?php if (LOG_BUILD==false) echo "selected";?>>No</option>
+							<option value="true" <?php if (LOG_BUILD==true) echo "selected";?>>是</option>
+							<option value="false" <?php if (LOG_BUILD==false) echo "selected";?>>否</option>
 						</select>
 					</td>
 				</tr>
@@ -37,53 +37,53 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 					<td>Log Tech</td>
 					<td>
 						<select name="log_tech">
-							<option value="true" <?php if (LOG_TECH==true) echo "selected";?>>Yes</option>
-							<option value="false" <?php if (LOG_TECH==false) echo "selected";?>>No</option>
+							<option value="true" <?php if (LOG_TECH==true) echo "selected";?>>是</option>
+							<option value="false" <?php if (LOG_TECH==false) echo "selected";?>>否</option>
 						</select>
-					</td>	
+					</td>
 				</tr>
 				<tr>
 					<td>Log Login</td>
 					<td>
 						<select name="log_login">
-							<option value="true" <?php if (LOG_LOGIN==true) echo "selected";?>>Yes</option>
-							<option value="false" <?php if (LOG_LOGIN==false) echo "selected";?>>No</option>
+							<option value="true" <?php if (LOG_LOGIN==true) echo "selected";?>>是</option>
+							<option value="false" <?php if (LOG_LOGIN==false) echo "selected";?>>否</option>
 						</select>
-					</td>	
+					</td>
 				</tr>
 				<tr>
 					<td>Log Gold</td>
 					<td>
 						<select name="log_gold_fin">
-							<option value="true" <?php if (LOG_GOLD_FIN==true) echo "selected";?>>Yes</option>
-							<option value="false" <?php if (LOG_GOLD_FIN==false) echo "selected";?>>No</option>
+							<option value="true" <?php if (LOG_GOLD_FIN==true) echo "selected";?>>是</option>
+							<option value="false" <?php if (LOG_GOLD_FIN==false) echo "selected";?>>否</option>
 						</select>
-					</td>	
+					</td>
 				</tr>
 				<tr>
 					<td>Log Admin</td>
 					<td>
 						<select name="log_admin">
-							<option value="true" <?php if (LOG_ADMIN==true) echo "selected";?>>Yes</option>
-							<option value="false" <?php if (LOG_ADMIN==false) echo "selected";?>>No</option>
+							<option value="true" <?php if (LOG_ADMIN==true) echo "selected";?>>是</option>
+							<option value="false" <?php if (LOG_ADMIN==false) echo "selected";?>>否</option>
 						</select>
-					</td>	
+					</td>
 				</tr>
 				<tr>
 					<td>Log War</td>
 					<td>
 						<select name="log_war">
-							<option value="true" <?php if (LOG_WAR==true) echo "selected";?>>Yes</option>
-							<option value="false" <?php if (LOG_WAR==false) echo "selected";?>>No</option>
+							<option value="true" <?php if (LOG_WAR==true) echo "selected";?>>是</option>
+							<option value="false" <?php if (LOG_WAR==false) echo "selected";?>>否</option>
 						</select>
-					</td>	
-				</tr>				
+					</td>
+				</tr>
 				<tr>
 					<td>Log Market</td>
 					<td>
 						<select name="log_market">
-							<option value="true" <?php if (LOG_MARKET==true) echo "selected";?>>Yes</option>
-							<option value="false" <?php if (LOG_MARKET==false) echo "selected";?>>No</option>
+							<option value="true" <?php if (LOG_MARKET==true) echo "selected";?>>是</option>
+							<option value="false" <?php if (LOG_MARKET==false) echo "selected";?>>否</option>
 						</select>
 					</td>
 				</tr>
@@ -91,13 +91,13 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 					<td>Log Illegal</td>
 					<td>
 						<select name="log_illegal">
-							<option value="true" <?php if (LOG_ILLEGAL==true) echo "selected";?>>Yes</option>
-							<option value="false" <?php if (LOG_ILLEGAL==false) echo "selected";?>>No</option>
+							<option value="true" <?php if (LOG_ILLEGAL==true) echo "selected";?>>是</option>
+							<option value="false" <?php if (LOG_ILLEGAL==false) echo "selected";?>>否</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
-	
+
 				</tbody>
 			</table>
 			<br />

@@ -139,7 +139,7 @@ include("Templates/Plus/pmenu.tpl");
 	<tr>
 		<td class="preview"><a href="plus.php?id=3"><img class="p1_25" src="img/x.gif" alt="Production bonus for lumber" title="Production bonus for lumber" /></a></td>
 
-		<td class="text">With this Gold advantage all your villages' lumber production will be increased by 25%. 
+		<td class="text">With this Gold advantage all your villages' lumber production will be increased by 25%.
 <br /><br />
 The bonus will not be added to the single resource fields but to the sum of the production.
 <br /><br />

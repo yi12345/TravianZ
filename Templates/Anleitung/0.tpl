@@ -800,7 +800,7 @@ For beginners and those players who don't know exactly what they want to play, t
 
 	<img align="left" src="img/un/h//germane.jpg" width="104" height="151" border="0" alt="Teuton">
 
-The Teutons are the most aggressive tribe. Their troops are notorious and feared for their rage and frenzy when they attack. They move around as a plundering horde, not even afraid of death. 
+The Teutons are the most aggressive tribe. Their troops are notorious and feared for their rage and frenzy when they attack. They move around as a plundering horde, not even afraid of death.
 
 <br><br>
 
@@ -1188,10 +1188,10 @@ For aggressive and experienced players the Teutons are an excellent choice!</p>
 
 
 
-	</div> 
-	<div class="clear"></div> 
-</div> 
- 
+	</div>
+	<div class="clear"></div>
+</div>
+
 <div id="footer">
 
 	<div class="container">
@@ -1203,5 +1203,5 @@ For aggressive and experienced players the Teutons are an excellent choice!</p>
 
 	</div>
 
-</div> 
-</div> 
+</div>
+</div>

@@ -29,7 +29,7 @@ if($session->access!=BANNED){
 	<td>
 	</td>
 	<td colspan="2">
-	
+
 			<div bbArea="text" id="text_container" name="text_container">
 
 				<div id="text_toolbar" name="text_toolbar">
@@ -66,7 +66,7 @@ if($session->access!=BANNED){
 			<script>
 				var bbEditor = new BBEditor("text");
 			</script>
-			
+
 	</td></tr><tr>
 
 		<th>survey</th>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
@@ -15,7 +15,7 @@ $coorarray = array(1=>"101,33,28","165,32,28","224,46,28","46,63,28","138,74,28"
 $arrayVillage = $village->resarray;
 ?>
 <map name="rx" id="rx">
-<?php 
+<?php
 for($i=1;$i<=18;$i++) {echo "	<area href=\"build.php?id=$i\" coords=\"$coorarray[$i]\" shape=\"circle\" title=\"".$building->procResType($arrayVillage['f'.$i.'t'])." Level ".$arrayVillage['f'.$i]."\"/>\r\n";
 }
 ?>
@@ -23,7 +23,7 @@ for($i=1;$i<=18;$i++) {echo "	<area href=\"build.php?id=$i\" coords=\"$coorarray
 </map>
 
 <div id="village_map" class="f<?php echo $village->type; ?>">
-<?php 
+<?php
 for($i=1;$i<=18;$i++) {
 	if($arrayVillage['f'.$i.'t'] != 0) {
 		$text = "";

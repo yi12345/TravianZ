@@ -13,21 +13,21 @@ if(isset($_GET['u']))
 	{
 		$file = "http://travian.gamingcrazy.net/Update/$dl.zip";
 		$newfile = "update.zip";
-		if (!copy($file, $newfile)) 
+		if (!copy($file, $newfile))
 		{
 				echo "Update Files of Version $dl were not found.<br />";
 		}
 		else
 		{
 			$zip = new ZipArchive;
-			if ($zip->open('update.zip') === TRUE) 
+			if ($zip->open('update.zip') === TRUE)
 			{
 				$zip->extractTo('../');
 				$zip->close();
 				unlink('update.zip');
 				echo "Successfully Updated to Version $dl.<br />";
-			} 
-			else 	
+			}
+			else
 			{
 				echo 'Failed to update to Version $dl.<br />';
 			}
@@ -49,7 +49,7 @@ if(isset($_GET['u']))
 		</tr>
 		<tr>
 			<td class="hab" colspan="2">Latest Version :</td>
-			<td class="hab" colspan="1"><font color="red"><?php echo "$latest"; ?></font></td> 
+			<td class="hab" colspan="1"><font color="red"><?php echo "$latest"; ?></font></td>
 		</tr>
 		<tr>
 			<td class="hab" colspan="2">Check for Update</td>
@@ -60,10 +60,10 @@ if(isset($_GET['u']))
 		<td class="hab" colspan="1"><?php
 			if($latest > $ver)
 			{
-				echo'<center><a href="https://github.com/yi12345/TravianZ"><img src="../img/admin/b/update.png"></a></center>'; 
-			} 
+				echo'<center><a href="https://github.com/yi12345/TravianZ"><img src="../img/admin/b/update.png"></a></center>';
+			}
 			else
-			{ 
+			{
 				echo "No updates Avaiable";
 			}
 			?></td>

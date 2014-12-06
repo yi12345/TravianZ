@@ -38,7 +38,7 @@ for($i=35;$i<=36;$i++) {
 		echo ($dur=="0:00:00")? "0:00:01":$dur;
         if($session->userinfo['gold'] >= 3 && $building->getTypeLevel(17) >= 1) {
                    echo "|<a href=\"build.php?gid=17&t=3&r1=".((${'u'.$i}['wood'])*$technology->maxUnitPlus($i))."&r2=".((${'u'.$i}['clay'])*$technology->maxUnitPlus($i))."&r3=".((${'u'.$i}['iron'])*$technology->maxUnitPlus($i))."&r4=".((${'u'.$i}['crop'])*$technology->maxUnitPlus($i))."\" title=\"NPC trade\"><img class=\"npc\" src=\"img/x.gif\" alt=\"NPC trade\" title=\"NPC trade\" /></a>";
-                 }  
+                 }
         echo "</div></td>
 					<td class=\"val\">
 						<input type=\"text\" class=\"text\" name=\"t$i\" value=\"0\" maxlength=\"10\">

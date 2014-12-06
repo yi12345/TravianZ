@@ -1,4 +1,4 @@
-<div id="build" class="gid21"><a href="#" onClick="return Popup(21,4, 'gid');" class="build_logo"> 
+<div id="build" class="gid21"><a href="#" onClick="return Popup(21,4, 'gid');" class="build_logo">
 <img class="building g21" src="img/x.gif" alt="Workshop" title="Workshop" /> </a>
 
 <h1>Workshop <span class="level">Level <?php echo $village->resarray['f'.$id]; ?></span></h1>
@@ -68,12 +68,12 @@
 					echo ($dur=="0:00:00")? "0:00:01":$dur;
                     if($session->userinfo['gold'] >= 3 && $building->getTypeLevel(17) >= 1) {
                    echo "|<a href=\"build.php?gid=17&t=3&r1=".((${'u'.$i}['wood'])*$technology->maxUnitPlus($i))."&r2=".((${'u'.$i}['clay'])*$technology->maxUnitPlus($i))."&r3=".((${'u'.$i}['iron'])*$technology->maxUnitPlus($i))."&r4=".((${'u'.$i}['crop'])*$technology->maxUnitPlus($i))."\" title=\"NPC trade\"><img class=\"npc\" src=\"img/x.gif\" alt=\"NPC trade\" title=\"NPC trade\" /></a>";
-                 }  
+                 }
                     echo "</div></td>
                                 <td class=\"val\">
                                     <input type=\"text\" class=\"text\" name=\"t$i\" value=\"0\" maxlength=\"10\">
                                 </td>
-            
+
                                 <td class=\"max\">
                                     <a href=\"#\" onClick=\"document.snd.t$i.value=".$technology->maxUnit($i)."; return false;\">(".$technology->maxUnit($i).")</a>
                                 </td>
@@ -132,7 +132,7 @@
         </tbody></table>
     <?php }
 include("upgrade.tpl");
-?>  
+?>
     </p></div>
 
 

@@ -9,7 +9,7 @@ $aid = $session->alliance;
 }
 $allianceinfo = $database->getAlliance($aid);
 echo "<h1>".$allianceinfo['tag']." - ".$allianceinfo['name']."</h1>";
-include("alli_menu.tpl"); 
+include("alli_menu.tpl");
 
 
 ?>
@@ -23,8 +23,8 @@ function send_data() {
 //alert( document.form1.msg.value);
 msg = document.form1.msg.value;
 //alert(msg);
-//x_add_data(name +"|"+msg,add_cb); 
-x_add_data(msg,add_cb); 
+//x_add_data(name +"|"+msg,add_cb);
+x_add_data(msg,add_cb);
 document.form1.msg.value="";
 }
 
@@ -52,6 +52,6 @@ document.form1.msg.value="";
 </form>
 
 
-</body> 
+</body>
 			<div id="rooms">
 			</div>

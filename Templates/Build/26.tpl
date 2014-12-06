@@ -20,19 +20,19 @@ if($_POST AND $_GET['action'] == 'change_capital') {
           $query2 = mysql_query('UPDATE `' . TB_PREFIX . 'fdata` SET `f' . $i . '` = 10 WHERE `vref` = ' . $data2['vref']) or die(mysql_error());
         }
       }
-      
+
       for($i=19; $i<=40; ++$i) {
         if($data2['f' . $i . 't'] == 34) {
           $query3 = mysql_query('UPDATE `' . TB_PREFIX . 'fdata` SET `f' . $i . 't` = 0, `f' . $i . '` = 0 WHERE `vref` = ' . $data2['vref']) or die(mysql_error());
         }
       }
-	  
+
 	  for($i=19; $i<=40; ++$i) {
         if($data2['f' . $i . 't'] == 29 or $data2['f' . $i . 't'] == 30 or $data2['f' . $i . 't'] == 38 or $data2['f' . $i . 't'] == 39 or $data2['f' . $i . 't'] == 42) {
           $query3 = mysql_query('UPDATE `' . TB_PREFIX . 'fdata` SET `f' . $i . 't` = 0, `f' . $i . '` = 0 WHERE `vref` = ' . $village->wid) or die(mysql_error());
         }
       }
-      
+
       $query3 = mysql_query('UPDATE `' . TB_PREFIX . 'vdata` SET `capital` = 0 WHERE `wref` = ' . $data1['wref']);
       $query4 = mysql_query('UPDATE `' . TB_PREFIX . 'vdata` SET `capital` = 1 WHERE `wref` = ' . $village->wid);
     }
@@ -53,15 +53,15 @@ if($_POST AND $_GET['action'] == 'change_capital') {
 		title="Palace" /> </a>
 	The king or queen of the empire lives in the palace. Only one palace can exist in your realm at a time. You need a palace in order to proclaim a village to be your capital.</p>
 
-<?php 
+<?php
 if ($building->getTypeLevel(26) > 0) {
 
-include("26_menu.tpl"); 
+include("26_menu.tpl");
 
 $test=$database->getAvailableExpansionTraining();
 
 if($village->resarray['f'.$id] >= 10){
-	include ("26_train.tpl");	
+	include ("26_train.tpl");
 }
 else{
 	echo '<div class="c">In order to found a new village you need a level 10, 15 or 20 palace and 3 settlers. In order to conquer a new village you need a level 10, 15 or 20 palace and a senator, chief or chieftain.</div>';
@@ -75,7 +75,7 @@ $data = mysql_fetch_assoc($query);
 if($data['wref'] == $village->wid) {
 ?>
 <p class="none">This is your capital</p>
-<?php 
+<?php
 } else {
   if($_GET['confirm'] == '') {
     print '<p><a href="?id=' . $building->getTypeField(26) . '&confirm=yes">&raquo change capital</a></p>';

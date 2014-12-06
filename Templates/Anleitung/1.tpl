@@ -647,7 +647,7 @@ The Capital is the only place a stonemason's lodge can be erected. Also the capi
 
 <img src="img/un/h/gid25.gif" width=166 height=150 border=0 alt="Residence" title="Residence" align="left" />
 
-The residence is a small palace where the king or queen lives when he or she visits the village. The residence protects the village against enemies who want to conquer it as long as it is not destroyed. 
+The residence is a small palace where the king or queen lives when he or she visits the village. The residence protects the village against enemies who want to conquer it as long as it is not destroyed.
 
 <br><br>
 
@@ -776,10 +776,10 @@ Your troops can train to increase their stamina at the tournament square. The fu
     <br>
 
     Rally Point Level 15</p>
-	</div> 
-	<div class="clear"></div> 
-</div> 
- 
+	</div>
+	<div class="clear"></div>
+</div>
+
 <div id="footer">
 
 	<div class="container">
@@ -790,5 +790,5 @@ Your troops can train to increase their stamina at the tournament square. The fu
 
 	</div>
 
-</div> 
-</div> 
+</div>
+</div>
