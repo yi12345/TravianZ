@@ -191,8 +191,8 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
 	<span class="f9 c6 cc2">Admin Name:</span><span class="cc3"><input type="text" name="aname" id="aname"></span><br /><br />
 	<span class="f9 c6 cc2">Admin Email:</span><span class="cc3"><input name="aemail" type="text" id="aemail"></span><br /><br />
 	<span class="f9 c6 cc2">Admin rank:</span><span class="cc3" style="position: absolute;right:20%;"><select name="admin_rank">
-	  <option value="false">No</option>
-	  <option value="true" selected="selected">Yes</option></select></span><br /><br />
+	  <option value="false">否</option>
+	  <option value="true" selected="selected">是</option></select></span><br /><br />
 
 <!-- </LEFT BOX - ADMIN RELATED> -->
 
@@ -202,8 +202,8 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
 
 
 	<span class="f9 c6 c2">GPack:</span><span class="c3"><select name="gpack">
-	  <option value="false" selected="selected">No</option>
-	  <option value="true" disabled="disabled">Yes</option></select></span><br /><br />
+	  <option value="false" selected="selected">否</option>
+	  <option value="true" disabled="disabled">是</option></select></span><br /><br />
 	<span class="f9 c6 c2">GPack Design:</span><span class="c3"><select name="gp_locate">
 	  <option value="gpack/travian_default/" selected="selected">Travian Default
 	  <option value="gpack/travianx_v1/">TravianX v1 by Dzoki</option></select></span><br /><br />
@@ -234,41 +234,41 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
 	<span class="f10 c">LOG RELATED (You should disable them)</span>
 	<table><tr>
 	<td><span class="f9 c6">Log Building:</span></td><td><select name="log_build">
-	  <option value="true">Yes</option>
-	  <option value="false" selected="selected">No</option>
+	  <option value="true">是</option>
+	  <option value="false" selected="selected">否</option>
 	</select></td></tr><tr>
 	<td><span class="f9 c6">Log Tech:</span></td><td><select name="log_tech">
-	  <option value="true">Yes</option>
-	  <option value="false" selected="selected">No</option>
+	  <option value="true">是</option>
+	  <option value="false" selected="selected">否</option>
 	</select></td></tr><tr>
 	<td><span class="f9 c6">Log Login:</span></td><td><select name="log_login">
-	  <option value="true">Yes</option>
-	  <option value="false" selected="selected">No</option>
+	  <option value="true">是</option>
+	  <option value="false" selected="selected">否</option>
 	</select></td></tr>
  	 <tr>
 	<td><span class="f9 c6">Log Gold:</span></td><td><select name="log_gold_fin">
-	  <option value="true">Yes</option>
-	  <option value="false" selected="selected">No</option>
+	  <option value="true">是</option>
+	  <option value="false" selected="selected">否</option>
 	</select></td></tr>
 	<tr>	<td><span class="f9 c6">Log Admin:</span></td><td><select name="log_admin">
-	  <option value="true">Yes</option>
-	  <option value="false" selected="selected">No</option>
+	  <option value="true">是</option>
+	  <option value="false" selected="selected">否</option>
 	</select></td></tr>
 	<tr>	<td><span class="f9 c6">Log War:</span></td><td><select name="log_war">
-	  <option value="true">Yes</option>
-	  <option value="false" selected="selected">No</option>
+	  <option value="true">是</option>
+	  <option value="false" selected="selected">否</option>
 	</select></td></tr><tr>
 	<td><span class="f9 c6">Log Market:</span></td><td><select name="log_market">
-	  <option value="true">Yes</option>
-	  <option value="false" selected="selected">No</option>
+	  <option value="true">是</option>
+	  <option value="false" selected="selected">否</option>
 	</select></td></tr><tr>
 	<td><span class="f9 c6">Log Illegal:</span></td><td><select name="log_illegal">
-	  <option value="true">Yes</option>
-	  <option value="false" selected="selected">No</option>
+	  <option value="true">是</option>
+	  <option value="false" selected="selected">否</option>
 	</select></td></tr><tr>
 	<td><span class="f9 c6">Log :</span></td><td><select name="">
-	  <option value="true">Yes</option>
-	  <option value="false" selected="selected">No</option>
+	  <option value="true">是</option>
+	  <option value="false" selected="selected">否</option>
 	</select></td></tr>
 	</table>
 	</p>
@@ -277,20 +277,20 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
     <span class="f10 c">EXTRA OPTIONS</span>
     <table><tr>
     <td><span class="f9 c6">Quest:</span></td><td><select name="quest">
-      <option value="true" selected="selected">Yes</option>
-      <option value="false">No</option>
+      <option value="true" selected="selected">是</option>
+      <option value="false">否</option>
     </select></td></tr><tr>
         <td><span class="f9 c6">Quest Type:</span></td><td><select name="qtype">
       <option value="25" selected="selected">Official Travian</option>
       <option value="37">TravianZ Extended</option>
     </select></td></tr><tr>
 	<td><span class="f9 c6">Activate:</span></td><td><select name="activate">
-	  <option value="true">Yes</option>
-	  <option value="false" selected="selected">No</option>
+	  <option value="true">是</option>
+	  <option value="false" selected="selected">否</option>
 	</select></td></tr><tr>
 	<td><span class="f9 c6">Limit Mailbox:</span></td><td><select name="limit_mailbox">
-	  <option value="true">Yes</option>
-	  <option value="false" selected="selected">No</option>
+	  <option value="true">是</option>
+	  <option value="false" selected="selected">否</option>
 	</select> (NOT DONE)</td></tr>
 	<tr><td><span class="f9 c6">Max mails:</span></td><td><input type="text" name="max_mails" id="max_mails" value="30" size="4"> (NOT DONE)</td></tr>
 	 <tr>
@@ -305,12 +305,12 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
 	  <option value="0">Fast</option>
 	</select></td></tr>
 	<tr>	<td><span class="f9 c6">Error Reporting:</span></td><td><select name="error">
-	  <option value="error_reporting (E_ALL ^ E_NOTICE);" selected="selected">Yes</option>
-	  <option value="error_reporting (0);">No</option>
+	  <option value="error_reporting (E_ALL ^ E_NOTICE);" selected="selected">是</option>
+	  <option value="error_reporting (0);">否</option>
 	</select></td></tr><tr>
 	<td><span class="f9 c6">T4 is Coming screen:</span></td><td><select name="t4_coming">
-	  <option value="true">Yes</option>
-	  <option value="false" selected="selected">No</option>
+	  <option value="true">是</option>
+	  <option value="false" selected="selected">否</option>
 	</select></td></tr>
 	</table>
 	</p>

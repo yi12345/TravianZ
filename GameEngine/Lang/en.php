@@ -115,8 +115,8 @@ define("HRS","(hrs.)");
 define("DONE_AT","done at");
 define("CANCEL","cancel");
 define("LOYALTY","Loyalty:");
-define("CALCULATED_IN","Calculated in");
-define("SEVER_TIME","Server time:");
+define("CALCULATED_IN","運算耗時 ");
+define("SEVER_TIME","伺服器時間:");
 
 //QUEST
 define("Q_BUTN","Send");
@@ -698,8 +698,8 @@ define("NOTHING_HERE","Nothing here!");
 define("WE_LOOKED","We looked 404 times already but can't find anything");
 
 //TIME RELATED
-define("CALCULATED","Calculated in");
-define("SERVER_TIME","Server time:");
+define("CALCULATED","運算耗時 ");
+define("SERVER_TIME","伺服器時間:");
 
 //MASSMESSAGE.php
 define("MASS","Message Content");

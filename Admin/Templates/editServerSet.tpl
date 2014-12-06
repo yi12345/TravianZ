@@ -143,8 +143,8 @@ function refresh(tz) {
 						<td>Activation Mail</td>
 						<td>
 							<select name="activate">
-								<option value="true" <?php if (AUTH_EMAIL==true) echo "selected";?>>Yes</option>
-								<option value="false" <?php if (AUTH_EMAIL==false) echo "selected";?>>No</option>
+								<option value="true" <?php if (AUTH_EMAIL==true) echo "selected";?>>是</option>
+								<option value="false" <?php if (AUTH_EMAIL==false) echo "selected";?>>否</option>
 							</select>
 						</td>
 					</tr>
@@ -152,8 +152,8 @@ function refresh(tz) {
 						<td>Quest</td>
 						<td>
 							<select name="quest">
-								<option value="true" <?php if(QUEST == true) echo "selected";?>>Yes</option>
-								<option value="false" <?php if(QUEST == false) echo "selected";?>>No</option>
+								<option value="true" <?php if(QUEST == true) echo "selected";?>>是</option>
+								<option value="false" <?php if(QUEST == false) echo "selected";?>>否</option>
 							</select>
 						</td>
 					</tr>
@@ -282,16 +282,16 @@ function refresh(tz) {
 						<td>Graphic Pack</td>
 						<td>
 							<select name="gpack">
-								<option value="true" <?php if(GP_ENABLE==true) echo "selected";?>>Yes</option>
-								<option value="false" <?php if(GP_ENABLE==false) echo "selected";?>>No</option>
+								<option value="true" <?php if(GP_ENABLE==true) echo "selected";?>>是</option>
+								<option value="false" <?php if(GP_ENABLE==false) echo "selected";?>>否</option>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<td>Error Reporting</td>
 						<td><select name="error">
-							<option value="error_reporting (E_ALL ^ E_NOTICE);" <?php if(ERROR_REPORT=="error_reporting (E_ALL ^ E_NOTICE);") echo "selected";?>>Yes</option>
-							<option value="error_reporting (0);" <?php if(ERROR_REPORT=="error_reporting (0);") echo "selected";?>>No</option>
+							<option value="error_reporting (E_ALL ^ E_NOTICE);" <?php if(ERROR_REPORT=="error_reporting (E_ALL ^ E_NOTICE);") echo "selected";?>>是</option>
+							<option value="error_reporting (0);" <?php if(ERROR_REPORT=="error_reporting (0);") echo "selected";?>>否</option>
 						</select>
 						</td>
 					</tr>

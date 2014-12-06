@@ -28,8 +28,8 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 					<td width="50%">Limit Mailbox</td>
 					<td width="50%">
 						<select name="limit_mailbox">
-							<option value="true" <?php if (LIMIT_MAILBOX==true) echo "selected";?>>Yes</option>
-							<option value="false" <?php if (LIMIT_MAILBOX==false) echo "selected";?>>No</option>
+							<option value="true" <?php if (LIMIT_MAILBOX==true) echo "selected";?>>是</option>
+							<option value="false" <?php if (LIMIT_MAILBOX==false) echo "selected";?>>否</option>
 						</select>
 					</td>
 				</tr>
