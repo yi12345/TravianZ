@@ -41,7 +41,7 @@ $online = mysql_num_rows(mysql_query("SELECT * FROM " . TB_PREFIX . "users WHERE
 <td>: <font color="Red"><?php if(MEDALINTERVAL >= 86400){ echo ''.(MEDALINTERVAL/86400).' Days'; } else if(MEDALINTERVAL < 86400){ echo ''.(MEDALINTERVAL/3600).' Hours'; } ?></font></b></td>
 </tr>
 <tr>
-<td><b>開服日期t</td>
+<td><b>開服日期</td>
 <td>: <font color="Red"><?php echo START_DATE;?></font></b></td>
 </tr>
 </table>
