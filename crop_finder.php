@@ -343,7 +343,7 @@ include("Templates/links.tpl");
 
 ?></b> ms
 
-<br />Server time: <span id="tp1" class="b"><?php
+<br />伺服器時間: <span id="tp1" class="b"><?php
 
    echo date('H:i:s');
 
