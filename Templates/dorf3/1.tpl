@@ -34,7 +34,7 @@
 		}
 		foreach($jobs as $b){
 			$bui .= '<a href="build.php?newdid='.$vid.'&id='.$b['field'].'"><img class="bau" src="img/x.gif" title="'.$building->procResType($b['type']).'" alt="'.$building->procResType($b['type']).'"></a>';
-		}	
+		}
 		foreach($unit as $c){
 			$gid = in_array($c['unit'],$unitsbytype['infantry'])?19:(in_array($c['unit'],$unitsbytype['cavalry'])?20:(in_array($c['unit'],$unitsbytype['siege'])?21:(in_array(($c['unit']-60),$unitsbytype['infantry'])?29:(in_array(($c['unit']-60),$unitsbytype['cavalry'])?30:($building->getTypeLevel(26)>0?26:25)))));
 			if($c['unit'] > 60) { $c['unit'] -= 60; }

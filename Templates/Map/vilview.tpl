@@ -1,5 +1,5 @@
 <div id="content"  class="map">
-<?php 
+<?php
 $basearray = $database->getMInfo($_GET['d']);
 $uinfo = $database->getVillage($basearray['id']);
 $oasis1 = mysql_query('SELECT * FROM `' . TB_PREFIX . 'odata` WHERE `wref` = ' . mysql_real_escape_string($_GET['d']));
@@ -17,7 +17,7 @@ if($uinfo['owner']==3 && $uinfo['name']==PLANVILLAGE){
 ?>
 <img src="img/x.gif" id="detailed_map" class="f99" alt="<?php echo PLANVILLAGE;?>" />
 <?php }else{ ?>
-<img src="img/x.gif" id="detailed_map" class="<?php echo ($basearray['fieldtype'] == 0)? 'w'.$basearray['oasistype'] : 'f'.$basearray['fieldtype'] ?>" alt="<?php 
+<img src="img/x.gif" id="detailed_map" class="<?php echo ($basearray['fieldtype'] == 0)? 'w'.$basearray['oasistype'] : 'f'.$basearray['fieldtype'] ?>" alt="<?php
 switch($basearray['fieldtype']) {
 case 1:
 $tt =  "3-3-3-9";
@@ -116,15 +116,15 @@ if($oasis['owner'] == 2){
 ?>
 	</tbody>
 	</table>
-	
+
 <table cellpadding="1" cellspacing="1" id="troop_info" class="tableNone">
             <thead><tr>
                 <th colspan="3"><?php echo TROOP;?>:</th>
             </tr></thead>
             <tbody>
-            <?php         
+            <?php
         $unit = $database->getUnit($_GET['d']);
-        $unarray = array(31=>U31,U32,U33,U34,U35,U36,U37,U38,U39,U40);     
+        $unarray = array(31=>U31,U32,U33,U34,U35,U36,U37,U38,U39,U40);
         $a = 0;
         for ($i = 31; $i <= 40; $i++) {
           if($unit['u'.$i]){
@@ -132,20 +132,20 @@ if($oasis['owner'] == 2){
                       echo '<td class="ico"><img class="unit u'.$i.'" src="img/x.gif" alt="'.$unarray[$i].'" title="'.$unarray[$i].'" /></td>';
                       echo '<td class="val">'.$unit['u'.$i].'</td>';
                       echo '<td class="desc">'.$unarray[$i].'</td>';
-                      echo '</tr>';                                             
+                      echo '</tr>';
                   }else{
             $a = $a+1;
-          }                   
+          }
         }
         if($a == 10){
         echo '<tr><td><?php echo NOTROOP;?></td></tr>';
         }
 
-     
+
       ?>
         </tbody>
         </table>
-	
+
 <table cellpadding="1" cellspacing="1" id="troop_info" class="tableNone rep">
 		<thead><tr>
 			<th><?php echo REPORT;?>:</th>
@@ -211,7 +211,7 @@ if($type==18 or $type==19 or $type==20 or $type==21){
 }else{
 ?>
     <table cellpadding="1" cellspacing="1" id="village_info" class="tableNone">
-        <?php 
+        <?php
         $uinfo = $database->getUserArray($oasis['owner'],1); ?>
 		<tbody><tr>
 			<th>種族</th>
@@ -244,7 +244,7 @@ if($type==18 or $type==19 or $type==20 or $type==21){
 ?>
 	</tbody>
 	</table>
-	
+
 <table cellpadding="1" cellspacing="1" id="troop_info" class="tableNone rep">
 		<thead><tr>
 			<th>報告:</th>
@@ -348,7 +348,7 @@ if($type==18 or $type==19 or $type==20 or $type==21){
 		<!--<thead>
 			<th colspan="2"><div><?php echo $basearray['name']; ?></div>&nbsp;(<?php echo $basearray['x']; ?>|<?php echo $basearray['y']; ?>)</th>
 		</tr></thead>-->
-        <?php 
+        <?php
         $uinfo = $database->getUserArray($basearray['owner'],1); ?>
 		<tbody><tr>
 			<th><?php echo TRIBE;?></th>
@@ -370,7 +370,7 @@ if($type==18 or $type==19 or $type==20 or $type==21){
 			<td><?php echo $basearray['pop']; ?></td>
 		</tr></tbody>
 	</table>
- 
+
 <table cellpadding="1" cellspacing="1" id="troop_info" class="tableNone rep">
 		<thead><tr>
 			<th><?php echo REPORT;?>:</th>
@@ -444,46 +444,46 @@ if($type==18 or $type==19 or $type==20 or $type==21){
 		<td><a href="karte.php?z=<?php echo $_GET['d']; ?>">&raquo; <?php echo CENTREMAP;?>.</a></td>
 	</tr>
 	<?php if(!$basearray['occupied']) { ?>
-	
+
 	<tr>
-		<td class="none"><?php 
-      $mode = CP; 
-      $total = count($database->getProfileVillages($session->uid)); 
-      $need_cps = ${'cp'.$mode}[$total+1]; 
-      $cps = floor($database->getUserField($session->uid, 'cp',0));      
-      
+		<td class="none"><?php
+      $mode = CP;
+      $total = count($database->getProfileVillages($session->uid));
+      $need_cps = ${'cp'.$mode}[$total+1];
+      $cps = floor($database->getUserField($session->uid, 'cp',0));
+
       if($cps >= $need_cps) {
         $enough_cp = true;
       } else {
         $enough_cp = false;
       }
-      
-	
+
+
 	if($village->unitarray['u'.$session->tribe.'0'] >= 3 AND $enough_cp AND $village->resarray['f39']) {
         $test = "<a href=\"a2b.php?id=".$_GET['d']."&amp;s=1\">&raquo;  ".FNEWVILLAGE."</a>";
     } elseif($village->unitarray['u'.$session->tribe.'0'] >= 3 AND !$enough_cp) {
         $test = "&raquo; ".FNEWVILLAGE." ($cps/$need_cps ".CULTUREPOINT.")";
     } elseif(!$village->resarray['f39']) {
-        $test = "&raquo; ".FNEWVILLAGE." (".BUILDRALLY.")"; 
+        $test = "&raquo; ".FNEWVILLAGE." (".BUILDRALLY.")";
 	} else {
         $test = "&raquo; ".FNEWVILLAGE." (".$village->unitarray['u'.$session->tribe.'0']."/3 ".SETTLERSAVAIL.")";
     }
- 	
-	echo ($basearray['fieldtype']==0)? 
-		($village->resarray['f39']==0)? 
+
+	echo ($basearray['fieldtype']==0)?
+		($village->resarray['f39']==0)?
 		($basearray['owner'] == $session->uid)?
-			
-		"<a href=\"build.php?id=39\">&raquo; ".RAID." $otext ".OASIS." (".BUILDRALLY.")</a>" : 
-		"&raquo; ".RAID." $otext ".OASIS." (".BUILDRALLY.")" : 
+
+		"<a href=\"build.php?id=39\">&raquo; ".RAID." $otext ".OASIS." (".BUILDRALLY.")</a>" :
+		"&raquo; ".RAID." $otext ".OASIS." (".BUILDRALLY.")" :
 		"<a href=\"a2b.php?z=".$_GET['d']."&o\">&raquo; ".RAID." $otext</a>" :
 		"$test"
 	?>
 		</tr>
-        <?php } 
+        <?php }
         else if ($basearray['occupied'] && $basearray['wref'] != $_SESSION['wid']) {?>
         <tr>
 					<td class="none">
-          <?php 
+          <?php
 		  if($basearray['fieldtype'] == 0){
           $query1 = mysql_query('SELECT * FROM `' . TB_PREFIX . 'odata` WHERE `wref` = ' . mysql_escape_string($_GET['d']));
 		  }else{
@@ -497,7 +497,7 @@ if($type==18 or $type==19 or $type==20 or $type==21){
 		  } else if($data2['vac_mode']=='1') {
 			echo "&raquo; Send troops. (Vacation mode on)";
           } else if($data2['protect'] < time()) {
-            echo $village->resarray['f39']? "<a href=\"a2b.php?s=2&z=".$_GET['d']."\">&raquo; ".SENDTROOP : "&raquo; ".SENDTROOP." (".BUILDRALLY.")"; 
+            echo $village->resarray['f39']? "<a href=\"a2b.php?s=2&z=".$_GET['d']."\">&raquo; ".SENDTROOP : "&raquo; ".SENDTROOP." (".BUILDRALLY.")";
           } else {
             echo "&raquo; ".SENDTROOP." (".BEGINPRO.")";
           }
@@ -507,12 +507,12 @@ if($type==18 or $type==19 or $type==20 or $type==21){
 					    	<tr>
 					<td class="none">
 					<?php
-			if($data2['access']=='0' or $data2['access']=='8' or $data2['access']=='9') { 
+			if($data2['access']=='0' or $data2['access']=='8' or $data2['access']=='9') {
 			echo "&raquo; ".SENDMERC." (".BAN.")";
 			} else if($data2['vac_mode']=='1') {
 			echo "&raquo; Send merchant(s). (Vacation mode on)";
           } else {
-            echo $building->getTypeLevel(17)? "<a href=\"build.php?z=".$_GET['d']."&id=" . $building->getTypeField(17) . "\">&raquo; ".SENDMERC : "&raquo; ".SENDMERC ."(".BUILDMARKET.")"; 
+            echo $building->getTypeLevel(17)? "<a href=\"build.php?z=".$_GET['d']."&id=" . $building->getTypeField(17) . "\">&raquo; ".SENDMERC : "&raquo; ".SENDMERC ."(".BUILDMARKET.")";
           }
 
 		  ?>

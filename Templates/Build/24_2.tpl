@@ -1,4 +1,4 @@
-<?php 
+<?php
         if(!isset($timer)) {
         $timer = 1;
         }

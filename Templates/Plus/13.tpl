@@ -8,7 +8,7 @@
 ?>
 
 <form method="get" action="plus.php">
-<input name="id" value="14" type="hidden"> 
+<input name="id" value="14" type="hidden">
 <div align="center">
 	<table border="1" width="50%" cellspacing="0" cellpadding="0">
 		<tr>

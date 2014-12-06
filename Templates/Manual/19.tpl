@@ -39,7 +39,7 @@
 </tr>
 </tbody></table>
 
-<img id="big_unit" class="big_u9" src="img/x.gif" alt="Senator" title="Senator" /><div id="t_desc">The Senator is the tribe's chosen leader. He's a good speaker and knows how to convince others. He is able to persuade other villages to fight with the empire. 
+<img id="big_unit" class="big_u9" src="img/x.gif" alt="Senator" title="Senator" /><div id="t_desc">The Senator is the tribe's chosen leader. He's a good speaker and knows how to convince others. He is able to persuade other villages to fight with the empire.
 <br /><br />
 Every time the Senator speaks to the inhabitants of a village the enemy's loyalty value decreases until the village is yours.</div><div id="prereqs"><b>Prerequisites</b><br /><a href="manual.php?typ=4&amp;gid=16">Rally Point</a> Level 10, <a href="manual.php?typ=4&amp;gid=22">Academy</a> Level 20</div><map id="nav" name="nav">
  <area href="manual.php?typ=1&amp;s=8" title="back" coords="0,0,45,18" shape="rect" alt="" />

@@ -39,9 +39,9 @@
 </tr>
 </tbody></table>
 
-<img id="big_unit" class="big_u18" src="img/x.gif" alt="Catapult" title="Catapult" /><div id="t_desc">The Catapult is an excellent long-distance weapon; it is used to destroy the fields and buildings of enemy villages. However, without escorting troops it is almost defenceless so don't forget to send some of your troops with it. 
+<img id="big_unit" class="big_u18" src="img/x.gif" alt="Catapult" title="Catapult" /><div id="t_desc">The Catapult is an excellent long-distance weapon; it is used to destroy the fields and buildings of enemy villages. However, without escorting troops it is almost defenceless so don't forget to send some of your troops with it.
 <br /><br />
-Having a high level rally point makes your catapults more accurate and gives you the option to target additional enemy buildings. With a level 10 rally point each building except for the cranny, stonemason's lodge and trapper can be targeted. 
+Having a high level rally point makes your catapults more accurate and gives you the option to target additional enemy buildings. With a level 10 rally point each building except for the cranny, stonemason's lodge and trapper can be targeted.
 <br />
 HINT: Catapults CAN hit the cranny, trappers or stonemason's lodges when they target randomly.</div><div id="prereqs"><b>Prerequisites</b><br /><a href="manual.php?typ=4&amp;gid=21">Workshop</a> Level 10, <a href="manual.php?typ=4&amp;gid=22">Academy</a> Level 15</div><map id="nav" name="nav">
  <area href="manual.php?typ=1&amp;s=17" title="back" coords="0,0,45,18" shape="rect" alt="" />

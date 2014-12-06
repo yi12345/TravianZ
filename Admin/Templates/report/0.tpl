@@ -74,8 +74,8 @@ error_reporting(0);
 											?>
 										</td>
 									</tr>
-								</tbody><?php 
-							} 
+								</tbody><?php
+							}
 							if ($dataarray[141]!='' and $dataarray[142]!='')
 							{ //cata ?>
 								<tbody class="goods">
@@ -88,7 +88,7 @@ error_reporting(0);
 											?>
 										</td>
 									</tr>
-								</tbody><?php 
+								</tbody><?php
 							}
 							if ($dataarray[143]!='' and $dataarray[144]!='')
 							{ //chief ?>
@@ -102,7 +102,7 @@ error_reporting(0);
 											?>
 										</td>
 									</tr>
-								</tbody><?php 
+								</tbody><?php
 							}
 							if ($dataarray[145]!='' and $dataarray[146]!='')
 							{ //spy ?>
@@ -115,7 +115,7 @@ error_reporting(0);
 											?>
 										</td>
 									</tr>
-								</tbody><?php 
+								</tbody><?php
 							} ?>
 								<tbody class="goods">
 									<tr>
@@ -128,12 +128,12 @@ error_reporting(0);
 									</tr>
 								</tbody>
 							</table>
-	
+
 						<?php
 							$targettribe=$dataarray['31'];
 							if ($dataarray[34]=='1')
 							{
-								$start=1; ?>	
+								$start=1; ?>
 								<table cellpadding="1" cellspacing="1" class="defender">
 									<thead>
 										<tr>
@@ -176,11 +176,11 @@ error_reporting(0);
 													?>
 										</tr>
 									</tbody>
-								</table><?php 
-							} 
+								</table><?php
+							}
 							if ($dataarray[55]=='1')
-							{ 
-								$start=11;?>	
+							{
+								$start=11;?>
 								<table cellpadding="1" cellspacing="1" class="defender">
 									<thead>
 										<tr>
@@ -223,11 +223,11 @@ error_reporting(0);
 												?>
 										</tr>
 									</tbody>
-								</table><?php 
-							} 
+								</table><?php
+							}
 							if ($dataarray[76]=='1')
 							{
-								$start=21; ?>	
+								$start=21; ?>
 								<table cellpadding="1" cellspacing="1" class="defender">
 									<thead>
 										<tr>
@@ -270,11 +270,11 @@ error_reporting(0);
 											?>
 										</tr>
 									</tbody>
-								</table><?php 
-							} 
+								</table><?php
+							}
 							if ($dataarray[97]=='1')
-							{ 
-								$start=31; ?>	
+							{
+								$start=31; ?>
 								<table cellpadding="1" cellspacing="1" class="defender">
 									<thead>
 										<tr>
@@ -317,11 +317,11 @@ error_reporting(0);
 											?>
 										</tr>
 									</tbody>
-								</table><?php 
+								</table><?php
 							}
 							if ($dataarray[118]=='1')
 							{
-								$start=41; ?>	
+								$start=41; ?>
 								<table cellpadding="1" cellspacing="1" class="defender">
 									<thead>
 										<tr>
@@ -365,8 +365,8 @@ error_reporting(0);
 										</tr>
 									</tbody>
 								</table>
-							<?php 
-						} 
+							<?php
+						}
 					?>
 			</td>
 		</tr>

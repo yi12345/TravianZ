@@ -7,13 +7,13 @@ $u=0;
 }
 ?>
 
-<div id="build" class="gid17"><a href="#" onClick="return Popup(17,4);" class="build_logo"> 
-	<img class="building g17" src="img/x.gif" alt="Marketplace" title="Marketplace" /> 
-</a> 
-<h1>Marketplace <span class="level">level <?php echo $village->resarray['f'.$id]; ?></span></h1> 
+<div id="build" class="gid17"><a href="#" onClick="return Popup(17,4);" class="build_logo">
+	<img class="building g17" src="img/x.gif" alt="Marketplace" title="Marketplace" />
+</a>
+<h1>Marketplace <span class="level">level <?php echo $village->resarray['f'.$id]; ?></span></h1>
 <p class="build_desc">At the Marketplace you can trade resources with other players. The higher its level, the more resources can be transported at the same time.
-</p> 
- 
+</p>
+
 <?php include("17_menu.tpl");
 if($session->plus) {
 ?>
@@ -98,7 +98,7 @@ switch($market->onsale[$i]['gtype']) {
     }
     else if($session->access != BANNED){
     echo "<td class=\"act\"><a href=\"build.php?id=$id&t=1&a=".$session->mchecker."&g=".$market->onsale[$i]['id']."\">Accept offer</a></td>";
-    }else{ 
+    }else{
 	echo "<td class=\"act\"><a href=\"banned.php\">Accept offer</a></td>";
 	}
     echo"</tr>";
@@ -130,5 +130,5 @@ if(!isset($_GET['u']) && count($market->onsale) < 40) {
         }
     }
 ?>
-</td></tr> 
-</table></div> 
+</td></tr>
+</table></div>

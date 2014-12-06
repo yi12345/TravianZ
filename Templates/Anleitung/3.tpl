@@ -60,9 +60,9 @@
 <p class="answer">Every village can be catapulted to 0 inhabitants and as long as it is not the last of your account it will disappear after a short time. The only village that cannot be conquered is the capital. Note that destroying the capital is still possible.</p>
 
 </div>
-	<div class="clear"></div> 
-</div> 
- 
+	<div class="clear"></div>
+</div>
+
 <div id="footer">
 
 	<div class="container">
@@ -73,5 +73,5 @@
 
 	</div>
 
-</div> 
-</div> 
+</div>
+</div>

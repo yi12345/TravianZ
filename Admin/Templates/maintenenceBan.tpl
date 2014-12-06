@@ -11,18 +11,18 @@
 ?>
 <form action="../GameEngine/Admin/Mods/mainteneceBan.php" method="POST">
 	<input type="hidden" name="admid" id="admid" value="<?php echo $_SESSION['id']; ?>">
-	<br />	
+	<br />
 	<table id="member" cellpadding="1" cellspacing="1" >
 		<thead>
 			<tr>
 				<th colspan="2">Close Server (Ban Everyone)</th>
-			</tr> 
+			</tr>
 			<tr>
 				<td class="on">Duration</td>
 				<td class="hab">Starting</td>
 			</tr>
 		</thead>
-		<tbody> 
+		<tbody>
 			<tr>
 				<td class="hab"><input type="text" class="fm" name="duration" value="1"></td>
 				<td class="hab"><input type="text" class="fm" name="start" value="<?php echo date('d-m-Y H:i:s', strtotime("now")); ?>"></td>

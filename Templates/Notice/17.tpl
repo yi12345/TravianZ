@@ -19,7 +19,7 @@ if($database->getVillageField($dataarray[26],'name')!="??") {
 					<th>Subject:</th>
 					<th><?php echo $message->readingNotice['topic']; ?></th>
 				</tr>
- 
+
 				<tr>
 					<?php
                 $date = $generator->procMtime($message->readingNotice['time']); ?>

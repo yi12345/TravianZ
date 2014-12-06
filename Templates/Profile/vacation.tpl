@@ -1,6 +1,6 @@
 <h1>Player profile</h1>
 
-<?php 
+<?php
 
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
@@ -37,7 +37,7 @@ include("menu.tpl"); ?>
             <label><input class="text" type="text" name="vac_days" value="2" /></label>
         </td>
     </tr>
-  
+
      </tbody></table>
     <?php
 // Added by Shadow - cata7007@gmail.com / Skype : cata7007

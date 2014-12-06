@@ -45,7 +45,7 @@ foreach($posts as $pos) {
 	<tr>
 	<td>
 	</td><td>
-		
+
 			<div bbArea="text" id="text_container" name="text_container">
 				<div id="text_toolbar" name="text_toolbar">
 					<a href="javascript:void(0);" bbType="d" bbTag="b" ><div title="bold" alt="bold" class="bbButton bbBold"></div></a>
@@ -80,7 +80,7 @@ foreach($posts as $pos) {
 			<script>
 				var bbEditor = new BBEditor("text");
 			</script>
-			
+
 	</td></tr>
 	</tbody></table>
 

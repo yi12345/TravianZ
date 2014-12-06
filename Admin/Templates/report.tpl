@@ -39,14 +39,14 @@ if($rep)
 	<link href="../<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7c" rel="stylesheet" type="text/css">
 	<link href="../<?php echo GP_LOCATE; ?>travian.css?e21d2" rel="stylesheet" type="text/css">
 	<link href="../<?php echo GP_LOCATE; ?>lang/en/lang.css?e21d2" rel="stylesheet" type="text/css">
-	
+
 	<br />
 
 	<span class="b">reporte de</span>: <?php echo $database->getUserField($rep[0]['uid'],'username',0);?><br />
 
 	<div id="content" class="reports">
 		<h1>Reporte</h1>
-<?php 
+<?php
 $type = $rep[0]['ntype'];
 		include("Notice/".$type.".tpl");
 

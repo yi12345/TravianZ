@@ -1,7 +1,7 @@
 <?php
         $artefact1 = $database->getOwnArtefactInfo3($session->uid);
         $wref = $village->wid;
-       $coor = $database->getCoor($wref); 
+       $coor = $database->getCoor($wref);
         function getDistance($coorx1, $coory1, $coorx2, $coory2) {
    $max = 2 * WORLD_MAX + 1;
    $x1 = intval($coorx1);
@@ -36,7 +36,7 @@
         	echo '<tr><td colspan="4" class="none">You do not own any artefacts.</td></tr>';
         } else {
 		foreach($artefact1 as $artefact){
-		$coor2 = $database->getCoor($artefact['vref']); 
+		$coor2 = $database->getCoor($artefact['vref']);
                     if($artefact['size'] == 1 && $artefact['type'] != 11){
                        $reqlvl = 10;
                        $effect = "village";
@@ -108,7 +108,7 @@
         		$query = mysql_query('SELECT * FROM `' . TB_PREFIX . 'wdata` WHERE `id` = ' . $row['vref']);
         		$coor2 = mysql_fetch_assoc($query);
 
-        		
+
         		$dist = round(getDistance($coor['x'], $coor['y'], $coor2['x'], $coor2['y']),1);
 
         		$rows[$dist] = $row;

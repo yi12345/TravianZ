@@ -7,7 +7,7 @@ $aid = $session->alliance;
 }
 $allianceinfo = $database->getAlliance($aid);
 echo "<h1>".$allianceinfo['tag']." - ".$allianceinfo['name']."</h1>";
-include("alli_menu.tpl"); 
+include("alli_menu.tpl");
 ?>
 <div class="clear"></div>
 <h4 class="chartHeadline">Military events</h4>
@@ -35,7 +35,7 @@ $name = 1;
 if($query == 0) {
     $outputList .= "<td colspan=\"4\" class=\"none\">There are no reports available.</td>";
 }else{
-while($row = mysql_fetch_array($sql)){ 
+while($row = mysql_fetch_array($sql)){
 	$dataarray = explode(",",$row['data']);
     $id = $row["id"];
     $uid = $row["uid"];
@@ -47,7 +47,7 @@ while($row = mysql_fetch_array($sql)){
     $time = $row["time"];
     $viewed = $row["viewed"];
     $archive = $row["archive"];
-	
+
     $outputList .= "<tr>";
 	$outputList .= "<td class=\"sub\">";
 if($ntype==4 || $ntype==5 || $ntype==6 || $ntype==7){
@@ -67,10 +67,10 @@ if($ntype==4 || $ntype==5 || $ntype==6 || $ntype==7){
     if($ntype==0){ $nn = " scouts "; }else{ $nn = " attacks "; }
 
     $outputList .= $database->getUserField($dataarray[0],username,0);
-       
+
     $outputList .= $nn;
     $outputList .= $database->getUserField($dataarray[28],username,0);
-	if($ntype==0){ 
+	if($ntype==0){
 	$isoasis = $database->isVillageOases($toWref);
 	if($isoasis == 0){
 	if($toWref != $village->wid){
@@ -86,24 +86,24 @@ if($ntype==4 || $ntype==5 || $ntype==6 || $ntype==7){
 		}
 	}
 	$getUserAlly = $database->getUserField($getUser,alliance,0);
-	}else if($ntype==1 or $ntype==2 or $ntype==3 or $ntype==18 or $ntype==19){ 
+	}else if($ntype==1 or $ntype==2 or $ntype==3 or $ntype==18 or $ntype==19){
     	$getUserAlly = $database->getUserField($dataarray[28],alliance,0);
     }else{
     	$getUserAlly = $database->getUserField($dataarray[0],alliance,0);
     }
     $getAllyName = $database->getAllianceName($getUserAlly);
-    
+
     if($getUserAlly==$session->alliance || !$getUserAlly){
     	$allyName = "-";
     }else{
     	$allyName = "<a href=\"allianz.php?aid=".$getUserAlly."\">".$getAllyName."</a>";
     }
-    
+
     $outputList .= "<td class=\"al\">".$allyName."</td>";
     $date = $generator->procMtime($time);
     $outputList .= "<td class=\"dat\">".$date[0]." ".date('H:i',$time)."</td>";
 	$outputList .= "</tr>";
-    
+
 	$name++;
 }
 }

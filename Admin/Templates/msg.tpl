@@ -38,7 +38,7 @@ if($msg)
 			<div class="clear"></div>
 			<div class="line"></div>
 			<div class="message" style="min-height: 10px;">
-<?php 
+<?php
 $input = $msg[0]['message'];
 $alliance = $msg[0]['alliance'];
 $player = $msg[0]['player'];

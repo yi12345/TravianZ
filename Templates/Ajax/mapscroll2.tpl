@@ -142,7 +142,7 @@ $image = "o99";
 		elseif($donnees['map_oasis'] != 0){
 			if ($donnees['oasis_conqured'] != 0){
 					$map_js.= ",\"\",\"".$donnees['oasis_user']."\",\"-\",\"".$donnees['oasis_alli_name']."\",\"".$donnees['oasis_tribe']."\"]";
-			} 
+			}
 			else{
 				$map_js.="]";
 			}

@@ -10,7 +10,7 @@ include('menu.tpl');
 <?php
 
 $timer = 0;
-$varray = $database->getProfileVillages($session->uid); 
+$varray = $database->getProfileVillages($session->uid);
 foreach($varray as $vil){
 	$vid = $vil['wref'];
 	$cp = $database->getVillageField($vid, 'cp');
@@ -26,7 +26,7 @@ foreach($varray as $vil){
 	$hasCel = $database->getVillageField($vid,'celebration');
 	if ($hasCel <> 0) { $timer++; }
 
-	if($vdata['capital'] == 1){$class = 'hl';}else{$class = '';}                  
+	if($vdata['capital'] == 1){$class = 'hl';}else{$class = '';}
 
 	echo '<tr class="'.$class.'"><td class="vil fc"><a href="dorf1.php?newdid='.$vid.'">'.$vil['name'].'</a></td>';
 	echo '<td class="cps">'.$cp.'</td>';
@@ -47,8 +47,8 @@ foreach($varray as $vil){
 	while($s <=$senator) {
 		echo $senatorp;
 		$s++;
-	}		
-		
+	}
+
 	echo '</span></td>';
 	echo '<td class="slo lc">'.$exp.'/'.$maxslots.'</td>';
 	$gesexp = $gesexp + $exp;
@@ -56,7 +56,7 @@ foreach($varray as $vil){
 	$gescp = $gescp + $cp;
 	$gessied = $gessied + $siedler;
 	$gessen = $gessen + $senator;
-	echo '</tr>';    
+	echo '</tr>';
 }
 ?>
 
@@ -68,7 +68,7 @@ foreach($varray as $vil){
 	<td class="cel none">&nbsp;</td>
 
 	<td class="tro">
-	<?php 	
+	<?php
 	echo $gessied;
 	echo $siedlerp;
 	echo '&nbsp;';

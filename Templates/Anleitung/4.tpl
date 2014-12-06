@@ -45,7 +45,7 @@ As soon as the steward of a town (senator, chief, chieftain) as been researched 
 
     </tr>
 
-    
+
 
     <tr>
 
@@ -3343,10 +3343,10 @@ As soon as the steward of a town (senator, chief, chieftain) as been researched 
 
 <p>The more villages one has, the more culture points are necessary to found or conquer additional villages. One cannot lose culture points, however, one needs more for additional villages.</p>
 
-	</div> 
-	<div class="clear"></div> 
-</div> 
- 
+	</div>
+	<div class="clear"></div>
+</div>
+
 <div id="footer">
 
 	<div class="container">
@@ -3357,5 +3357,5 @@ As soon as the steward of a town (senator, chief, chieftain) as been researched 
 
 	</div>
 
-</div> 
-</div> 
+</div>
+</div>

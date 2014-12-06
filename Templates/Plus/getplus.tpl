@@ -27,7 +27,7 @@ echo <<<EOT
   <input type="submit" name="plus" value="Get Now"></td></tr>
 </table>
 </form>
-<br /> <br /> 
+<br /> <br />
 
 EOT;
 }else{
@@ -45,7 +45,7 @@ EOT;
     }
 
     if(!$valid) break;
-    $valid=TRUE; 
+    $valid=TRUE;
 /////////////////////////////////////////////////////////
     $plusTime = 604800; // 7 days
     $time = time();
@@ -98,10 +98,10 @@ echo' Please select the option you wish to activate or extend.<br>';
     }
     if(!$valid) break;
     $valid=TRUE;
-    
 
 
-    if(mysql_num_rows($plusCheck) > 0){ 
+
+    if(mysql_num_rows($plusCheck) > 0){
         if($time > $pluss[$key] ){
             $editplus = mysql_query("UPDATE ".TB_PREFIX."users SET `{$key}`= `{$key}` + ('".$time."'+'".$plusTime."'),  `gold` =  `gold` - {$gldz}   WHERE `id`='".$session->uid."'") or die(mysql_error());
             echo "<META HTTP-EQUIV=Refresh CONTENT=\"2; {$url}\" ><br /><br /><div align=center><font color=green size=4><b> Your Status has been updated!</b></font></div>";
@@ -109,13 +109,13 @@ echo' Please select the option you wish to activate or extend.<br>';
         if($time < $pluss[$key]){
             $editplus = mysql_query("UPDATE ".TB_PREFIX."users SET `{$key}`= `{$key}` +'".$plusTime."',  `gold` =  `gold` - {$gldz}  WHERE `id`='".$session->uid."'") or die(mysql_error());
             echo "<META HTTP-EQUIV=Refresh CONTENT=\"2; {$url}\" ><br /><br /><div align=center><font color=green size=4><b> Your Status has been updated!</b></font></div>";
-       
+
        }
     }
 else{
         $insertplus = mysql_query("INSERT INTO ".TB_PREFIX."users (`username`,`{$key}`, `gold`) VALUES ('".$session->username."', ('".$time."'+'".$plusTime."'),`gold` - {$gldz})") or die(mysql_error());
         echo "<META HTTP-EQUIV=Refresh CONTENT=\"3; {$url})\" ><br /><br /><div align=center><font color=green size=4><b> Your Status has been updated!</b></font></div>";
-	 }   
+	 }
 }
 
 

@@ -14,7 +14,7 @@ include("next.tpl");
 		<td><b><?php echo $bid38[$village->resarray['f'.$id]]['attri']*STORAGE_MULTIPLIER; ?></b> Resource units</td>
 	</tr>
 	<tr>
-<?php 
+<?php
         if(!$building->isMax($village->resarray['f'.$id.'t'],$id)) {
 		$next = $village->resarray['f'.$id]+1+$loopsame+$doublebuild+$master;
 		if($next<=20){
@@ -32,7 +32,7 @@ include("next.tpl");
             ?>
 	</tr>
 	</table>
- <?php 
+ <?php
 include("upgrade.tpl");
 ?>
 </p></div>

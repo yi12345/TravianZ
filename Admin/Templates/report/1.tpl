@@ -7,7 +7,7 @@ $dataarray = explode(",",$rep['data']);
 			<th>Subject:</th>
 			<th><?php echo $rep['topic']; ?></th>
 				</tr>
- 
+
 				<tr>
 					<?php
 						$date = date('d:m:Y H:i:s', $rep['time']);
@@ -59,7 +59,7 @@ if ($dataarray[139]!='' and $dataarray[140]!=''){ //ram
 	<img class="unit u<?php echo $dataarray[139]; ?>" src="img/x.gif" alt="Ram" title="Ram" />
 	<?php echo $dataarray[140]; ?>
     </td></tr></tbody>
-<?php } 
+<?php }
 if ($dataarray[141]!='' and $dataarray[142]!=''){ //cata
 ?>
 	<tbody class="goods"><tr><th>Information</th><td colspan="10">
@@ -77,20 +77,20 @@ if ($dataarray[143]!='' and $dataarray[144]!=''){ //chief
 <?php if ($dataarray[145]!='' and $dataarray[146]!=''){ //spy
 ?>
     <tbody class="goods"><tr><th>Information</th><td colspan="10">
-    
+
     <?php echo $dataarray[146]; ?>
     </td></tr></tbody>
 <?php } ?>
 	<tbody class="goods"><tr><th>Bounty</th><td colspan="10">
 	<div class="res"><img class="r1" src="img/x.gif" alt="Lumber" title="Lumber" /><?php echo $dataarray[23]; ?> | <img class="r2" src="img/x.gif" alt="Clay" title="Clay" /><?php echo $dataarray[24]; ?> | <img class="r3" src="img/x.gif" alt="Iron" title="Iron" /><?php echo $dataarray[25]; ?> | <img class="r4" src="img/x.gif" alt="Crop" title="Crop" /><?php echo $dataarray[26]; ?></div><div class="carry"><img class="car" src="img/x.gif" alt="carry" title="carry" /><?php echo ($dataarray[23]+$dataarray[24]+$dataarray[25]+$dataarray[26])."/".$dataarray[27]; ?></div>
     </td></tr></tbody></table>
-	
+
 <?php
 $targettribe=$dataarray['31'];
 
 
 if ($dataarray[34]=='1'){
-$start=1; ?>	
+$start=1; ?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
@@ -100,8 +100,8 @@ $start=1; ?>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 	<?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\"  /></td>";
@@ -127,9 +127,9 @@ for($i=45;$i<=54;$i++) {
 ?>
 </tr></tbody></table>
 
-<?php } 
-if ($dataarray[55]=='1'){ 
-$start=11;?>	
+<?php }
+if ($dataarray[55]=='1'){
+$start=11;?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
@@ -139,8 +139,8 @@ $start=11;?>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 <?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\"  /></td>";
@@ -167,7 +167,7 @@ for($i=66;$i<=75;$i++) {
 </tr></tbody></table>
 <?php } ?>
 <?php  if ($dataarray[76]=='1'){
-$start=21; ?>	
+$start=21; ?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
@@ -177,8 +177,8 @@ $start=21; ?>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 	<?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\"  /></td>";
@@ -205,8 +205,8 @@ for($i=87;$i<=96;$i++) {
 </tr></tbody></table>
 
 <?php } ?>
-<?php  if ($dataarray[97]=='1'){ 
-$start=31; ?>	
+<?php  if ($dataarray[97]=='1'){
+$start=31; ?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
@@ -216,8 +216,8 @@ $start=31; ?>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 	<?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\"  /></td>";
@@ -245,7 +245,7 @@ for($i=108;$i<=117;$i++) {
 
 <?php } ?>
 <?php  if ($dataarray[118]=='1'){
-$start=41; ?>	
+$start=41; ?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
@@ -255,8 +255,8 @@ $start=41; ?>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 	<?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\"  /></td>";

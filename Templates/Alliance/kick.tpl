@@ -8,7 +8,7 @@ $aid = $session->alliance;
 $memberlist = $database->getAllMember($aid);
 $allianceinfo = $database->getAlliance($aid);
 echo "<h1>".$allianceinfo['tag']." - ".$allianceinfo['name']."</h1>";
-include("alli_menu.tpl"); 
+include("alli_menu.tpl");
 ?>
 			<form method="post" action="allianz.php">
 				<table cellpadding="1" cellspacing="1" id="position" class="small_option">
@@ -38,7 +38,7 @@ include("alli_menu.tpl");
 				<p>
 					<input type="hidden" name="o" value="2">
 					<input type="hidden" name="s" value="5">
-					<input type="hidden" name="a" value="2">                    
+					<input type="hidden" name="a" value="2">
 					<input type="image" value="ok" name="s1" id="btn_ok" class="dynamic_img" src="img/x.gif" alt="OK" />
 				</p>
 			</form>

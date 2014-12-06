@@ -38,19 +38,19 @@ $ckey= $generator->generateRandStr(6);
 
 
  if (!isset($process['t1']) || $process['t1'] == ''){  $t1='0'; }else{  $t1=$process['t1']; }
- if (!isset($process['t2']) || $process['t2'] == ''){  $t2='0'; }else{  $t2=$process['t2']; } 
- if (!isset($process['t3']) || $process['t3'] == ''){  $t3='0'; }else{  $t3=$process['t3']; if ($session->tribe == 3){ $scout=1; } } 
- if (!isset($process['t4']) || $process['t4'] == ''){  $t4='0'; }else{  $t4=$process['t4']; if ($session->tribe == 1 || $session->tribe == 2 || $session->tribe == 4 || $session->tribe == 5){ $scout=1;} } 
- if (!isset($process['t5']) || $process['t5'] == ''){  $t5='0'; }else{  $t5=$process['t5']; } 
- if (!isset($process['t6']) || $process['t6'] == ''){  $t6='0'; }else{  $t6=$process['t6']; } 
- if (!isset($process['t7']) || $process['t7'] == ''){  $t7='0'; }else{  $t7=$process['t7']; } 
- if (!isset($process['t8']) || $process['t8'] == ''){  $t8='0'; }else{  $t8=$process['t8']; } 
- if (!isset($process['t9']) || $process['t9'] == ''){  $t9='0'; }else{  $t9=$process['t9']; } 
- if (!isset($process['t10']) || $process['t10'] == ''){  $t10='0'; }else{  $t10=$process['t10']; } 
- if (!isset($process['t11']) || $process['t11'] == ''){  $t11='0'; }else{  $t11=$process['t11']; $showhero=1;} 
+ if (!isset($process['t2']) || $process['t2'] == ''){  $t2='0'; }else{  $t2=$process['t2']; }
+ if (!isset($process['t3']) || $process['t3'] == ''){  $t3='0'; }else{  $t3=$process['t3']; if ($session->tribe == 3){ $scout=1; } }
+ if (!isset($process['t4']) || $process['t4'] == ''){  $t4='0'; }else{  $t4=$process['t4']; if ($session->tribe == 1 || $session->tribe == 2 || $session->tribe == 4 || $session->tribe == 5){ $scout=1;} }
+ if (!isset($process['t5']) || $process['t5'] == ''){  $t5='0'; }else{  $t5=$process['t5']; }
+ if (!isset($process['t6']) || $process['t6'] == ''){  $t6='0'; }else{  $t6=$process['t6']; }
+ if (!isset($process['t7']) || $process['t7'] == ''){  $t7='0'; }else{  $t7=$process['t7']; }
+ if (!isset($process['t8']) || $process['t8'] == ''){  $t8='0'; }else{  $t8=$process['t8']; }
+ if (!isset($process['t9']) || $process['t9'] == ''){  $t9='0'; }else{  $t9=$process['t9']; }
+ if (!isset($process['t10']) || $process['t10'] == ''){  $t10='0'; }else{  $t10=$process['t10']; }
+ if (!isset($process['t11']) || $process['t11'] == ''){  $t11='0'; }else{  $t11=$process['t11']; $showhero=1;}
  if ($session->tribe == 3){
  $totalunits =$process['t1']+$process['t2']+$process['t4']+$process['t5']+$process['t6']+$process['t7']+$process['t8']+$process['t9']+$process['t10']+$process['t11'];
- 
+
  }else{
  $totalunits =$process['t1']+$process['t2']+$process['t3']+$process['t5']+$process['t6']+$process['t7']+$process['t8']+$process['t9']+$process['t10']+$process['t11'];
  }
@@ -88,7 +88,7 @@ $start = ($tribe-1)*10+1;
 $end = ($tribe*10);
 ?>
 
-<h1><?php echo "對 ".$process[1]." 的".$actionType; ?></h1>            
+<h1><?php echo "對 ".$process[1]." 的".$actionType; ?></h1>
 <form method="post" action="a2b.php">
 
             <table id="short_info" cellpadding="1" cellspacing="1">
@@ -136,14 +136,14 @@ $end = ($tribe*10);
                     <tr>
 
                         <td></td>
-                 <?php 
+                 <?php
                 for($i=$start;$i<=($end);$i++) {
-                      echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";    
+                      echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
                   } if ($process['t11'] != ''){
-                  echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";    
-                  
+                  echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";
+
                   }?>
-                        
+
                     </tr>
 
                     <tr>
@@ -186,7 +186,7 @@ $end = ($tribe*10);
         </tr>
     </tbody>
     <?php } ?>
-                
+
 
         <?php if(isset($kata) AND $process['c']!='2'){?><tr>
 
@@ -194,7 +194,7 @@ $end = ($tribe*10);
                 <tr>
                     <th>目標:</th>
                     <td colspan="<?php if($process['t11'] != ''){ echo"11"; }else{ echo"10"; } ?>">
-                    
+
                         <select name="ctar1" class="dropdown">
                             <option value="0">Random</option>
                             <?php if($building->getTypeLevel(16) >= 5) { ?>
@@ -205,7 +205,7 @@ $end = ($tribe*10);
                                 <option value="4">農田</option>
                                 <option value="5">鋸木廠</option>
                                 <option value="6">磚廠</option>
-                            
+
                                 <option value="7">鋼鐵鑄造廠</option>
                                 <option value="8">麵粉廠</option>
                                 <option value="9">麵包店</option>
@@ -227,7 +227,7 @@ $end = ($tribe*10);
                                 <?php } ?>
                                 <option value="38">大倉庫</option>
                                 <option value="39">大糧倉</option>
-                                <option value="40">世界奇觀</option>    
+                                <option value="40">世界奇觀</option>
                             </optgroup>
                             <?php } ?>
                             <?php if($building->getTypeLevel(16) >= 10) { ?>
@@ -239,7 +239,7 @@ $end = ($tribe*10);
                                 <option value="19">兵營</option>
                                 <option value="20">馬廄</option>
                                 <option value="21">工場</option>
-                                
+
                                 <option value="22">研究院</option>
                                 <option value="29">大兵營</option>
                                 <option value="30">大馬廄</option>
@@ -260,7 +260,7 @@ $end = ($tribe*10);
                                 <option value="4">農田</option>
                                 <option value="5">鋸木廠</option>
                                 <option value="6">磚廠</option>
-                            
+
                                 <option value="7">鋼鐵鑄造廠</option>
                                 <option value="8">麵粉廠</option>
                                 <option value="9">麵包店</option>
@@ -277,13 +277,13 @@ $end = ($tribe*10);
                                 <option value="24">城鎮廳</option>
                                 <option value="25">行宮</option>
                                 <option value="26">皇宮</option>
-                                
+
                                 <option value="27">寶物庫</option>
                                 <option value="28">交易所</option>
                                 <?php } ?>
                                 <option value="38">大倉庫</option>
                                 <option value="39">大糧倉</option>
-								<option value="40">世界奇觀</option>  
+								<option value="40">世界奇觀</option>
                             </optgroup>
                             <?php } ?>
                             <?php if($building->getTypeLevel(16) >= 10) { ?>
@@ -295,7 +295,7 @@ $end = ($tribe*10);
                                 <option value="19">兵營</option>
                                 <option value="20">馬廄</option>
                                 <option value="21">工場</option>
-                                
+
                                 <option value="22">研究院</option>
                                 <option value="29">大兵營</option>
                                 <option value="30">大馬廄</option>
@@ -308,16 +308,16 @@ $end = ($tribe*10);
                     <span class="info">(將會被投石車攻擊)</span>
                      </td>
                 </tr>
-            </tbody><?PHP  
+            </tbody><?PHP
             }
             else if($process['c']=='4')
             {
-                ?><tbody class="infos">  
+                ?><tbody class="infos">
                 <th>目標:</th>
 
             <td colspan="<?php if($process['t11'] != ''){ echo"11"; }else{ echo"10"; } ?>">
                 <?PHP
-                
+
                 echo"警告: 投石車<b>只能</b>使用於普通攻擊 (請勿使用於搶奪中)";
                 ?>
                 </td>
@@ -336,7 +336,7 @@ $end = ($tribe*10);
 
    <th>到達時間</th>
 
-            
+
 
             <?php
             $speeds = array();
@@ -357,7 +357,7 @@ $end = ($tribe*10);
 
                         {
 
-                            if ($i<11) 
+                            if ($i<11)
                 $speeds[] = ${'u'.(($session->tribe-1)*10+$i)}['speed'];
                 else
                 {
@@ -375,7 +375,7 @@ $end = ($tribe*10);
 
                         }
 
-                        
+
 
                     }
 
@@ -383,7 +383,7 @@ $end = ($tribe*10);
 
 
 
-            
+
 
             if($scout)
 
@@ -416,7 +416,7 @@ $end = ($tribe*10);
 
             ?>
 
-            
+
 
             <td colspan="<?php if($process['t11'] != ''){ echo"11"; }else{ echo"10"; } ?>">
 
@@ -432,13 +432,13 @@ $end = ($tribe*10);
 
 </table>
 
-<input name="timestamp" value="<?php echo time(); ?>" type="hidden"> 
+<input name="timestamp" value="<?php echo time(); ?>" type="hidden">
 
-<input name="timestamp_checksum" value="<?php echo $ckey; ?>" type="hidden"> 
+<input name="timestamp_checksum" value="<?php echo $ckey; ?>" type="hidden">
 
-<input name="ckey" value="<?php echo $id; ?>" type="hidden"> 
+<input name="ckey" value="<?php echo $id; ?>" type="hidden">
 
-<input name="id" value="39" type="hidden"> 
+<input name="id" value="39" type="hidden">
 
 <input name="a" value="533374" type="hidden">
 <input name="c" value="3" type="hidden">
@@ -447,11 +447,11 @@ $end = ($tribe*10);
     if(($database->hasBeginnerProtection($village->wid)==1)&&($database->hasBeginnerProtection($process['0'])==0)){
   	echo"<span style=\"color: #DD0000\"><b>注意:</b> 攻擊其他玩家將取消您的新手保護。</span>";
     }
-    if($database->hasBeginnerProtection($process['0'])==1) { 
+    if($database->hasBeginnerProtection($process['0'])==1) {
         echo"<b>該玩家正在新手保護期。</b>";
     } else {
 ?>
-        <p class="btn"><input value="ok" name="s1" id="btn_ok" 
+        <p class="btn"><input value="ok" name="s1" id="btn_ok"
 
 class="dynamic_img " src="img/x.gif" alt="OK" type="image" onclick="if (this.disabled==false) {document.getElementsByTagName('form')[0].submit();} this.disabled=true;" onLoad="this.disabled=false;"></p>
 

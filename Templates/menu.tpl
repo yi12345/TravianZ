@@ -49,8 +49,8 @@ div.c1 {text-align: center}
             <a href="plus.php?id=3"><?php echo SERVER_NAME; ?> <b><span class="plus_g">P</span><span class="plus_o">l</span><span class="plus_g">u</span><span class="plus_o">s</span></b></a>
         </p>
         <p>
-            <a href="rules.php"><b><?php echo GAME_RULES;?></b></a> 
-            <a href="support.php"><b><?php echo SUPPORT;?></b></a> 
+            <a href="rules.php"><b><?php echo GAME_RULES;?></b></a>
+            <a href="support.php"><b><?php echo SUPPORT;?></b></a>
         <br></p>
 		<?php
 		$timestamp = $database->isDeleting($session->uid);
@@ -94,19 +94,19 @@ div.c1 {text-align: center}
 
     <div class="footer-stopper"></div>
 
-    <div class="clear"></div><?php 
-    include("Templates/footer.tpl"); 
-    include("Templates/res.tpl"); 
+    <div class="clear"></div><?php
+    include("Templates/footer.tpl");
+    include("Templates/res.tpl");
     ?>
 
     <div id="stime">
         <div id="ltime">
             <div id="ltimeWrap">
-                Calculated in <b><?php
+                運算耗時  <b><?php
                 echo round(($generator->pageLoadTimeEnd()-$start)*1000);
                 ?></b> ms
                 <br>
-                Server time: <span id="tp1" class="b"><?php echo date('H:i:s'); ?></span>
+                伺服器時間: <span id="tp1" class="b"><?php echo date('H:i:s'); ?></span>
             </div>
         </div>
     </div>

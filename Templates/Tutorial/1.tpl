@@ -50,9 +50,9 @@
                     </tr>
                 </tbody>
             </table>
-        </div> 
-        <div class="clear"></div> 
-    </div> 
+        </div>
+        <div class="clear"></div>
+    </div>
     <div id="footer">
         <div class="container">
             <a href="#" class="logo"><img src="img/x.gif" alt="Travian Games" class="logo_traviangames" /></a>
@@ -65,5 +65,5 @@
                 <li class="copyright">&copy; 2011 - ZravianX - All right reserved</li>
             </ul>
         </div>
-    </div> 
-</div> 
+    </div>
+</div>

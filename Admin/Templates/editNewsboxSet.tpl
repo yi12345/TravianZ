@@ -20,12 +20,12 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 			<table id="profile" cellpadding="0" cellspacing="0">
 				<thead>
 					<tr>
-						<th colspan="2">Edit Newsbox Settings</th>
+						<th colspan="2">編輯資訊設定</th>
 					</tr>
 				</thead>
 				<tbody>
 				<tr>
-					<td width="50%">Newsbox 1</td>
+					<td width="50%">資訊 1</td>
 					<td width="50%">
 						<select name="box1">
 							<option value="true" <?php if (NEWSBOX1==true) echo "selected";?>>Enable</option>
@@ -34,25 +34,25 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 					</td>
 				</tr>
 				<tr>
-					<td>Newsbox 2</td>
+					<td>資訊 2</td>
 					<td>
 						<select name="box2">
 							<option value="true" <?php if (NEWSBOX2==true) echo "selected";?>>Enable</option>
 							<option value="false" <?php if (NEWSBOX2==false) echo "selected";?>>Disable</option>
 						</select>
-					</td>	
+					</td>
 				</tr>
 				<tr>
-					<td>Newsbox 3</td>
+					<td>資訊 3</td>
 					<td>
 						<select name="box3">
 							<option value="true" <?php if (NEWSBOX3==true) echo "selected";?>>Enable</option>
 							<option value="false" <?php if (NEWSBOX3==false) echo "selected";?>>Disable</option>
 						</select>
-					</td>	
+					</td>
 				</tr>
 				<tr>
-				
+
 				</tbody>
 			</table>
 			<br />

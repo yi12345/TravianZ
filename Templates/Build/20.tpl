@@ -68,6 +68,6 @@
         </tbody></table>
     <?php }
     ?>
-	<?php 
+	<?php
 include("upgrade.tpl");
 ?> </p></div>

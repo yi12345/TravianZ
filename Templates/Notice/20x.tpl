@@ -10,7 +10,7 @@ $dataarray = explode(",",$data);
 					<th>Subject:</th>
 					<th><?php echo $topic; ?></th>
 				</tr>
- 
+
 				<tr>
 					<?php
                 $date = $generator->procMtime($time); ?>
@@ -76,7 +76,7 @@ if ($dataarray[139]!='' and $dataarray[140]!=''){ //ram
 	<img class="unit u<?php echo $dataarray[139]; ?>" src="img/x.gif" alt="Ram" title="Ram" />
 	<?php echo $dataarray[140]; ?>
     </td></tr></tbody>
-<?php } 
+<?php }
 if ($dataarray[141]!='' and $dataarray[142]!=''){ //cata
 ?>
 	<tbody class="goods"><tr><th>Information</th><td colspan="10">
@@ -94,18 +94,18 @@ if ($dataarray[143]!='' and $dataarray[144]!=''){ //chief
 <?php if ($dataarray[145]!='' and $dataarray[146]!=''){ //spy
 ?>
     <tbody class="goods"><tr><th>Information</th><td colspan="10">
-    
+
     <?php echo $dataarray[146]; ?>
     </td></tr></tbody>
 <?php } ?>
 </table>
-	
+
 <?php
 $targettribe=$dataarray['31'];
 
 
 if ($dataarray[34]=='1'){
-$start=1; ?>	
+$start=1; ?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
@@ -115,8 +115,8 @@ $start=1; ?>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 	<?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
@@ -142,9 +142,9 @@ for($i=45;$i<=54;$i++) {
 ?>
 </tr></tbody></table>
 
-<?php } 
-if ($dataarray[55]=='1'){ 
-$start=11;?>	
+<?php }
+if ($dataarray[55]=='1'){
+$start=11;?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
@@ -154,8 +154,8 @@ $start=11;?>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 <?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
@@ -182,7 +182,7 @@ for($i=66;$i<=75;$i++) {
 </tr></tbody></table>
 <?php } ?>
 <?php  if ($dataarray[76]=='1'){
-$start=21; ?>	
+$start=21; ?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
@@ -192,8 +192,8 @@ $start=21; ?>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 	<?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
@@ -220,8 +220,8 @@ for($i=87;$i<=96;$i++) {
 </tr></tbody></table>
 
 <?php } ?>
-<?php  if ($dataarray[97]=='1'){ 
-$start=31; ?>	
+<?php  if ($dataarray[97]=='1'){
+$start=31; ?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
@@ -231,8 +231,8 @@ $start=31; ?>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 	<?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
@@ -260,7 +260,7 @@ for($i=108;$i<=117;$i++) {
 
 <?php } ?>
 <?php  if ($dataarray[118]=='1'){
-$start=41; ?>	
+$start=41; ?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
@@ -270,8 +270,8 @@ $start=41; ?>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 	<?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";

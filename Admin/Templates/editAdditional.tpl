@@ -27,7 +27,7 @@ function go_url(url) {
 	location=url;
 	return(false);
 }
-</script>	
+</script>
 	<form action="../GameEngine/Admin/Mods/additional.php" method="POST">
 		<input type="hidden" name="admid" id="admid" value="<?php echo $_SESSION['id']; ?>">
 		<input type="hidden" name="id" value="<?php echo $id; ?>" />
@@ -91,7 +91,7 @@ function go_url(url) {
 								}
 							?>
 						</td>
-					</tr>				
+					</tr>
 					<tr>
 						<td>Give Protection For</td>
 						<td>
@@ -134,14 +134,14 @@ function go_url(url) {
 							<input class="fm" name="odef" value="<?php echo $user['dpall']; ?>" style="width: 60%;"> Points
 						</td>
 					</tr>
-					
+
 				</tbody>
 				<thead>
 				<tr>
 					<td style="border-right:none; text-align:left"><input name="back" type="image" id="btn_back" class="dynamic_img" src="img/x.gif" value="back" alt="back" onclick="return go_url('../Admin/admin.php?p=player&uid=<?php echo $_GET["uid"];?>')" /></td>
 					<td style="border-left:none; text-align:right" colspan="5"><input name="save" type="image" id="btn_save" class="dynamic_img" src="img/x.gif" value="save" alt="save" /></td>
 				</tr>
-				</thead>				
+				</thead>
 			</table>
 		</form>
 	<?php

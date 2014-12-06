@@ -14,10 +14,10 @@ if($session->sit == 0){
 }else{
 ?>
  | <span class=none><b>Options</b></span>
-<?php 
+<?php
 }
 ?>
 </div>
-<?php 
+<?php
 }
 ?>

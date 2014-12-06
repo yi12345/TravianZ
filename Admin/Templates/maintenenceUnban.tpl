@@ -13,19 +13,19 @@ $bannedUsers = $admin->search_banned();
 ?>
 <form action="../GameEngine/Admin/Mods/mainteneceUnban.php" method="POST">
 	<input type="hidden" name="admid" id="admid" value="<?php echo $_SESSION['id']; ?>">
-	
-	<br />		
+
+	<br />
 	<table id="member" cellpadding="1" cellspacing="1" >
 		<thead>
 			<tr>
 				<th colspan="2">Open Server (Unban Players by Reason)</th>
-			</tr> 
+			</tr>
 			<tr>
 				<td class="on">Unban "Reason"</td>
 				<td class="hab">Action</td>
 			</tr>
 		</thead>
-		<tbody> 
+		<tbody>
 			<tr>
 				<td><input type="text" class="fm" name="unbanreason" value=""></td>
 				<td class="hab" colspan="2"><center><input type="image" src="../img/admin/b/ok1.gif" value="submit"></center></td>
@@ -64,7 +64,7 @@ $bannedUsers = $admin->search_banned();
 						$name = $database->getUserField($bannedUsers[$i]['uid'],'username',0);
 						$link = '<a href="?p=player&uid='.$bannedUsers[$i]['uid'].'">'.$name.'<a/>';
 
-					} 
+					}
 					if($bannedUsers[$i]['end'])
 					{
 						$end = date("d.m.y H:i",$bannedUsers[$i]['end']);

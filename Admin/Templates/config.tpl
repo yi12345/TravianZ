@@ -213,7 +213,7 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 <table id="member">
 	<thead>
 		<tr>
-			<th>資訊設定<a href="admin.php?p=editNewsboxSet"><img src="../img/admin/edit.gif" title="Edit Newsbox Setting"></a></th>
+			<th>資訊設定<a href="admin.php?p=editNewsboxSet"><img src="../img/admin/edit.gif" title="Edit 資訊 Setting"></a></th>
 		</tr>
 	</thead>
 </table>

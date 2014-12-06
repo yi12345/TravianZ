@@ -60,9 +60,9 @@ $troops = "".$_POST['t1']."+".$_POST['t2']."+".$_POST['t3']."+".$_POST['t4']."+"
    				return round($dist, 1);
    			}
             $distance = getDistance($coor['x'], $coor['y'], $WrefX, $WrefY);
-            
+
 		$database->editSlotFarm($_GET['eid'], $_POST['lid'], $Wref, $WrefX, $WrefY, $distance, $_POST['t1'], $_POST['t2'], $_POST['t3'], $_POST['t4'], $_POST['t5'], $_POST['t6'], $_POST['t7'], $_POST['t8'], $_POST['t9'], $_POST['t10']);
-        
+
         header("Location: build.php?id=39&t=99");
 }
 }
@@ -71,10 +71,10 @@ if($FLData['owner'] == $session->uid){
 
 <div id="raidListSlot">
 	<h4>Add Slot</h4>
-<font color="#FF0000"><b>    
+<font color="#FF0000"><b>
 <?php echo $errormsg; ?>
 </b></font>
-	
+
 	<form id="edit_form" action="build.php?id=39&t=99&action=showSlot&eid=<?php echo $_GET['eid']; ?>" method="post">
 		<div class="boxes boxesColor gray"><div class="boxes-tl"></div><div class="boxes-tr"></div><div class="boxes-tc"></div><div class="boxes-ml"></div><div class="boxes-mr"></div><div class="boxes-mc"></div><div class="boxes-bl"></div><div class="boxes-br"></div><div class="boxes-bc"></div><div class="boxes-contents cf">
 
@@ -85,7 +85,7 @@ $lid2 = $getlid['lid'];
 		<input type="hidden" name="action" value="editSlot">
 		<input type="hidden" name="eid" value="<?php echo $_GET['eid']; ?>">
         <input type="hidden" name="lid" value="<?php echo $lid2; ?>">
-			
+
 			<table cellpadding="1" cellspacing="1" class="transparent">
 				<tbody><tr>
 					<th>Farm Name:</th><?php echo $_GET["lid"]; ?>
@@ -93,7 +93,7 @@ $lid2 = $getlid['lid'];
 						<select onchange="getTargetsByLid();" id="lid" name="lid">
 <?php
 $sql = mysql_query("SELECT * FROM ".TB_PREFIX."farmlist WHERE owner = $session->uid ORDER BY name ASC");
-while($row = mysql_fetch_array($sql)){ 
+while($row = mysql_fetch_array($sql)){
 $lid = $row["id"];
 $lname = $row["name"];
 $lowner = $row["owner"];
@@ -103,14 +103,14 @@ $lvname = $database->getVillageField($row["wref"], 'name');
 	if($lid==$lid2){ $selected = 'selected=""'; }else{ $selected = ''; }
 	echo '<option value="'.$lid.'" '.$selected.'>'.$lvname.' - '.$lname.'</option>';
 }
-?>	
+?>
 						</select>
 					</td>
 				</tr>
 				<tr>
 					<th>Select target:</th>
 					<td class="target">
-						
+
 			<div class="coordinatesInput">
 				<div class="xCoord">
 					<label for="xCoordInput">X:</label>
@@ -158,7 +158,7 @@ $vill[$towref] = 1;
 				</div>
 		<?php include "Templates/goldClub/trooplist.tpl"; ?>
 
-		
+
 <button type="submit" value="save" name="save" id="save"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Save</div></div></button>&nbsp;
 <button type="button" value="delete" name="delete" id="delete" onclick="window.location.href = '?gid=16&t=99&action=deleteSlot&eid=<?php echo $_GET["eid"]; ?>';"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Delete</div></div></button>
 </form>

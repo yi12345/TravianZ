@@ -27,18 +27,18 @@ else if(!$message->unread && $message->nunread) { $messagelol = "i3"; }
 else if($message->unread && $message->nunread) { $messagelol = "i1"; }
 else { $messagelol = "i4"; }
 
-//set $skipp_time. Use the SPEED. standard (1x) = 10 hours. 
-if(SPEED == '1'){ 
-	$skipp_time="43200"; 
-} else if(SPEED == '2'){ 
-	$skipp_time="21600"; 
-} else if(SPEED == '3'){ 
-	$skipp_time="11988"; 
+//set $skipp_time. Use the SPEED. standard (1x) = 10 hours.
+if(SPEED == '1'){
+	$skipp_time="43200";
+} else if(SPEED == '2'){
+	$skipp_time="21600";
+} else if(SPEED == '3'){
+	$skipp_time="11988";
 } else if(SPEED <= '5'){
-	$skipp_time="7200"; 
-} else if(SPEED > '5'){ 
-	$skipp_time="3600"; 
-} 
+	$skipp_time="7200";
+} else if(SPEED > '5'){
+	$skipp_time="3600";
+}
 $_SESSION['qst_time'] = $uArray['quest_time'];
 if (isset($qact)){
 	if ($check_quest==$qact) {
@@ -49,9 +49,9 @@ if (isset($qact)){
 			$database->updateUserField($_SESSION['username'],'quest','1',0);
 			$_SESSION['qst']= 1;
 			break;
-	
-	
-			//user does not follow the quest. 
+
+
+			//user does not follow the quest.
 			//Get reward: Resources: Every 24 hours (1 speed)  24/speed=hours
 			//Gold: 25 gold
 		case 'skip':
@@ -60,10 +60,10 @@ if (isset($qact)){
 			break;
 
 		case '2':
-			$database->updateUserField($_SESSION['username'],'quest','2',0);		
-			$_SESSION['qst']= 2;	
+			$database->updateUserField($_SESSION['username'],'quest','2',0);
+			$_SESSION['qst']= 2;
 			//Give Reward
-			$database->FinishWoodcutter($session->villages[0]);	
+			$database->FinishWoodcutter($session->villages[0]);
 			break;
 
 		case '3':
@@ -83,18 +83,18 @@ if (isset($qact)){
 			$database->updateUserField($_SESSION['username'],'quest','4',0);
 			$_SESSION['qst']= 4;
 			//Give Reward
-			$database->modifyResource($session->villages[0],30,60,30,20,1);		
+			$database->modifyResource($session->villages[0],30,60,30,20,1);
 			break;
-	
+
 		case 'rank':
 			$rSubmited=$qact2;
 			break;
-	
+
 		case '5':
 			$database->updateUserField($_SESSION['username'],'quest','5',0);
 			$_SESSION['qst']= 5;
 			//Give Reward
-			$database->modifyResource($session->villages[0],40,30,20,30,1);	
+			$database->modifyResource($session->villages[0],40,30,20,30,1);
 			break;
 
 		case '6':
@@ -105,9 +105,9 @@ if (isset($qact)){
 			$Message=Q6_MESSAGE;
 			$RB=true;
 			//Give Reward
-			$database->modifyResource($session->villages[0],50,60,30,30,1);	
+			$database->modifyResource($session->villages[0],50,60,30,30,1);
 			break;
-	
+
 		case '7':
 			$database->updateUserField($_SESSION['username'],'quest','7',0);
 			$_SESSION['qst']= 7;
@@ -116,36 +116,36 @@ if (isset($qact)){
 			$gold+=20;
 			$database->updateUserField($_SESSION['username'],'gold',$gold,0);
 			break;
-			
+
 		case '8':
 			$database->updateUserField($_SESSION['username'],'quest','8',0);
 			$_SESSION['qst']= 8;
 			//Give Reward
 			$database->modifyResource($session->villages[0],75,80,30,50,1);
 			break;
-	
+
 		case '9':
 			$crop = round($village->acrop);
 			if ($crop>=200){
 				$database->updateUserField($_SESSION['username'],'quest','9',0);
-				//Get 200 Crop	
-				$database->modifyResource($session->villages[0],0,0,0,-200,1);		
+				//Get 200 Crop
+				$database->modifyResource($session->villages[0],0,0,0,-200,1);
 				//Give Reward
 				$attack = $database->addAttack(0,1,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0);
 				$database->addMovement(3,0,$session->villages[0],$attack,time(),time()+43200/INCREASE_SPEED);
 			} else{
 				$NoCrop=Q8_NOCROP;
 			}
-			$_SESSION['qst']= 9;	
+			$_SESSION['qst']= 9;
 			break;
-	
+
 		case '10':
 			$database->updateUserField($_SESSION['username'],'quest','10',0);
 			$_SESSION['qst']= 10;
 			//Give Reward
 			$database->modifyResource($session->villages[0],75,90,30,50,1);
 			break;
-	
+
 		case '11':
 			$database->updateUserField($_SESSION['username'],'quest','11',0);
 			$_SESSION['qst']= 11;
@@ -158,70 +158,70 @@ if (isset($qact)){
 				$database->updateUserField($_SESSION['username'],'plus',$plus,0);
 			}
 			break;
-	
+
 		case 'coor':
 			$x=$qact2;
 			$y=$qact3;
 			break;
-	
+
 		case '12':
 			$database->updateUserField($_SESSION['username'],'quest','12',0);
 			$_SESSION['qst']= 12;
 			//Give Reward
-			$database->modifyResource($session->villages[0],60,30,40,90,1);	
+			$database->modifyResource($session->villages[0],60,30,40,90,1);
 			break;
-		
+
 		case '13':
 			$database->updateUserField($_SESSION['username'],'quest','13',0);
 			$_SESSION['qst']= 13;
 			//Give Reward
 			$database->modifyResource($session->villages[0],150,180,30,130,1);
 			break;
-	
+
 		case '14':
 			$database->updateUserField($_SESSION['username'],'quest','14',0);
 			$_SESSION['qst']= 14;
 			//Give Reward
 			$database->modifyResource($session->villages[0],60,50,40,30,1);
 			break;
-	
+
 		case 'lumber':
 			$lSubmited=$qact2;
 			break;
-	
+
 		case '15':
 			$database->updateUserField($_SESSION['username'],'quest','15',0);
 			$_SESSION['qst']= 15;
 			//Give Reward
 			$database->modifyResource($session->villages[0],50,30,60,20,1);
 			break;
-	
+
 		case '16':
 			$database->updateUserField($_SESSION['username'],'quest','16',0);
 			$_SESSION['qst']= 16;
 			//Give Reward
 			$database->modifyResource($session->villages[0],75,75,40,40,1);
 			break;
-	
+
 		case '17':
 			$database->updateUserField($_SESSION['username'],'quest','17',0);
 			$_SESSION['qst']= 17;
 			//Give Reward
 			$database->modifyResource($session->villages[0],100,90,100,60,1);
 			break;
-	
+
 		case '18':
 			$database->updateUserField($_SESSION['username'],'quest','18',0);
-			$_SESSION['qst']= 18;			
+			$_SESSION['qst']= 18;
 			break;
-	
+
 		case '19':
 			$database->updateUserField($_SESSION['username'],'quest','19',0);
 			$_SESSION['qst']= 19;
 			//Give Reward
 			$database->modifyResource($session->villages[0],80,90,60,40,1);
 			break;
-	
+
 		case '20':
 			$database->updateUserField($_SESSION['username'],'quest','20',0);
 			$_SESSION['qst']= 20;
@@ -231,28 +231,28 @@ if (isset($qact)){
 
 		case '21':
 			$database->updateUserField($_SESSION['username'],'quest','21',0);
-			$_SESSION['qst']= 21;			
+			$_SESSION['qst']= 21;
 			break;
-	
+
 		case '22':
 			$database->updateUserField($_SESSION['username'],'quest','22',0);
 			$_SESSION['qst']= 22;
 			//Give Reward
 			$database->modifyResource($session->villages[0],200,200,700,450,1);
 			break;
-	
+
 		case '23':
 			$database->updateUserField($_SESSION['username'],'quest','23',0);
 			$_SESSION['qst']= 23;
 			break;
-	
+
 		case '24':
 			$database->updateUserField($_SESSION['username'],'quest','24',0);
 			$_SESSION['qst']= 24;
 			//Give Reward
 			$database->modifyResource($session->villages[0],300,320,360,570,1);
 			break;
-	
+
 		case '28':
 			$dataarray[3] = 1;
 			$database->updateUserField($_SESSION['username'],'quest','28',0);
@@ -262,7 +262,7 @@ if (isset($qact)){
 			$gold+=15;
 			$database->updateUserField($_SESSION['username'],'gold',$gold,0);
 			break;
-	
+
 		case '29':
 			$dataarray[4] = 1;
 			$database->updateUserField($_SESSION['username'],'quest','29',0);
@@ -270,7 +270,7 @@ if (isset($qact)){
 			//Give Reward
 			$database->modifyResource($session->villages[0],240,280,180,100,1);
 			break;
-    
+
 		case '30':
 			$dataarray[5] = 1;
 			$database->updateUserField($_SESSION['username'],'quest','30',0);
@@ -278,7 +278,7 @@ if (isset($qact)){
 			//Give Reward
 			$database->modifyResource($session->villages[0],600,750,600,300,1);
 			break;
-    
+
 		case '31':
 			$dataarray[6] = 1;
 			$database->updateUserField($_SESSION['username'],'quest','31',0);
@@ -286,7 +286,7 @@ if (isset($qact)){
 			//Give Reward
 			$database->modifyResource($session->villages[0],900,850,600,300,1);
 			break;
-    
+
 		case '32':
 			$dataarray[7] = 1;
 			$database->updateUserField($_SESSION['username'],'quest','32',0);
@@ -294,7 +294,7 @@ if (isset($qact)){
 			//Give Reward
 			$database->modifyResource($session->villages[0],1800,2000,1650,800,1);
 			break;
-    
+
 		case '33':
 			$dataarray[8] = 1;
 			$database->updateUserField($_SESSION['username'],'quest','33',0);
@@ -302,7 +302,7 @@ if (isset($qact)){
 			//Give Reward
 			$database->modifyResource($session->villages[0],1600,1800,1950,1200,1);
 			break;
-    
+
 		case '34':
 			$dataarray[9] = 1;
 			$database->updateUserField($_SESSION['username'],'quest','34',0);
@@ -310,7 +310,7 @@ if (isset($qact)){
 			//Give Reward
 			$database->modifyResource($session->villages[0],3400,2800,3600,2200,1);
 			break;
-    
+
 		case '35':
 			$dataarray[10] = 1;
 			$database->updateUserField($_SESSION['username'],'quest','35',0);
@@ -318,19 +318,19 @@ if (isset($qact)){
 			//Give Reward
 			$database->modifyResource($session->villages[0],1050,800,900,750,1);
 			break;
-    
+
 		case '36':
 			$database->updateUserField($_SESSION['username'],'quest','36',0);
 			$_SESSION['qst']= 36;
 			//Give Reward
 			$database->modifyResource($session->villages[0],1600,2000,1800,1300,1);
 			break;
-	
+
 		case '37':
 			$database->updateUserField($_SESSION['username'],'quest','37',0);
 			$_SESSION['qst']= 37;
 			break;
-	
+
 		case '91':
 			$database->updateUserField($_SESSION['username'],'quest','91',0);
 			$database->updateUserField($_SESSION['username'],'quest_time',''.(time()+$skipp_time).'',0);
@@ -348,7 +348,7 @@ if (isset($qact)){
 			$gold+=15;
 			$database->updateUserField($_SESSION['username'],'gold',$gold,0);
 			break;
-		
+
 		case '92':
 			$database->updateUserField($_SESSION['username'],'quest','92',0);
 			$database->updateUserField($_SESSION['username'],'quest_time',''.(time()+$skipp_time).'',0);
@@ -356,8 +356,8 @@ if (isset($qact)){
 			$_SESSION['qst_time'] = time()+$skipp_time;
 			//Give Reward
 			$database->modifyResource($session->villages[0],217,247,177,207,1);
-			break;	
-	
+			break;
+
 		case '93':
 			$database->updateUserField($_SESSION['username'],'quest','93',0);
 			$database->updateUserField($_SESSION['username'],'quest_time',''.(time()+$skipp_time).'',0);
@@ -365,8 +365,8 @@ if (isset($qact)){
 			$_SESSION['qst_time'] = time()+$skipp_time;
 			//Give Reward
 			$database->modifyResource($session->villages[0],217,247,177,207,1);
-			break;	
-	
+			break;
+
 		case '94':
 			$database->updateUserField($_SESSION['username'],'quest','94',0);
 			$database->updateUserField($_SESSION['username'],'quest_time',''.(time()+$skipp_time).'',0);
@@ -374,8 +374,8 @@ if (isset($qact)){
 			$_SESSION['qst_time'] = time()+$skipp_time;
 			//Give Reward
 			$database->modifyResource($session->villages[0],217,247,177,207,1);
-			break;	
-	
+			break;
+
 		case '95':
 			$database->updateUserField($_SESSION['username'],'quest','95',0);
 			$database->updateUserField($_SESSION['username'],'quest_time',''.(time()+$skipp_time).'',0);
@@ -383,8 +383,8 @@ if (isset($qact)){
 			$_SESSION['qst_time'] = time()+$skipp_time;
 			//Give Reward
 			$database->modifyResource($session->villages[0],217,247,177,207,1);
-			break;	
-	
+			break;
+
 		case '96':
 			$database->updateUserField($_SESSION['username'],'quest','96',0);
 			$database->updateUserField($_SESSION['username'],'quest_time',''.(time()+$skipp_time).'',0);
@@ -392,8 +392,8 @@ if (isset($qact)){
 			$_SESSION['qst_time'] = time()+$skipp_time;
 			//Give Reward
 			$database->modifyResource($session->villages[0],217,247,177,207,1);
-			break;	
-	
+			break;
+
 		case '97':
 			$database->updateUserField($_SESSION['username'],'quest','97',0);
 			$database->updateUserField($_SESSION['username'],'quest_time',''.(time()).'',0);
@@ -411,7 +411,7 @@ if (isset($qact)){
 			$gold+=20;
 			$database->updateUserField($_SESSION['username'],'gold',$gold,0);
 			break;
-		}	
+		}
 	}
 }
 
@@ -424,14 +424,14 @@ if($session->access!=BANNED){
 
 <?php } elseif($_SESSION['qst']== 1){
 
-//Check one of Woodcutters is level 1 or upper 
+//Check one of Woodcutters is level 1 or upper
 $tRes = $database->getResourceLevel($session->villages[0]);
 $woodL=$tRes['f1']+$tRes['f3']+$tRes['f14']+$tRes['f17'];
 	//check if you are building a woodcutter to level 1
 	foreach($building->buildArray as $jobs) {
 			if($jobs['type']==1){
 				$woodL="99";
-			}	
+			}
       	}
 if ($woodL<1){?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> <?php echo Q1; ?><\/h1><br \/><i>&rdquo;<?php echo Q1_DESC; ?>&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><?php echo Q1_ORDER; ?><\/div><br \/><span id=\"qst_accpt\"><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"wood\"><\/div>\n\t\t","number":"-1","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":99}
@@ -439,9 +439,9 @@ if ($woodL<1){?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> <?php echo Q1; ?><\/h1><br \/><i>&rdquo;<?php echo Q1_RESP; ?>&rdquo;<\/i><br \/><br \/><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/><div class=\"rew\"><p class=\"ta_aw\"><?php echo Q1_REWARD; ?><br \/><\/div><br \/><span id=\"qst_accpt\"><a href=\"javascript: qst_next('','2');\"><?php echo Q_CONTINUE; ?><\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"wood\"><\/div>\n\t\t","number":"-1","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":99}
 <?php }?>
 
-<?php } elseif($_SESSION['qst']== 2){ 
+<?php } elseif($_SESSION['qst']== 2){
 
-//Check one of Croplands is level 1 or upper 
+//Check one of Croplands is level 1 or upper
 $tRes = $database->getResourceLevel($session->villages[0]);
 $cropL=$tRes['f2']+$tRes['f8']+$tRes['f9']+$tRes['f12']+$tRes['f13']+$tRes['f15'];
 if ($cropL<1){?>
@@ -450,7 +450,7 @@ if ($cropL<1){?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> <?php echo Q2; ?><\/h1><br \/><i>&rdquo;<?php echo Q2_RESP; ?>&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/><?php echo Q2_REWARD; ?> <b><span class=\"plus_g\">P</span><span class=\"plus_o\">l</span><span class=\"plus_g\">u</span><span class=\"plus_o\">s</span></b><\/div><br \/><span id=\"qst_accpt\"><a href=\"javascript: qst_next('','3');\"><?php echo Q_CONTINUE; ?><\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"farm\"><\/div>\n\t\t","number":2,"reward":{"plus":1},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":99}
 <?php }?>
 
-<?php } elseif($_SESSION['qst']== 3){ 
+<?php } elseif($_SESSION['qst']== 3){
 
 //Check the village name is changed or is default name
 
@@ -474,9 +474,9 @@ if ($rRes!=$rSubmited){?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/><?php echo Q4; ?><\/h1><br \/><i>&rdquo;<?php echo Q4_RESP; ?>&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/><?php echo Q_REWARD; ?><\/p><img src=\"img\/x.gif\" class=\"r1\" alt=\"Lumber\" title=\"Lumber\" \/>40&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\" \/>30&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\" \/>20&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r4\" alt=\"Crop\" title=\"Crop\" \/>30&nbsp;&nbsp;<\/div><br \/><span id=\"qst_accpt\"><a href=\"javascript: qst_next('','5');\"><?php echo Q_CONTINUE; ?><\/a><\/span><\/div>\n\t\t","number":4,"reward":{"wood":40,"clay":30,"iron":20,"crop":30},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":99}
 <?php }?>
 
-<?php } elseif($_SESSION['qst']== 5){ 
+<?php } elseif($_SESSION['qst']== 5){
 
-//Check one of Iron Mines and one of Clay Pites are level 1 or upper 
+//Check one of Iron Mines and one of Clay Pites are level 1 or upper
 $tRes = $database->getResourceLevel($session->villages[0]);
 $ironL=$tRes['f4']+$tRes['f7']+$tRes['f10']+$tRes['f11'];
 $clayL=$tRes['f5']+$tRes['f6']+$tRes['f16']+$tRes['f18'];
@@ -486,7 +486,7 @@ if ($ironL<1 || $clayL<1){?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/><?php echo Q5; ?><\/h1><br \/><i>&rdquo;<?php echo Q5_RESP; ?>&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/><?php echo Q_REWARD; ?><\/p><img src=\"img\/x.gif\" class=\"r1\" alt=\"Lumber\" title=\"Lumber\" \/>50&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\" \/>60&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\" \/>30&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r4\" alt=\"Crop\" title=\"Crop\" \/>30&nbsp;&nbsp;<\/div><br \/><span id=\"qst_accpt\"><a href=\"javascript: qst_next('','6');\"><?php echo Q_CONTINUE; ?><\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"clay_iron\"><\/div>\n\t\t","number":5,"reward":{"wood":50,"clay":60,"iron":30,"crop":30},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":99}
 <?php }?>
 
-<?php } elseif($_SESSION['qst']== 6){ 
+<?php } elseif($_SESSION['qst']== 6){
 
 //Check message is viewed or no
 if ($message->unread || $RB==true){?>
@@ -529,7 +529,7 @@ if ($ironL<4 || $clayL<4 || $woodL<4 || $cropL<6){?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> <?php echo Q9; ?><\/h1><br \/><i>&rdquo;<?php echo Q9_RESP; ?>.&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/><?php echo Q_REWARD; ?><\/p><img src=\"img\/x.gif\" class=\"r1\" alt=\"Lumber\" title=\"Lumber\" \/>75&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\" \/>80&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\" \/>30&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r4\" alt=\"Crop\" title=\"Crop\" \/>50&nbsp;&nbsp;<\/div><br \/><span id=\"qst_accpt\"><a href=\"javascript: qst_next('','10');\"><?php echo Q_CONTINUE; ?><\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"allres\"><\/div>\n\t\t","number":9,"reward":{"wood":75,"clay":80,"iron":30,"crop":50},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":99}
 <?php }?>
 
-<?php } elseif($_SESSION['qst']== 10){ 
+<?php } elseif($_SESSION['qst']== 10){
 
 //Check player Descriptions for [#0]
 $Dave= strrpos ($uArray['desc1'],'[#0]');
@@ -577,7 +577,7 @@ if ($ironL<1 || $clayL<1 || $woodL<1 || $cropL<1){?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> <?php echo Q13; ?><\/h1><br \/><i>&rdquo;<?php echo Q13_RESP; ?>&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/><?php echo Q_REWARD; ?><\/p><img src=\"img\/x.gif\" class=\"r1\" alt=\"Lumber\" title=\"Lumber\" \/>60&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\" \/>50&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\" \/>40&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r4\" alt=\"Crop\" title=\"Crop\" \/>30&nbsp;&nbsp;<\/div><br \/><span id=\"qst_accpt\"><a href=\"javascript: qst_next('','14');\"><?php echo Q_CONTINUE; ?><\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"allres\"><\/div>\n\t\t","number":13,"reward":{"wood":60,"clay":50,"iron":40,"crop":30},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":99}
 <?php }?>
 
-<?php } elseif($_SESSION['qst']== 14){ 
+<?php } elseif($_SESSION['qst']== 14){
 
 //Check player submited number Barracks cost lumber
 if ($lSubmited!=210){?>
@@ -895,7 +895,7 @@ $_SESSION['qst']= 38; ?>
 
 <?php } elseif($_SESSION['qst']== 1){
 
-//Check one of Woodcutters is level 1 or upper 
+//Check one of Woodcutters is level 1 or upper
 $tRes = $database->getResourceLevel($session->villages[0]);
 $woodL=$tRes['f1']+$tRes['f3']+$tRes['f14']+$tRes['f17'];
 if ($woodL<1){?>
@@ -904,9 +904,9 @@ if ($woodL<1){?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> Task 1: Woodcutter<\/h1><br \/><i>&rdquo;Yes, that way you gain more lumber.I helped a bit and completed the order instantly.&rdquo;<\/i><br \/><br \/><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/><div class=\"rew\"><p class=\"ta_aw\">Your reward:<\/p>Woodcutter instantly completed.<br \/><\/div><br \/><span id=\"qst_accpt\"><a href=\"banned.php\">Continue with the next task.<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"wood\"><\/div>\n\t\t","number":"-1","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php }?>
 
-<?php } elseif($_SESSION['qst']== 2){ 
+<?php } elseif($_SESSION['qst']== 2){
 
-//Check one of Croplands is level 1 or upper 
+//Check one of Croplands is level 1 or upper
 $tRes = $database->getResourceLevel($session->villages[0]);
 $cropL=$tRes['f2']+$tRes['f8']+$tRes['f9']+$tRes['f12']+$tRes['f13']+$tRes['f15'];
 if ($cropL<1){?>
@@ -915,7 +915,7 @@ if ($cropL<1){?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> Task 2: Crop<\/h1><br \/><i>&rdquo;Very good. Now your subjects have enough to eat again...&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Your reward:<\/p><img src=\"img\/x.gif\" class=\"r1\" alt=\"Lumber\" title=\"Lumber\" \/>50&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\" \/>60&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\" \/>30&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r4\" alt=\"Crop\" title=\"Crop\" \/>10&nbsp;&nbsp;<\/div><br \/><span id=\"qst_accpt\"><a href=\"banned.php\">Continue with the next task.<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"farm\"><\/div>\n\t\t","number":2,"reward":{"plus":1},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php }?>
 
-<?php } elseif($_SESSION['qst']== 3){ 
+<?php } elseif($_SESSION['qst']== 3){
 
 //Check the village name is changed or is default name
 
@@ -939,9 +939,9 @@ if ($rRes!=$rSubmited){?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> Task 4: Other Players<\/h1><br \/><i>&rdquo;Exactly! That's your rank.&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Your reward:<\/p><img src=\"img\/x.gif\" class=\"r1\" alt=\"Lumber\" title=\"Lumber\" \/>40&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\" \/>30&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\" \/>20&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r4\" alt=\"Crop\" title=\"Crop\" \/>30&nbsp;&nbsp;<\/div><br \/><span id=\"qst_accpt\"><a href=\"banned.php\">Continue with the next task.<\/a><\/span><\/div>\n\t\t","number":4,"reward":{"wood":40,"clay":30,"iron":20,"crop":30},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php }?>
 
-<?php } elseif($_SESSION['qst']== 5){ 
+<?php } elseif($_SESSION['qst']== 5){
 
-//Check one of Iron Mines and one of Clay Pites are level 1 or upper 
+//Check one of Iron Mines and one of Clay Pites are level 1 or upper
 $tRes = $database->getResourceLevel($session->villages[0]);
 $ironL=$tRes['f4']+$tRes['f7']+$tRes['f10']+$tRes['f11'];
 $clayL=$tRes['f5']+$tRes['f6']+$tRes['f16']+$tRes['f18'];
@@ -951,7 +951,7 @@ if ($ironL<1 || $clayL<1){?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> Task 5: Two Building Orders<\/h1><br \/><i>&rdquo;As you noticed, building orders take rather long. The world of <?php echo SERVER_NAME; ?> will continue to spin even if you are offline. Even in a few months there will be many new things for you to discover.\r\n<br \/><br \/>\r\nThe best thing to do is occasionally checking your village and giving you subjects new tasks to do.&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Your reward:<\/p><img src=\"img\/x.gif\" class=\"r1\" alt=\"Lumber\" title=\"Lumber\" \/>50&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\" \/>60&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\" \/>30&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r4\" alt=\"Crop\" title=\"Crop\" \/>30&nbsp;&nbsp;<\/div><br \/><span id=\"qst_accpt\"><a href=\"banned.php\">Continue with the next task.<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"clay_iron\"><\/div>\n\t\t","number":5,"reward":{"wood":50,"clay":60,"iron":30,"crop":30},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php }?>
 
-<?php } elseif($_SESSION['qst']== 6){ 
+<?php } elseif($_SESSION['qst']== 6){
 
 //Check message is viewed or no
 if ($message->unread || $RB==true){?>
@@ -978,7 +978,7 @@ if ($ironL<4 || $clayL<4 || $woodL<4 || $cropL<6){?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> Task 8: Everything to 1.<\/h1><br \/><i>&rdquo;Very good, your resource production just thrives.\r\n<br \/><br \/>\r\nSoon we can start with constructing buildings in the village.&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Your reward:<\/p><img src=\"img\/x.gif\" class=\"r1\" alt=\"Lumber\" title=\"Lumber\" \/>75&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\" \/>80&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\" \/>30&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r4\" alt=\"Crop\" title=\"Crop\" \/>50&nbsp;&nbsp;<\/div><br \/><span id=\"qst_accpt\"><a href=\"banned.php\">Continue with the next task.<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"allres\"><\/div>\n\t\t","number":12,"reward":{"wood":75,"clay":80,"iron":30,"crop":50},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php }?>
 
-<?php } elseif($_SESSION['qst']== 9){ 
+<?php } elseif($_SESSION['qst']== 9){
 
 //Check player Descriptions for [#0]
 $Dave= strrpos ($uArray['desc1'],'[#0]');
@@ -1014,7 +1014,7 @@ if ($ironL<1 || $clayL<1 || $woodL<1 || $cropL<1){?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> Task 11: To Two.<\/h1><br \/><i>&rdquo;Very good, your village grows and thrives!&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Your reward:<\/p><img src=\"img\/x.gif\" class=\"r1\" alt=\"Lumber\" title=\"Lumber\" \/>60&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\" \/>50&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\" \/>40&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r4\" alt=\"Crop\" title=\"Crop\" \/>30&nbsp;&nbsp;<\/div><br \/><span id=\"qst_accpt\"><a href=\"banned.php\">Continue with the next task.<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"allres\"><\/div>\n\t\t","number":15,"reward":{"wood":60,"clay":50,"iron":40,"crop":30},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php }?>
 
-<?php } elseif($_SESSION['qst']== 12){ 
+<?php } elseif($_SESSION['qst']== 12){
 
 //Check player submited number Barracks cost lumber
 if ($lSubmited!=210){?>

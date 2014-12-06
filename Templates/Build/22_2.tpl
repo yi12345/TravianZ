@@ -5,7 +5,7 @@
 </tr></thead>
 <tbody>
 
-<?php 
+<?php
 $fail = $success = 0;
 $acares = $technology->grabAcademyRes();
 for($i=12;$i<=19;$i++) {
@@ -64,10 +64,10 @@ for($i=12;$i<=19;$i++) {
 if($success == 0) {
 echo "<td colspan=\"2\"><div class=\"none\" align=\"center\">There are no researches avaliable</div></td>";
 }
-?>		
+?>
 			</tbody>
             </table>
-<?php if($fail > 0) { 
+<?php if($fail > 0) {
 	echo "<p class=\"switch\"><a id=\"researchFutureLink\" href=\"#\" onclick=\"return $('researchFuture').toggle();\">show more</a></p>
 		<table id=\"researchFuture\" class=\"build_details hide\" cellspacing=\"1\" cellpadding=\"1\">
 			<thead><tr><td colspan=\"2\">Prerequisites</td></tr><tbody>";

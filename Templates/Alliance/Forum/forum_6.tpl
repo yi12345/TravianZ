@@ -135,7 +135,7 @@ foreach($posts as $po) {
 		$trip = "Teutons";
 	}else if($displayarray['tribe'] == 3) {
 		$trip = "Gauls";
-	} 
+	}
 	$owner = $database->getUserArray($po['owner'],1);
 	$allianceinfo = $database->getAlliance($owner['alliance']);
 	$input = $po['post'];
@@ -169,7 +169,7 @@ echo '<div class="clear dotted"></div><div class="text">'.$bbcode_post.'</div></
 	if($opt['opt5'] == 1){
 		echo '<a href="allianz.php?s=2&pid='.$aid.'&tid='.$arr['id'].'&admin=switch_admin" title="Toggle Admin mode"><img class="switch_admin dynamic_img" src="img/x.gif" alt="Toggle Admin mode" /></a>';
 	}
-	 
+
 	 echo '</div>';
 }else{
 header("Location: banned.php");

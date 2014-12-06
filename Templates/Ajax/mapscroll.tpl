@@ -95,7 +95,7 @@ $i=0;
 $yrow = 0;
 
 $map_js ='';
-while ($donnees = mysql_fetch_assoc($result2)){	
+while ($donnees = mysql_fetch_assoc($result2)){
 
 $targetalliance=$donnees["aliance_id"];
 $friendarray=$database->getAllianceAlly($donnees["aliance_id"],1);
@@ -125,7 +125,7 @@ $image = "o99";
 		elseif($donnees['map_oasis'] != 0){
 			if ($donnees['oasis_conqured'] != 0){
 					$map_js.= ",\"\",\"".$donnees['oasis_user']."\",\"-\",\"".$donnees['oasis_alli_name']."\",\"".$donnees['oasis_tribe']."\"]";
-			} 
+			}
 			else{
 				$map_js.="]";
 			}

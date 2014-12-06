@@ -1,6 +1,6 @@
 <div id="content"  class="messages">
 <h1>短消息</h1>
-<?php 
+<?php
 include("menu.tpl");
 ?>
 <form method="post" action="nachrichten.php" name="msg" ><table cellpadding="1" cellspacing="1" id="overview">
@@ -23,7 +23,7 @@ include("menu.tpl");
 		<input name="delmsg" value="delete" type="image" id="btn_delete" class="dynamic_img" src="img/x.gif" alt="delete" />
         <?php if($session->plus) { echo "<input name=\"archive\" value=\"Archive\" type=\"image\" id=\"btn_archiv\" class=\"dynamic_img\" src=\"img/x.gif\" alt=\"Archive\" />"; } ?>
         <input name="ft" value="m3" type="hidden" />
-	</th><th class="navi"><?php 
+	</th><th class="navi"><?php
     if(!isset($_GET['s']) && count($message->inbox1) < 10) {
     echo "&laquo;&raquo;";
     }
@@ -42,7 +42,7 @@ include("menu.tpl");
         }
     }
     ?></th></tr></tfoot><tbody>
-    <?php 
+    <?php
     if(isset($_GET['s'])) {
     $s = $_GET['s'];
     }
