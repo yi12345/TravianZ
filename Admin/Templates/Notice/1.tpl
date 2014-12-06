@@ -30,13 +30,13 @@ if($database->isVillageOases($dataarray[29])){
 <table cellpadding="1" cellspacing="1" id="report_surround">
                         <thead>
                                 <tr>
-                                        <th>Subject:</th>
+                                        <th>主旨:</th>
                                         <th><?php echo $rep[0]['topic']; ?></th>
                                 </tr>
                                 <tr>
                                         <?php
 $date = $generator->procMtime($rep[0]['time']); ?>
-                                        <td class="sent">Sent:</td>
+                                        <td class="sent">寄送時間:</td>
                                         <td>on <?php echo $date[0]."<span> at ".$date[1]; ?></span> <span>hour</span></td>
                                 </tr>
                         </thead>
