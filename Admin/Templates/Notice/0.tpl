@@ -35,7 +35,7 @@ $start = ($tribe-1)*10+1;
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=3;$i<=12;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">0</td>";
@@ -44,7 +44,7 @@ for($i=3;$i<=12;$i++) {
     	echo "<td>".$dataarray[$i]."</td>";
     }
 }
-echo "<tr><th>Casualties</th>";
+echo "<tr><th>傷亡</th>";
 for($i=13;$i<=22;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">0</td>";
@@ -78,7 +78,7 @@ if ($dataarray[143]!='' and $dataarray[144]!=''){ //chief
 <?php } ?>
 <?php if ($dataarray[145]!='' and $dataarray[146]!=''){ //spy
 ?>
-    <tbody class="goods"><tr><th>Information</th><td colspan="10">
+    <tbody class="goods"><tr><th>資訊</th><td colspan="10">
 
     <?php echo $dataarray[146]; ?>
     </td></tr></tbody>
@@ -95,7 +95,7 @@ $start=1; ?>
 	<thead>
 	<tr>
 	<td class="role">防禦者</th>
-	<td colspan="10"><?php if($targettribe=='1'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> from the village <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo "援兵"; } ?></td>
+	<td colspan="10"><?php if($targettribe=='1'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> 來自村莊 <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo "援兵"; } ?></td>
 	</tr></thead>
 	<tbody class="units">
 	<tr>
@@ -106,7 +106,7 @@ $start=1; ?>
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=35;$i<=44;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">0</td>";
@@ -134,7 +134,7 @@ $start=11;?>
 	<thead>
 	<tr>
 	<td class="role">防禦者</th>
-	<td colspan="10"><?php if($targettribe=='2'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> from the village <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo "援兵"; } ?></td>
+	<td colspan="10"><?php if($targettribe=='2'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> 來自村莊 <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo "援兵"; } ?></td>
 	</tr></thead>
 	<tbody class="units">
 	<tr>
@@ -145,7 +145,7 @@ $start=11;?>
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=56;$i<=65;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">0</td>";
@@ -154,7 +154,7 @@ for($i=56;$i<=65;$i++) {
     	echo "<td>".$dataarray[$i]."</td>";
     }
 }
-echo "<tr><th>Casualties</th>";
+echo "<tr><th>傷亡</th>";
 for($i=66;$i<=75;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">0</td>";
@@ -172,7 +172,7 @@ $start=21; ?>
 	<thead>
 	<tr>
 	<td class="role">防禦者</th>
-	<td colspan="10"><?php if($targettribe=='3'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> from the village <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo "援兵"; } ?></td>
+	<td colspan="10"><?php if($targettribe=='3'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> 來自村莊 <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo "援兵"; } ?></td>
 	</tr></thead>
 	<tbody class="units">
 	<tr>
@@ -183,7 +183,7 @@ $start=21; ?>
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=77;$i<=86;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">0</td>";
@@ -192,7 +192,7 @@ for($i=77;$i<=86;$i++) {
     	echo "<td>".$dataarray[$i]."</td>";
     }
 }
-echo "<tr><th>Casualties</th>";
+echo "<tr><th>傷亡</th>";
 for($i=87;$i<=96;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">0</td>";
@@ -211,7 +211,7 @@ $start=31; ?>
 	<thead>
 	<tr>
 	<td class="role">防禦者</th>
-	<td colspan="10"><?php if($targettribe=='4'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> from the village <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo "援兵"; } ?></td>
+	<td colspan="10"><?php if($targettribe=='4'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> 來自村莊 <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo "援兵"; } ?></td>
 	</tr></thead>
 	<tbody class="units">
 	<tr>
@@ -222,7 +222,7 @@ $start=31; ?>
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=98;$i<=107;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">0</td>";
@@ -231,7 +231,7 @@ for($i=98;$i<=107;$i++) {
     	echo "<td>".$dataarray[$i]."</td>";
     }
 }
-echo "<tr><th>Casualties</th>";
+echo "<tr><th>傷亡</th>";
 for($i=108;$i<=117;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">0</td>";
@@ -250,7 +250,7 @@ $start=41; ?>
 	<thead>
 	<tr>
 	<td class="role">防禦者</th>
-	<td colspan="10"><?php if($targettribe=='5'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> from the village <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo "援兵"; } ?></td>
+	<td colspan="10"><?php if($targettribe=='5'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> 來自村莊 <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo "援兵"; } ?></td>
 	</tr></thead>
 	<tbody class="units">
 	<tr>
@@ -261,7 +261,7 @@ $start=41; ?>
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=119;$i<=128;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">0</td>";
@@ -270,7 +270,7 @@ for($i=119;$i<=128;$i++) {
     	echo "<td>".$dataarray[$i]."</td>";
     }
 }
-echo "<tr><th>Casualties</th>";
+echo "<tr><th>傷亡</th>";
 for($i=129;$i<=138;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">0</td>";

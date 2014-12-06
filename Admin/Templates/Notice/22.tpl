@@ -23,15 +23,15 @@ $message1 = "".$database->getUserField($dataarray[0],"username",0)." wishes you 
 <table cellpadding="1" cellspacing="1" id="report_surround">
 			<thead>
 				<tr>
-					<th>Subject:</th>
+					<th>主旨:</th>
 					<th><?php echo $rep[0]['topic']; ?></th>
 				</tr>
 
 				<tr>
 					<?php
                 $date = $generator->procMtime($rep[0]['time']); ?>
-					<td class="sent">Sent:</td>
-					<td>on <?php echo $date[0]."<span> at ".$date[1]; ?></span> <span>hour</span></td>
+					<td class="sent">寄送時間:</td>
+					<td>on <?php echo $date[0]."<span> at ".$date[1]; ?></span> <span>小時</span></td>
 				</tr>
 			</thead>
 			<tbody>
@@ -39,8 +39,8 @@ $message1 = "".$database->getUserField($dataarray[0],"username",0)." wishes you 
 				<tr><td colspan="2" class="report_content">
 		<table cellpadding="1" cellspacing="1" class="attacker"><thead>
 <tr>
-<td class="role">Attacker</td>
-<td colspan="<?php echo $colspan ?>"><a href="spieler.php?uid=<?php echo $database->getUserField($dataarray[0],"id",0); ?>"><?php echo $database->getUserField($dataarray[0],"username",0); ?></a> from the village <a href="karte.php?d=<?php echo $dataarray[1]."&amp;c=".$generator->getMapCheck($dataarray[1]); ?>"><?php echo $database->getVillageField($dataarray[1],"name"); ?></a></td>
+<td class="role">攻擊者</td>
+<td colspan="<?php echo $colspan ?>"><a href="spieler.php?uid=<?php echo $database->getUserField($dataarray[0],"id",0); ?>"><?php echo $database->getUserField($dataarray[0],"username",0); ?></a> 來自村莊 <a href="karte.php?d=<?php echo $dataarray[1]."&amp;c=".$generator->getMapCheck($dataarray[1]); ?>"><?php echo $database->getVillageField($dataarray[1],"name"); ?></a></td>
 </tr>
 </thead>
 <tbody class="units">
@@ -55,7 +55,7 @@ for($i=$start;$i<=($start+9);$i++) {
 if(isset($dataarray[14]) and $dataarray[14]!=0){
 	echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=4;$i<=13;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">0</td>";
@@ -69,7 +69,7 @@ if(isset($dataarray[14]) and $dataarray[14]!=0){
 }
 ?>
 </tbody>
-	<tbody class="goods"><tr><th>Information</th><td colspan="<?php echo $colspan; ?>">
+	<tbody class="goods"><tr><th>資訊</th><td colspan="<?php echo $colspan; ?>">
 	<img src="<?php echo GP_LOCATE; ?>img/r/<?php echo $image; ?>.gif" alt="Peace" title="Peace" />
 	<?php echo $message1; ?>
     </td></tr></tbody>

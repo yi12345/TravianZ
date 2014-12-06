@@ -17,7 +17,7 @@ $dataarray = explode(",",$data);
                     <!-- TODO: Translate -->
                     <!-- Where is this? -->
 					<td class="sent">寄送時間:</td>
-					<td>on <?php echo $date[0]."<span> at ".$date[1]; ?></span> <span>hour</span></td>
+					<td>on <?php echo $date[0]."<span> at ".$date[1]; ?></span> <span>小時</span></td>
 				</tr>
 			</thead>
 			<tbody>
@@ -98,7 +98,7 @@ $start=1; ?>
 	<thead>
 	<tr>
 	<td class="role">防禦者</th>
-	<td colspan="10"><?php if($targettribe=='1'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> from the village <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo "援兵"; } ?></td>
+	<td colspan="10"><?php if($targettribe=='1'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> 來自村莊 <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo "援兵"; } ?></td>
 	</tr></thead>
 	<tbody class="units">
 	<tr>
@@ -137,7 +137,7 @@ $start=11;?>
 	<thead>
 	<tr>
 	<td class="role">防禦者</th>
-	<td colspan="10"><?php if($targettribe=='2'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> from the village <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo "援兵"; } ?></td>
+	<td colspan="10"><?php if($targettribe=='2'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> 來自村莊 <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo "援兵"; } ?></td>
 	</tr></thead>
 	<tbody class="units">
 	<tr>
@@ -175,7 +175,7 @@ $start=21; ?>
 	<thead>
 	<tr>
 	<td class="role">防禦者</th>
-	<td colspan="10"><?php if($targettribe=='3'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> from the village <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo "援兵"; } ?></td>
+	<td colspan="10"><?php if($targettribe=='3'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> 來自村莊 <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo "援兵"; } ?></td>
 	</tr></thead>
 	<tbody class="units">
 	<tr>
@@ -214,7 +214,7 @@ $start=31; ?>
 	<thead>
 	<tr>
 	<td class="role">防禦者</th>
-	<td colspan="10"><?php if($targettribe=='4'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> from the village <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo "援兵"; } ?></td>
+	<td colspan="10"><?php if($targettribe=='4'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> 來自村莊 <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo "援兵"; } ?></td>
 	</tr></thead>
 	<tbody class="units">
 	<tr>
@@ -253,7 +253,7 @@ $start=41; ?>
 	<thead>
 	<tr>
 	<td class="role">防禦者</th>
-	<td colspan="10"><?php if($targettribe=='5'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> from the village <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo "援兵"; } ?></td>
+	<td colspan="10"><?php if($targettribe=='5'){ echo'<a href="spieler.php?uid='.$database->getUserField($dataarray[28],"id",0).'">'.$database->getUserField($dataarray[28],"username",0).'</a> 來自村莊 <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo "援兵"; } ?></td>
 	</tr></thead>
 	<tbody class="units">
 	<tr>

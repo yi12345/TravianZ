@@ -36,14 +36,14 @@ if($database->isVillageOases($dataarray[29])){
 <table cellpadding="1" cellspacing="1" id="report_surround">
                         <thead>
                                 <tr>
-                                        <th>Subject:</th>
+                                        <th>主旨:</th>
                                         <th><?php echo $rep[0]['topic']; ?></th>
                                 </tr>
                                 <tr>
                                         <?php
 $date = $generator->procMtime($rep[0]['time']); ?>
-                                        <td class="sent">Sent:</td>
-                                        <td>on <?php echo $date[0]."<span> at ".$date[1]; ?></span> <span>hour</span></td>
+                                        <td class="sent">寄送時間:</td>
+                                        <td>on <?php echo $date[0]."<span> at ".$date[1]; ?></span> <span>小時</span></td>
                                 </tr>
                         </thead>
                         <tbody>
@@ -51,8 +51,8 @@ $date = $generator->procMtime($rep[0]['time']); ?>
                                 <tr><td colspan="2" class="report_content">
                 <table cellpadding="1" cellspacing="1" id="attacker"><thead>
 <tr>
-<td class="role">Attacker</td>
-<td colspan="<?php echo $colspan ?>"><?php echo $user_url;?> from the village <?php echo $from_url;?></td>
+<td class="role">攻擊者</td>
+<td colspan="<?php echo $colspan ?>"><?php echo $user_url;?> 來自村莊 <?php echo $from_url;?></td>
 </tr>
 </thead>
 <tbody class="units">
@@ -67,7 +67,7 @@ for($i=$start;$i<=($start+9);$i++) {
 if(isset($dataarray[151]) and $dataarray[151]!=0){
         echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=3;$i<=12;$i++) {
         if($dataarray[$i] == 0) {
             echo "<td class=\"none\">0</td>";
@@ -79,7 +79,7 @@ else {
 if(isset($dataarray[151]) and $dataarray[151]!=0){
         echo "<td>$dataarray[151]</td>";
 }
-echo "<tr><th>Casualties</th>";
+echo "<tr><th>傷亡</th>";
 for($i=13;$i<=22;$i++) {
         if($dataarray[$i] == 0) {
             echo "<td class=\"none\">0</td>";
@@ -93,7 +93,7 @@ if(isset($dataarray[151]) and $dataarray[151]!=0){
     echo "<td $tdclass>$dataarray[152]</td>";
 }
 if($dataarray[153] != 0 or $dataarray[154] != 0 or $dataarray[155] != 0 or $dataarray[156] != 0 or $dataarray[157] != 0 or $dataarray[158] != 0 or $dataarray[159] != 0 or $dataarray[160] != 0 or $dataarray[161] != 0 or $dataarray[162] != 0 or $dataarray[163] != 0){
-echo "</tr><tr><th>Prisoners</th>";
+echo "</tr><tr><th>囚犯</th>";
 for($i=153;$i<=162;$i++) {
     if($dataarray[$i] == 0) {
         echo "<td class=\"none\">0</td>";
@@ -109,35 +109,35 @@ if(isset($dataarray[151]) and $dataarray[151]!=0){
 }
 if ($dataarray[165]!='' and $dataarray[166]!=''){ //ram
 ?>
-        <tbody class="goods"><tr><th>Information</th><td colspan="<?php echo $colspan; ?>">
+        <tbody class="goods"><tr><th>資訊</th><td colspan="<?php echo $colspan; ?>">
         <img class="unit u<?php echo $dataarray[165]; ?>" src="img/x.gif" alt="Ram" title="Ram" />
         <?php echo $dataarray[166]; ?>
     </td></tr></tbody>
 <?php }
 if ($dataarray[167]!='' and $dataarray[168]!=''){ //cata
 ?>
-        <tbody class="goods"><tr><th>Information</th><td colspan="<?php echo $colspan; ?>">
+        <tbody class="goods"><tr><th>資訊</th><td colspan="<?php echo $colspan; ?>">
         <img class="unit u<?php echo $dataarray[167]; ?>" src="img/x.gif" alt="Catapult" title="Catapult" />
         <?php echo $dataarray[168]; ?>
     </td></tr></tbody>
 <?php }
 if ($dataarray[169]!='' and $dataarray[170]!=''){ //chief
 ?>
-        <tbody class="goods"><tr><th>Information</th><td colspan="<?php echo $colspan; ?>">
+        <tbody class="goods"><tr><th>資訊</th><td colspan="<?php echo $colspan; ?>">
         <img class="unit u<?php echo $dataarray[169]; ?>" src="img/x.gif" alt="Chief" title="Chief" />
         <?php echo $dataarray[170]; ?>
     </td></tr></tbody>
 <?php }
 if ($dataarray[172]!='' and $dataarray[173]!=''){ //hero
 ?>
-        <tbody class="goods"><tr><th>Information</th><td colspan="<?php echo $colspan; ?>">
+        <tbody class="goods"><tr><th>資訊</th><td colspan="<?php echo $colspan; ?>">
         <img class="unit u<?php echo $dataarray[172]; ?>" src="img/x.gif" alt="Hero" title="Hero" />
         <?php echo $dataarray[173]; ?>
     </td></tr></tbody>
 <?php }
 if(isset($dataarray[171]) && $dataarray[171] !=''){ //troop not return
 ?>
-        <tbody class="goods"><tr><th>Information</th><td colspan="<?php echo $colspan; ?>">
+        <tbody class="goods"><tr><th>資訊</th><td colspan="<?php echo $colspan; ?>">
         <?php echo $dataarray[171]; ?>
     </td></tr></tbody>
 <?php }?>
@@ -153,7 +153,7 @@ $start=1; ?>
         <table cellpadding="1" cellspacing="1" class="defender">
         <thead>
         <tr>
-        <td class="role">Defender</th>
+        <td class="role">防禦者</th>
         <td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='1'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>
         </tr></thead>
         <tbody class="units">
@@ -165,7 +165,7 @@ $start=1; ?>
 for($i=$start;$i<=($start+9);$i++) {
         echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=35;$i<=44;$i++) {
         if($dataarray[$i] == "?") {
         echo "<td class=\"none\">?</td>";
@@ -174,7 +174,7 @@ else {
         echo "<td class=\"none\">?</td>";
     }
 }
-echo "<tr><th>Casualties</th>";
+echo "<tr><th>傷亡</th>";
 for($i=45;$i<=54;$i++) {
         if($dataarray[$i] == "?") {
         echo "<td class=\"none\">?</td>";
@@ -192,7 +192,7 @@ $start=11;?>
         <table cellpadding="1" cellspacing="1" class="defender">
         <thead>
         <tr>
-        <td class="role">Defender</th>
+        <td class="role">防禦者</th>
         <td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='2'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>
         </tr></thead>
         <tbody class="units">
@@ -204,7 +204,7 @@ $start=11;?>
 for($i=$start;$i<=($start+9);$i++) {
         echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=56;$i<=65;$i++) {
         if($dataarray[$i] == "?") {
         echo "<td class=\"none\">?</td>";
@@ -213,7 +213,7 @@ else {
         echo "<td class=\"none\">?</td>";
     }
 }
-echo "<tr><th>Casualties</th>";
+echo "<tr><th>傷亡</th>";
 for($i=66;$i<=75;$i++) {
         if($dataarray[$i] == "?") {
         echo "<td class=\"none\">?</td>";
@@ -230,7 +230,7 @@ $start=21; ?>
         <table cellpadding="1" cellspacing="1" class="defender">
         <thead>
         <tr>
-        <td class="role">Defender</th>
+        <td class="role">防禦者</th>
         <td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='3'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>
         </tr></thead>
         <tbody class="units">
@@ -242,7 +242,7 @@ $start=21; ?>
 for($i=$start;$i<=($start+9);$i++) {
         echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=77;$i<=86;$i++) {
         if($dataarray[$i] == "?") {
         echo "<td class=\"none\">?</td>";
@@ -251,7 +251,7 @@ else {
         echo "<td class=\"none\">?</td>";
     }
 }
-echo "<tr><th>Casualties</th>";
+echo "<tr><th>傷亡</th>";
 for($i=87;$i<=96;$i++) {
         if($dataarray[$i] == "?") {
         echo "<td class=\"none\">?</td>";
@@ -269,8 +269,8 @@ $start=31; ?>
         <table cellpadding="1" cellspacing="1" class="defender">
         <thead>
         <tr>
-        <td class="role">Defender</th>
-        <td colspan="10"><?php if($targettribe=='4'){ echo'<a href="spieler.php?uid=">'.$database->getUserField($dataarray[28],"username",0).'</a> from the village <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo"Reinforcement"; } ?></td>
+        <td class="role">防禦者</th>
+        <td colspan="10"><?php if($targettribe=='4'){ echo'<a href="spieler.php?uid=">'.$database->getUserField($dataarray[28],"username",0).'</a> 來自村莊 <a href="karte.php?d='.$dataarray[29].'&amp;c='.$generator->getMapCheck($dataarray[29]).'">'.stripslashes($dataarray[30]).'</a>'; } else { echo"Reinforcement"; } ?></td>
         </tr></thead>
         <tbody class="units">
         <tr>
@@ -281,7 +281,7 @@ $start=31; ?>
 for($i=$start;$i<=($start+9);$i++) {
         echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=98;$i<=107;$i++) {
         if($dataarray[$i] == "?") {
         echo "<td class=\"none\">?</td>";
@@ -290,7 +290,7 @@ else {
         echo "<td class=\"none\">?</td>";
     }
 }
-echo "<tr><th>Casualties</th>";
+echo "<tr><th>傷亡</th>";
 for($i=108;$i<=117;$i++) {
         if($dataarray[$i] == "?") {
         echo "<td class=\"none\">?</td>";
@@ -308,7 +308,7 @@ $start=41; ?>
         <table cellpadding="1" cellspacing="1" class="defender">
         <thead>
         <tr>
-        <td class="role">Defender</th>
+        <td class="role">防禦者</th>
         <td colspan="10"><?php if($targettribe=='5'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>
         </tr></thead>
         <tbody class="units">
@@ -320,7 +320,7 @@ $start=41; ?>
 for($i=$start;$i<=($start+9);$i++) {
         echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=119;$i<=128;$i++) {
         if($dataarray[$i] == "?") {
         echo "<td class=\"none\">?</td>";
@@ -329,7 +329,7 @@ else {
         echo "<td class=\"none\">?</td>";
     }
 }
-echo "<tr><th>Casualties</th>";
+echo "<tr><th>傷亡</th>";
 for($i=129;$i<=138;$i++) {
         if($dataarray[$i] == "?") {
         echo "<td class=\"none\">?</td>";
