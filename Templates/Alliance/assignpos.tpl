@@ -9,7 +9,7 @@ $allianceinfo = $database->getAlliance($aid);
 $memberlist = $database->getAllMember($aid);
 
 echo "<h1>".$allianceinfo['tag']." - ".$allianceinfo['name']."</h1>";
-include("alli_menu.tpl"); 
+include("alli_menu.tpl");
 if($session->access!=BANNED){
 ?>
 			<form method="post" action="allianz.php">

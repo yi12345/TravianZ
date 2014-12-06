@@ -62,7 +62,7 @@ echo "<span class=\"error\">".$form->getError('email')."</span>";
     <th>Name of the sitter</th>
     <td><input class="text" type="text" name="v1" maxlength="15"><span class="count">(<?php echo $count; ?>/2)</span></td>
 </tr>
-<?php 
+<?php
 }
 ?><tr><td colspan="2" class="sitter">
 <?php if($count == 0) { echo "<span class=\"none\">You have no sitters.</span></td>"; }
@@ -80,7 +80,7 @@ echo "<a href=\"spieler.php?uid=".$session->userinfo['sit2']."\">".$database->ge
 }
 ?></tr>
 <tr><td class="note" colspan="2">You have been entered as sitter on the following accounts. You can cancel this by clicking the red X.</td></tr><tr><td colspan="2" class="sitter">
-<?php 
+<?php
 $sitee = $database->getSitee($session->uid);
 if(count($sitee) == 0) {
 echo "<span class=\"none\">You have no sitters.</span>";
@@ -131,7 +131,7 @@ else {
         <th>Confirm with password:</th>
 
         <td><input class="text" type="password" name="del_pw" maxlength="30" /></td>
-        <?php 
+        <?php
         }
         ?>
     </tr></tbody></table>

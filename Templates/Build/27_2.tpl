@@ -9,13 +9,13 @@
 ?></span></h1>
 
         <p class="build_desc">The riches of your empire are kept in the treasury. The treasury has room for one treasure. After you have captured an artefact it takes 24 hours on a normal server or 12 hours on a thrice speed server to be effective.</p>
-        
+
         <?php
 
         include ("27_menu.tpl");
 
 ?>
-        
+
         <table id="show_artefacts" cellpadding="1" cellspacing="1">
     		<thead>
     			<tr>
@@ -50,8 +50,8 @@
 
 ?>
             <tr><td colspan="4"></td></tr>
-            
-            
+
+
             <?php
 
         	unset($artefact);
@@ -70,8 +70,8 @@
 
 ?>
             <tr><td colspan="4"></td></tr>
-            
-            
+
+
             <?php
 
         	unset($artefact);
@@ -90,8 +90,8 @@
 
 ?>
             <tr><td colspan="4"></td></tr>
-            
-            
+
+
             <?php
 
         	unset($artefact);
@@ -110,7 +110,7 @@
 
 ?>
             <tr><td colspan="4"></td></tr>
-            
+
             <?php
 
         	unset($artefact);
@@ -129,7 +129,7 @@
 
 ?>
             <tr><td colspan="4"></td></tr>
-            
+
             <?php
 
         	unset($artefact);
@@ -148,7 +148,7 @@
 
 ?>
             <tr><td colspan="4"></td></tr>
-            
+
             <?php
 
         	unset($artefact);
@@ -167,7 +167,7 @@
 
 ?>
             <tr><td colspan="4"></td></tr>
-            
+
             <?php
 
         	unset($artefact);
@@ -205,13 +205,13 @@
         }
 
 ?>
-            
+
     	</tbody></table></div>
-        
+
         <?php
 
         include ("upgrade.tpl");
 
 ?>
-        
+
 </div>

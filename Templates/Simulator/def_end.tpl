@@ -74,8 +74,8 @@
 						<td class="value"><input class="text" type="text" name="h_def_bonus" value="<?php echo $form->getValue('h_def_bonus')==""? 0 : $form->getValue('h_def_bonus'); ?>" maxlength="4" title="Hero (def bonus)" /></td>
 						<td class="research"></td>
 				    </tr>
-					
-					
+
+
 				</table>
 			</td>
 		</tr></tbody></table>

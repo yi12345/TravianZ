@@ -43,7 +43,7 @@ if($session->tribe == 1){
 					<label for="t10"><img class="unit u10" title="<?php echo U10; ?>" src="img/x.gif"></label>
 					<input class="text troop" id="t10" type="text" name="t10" value="0">
 				</div>
-			
+
 						<div class="clear"></div>
 		</div>
 <?php }elseif($session->tribe == 2){ ?>
@@ -89,7 +89,7 @@ if($session->tribe == 1){
 					<label for="t10"><img class="unit u20" title="<?php echo U20; ?>" src="img/x.gif"></label>
 					<input class="text troop" id="t10" type="text" name="t10" value="0">
 				</div>
-			
+
 						<div class="clear"></div>
 		</div>
 <?php }elseif($session->tribe == 3){ ?>
@@ -135,7 +135,7 @@ if($session->tribe == 1){
 					<label for="t10"><img class="unit u30" title="<?php echo U30; ?>" src="img/x.gif"></label>
 					<input class="text troop" id="t10" type="text" name="t10" value="0">
 				</div>
-			
+
 						<div class="clear"></div>
 		</div>
 <?php } ?>

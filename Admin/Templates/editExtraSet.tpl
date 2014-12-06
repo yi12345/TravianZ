@@ -35,9 +35,9 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 				</tr>
 				<tr>
 					<td>Max Number of Mails</td>
-					<td>30</td>	
+					<td>30</td>
 				</tr>
-	
+
 			</tbody>
 			</table>
 			<br />

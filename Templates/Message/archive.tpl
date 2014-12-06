@@ -1,6 +1,6 @@
 <div id="content"  class="messages">
 <h1>短消息</h1>
-<?php 
+<?php
 include("menu.tpl");
 ?>
 <form method="post" action="nachrichten.php" name="msg" ><input type="hidden" name="ft" value="m5" /><table cellpadding="1" cellspacing="1" id="overview">
@@ -14,7 +14,7 @@ include("menu.tpl");
 	</th>
 	<th colspan="2" class="buttons">
 		<input name="delmsg" value="delete" type="image" id="btn_delete" class="dynamic_img" src="img/x.gif" alt="delete" /> <input name="start" type="image" value="Back" alt="Back" id="btn_back" class="dynamic_img" src="img/x.gif" /></th>
-        <th class="navi"><?php 
+        <th class="navi"><?php
     if(!isset($_GET['s']) && count($message->archived1) < 10) {
     echo "&laquo;&raquo;";
     }
@@ -33,7 +33,7 @@ include("menu.tpl");
         }
     }
     ?></th></tr></tfoot><tbody>
-     <?php 
+     <?php
     if(isset($_GET['s'])) {
     $s = $_GET['s'];
     }

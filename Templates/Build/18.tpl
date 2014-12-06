@@ -59,7 +59,7 @@ echo "
     <?php
         if($alliance->gotInvite) {
         echo "<p class=\"error2\" style=\"color: #DD0000\">".$form->getError("ally_accept")."</p>";
-        } 
+        }
     }
 include("upgrade.tpl");
 ?>

@@ -12,7 +12,7 @@
 					<th>
 						target village:					</th>
 					<td>
-                    
+
 						<select id="tvillage" name="tvillage">
 <?php
     if($session->villages[0] == $village->wid){

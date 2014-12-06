@@ -5,4 +5,4 @@ if($session->access!=BANNED){
         }else{
             header("Location: banned.php");
         }
-?> 
+?>

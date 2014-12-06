@@ -11,7 +11,7 @@
     for($i=1;$i<=0;$i++) {
     echo "Row ".$i;
     }
-             
+
     mysql_select_db($db_name, $con);
 
     $result = mysql_query("SELECT * FROM ".TB_PREFIX."alidata ORDER BY ap DESC, id DESC Limit 10");
@@ -106,7 +106,7 @@
       echo "</tr>";
       }
 ?>
-	
+
 		 <tr>
 			<td colspan="3" class="empty"></td>
 		</tr>
@@ -124,7 +124,7 @@
 ?>
          </tbody>
 </table>
-	
+
 <?php
     for($i=1;$i<=0;$i++) {
     echo "Row ".$i;
@@ -171,7 +171,7 @@
 		echo "<tr class=\"none\">"; } else { echo "<tr class=\"own hl\">"; }
       echo "<td class=\"ra fc\">".$place2."&nbsp;</td>";
 		if($row['id'] == $session->alliance) {
-		echo "<td class=\"pla\">".$row['tag']."</td>"; } else { echo "<td class=\"pla\"><a href='allianz.php?aid=".$row['id']."'>".$row['tag']."</a></td>"; }    
+		echo "<td class=\"pla\">".$row['tag']."</td>"; } else { echo "<td class=\"pla\"><a href='allianz.php?aid=".$row['id']."'>".$row['tag']."</a></td>"; }
           echo "<td class=\"val lc\">".$row['clp']."</td>";
       echo "</tr>";
       }
@@ -229,7 +229,7 @@
       echo "<td class=\"val lc\">".$row['RR']."</td>";
       echo "</tr>";
       }
-	  
+
 	mysql_close($con);
 ?>
          </tbody>

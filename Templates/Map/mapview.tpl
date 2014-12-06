@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 #################################################################################
@@ -170,7 +170,7 @@ if (isset($neutralarray[0])) {
 		}
     	}
 
-		
+
 	// Map content
 	if($donnees['ville_user']==3 && $donnees['ville_name']==PLANVILLAGE){
 	$map_content .= "<div id='i_".$row."_".$i."' class='o99'>$att</div>\r";
@@ -192,7 +192,7 @@ if (isset($neutralarray[0])) {
 		elseif($donnees['map_oasis'] != 0){
 			if ($donnees['oasis_conqured'] != 0){
 					$map_js.= ",\"\",\"".$donnees['oasis_user']."\",\"-\",\"".$donnees['oasis_alli_name']."\",\"".$donnees['oasis_tribe']."\"]";
-			} 
+			}
 			else{
 				$map_js.="]";
 			}
@@ -279,5 +279,5 @@ if (isset($neutralarray[0])) {
 			</form>
 		</div>
 		<table cellpadding="1" cellspacing="1" id="map_infobox" class="default"><thead><tr><th colspan="2"><?php echo DETAIL;?></th></tr></thead><tbody><tr><th><?php echo PLAYER;?></th><td>-</td></tr><tr><th><?php echo POP;?></th><td>-</td></tr><tr><th><?php echo ALLIANCE;?></th><td></td></tr></tbody></table>
-	</div>            
+	</div>
 </div>

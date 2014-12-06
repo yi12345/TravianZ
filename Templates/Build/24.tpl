@@ -6,7 +6,7 @@
 </p>
 <?php
 	if ($building->getTypeLevel(24) > 0) {
-		include("Templates/Build/24_1.tpl"); 
+		include("Templates/Build/24_1.tpl");
 		include("Templates/Build/24_2.tpl");
 	} else {
 		 echo "<p><b>Celebrations can commence when the town hall is completed.</b><br>\n";

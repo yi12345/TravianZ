@@ -1,5 +1,5 @@
 <?php
-$normalA = $database->getOwnArtefactInfoByType($village->wid,6);  
+$normalA = $database->getOwnArtefactInfoByType($village->wid,6);
 $largeA = $database->getOwnUniqueArtefactInfo($session->uid,6,2);
 
 $mainbuilding = $building->getTypeLevel(15);
@@ -40,7 +40,7 @@ $brewery = $building->getTypeLevel(35);
 $horsedrinkingtrough = $building->getTypeLevel(41);
 $herosmansion = $building->getTypeLevel(37);
 $greatwarehouse = $building->getTypeLevel(38);
-$greatgranary = $building->getTypeLevel(39);  
+$greatgranary = $building->getTypeLevel(39);
 $greatworkshop = $building->getTypeLevel(42);
 
 $mainbuilding1 = $database->getBuildingByType2($village->wid,15);
@@ -81,7 +81,7 @@ $brewery1 = $database->getBuildingByType2($village->wid,35);
 $horsedrinkingtrough1 = $database->getBuildingByType2($village->wid,41);
 $herosmansion1 = $database->getBuildingByType2($village->wid,37);
 $greatwarehouse1 = $database->getBuildingByType2($village->wid,38);
-$greatgranary1 = $database->getBuildingByType2($village->wid,39);  
+$greatgranary1 = $database->getBuildingByType2($village->wid,39);
 $greatworkshop1 = $database->getBuildingByType2($village->wid,42);
 
 ?>
@@ -121,7 +121,7 @@ if((($greatwarehouse == 0 && $greatwarehouse1 == 0) || $greatwarehouse == 20) &&
 }
 if((($greatgranary == 0 && $greatgranary1 == 0) || $greatgranary == 20) && $mainbuilding >= 10 && ($largeA['owner'] == $session->uid || $normalA['vref'] == $village->wid || $village->natar==1) && ($id != 39 && $id != 40)) {
     include("avaliable/greatgranary.tpl");
-}  
+}
 if((($trapper == 0 && $trapper1 == 0) || $trapper == 20) && $rallypoint >= 1 && $session->tribe == 3 && $id != 39 && $id != 40) {
 include("avaliable/trapper.tpl");
 }
@@ -174,9 +174,9 @@ while($villaggi_array = mysql_fetch_array($query)){
 	$query1 = mysql_query("SELECT * FROM ".TB_PREFIX."fdata WHERE vref = ".$villaggi_array['wref']."");
 	$strutture= mysql_fetch_array($query1);
 
-//search Castle in array structure village 
+//search Castle in array structure village
 $test =	in_array(26,$strutture);
-if ($test){	
+if ($test){
 	break;
 	}
 
@@ -257,7 +257,7 @@ if($mainbuilding < 10 && $warehouse < 10 && $village->capital == 0 && $largeA['o
 }
 if($mainbuilding < 10 && $granary < 10 && $village->capital == 0 && $largeA['owner'] == $session->uid || $normalA['vref'] == $village->wid ) {
     include("soon/greatgranary.tpl");
-} 
+}
 if($hero == 0 && ($mainbuilding <= 2 || $rallypoint == 0)){
     include("soon/hero.tpl");
 }
@@ -296,9 +296,9 @@ while($villaggi_array = mysql_fetch_array($query)){
 	$query1 = mysql_query("SELECT * FROM ".TB_PREFIX."fdata WHERE vref = ".$villaggi_array['wref']."");
 	$strutture= mysql_fetch_array($query1);
 
-//search Castle in array structure village 
+//search Castle in array structure village
 $test =	in_array(26,$strutture);
-if ($test){	
+if ($test){
 	break;
 	}
 
@@ -366,7 +366,7 @@ if($greatworkshop == 0 && $workshop >= 18 && $village->capital == 0 && GREAT_WKS
    ?>
     </div><p class="switch"><a id="all_link" class="hide"
     href="javascript:show_build_list('all');">show more</a></p>
-    
+
     <div id="build_list_all" class="hide">
     <?php
     if($academy == 0 && ($mainbuilding == 1 || $barrack == 0)) {
@@ -464,7 +464,7 @@ function show_build_list(list) {
     }
 }
 </script>
-<?php 
+<?php
 }
 ?>
 </div>

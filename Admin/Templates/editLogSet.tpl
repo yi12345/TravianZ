@@ -40,7 +40,7 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 							<option value="true" <?php if (LOG_TECH==true) echo "selected";?>>Yes</option>
 							<option value="false" <?php if (LOG_TECH==false) echo "selected";?>>No</option>
 						</select>
-					</td>	
+					</td>
 				</tr>
 				<tr>
 					<td>Log Login</td>
@@ -49,7 +49,7 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 							<option value="true" <?php if (LOG_LOGIN==true) echo "selected";?>>Yes</option>
 							<option value="false" <?php if (LOG_LOGIN==false) echo "selected";?>>No</option>
 						</select>
-					</td>	
+					</td>
 				</tr>
 				<tr>
 					<td>Log Gold</td>
@@ -58,7 +58,7 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 							<option value="true" <?php if (LOG_GOLD_FIN==true) echo "selected";?>>Yes</option>
 							<option value="false" <?php if (LOG_GOLD_FIN==false) echo "selected";?>>No</option>
 						</select>
-					</td>	
+					</td>
 				</tr>
 				<tr>
 					<td>Log Admin</td>
@@ -67,7 +67,7 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 							<option value="true" <?php if (LOG_ADMIN==true) echo "selected";?>>Yes</option>
 							<option value="false" <?php if (LOG_ADMIN==false) echo "selected";?>>No</option>
 						</select>
-					</td>	
+					</td>
 				</tr>
 				<tr>
 					<td>Log War</td>
@@ -76,8 +76,8 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 							<option value="true" <?php if (LOG_WAR==true) echo "selected";?>>Yes</option>
 							<option value="false" <?php if (LOG_WAR==false) echo "selected";?>>No</option>
 						</select>
-					</td>	
-				</tr>				
+					</td>
+				</tr>
 				<tr>
 					<td>Log Market</td>
 					<td>
@@ -97,7 +97,7 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 					</td>
 				</tr>
 				<tr>
-	
+
 				</tbody>
 			</table>
 			<br />

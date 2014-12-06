@@ -1,4 +1,4 @@
-<?php 
+<?php
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
@@ -10,7 +10,7 @@
 #################################################################################
 
 // Fetch all links
-$query = $database->getLinks($session->uid);  
+$query = $database->getLinks($session->uid);
 if (mysql_num_rows($query) > 0){
 $links = array();
 while($data = mysql_fetch_assoc($query)) {
@@ -29,7 +29,7 @@ foreach($links as $link) {
        $external = '';
    }
 
-   echo '<tr><td class="dot">●</td><td class="link">'; 
+   echo '<tr><td class="dot">●</td><td class="link">';
  if($session->plus == 0) { echo  "buy Plus"; } else {
    echo '<a href="' . $link['url'] . '"' . $target . '>' . $link['name'] . $external . '</a></td></tr>';
 }

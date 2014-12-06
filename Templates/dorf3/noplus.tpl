@@ -12,13 +12,13 @@
 <tr>
 	<td>Village</td>
 	<td>Attacks</td>
-	<td>Building</td> 
+	<td>Building</td>
 	<td>Troops</td>
 	<td>Merchants</td>
 </tr></thead><tbody>
 <?php
-$varray = $database->getProfileVillages($session->uid);  
-foreach($varray as $vil){  
+$varray = $database->getProfileVillages($session->uid);
+foreach($varray as $vil){
   $vid = $vil['wref'];
   $vdata = $database->getVillage($vid);
   if($vdata['capital'] == 1){$class = 'hl';}else{$class = '';}
@@ -26,12 +26,12 @@ foreach($varray as $vil){
   <tr class="'.$class.'">
 		   <td class="vil fc"><a href="dorf1.php?newdid='.$vid.'">'.$vdata['name'].'</a></td>
 		   <td class="att"><span class="none">?</span></td>
-		   <td class="bui"><span class="none">?</span></td> 
+		   <td class="bui"><span class="none">?</span></td>
 		   <td class="tro"><span class="none">?</span></td>
 		   <td class="tra lc"><a href="build.php?gid=17">?/?</a></td>
-	</tr> 
+	</tr>
   ';
 }
-?>   
+?>
      </tbody>
 </table>

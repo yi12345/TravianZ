@@ -1,4 +1,4 @@
- <?php 
+ <?php
 
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
@@ -33,5 +33,5 @@ if (($_SESSION['qst']<38 && QTYPE==37 && QUEST==true) || ($_SESSION['qst']<31 &&
                 cache_preload = new Image();
                 cache_preload.src = "img/x.gif";
                 cache_preload.className = "wood";
-            </script>                        
+            </script>
 <?php } ?>

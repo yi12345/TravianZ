@@ -121,18 +121,18 @@ if ($dataarray[143]!='' and $dataarray[144]!=''){ //chief
 <?php if ($dataarray[145]!='' and $dataarray[146]!=''){ //spy
 ?>
     <tbody class="goods"><tr><th>Information</th><td colspan="10">
-    
+
     <?php echo $dataarray[146]; ?>
     </td></tr></tbody>
 <?php } ?>
 </table>
-        
+
 <?php
 $targettribe=$dataarray['31'];
 
 
 if ($dataarray[34]=='1'){
-$start=1; ?>        
+$start=1; ?>
         <table cellpadding="1" cellspacing="1" class="defender">
         <thead>
         <tr>
@@ -142,8 +142,8 @@ $start=1; ?>
         <tbody class="units">
         <tr>
         <td>&nbsp;</td>
-        
-        
+
+
         <?php
 for($i=$start;$i<=($start+9);$i++) {
         echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
@@ -181,7 +181,7 @@ if($targettribe == '1' and isset($dataarray[150]) and $dataarray[150]!=0){
 
 <?php }
 if ($dataarray[55]=='1'){
-$start=11;?>        
+$start=11;?>
         <table cellpadding="1" cellspacing="1" class="defender">
         <thead>
         <tr>
@@ -191,8 +191,8 @@ $start=11;?>
         <tbody class="units">
         <tr>
         <td>&nbsp;</td>
-        
-        
+
+
 <?php
 for($i=$start;$i<=($start+9);$i++) {
         echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
@@ -229,7 +229,7 @@ if($targettribe == '2' and isset($dataarray[150]) and $dataarray[150]!=0){
 </tr></tbody></table>
 <?php } ?>
 <?php if ($dataarray[76]=='1'){
-$start=21; ?>        
+$start=21; ?>
         <table cellpadding="1" cellspacing="1" class="defender">
         <thead>
         <tr>
@@ -239,8 +239,8 @@ $start=21; ?>
         <tbody class="units">
         <tr>
         <td>&nbsp;</td>
-        
-        
+
+
         <?php
 for($i=$start;$i<=($start+9);$i++) {
         echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
@@ -278,7 +278,7 @@ if($targettribe == '3' and isset($dataarray[150]) and $dataarray[150]!=0){
 
 <?php } ?>
 <?php if ($dataarray[97]=='1'){
-$start=31; ?>        
+$start=31; ?>
         <table cellpadding="1" cellspacing="1" class="defender">
         <thead>
         <tr>
@@ -288,8 +288,8 @@ $start=31; ?>
         <tbody class="units">
         <tr>
         <td>&nbsp;</td>
-        
-        
+
+
         <?php
 for($i=$start;$i<=($start+9);$i++) {
         echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
@@ -317,7 +317,7 @@ else {
 
 <?php } ?>
 <?php if ($dataarray[118]=='1'){
-$start=41; ?>        
+$start=41; ?>
         <table cellpadding="1" cellspacing="1" class="defender">
         <thead>
         <tr>
@@ -327,8 +327,8 @@ $start=41; ?>
         <tbody class="units">
         <tr>
         <td>&nbsp;</td>
-        
-        
+
+
         <?php
 for($i=$start;$i<=($start+9);$i++) {
         echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";

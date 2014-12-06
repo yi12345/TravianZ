@@ -85,5 +85,5 @@ $_SESSION['mas'][$bid]=$bid.",".$id.",".$mastertime;
         echo "<a class=\"build\" href=\"banned.php?a=$bid&id=$id&c=$session->checker\">Construct building. (waiting loop)</a>";
      }
      }
-            ?>    
+            ?>
 </td>

@@ -26,7 +26,7 @@ $message1 = "".$database->getUserField($dataarray[0],"username",0)." wishes you 
 					<th>Subject:</th>
 					<th><?php echo $rep[0]['topic']; ?></th>
 				</tr>
- 
+
 				<tr>
 					<?php
                 $date = $generator->procMtime($rep[0]['time']); ?>

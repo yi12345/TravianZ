@@ -1,4 +1,4 @@
-<?php 
+<?php
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
@@ -31,9 +31,9 @@ if ($village->natar==1 && ( $t== 25 || $t == 26 || $t == 29 || $t == 30 || $t ==
         if($village->resarray['f99'] != 0) {
             $title = $building->procResType(40). " Level ".$village->resarray['f99'];
         }else $title = $building->procResType(40);
-        
+
         echo "<area href=\"build.php?id=99\" title=\"$title\" coords=\"190,170,80\" shape=\"circle\"/>";
-    }    
+    }
 } else {
         if($village->resarray['f'.$t.'t'] != 0) {
             $title = $building->procResType($village->resarray['f'.$t.'t']). " Level ".$village->resarray['f'.$t];
@@ -47,7 +47,7 @@ if ($village->natar==1 && ( $t== 25 || $t == 26 || $t == 29 || $t == 30 || $t ==
     }
 }
 ?>
-	
+
     <area href="build.php?id=40" title="<?php echo $wtitle; ?>" coords="312,338,347,338,377,320,406,288,421,262,421,222,396,275,360,311" shape="poly" alt="" />
 	<area href="build.php?id=40" title="<?php echo $wtitle; ?>" coords="49,338,0,274,0,240,33,286,88,338" shape="poly" alt="" />
 	<area href="build.php?id=40" title="<?php echo $wtitle; ?>" coords="0,144,34,88,93,39,181,15,252,15,305,31,358,63,402,106,421,151,421,93,378,47,280,0,175,0,78,28,0,92" shape="poly" alt="" />
@@ -56,7 +56,7 @@ if ($village->natar==1 && ( $t== 25 || $t == 26 || $t == 29 || $t == 30 || $t ==
 	if($session->tribe == 3){
 		$session->tribe = '';
 	}
-	
+
 if($building->walling()) {
 $vmapc = "d2_1".$session->tribe;
 }
@@ -90,12 +90,12 @@ for ($i=1;$i<=20;$i++) {
             echo "<img src=\"img/x.gif\" class=\"building e$i rocket $im\" alt=\"$text\" />";
         }
     }
-}    
+}
 }
     if (($_SESSION['qst']==38 && QTYPE==37) || ($_SESSION['qst']==31 && QTYPE==25)){
         $database->updateUserField($_SESSION['username'],'quest','40',0);
         $_SESSION['qst']=40;
-    }  
+    }
     if($village->resarray['f39'] == 0) {
             if($building->rallying()) {
             echo "<img src=\"img/x.gif\" class=\"dx1 g16b\" alt=\"Rally Point Level ".$village->resarray['f39']."\" />";
@@ -139,7 +139,7 @@ echo "<div class=\"l40\">".$village->resarray['f40']."</div>";
 }
 if($village->resarray['f99t'] != 0) {
 echo "<div class=\"d40\">".$village->resarray['f99']."</div>";
-} 
+}
 ?>
 		</div>
 	<img class="map1" usemap="#map1" src="img/x.gif" alt="" />

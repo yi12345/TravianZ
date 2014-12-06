@@ -15,7 +15,7 @@ if ($village->capital == 1) {
 include("25_menu.tpl");
 
 if($village->resarray['f'.$id] >= 10){
-	include ("25_train.tpl");	
+	include ("25_train.tpl");
 }
 else{
 	echo '<div class="c">In order to found a new village you need a level 10 or 20 residence and 3 settlers. In order to conquer a new village you need a level 10 or 20 residence and a senator, chief or chieftain.</div>';

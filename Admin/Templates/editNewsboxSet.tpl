@@ -40,7 +40,7 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 							<option value="true" <?php if (NEWSBOX2==true) echo "selected";?>>Enable</option>
 							<option value="false" <?php if (NEWSBOX2==false) echo "selected";?>>Disable</option>
 						</select>
-					</td>	
+					</td>
 				</tr>
 				<tr>
 					<td>Newsbox 3</td>
@@ -49,10 +49,10 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 							<option value="true" <?php if (NEWSBOX3==true) echo "selected";?>>Enable</option>
 							<option value="false" <?php if (NEWSBOX3==false) echo "selected";?>>Disable</option>
 						</select>
-					</td>	
+					</td>
 				</tr>
 				<tr>
-				
+
 				</tbody>
 			</table>
 			<br />

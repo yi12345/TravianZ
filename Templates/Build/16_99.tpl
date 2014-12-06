@@ -67,7 +67,7 @@ if(!$session->goldclub) {
 <tr>
 						Send troops away a maximun of <input class="text" type="text" name="maxevasion" value="<?php echo $user['maxevasion']; ?>" maxlength="3" style="width:50px;"> times
 						<span class="none">(costs: <img src="<?php echo GP_LOCATE; ?>img/a/gold_g.gif" alt="Gold" title="Gold"/><b>2</b> per evasion)</span>
-					
+
 </tr>
 <tr>
 <div class="clear"></div><p><input type="image" value="ok" name="s1" id="btn_ok" class="dynamic_img" src="img/x.gif" tabindex="8" alt="OK"/></p></form>

@@ -100,8 +100,8 @@ $start=1; ?>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 	<?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
@@ -127,9 +127,9 @@ for($i=45;$i<=54;$i++) {
 ?>
 </tr></tbody></table>
 
-<?php } 
-if ($dataarray[55]=='1'){ 
-$start=11;?>	
+<?php }
+if ($dataarray[55]=='1'){
+$start=11;?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
@@ -139,8 +139,8 @@ $start=11;?>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 <?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
@@ -167,7 +167,7 @@ for($i=66;$i<=75;$i++) {
 </tr></tbody></table>
 <?php } ?>
 <?php  if ($dataarray[76]=='1'){
-$start=21; ?>	
+$start=21; ?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
@@ -177,8 +177,8 @@ $start=21; ?>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 	<?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
@@ -205,8 +205,8 @@ for($i=87;$i<=96;$i++) {
 </tr></tbody></table>
 
 <?php } ?>
-<?php  if ($dataarray[97]=='1'){ 
-$start=31; ?>	
+<?php  if ($dataarray[97]=='1'){
+$start=31; ?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
@@ -216,8 +216,8 @@ $start=31; ?>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 	<?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
@@ -245,7 +245,7 @@ for($i=108;$i<=117;$i++) {
 
 <?php } ?>
 <?php  if ($dataarray[118]=='1'){
-$start=41; ?>	
+$start=41; ?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
@@ -255,8 +255,8 @@ $start=41; ?>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 	<?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";

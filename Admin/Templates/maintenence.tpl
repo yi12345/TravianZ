@@ -13,13 +13,13 @@
 	<thead>
 		<tr>
 			<th colspan="2">Server Maintenence</th>
-		</tr> 
+		</tr>
 		<tr>
 			<td class="on">Description</td>
 			<td class="hab">Execute</td>
 		</tr>
 	</thead>
-	<tbody> 
+	<tbody>
 		<tr>
 			<td class="hab">Close Server for Maintenece, This will ban all players (Access 2) till you can fix bugs, or a crap version of a ceasefire lol</td>
 			<td class="hab"><center><a href="admin.php?p=maintenenceBan"><img src="../img/admin/b/ok1.gif"></a></center></td>

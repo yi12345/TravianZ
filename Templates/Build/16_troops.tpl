@@ -4,12 +4,12 @@
                   $end = ($tribe*10);
                   echo "<tr><th>&nbsp;</th>";
                   for($i=$start;$i<=($end);$i++) {
-                  	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";	
+                  	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
                   }
 				  if($village->unitarray['hero'] != 0) {
-                  echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";    
+                  echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";
 				  }
-                  
+
 			?>
 			</tr><tr><th><?php echo TROOPS;?></th>
             <?php
@@ -27,7 +27,7 @@
                 echo "<td>";
 				echo $village->unitarray['hero']."</td>";
                 }
-                
+
             ?>
            </tr></tbody>
             <tbody class="infos"><tr><th><?php echo UPKEEP;?></th>

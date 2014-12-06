@@ -33,7 +33,7 @@ else{
 }
 $xm7 = ($x-7) < -WORLD_MAX? $x+WORLD_MAX+WORLD_MAX-6 : $x-7;
 $xm6 = ($x-6) < -WORLD_MAX? $x+WORLD_MAX+WORLD_MAX-5 : $x-6;
-$xm5 = ($x-5) < -WORLD_MAX? $x+WORLD_MAX+WORLD_MAX-4 : $x-5; 
+$xm5 = ($x-5) < -WORLD_MAX? $x+WORLD_MAX+WORLD_MAX-4 : $x-5;
 $xm4 = ($x-4) < -WORLD_MAX? $x+WORLD_MAX+WORLD_MAX-3 : $x-4;
 $xm3 = ($x-3) < -WORLD_MAX? $x+WORLD_MAX+WORLD_MAX-2 : $x-3;
 $xm2 = ($x-2) < -WORLD_MAX? $x+WORLD_MAX+WORLD_MAX-1 : $x-2;
@@ -137,10 +137,10 @@ $map_content='';
 $map_gen='';
 $coorarray = array(
 "48, 253, 85, 273, 48, 293, 11, 273"
-,"84, 233, 121, 253, 84, 273, 47, 253" 
+,"84, 233, 121, 253, 84, 273, 47, 253"
 ,"120, 213, 157, 233, 120, 253, 83, 233"
-,"156, 193, 193, 213, 156, 233, 119, 213" 
-,"192, 173, 229, 193, 192, 213, 155, 193" 
+,"156, 193, 193, 213, 156, 233, 119, 213"
+,"192, 173, 229, 193, 192, 213, 155, 193"
 ,"228, 153, 265, 173, 228, 193, 191, 173"
 ,"264, 133, 301, 153, 264, 173, 227, 153"
 ,"300, 113, 337, 133, 300, 153, 263, 133"
@@ -171,8 +171,8 @@ $coorarray = array(
 ,"338, 173, 375, 193, 338, 213, 301, 193"
 ,"374, 153, 411, 173, 374, 193, 337, 173"
 ,"410, 133, 447, 153, 410, 173, 373, 153"
-,"446, 113, 483, 133, 446, 153, 409, 133" 
-,"482, 93, 519, 113, 482, 133, 445, 113" 
+,"446, 113, 483, 133, 446, 153, 409, 133"
+,"482, 93, 519, 113, 482, 133, 445, 113"
 ,"518, 73, 555, 93, 518, 113, 481, 93"
 ,"554, 53, 591, 73, 554, 93, 517, 73"
 ,"159, 313, 196, 333, 159, 353, 122, 333"
@@ -347,17 +347,17 @@ if (isset($neutralarray[0])) {
 		}
     	}
 
-	
+
 	// Map content
 	if($donnees['ville_user']==3 && $donnees['ville_name']=='WW Buildingplan'){
-	$map_content .= "<div id='i_".$row."_".$i."' class='o99'>$att</div>\r"; 
+	$map_content .= "<div id='i_".$row."_".$i."' class='o99'>$att</div>\r";
 	}else{
 	$map_content .= "<div id='i_".$row."_".$i."' class='".$image."'>$att</div>\r";
 	}
 
 	//Map create
-	$map_gen .= "<area id='a_".$row."_".$i."' shape='poly' coords='".$coorarray[$coorindex]."' title='".$donnees['ville_name']."' href='karte.php?d=".$donnees['map_id']."&c=".$generator->getMapCheck($donnees['map_id'])."' target='_parent' />\n"; 
-	
+	$map_gen .= "<area id='a_".$row."_".$i."' shape='poly' coords='".$coorarray[$coorindex]."' title='".$donnees['ville_name']."' href='karte.php?d=".$donnees['map_id']."&c=".$generator->getMapCheck($donnees['map_id'])."' target='_parent' />\n";
+
 	//Javascript map info
 	if($yrow!=13){
 		$map_js .= "[".$donnees['map_x'].",".$donnees['map_y'].",".$donnees['map_fieldtype'].",". ((!empty($donnees['map_oasis'])) ? $donnees['map_oasis'] : 0) .",\"d=".$donnees['map_id']."&c=".$generator->getMapCheck($donnees['map_id'])."\",\"".$image."\"";
@@ -369,7 +369,7 @@ if (isset($neutralarray[0])) {
 		elseif($donnees['map_oasis'] != 0){
 			if ($donnees['oasis_conqured'] != 0){
 					$map_js.= ",\"\",\"".$donnees['oasis_user']."\",\"-\",\"".$donnees['oasis_alli_name']."\",\"".$donnees['oasis_tribe']."\"]";
-			} 
+			}
 			else{
 				$map_js.="]";
 			}
@@ -388,7 +388,7 @@ if (isset($neutralarray[0])) {
 		//$regcount += 1;
 	}
 	else {$map_js .= "]";}
-	
+
 	if($i == 12 && $row <= 11){	$row += 1;	$i = -1;}
 	$i++;
 	$i2++;
@@ -421,7 +421,7 @@ if (isset($neutralarray[0])) {
 					</script>
 					<div id="map_content">
 						<?php echo $map_content;?>
-						
+
 					</div>
 					<div id="map_rulers"><?php
 						for($i=0;$i<=12;$i++){
@@ -429,7 +429,7 @@ if (isset($neutralarray[0])) {
 						echo "<div id=\"my".$i."\">".$yarray[$i]."</div>\n";
 						}?>
 					</div>
-					<map id="map_overlay_large" name="map_overlay_large"> 
+					<map id="map_overlay_large" name="map_overlay_large">
 						<?php echo $map_gen;?>
 						<area id="ma_n1" href="karte2.php?z=<?php echo $generator->getBaseID($x,$yp1);?>" coords="762,115,30" shape="circle" title="North"/>
 						<area id="ma_n2" href="karte2.php?z=<?php echo $generator->getBaseID($xp1,$y);?>" coords="770,430,30" shape="circle" title="East"/>

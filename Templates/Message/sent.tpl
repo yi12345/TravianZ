@@ -29,7 +29,7 @@
 		<?php } else { ?>
 		<input class="check" type="checkbox" id="s10" name="s10" onclick="Allmsg(this.form);" />
 		<?php } ?></th>
-	<th colspan="2" class="buttons"><input name="delmsg" value="delete" type="image" id="btn_delete" class="dynamic_img" src="img/x.gif" alt="delete" /></th><th class="navi"><?php 
+	<th colspan="2" class="buttons"><input name="delmsg" value="delete" type="image" id="btn_delete" class="dynamic_img" src="img/x.gif" alt="delete" /></th><th class="navi"><?php
      if(!isset($_GET['s']) && count($message->sent1) < 10) {
     echo "&laquo;&raquo;";
     }
@@ -49,7 +49,7 @@
     }
     ?></th></tr></tfoot>
 <tbody>
-   <?php 
+   <?php
     if(isset($_GET['s'])) {
     $s = $_GET['s'];
     }

@@ -131,14 +131,14 @@ if ($dataarray[143]!='' and $dataarray[144]!=''){ //chief
 <?php if ($dataarray[145]!='' and $dataarray[146]!=''){ //spy
 ?>
     <tbody class="goods"><tr><th>Information</th><td colspan="<?php echo $colspan; ?>">
-    
+
     <?php echo $dataarray[146]; ?>
     </td></tr></tbody>
 <?php }
 if ($dataarray[162]!='' and $dataarray[162]!=''){ //release prisoners
 ?>
     <tbody class="goods"><tr><th>Information</th><td colspan="<?php echo $colspan; ?>">
-    
+
     <?php echo $dataarray[162]; ?>
     </td></tr></tbody>
 <?php }
@@ -150,7 +150,7 @@ if ($dataarray[165]!='' and $dataarray[166]!=''){ //hero
     </td></tr></tbody>
 <?php }
 if(isset($dataarray[164]) && $dataarray[164] !=''){ //troop not return
-?>        
+?>
         <tbody class="goods"><tr><th>Information</th><td colspan="<?php echo $colspan; ?>">
         <?php echo $dataarray[164]; ?>
     </td></tr></tbody>
@@ -168,7 +168,7 @@ $start=1; ?>
     <thead>
     <tr>
     <td class="role">Defender</th>
-        <td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='1'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>        
+        <td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='1'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>
 </tr></thead>
 <tbody class="units">
 <tr>
@@ -215,7 +215,7 @@ $start=11;?>
     <thead>
     <tr>
     <td class="role">Defender</th>
-        <td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='2'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>        
+        <td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='2'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>
 </tr></thead>
 <tbody class="units">
 <tr>
@@ -261,7 +261,7 @@ $start=21; ?>
     <thead>
     <tr>
     <td class="role">Defender</th>
-        <td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='3'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>        
+        <td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='3'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>
 </tr></thead>
 <tbody class="units">
 <tr>
@@ -346,7 +346,7 @@ $start=41; ?>
     <thead>
     <tr>
     <td class="role">Defender</th>
-        <td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='5'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>        
+        <td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='5'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>
 </tr></thead>
 <tbody class="units">
 <tr>

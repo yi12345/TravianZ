@@ -39,7 +39,7 @@
 </tr>
 </tbody></table>
 
-<img id="big_unit" class="big_u14" src="img/x.gif" alt="Scout" title="Scout" /><div id="t_desc">The Scout moves far ahead of the Teuton troops in order to get an impression of the enemy's strength and his villages. He moves on foot, which makes him slower than his Roman or Gaul counterparts. He scouts the enemy units, resources and fortifications. 
+<img id="big_unit" class="big_u14" src="img/x.gif" alt="Scout" title="Scout" /><div id="t_desc">The Scout moves far ahead of the Teuton troops in order to get an impression of the enemy's strength and his villages. He moves on foot, which makes him slower than his Roman or Gaul counterparts. He scouts the enemy units, resources and fortifications.
 <br /><br />
 If there are no enemy Scouts, Pathfinders or Equites Legati in the scouted village then the scouting remains unnoticed.</div><div id="prereqs"><b>Prerequisites</b><br /><a href="manual.php?typ=4&amp;gid=22">Academy</a> Level 1, <a href="manual.php?typ=4&amp;gid=15">Main Building</a> Level 5</div><map id="nav" name="nav">
  <area href="manual.php?typ=1&amp;s=13" title="back" coords="0,0,45,18" shape="rect" alt="" />

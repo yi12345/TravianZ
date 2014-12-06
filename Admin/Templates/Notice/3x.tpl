@@ -2,7 +2,7 @@
 ############################################################
 ##           DO NOT REMOVE THIS NOTICE                    ##
 ##          ADVOCAITE ROCKS TRAVIANX NUTS                 ##
-##                  GIT HUB REV                           ##  
+##                  GIT HUB REV                           ##
 ############################################################
 $topic = $database->getNotice2($_GET['id'], 'topic');
 $time = $database->getNotice2($_GET['id'], 'time');
@@ -17,7 +17,7 @@ $colspan2 = 10;
 					<th>Subject:</th>
 					<th><?php echo $topic; ?></th>
 				</tr>
- 
+
 				<tr>
 					<?php
                 $date = $generator->procMtime($time); ?>
@@ -88,13 +88,13 @@ if(isset($dataarray[151]) and $dataarray[151]!=0){
 }
 echo "</tr></tbody>"; ?>
 </td></tr></tbody></table>
-	
+
 <?php
 $targettribe=$dataarray['31'];
 
 
 if ($dataarray[31]=='1'){
-$start=1; ?>	
+$start=1; ?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
@@ -104,8 +104,8 @@ $start=1; ?>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 	<?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
@@ -131,9 +131,9 @@ for($i=45;$i<=54;$i++) {
 ?>
 </tr></tbody></table>
 
-<?php } 
-if ($dataarray[31]=='2'){ 
-$start=11;?>	
+<?php }
+if ($dataarray[31]=='2'){
+$start=11;?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
@@ -143,8 +143,8 @@ $start=11;?>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 <?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
@@ -171,7 +171,7 @@ for($i=66;$i<=75;$i++) {
 </tr></tbody></table>
 <?php } ?>
 <?php  if ($dataarray[31]=='3'){
-$start=21; ?>	
+$start=21; ?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
@@ -181,8 +181,8 @@ $start=21; ?>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 	<?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
@@ -209,8 +209,8 @@ for($i=87;$i<=96;$i++) {
 </tr></tbody></table>
 
 <?php } ?>
-<?php  if ($dataarray[31]=='4'){ 
-$start=31; ?>	
+<?php  if ($dataarray[31]=='4'){
+$start=31; ?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
@@ -220,8 +220,8 @@ $start=31; ?>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 	<?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
@@ -249,7 +249,7 @@ for($i=108;$i<=117;$i++) {
 
 <?php } ?>
 <?php  if ($dataarray[31]=='5'){
-$start=41; ?>	
+$start=41; ?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
@@ -259,8 +259,8 @@ $start=41; ?>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 	<?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";

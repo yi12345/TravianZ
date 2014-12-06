@@ -28,7 +28,7 @@ foreach($topics as $arr) {
 	<tr>
 	<td>
 	</td><td>
-		
+
 			<div bbArea="text" id="text_container" name="text_container">
 				<div id="text_toolbar" name="text_toolbar">
 
@@ -64,7 +64,7 @@ foreach($topics as $arr) {
 			<script>
 				var bbEditor = new BBEditor("text");
 			</script>
-			
+
 	</td></tr>
 	</tbody></table>
 

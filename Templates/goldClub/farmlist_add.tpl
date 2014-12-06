@@ -15,7 +15,7 @@
 					<th>
 						Village:					</th>
 					<td>
-                    
+
 						<select id="did" name="did">
 <?php
 	for($i=1;$i<=count($session->villages);$i++) {
@@ -24,7 +24,7 @@
     }else{
         $select = '';
     }
-    
+
 		echo "<option value=\"".$session->villages[$i-1]."\" ".$select.">".$database->getVillageField($session->villages[$i-1],'name')."</option>";
     }
 ?>						</select>

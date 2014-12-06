@@ -10,7 +10,7 @@ $allianceinfo = $database->getAlliance($aid);
 $noticeArray = $database->readAlliNotice($aid);
 
 echo "<h1>".$allianceinfo['tag']." - ".$allianceinfo['name']."</h1>";
-include("alli_menu.tpl"); 
+include("alli_menu.tpl");
 ?>
 <table cellpadding="1" cellspacing="1" id="events"><thead>
 <tr><th colspan="2">Alliance events</th></tr>

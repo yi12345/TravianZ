@@ -36,7 +36,7 @@ if($ChckTopic){
 			$post_dates = date('m/d/y, H:i a',$arrs['date']);
 			$owner_topics = $database->getUserArray($arrs['owner'],1);
 		}
-		
+
 		echo '<tr><td class="ico">';
 		if($database->CheckEditRes($aid)=="1"){
 			if($database->CheckCloseTopic($arrs['id']) == 1){
@@ -55,7 +55,7 @@ if($ChckTopic){
 		<td class="cou">'.$CountPosts.'</td>
 		<td class="last">'.$post_dates.'<br /><a href="spieler.php?uid='.$arrs['owner'].'">'.$owner_topics['username'].'</a> <a href="allianz.php?s=2&fid2='.$arrs['cat'].'&pid='.$aid.'&tid='.$arrs['id'].'&seite=max"><img class="latest_reply" src="img/x.gif" alt="Show last post" title="Show last post" /></a>
 		</td></tr>';
-	
+
 	}
 
 	foreach($Topics as $arr) {
@@ -70,7 +70,7 @@ if($ChckTopic){
 			$post_date = date('m/d/y, H:i a',$arr['date']);
 			$owner_topic = $database->getUserArray($arr['owner'],1);
 		}
-		
+
 		echo '<tr><td class="ico">';
 		if($database->CheckEditRes($aid)=="1"){
 			if($database->CheckCloseTopic($arr['id']) == 1){
@@ -89,7 +89,7 @@ if($ChckTopic){
 		<td class="cou">'.$CountPost.'</td>
 		<td class="last">'.$post_date.'<br /><a href="spieler.php?uid='.$arr['owner'].'">'.$owner_topic['username'].'</a> <a href="allianz.php?s=2&aid='.$aid.'&tid='.$arr['id'].'&seite=max"><img class="latest_reply" src="img/x.gif" alt="Show last post" title="Show last post" /></a>
 		</td></tr>';
-	
+
 	}
 }else{
 echo '<tr>
@@ -98,7 +98,7 @@ echo '<tr>
 }
 ?>
 	</tbody></table><p>
-	<a href="allianz.php?s=2&pid=<?php echo $aid; ?>&fid=<?php echo $cat_id; ?>&ac=newtopic"><img id="fbtn_post" class="dynamic_img" src="img/x.gif" alt="Post new thread" /></a> 
+	<a href="allianz.php?s=2&pid=<?php echo $aid; ?>&fid=<?php echo $cat_id; ?>&ac=newtopic"><img id="fbtn_post" class="dynamic_img" src="img/x.gif" alt="Post new thread" /></a>
 <?php
 	$opt = $database->getAlliPermissions($session->uid, $aid);
 	if(isset($opt['opt5']) && $opt['opt5']== 1){

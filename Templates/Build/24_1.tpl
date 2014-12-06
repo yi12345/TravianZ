@@ -18,12 +18,12 @@
                     echo $generator->getTimeFormat(round($cel[$i]['time'] * ($bid24[$building->getTypeLevel(24)]['attri'] / 100)/SPEED));
                     if($session->userinfo['gold'] >= 3 && $building->getTypeLevel(17) >= 1) {
                    echo "|<a href=\"build.php?gid=17&t=3&r1=".$cel[$i]['wood']."&r2=".$cel[$i]['clay']."&r3=".$cel[$i]['iron']."&r4=".$cel[$i]['crop']."\" title=\"NPC trade\"><img class=\"npc\" src=\"img/x.gif\" alt=\"NPC trade\" title=\"NPC trade\" /></a>";
-                   }		   
+                   }
 				if($inuse > $time){
 					echo "<td class=\"act\">
 					<div class=\"none\">Celebration</br>in progress</div>
 					</td></tr>";
-					}				
+					}
                   else if($cel[$i]['wood'] > $village->awood || $cel[$i]['clay'] > $village->aclay || $cel[$i]['iron'] > $village->airon || $cel[$i]['crop'] > $village->acrop) {
 					if($village->getProd("crop")>0){
 	                   	$time = $technology->calculateAvaliable(24,$cel[$i]);
@@ -38,8 +38,8 @@
                     echo "<td class=\"act\">";
 					echo "<a class=\"research\" href=\"celebration.php?type=$i&id=$id\">hold</a></td></tr>";
                 }
-				
-			if($level >= 10){	
+
+			if($level >= 10){
 		$level = $village->resarray['f'.$id];
 			echo "<tr><td class=\"desc\">
 					<div class=\"tit\">
@@ -54,7 +54,7 @@
 					echo "<td class=\"act\">
 					<div class=\"none\">Celebration<br />in progress</div>
 					</td></tr>";
-					}	
+					}
                   else if(29700 > $village->awood || 33250 > $village->aclay || 32000 > $village->airon || 6700 > $village->acrop) {
 			if($village->getProd("crop")>0){
                    	$time = $technology->calculateAvaliable(24,$cel[2]);

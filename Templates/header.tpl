@@ -1,4 +1,4 @@
-<?php 
+<?php
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
@@ -80,7 +80,7 @@ height:18px;
   }
 </style>
 <?php
-$hour = date('Hi'); 
+$hour = date('Hi');
 if ($hour > 1759 or $hour < 500) {
 $day_night_img = 'night_image';
 } elseif ($hour > 1200) {

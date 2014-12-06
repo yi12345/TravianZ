@@ -43,7 +43,7 @@ $output="<table cellpadding=1 cellspacing=1 class=\"build_details\">
                 <th colspan=2>Train New Hero</th>
             </tr>
         </thead>";
-        
+
 if($session->tribe == 1) {
     $output.=" <tr>
                 <td class=\"desc\">
@@ -61,23 +61,23 @@ if($session->tribe == 1) {
      $output.=$generator->getTimeFormat(round($u1['time'] / SPEED * $artefact_bonus2 / $artefact_bonus)*3);
      $output.="</div>
 				</td>
-				
+
                 <td class=\"val\" width=\"20%\"><center>";
 
-                
-    if($village->awood < $u1['wood'] || $village->aclay < $u1['clay'] || $village->airon < $u1['iron'] || $village->acrop < $u1['crop'])      
-        $output.="<span class=\"none\">Not enough resources</span>";    
-    elseif($units['u1'] == 0) 
-        $output.="<span class=\"none\">Not available units</span>";      
+
+    if($village->awood < $u1['wood'] || $village->aclay < $u1['clay'] || $village->airon < $u1['iron'] || $village->acrop < $u1['crop'])
+        $output.="<span class=\"none\">Not enough resources</span>";
+    elseif($units['u1'] == 0)
+        $output.="<span class=\"none\">Not available units</span>";
     else $output.="<a href=\"build.php?id=".$id."&train=1\">Train</a>";
-        
-    
+
+
     $output.="</center></td>
 </tr>";
-  
-        
-    
-    if($database->checkIfResearched($village->wid, 't2') != 0){ 
+
+
+
+    if($database->checkIfResearched($village->wid, 't2') != 0){
         $output.="<tr>
                     <td class=\"desc\">
         				<div class=\"tit\">
@@ -92,25 +92,25 @@ if($session->tribe == 1) {
                             <img class=\"r5\" src=\"img/x.gif\" alt=\"Crop consumption\" title=\"Crop consumption\" />6|
                             <img class=\"clock\" src=\"img/x.gif\" alt=\"Duration\" title=\"Duration\" />";
         $output.=$generator->getTimeFormat(round($u2['time'] / SPEED * $artefact_bonus2 / $artefact_bonus)*3);
-        
+
         $output.="</div>
         				</td>
-        				
+
                         <td class=\"val\" width=\"20%\"><center>";
-                        
-        if($village->awood < $u2['wood'] OR $village->aclay < $u2['clay'] OR $village->airon < $u2['iron'] OR $village->acrop < $u2['crop']) 
-           $output.="<span class=\"none\">Not enough resources</span>"; 
+
+        if($village->awood < $u2['wood'] OR $village->aclay < $u2['clay'] OR $village->airon < $u2['iron'] OR $village->acrop < $u2['crop'])
+           $output.="<span class=\"none\">Not enough resources</span>";
         elseif($units['u2'] == 0)
-            $output.="<span class=\"none\">Not available units</span>"; 
-        else 
+            $output.="<span class=\"none\">Not available units</span>";
+        else
             $output.="<a href=\"build.php?id=".$id."&train=2\">Train</a>";
-                         
+
         $output.="</center></td>
                     </tr>";
-    } 
-        
+    }
+
     if($database->checkIfResearched($village->wid, 't3') != 0){
-            
+
         $output.="<tr>
                         <td class=\"desc\">
         					<div class=\"tit\">
@@ -124,26 +124,26 @@ if($session->tribe == 1) {
                                 <img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" />".$u3['crop']."|
                                 <img class=\"r5\" src=\"img/x.gif\" alt=\"Crop consumption\" title=\"Crop consumption\" />6|
                                 <img class=\"clock\" src=\"img/x.gif\" alt=\"Duration\" title=\"Duration\" />";
-                                
+
          $output.=  $generator->getTimeFormat(round($u3['time'] / SPEED * $artefact_bonus2 / $artefact_bonus)*3);
-        
+
         $output.= "</div>
         				</td>
-        				
+
                         <td class=\"val\" width=\"20%\"><center>";
-        
-        if($village->awood < $u3['wood'] OR $village->aclay < $u3['clay'] OR $village->airon < $u3['iron'] OR $village->acrop < $u3['crop']) { 
-            $output.="<span class=\"none\">Not enough resources</span>"; 
-        }else if($units['u3'] == 0){ 
-            $output.="<span class=\"none\">Not available units</span>"; 
+
+        if($village->awood < $u3['wood'] OR $village->aclay < $u3['clay'] OR $village->airon < $u3['iron'] OR $village->acrop < $u3['crop']) {
+            $output.="<span class=\"none\">Not enough resources</span>";
+        }else if($units['u3'] == 0){
+            $output.="<span class=\"none\">Not available units</span>";
         }else {
             $output.="<a href=\"build.php?id=".$id."&train=3\">Train</a>";
-        }  
+        }
                  "</center></td>
-                    </tr> " ;     
-    }         
-    
-    if($database->checkIfResearched($village->wid, 't5') != 0){  
+                    </tr> " ;
+    }
+
+    if($database->checkIfResearched($village->wid, 't5') != 0){
         $output.= "<tr>
                     <td class=\"desc\">
     					<div class=\"tit\">
@@ -160,21 +160,21 @@ if($session->tribe == 1) {
     				        $generator->getTimeFormat(round($u5['time'] / SPEED * $artefact_bonus2 / $artefact_bonus)*3)."
                         </div>
     				</td>
-    				
+
                     <td class=\"val\" width=\"20%\"><center>";
-        
-        if($village->awood < $u5['wood'] OR $village->aclay < $u5['clay'] OR $village->airon < $u5['iron'] OR $village->acrop < $u5['crop']) { 
-            $output.= "<span class=\"none\">Not enough resources</span>"; 
-        }else if($units['u5'] == 0){ 
-            $output.= "<span class=\"none\">Not available units</span>"; 
+
+        if($village->awood < $u5['wood'] OR $village->aclay < $u5['clay'] OR $village->airon < $u5['iron'] OR $village->acrop < $u5['crop']) {
+            $output.= "<span class=\"none\">Not enough resources</span>";
+        }else if($units['u5'] == 0){
+            $output.= "<span class=\"none\">Not available units</span>";
         }else {
             $output.= "<a href=\"build.php?id=".$id."&train=5\">Train</a>";
-        } 
+        }
         $output.="</center></td>
                 </tr>";
-    }      
-    
-    if($database->checkIfResearched($village->wid, 't6') != 0){ 
+    }
+
+    if($database->checkIfResearched($village->wid, 't6') != 0){
         $output.="<tr>
                     <td class=\"desc\">
     					<div class=\"tit\">
@@ -191,21 +191,21 @@ if($session->tribe == 1) {
     				        $generator->getTimeFormat(round($u6['time'] / SPEED * $artefact_bonus2 / $artefact_bonus)*3)."
                         </div>
     				</td>
-    				
+
                     <td class=\"val\" width=\"20%\"><center>   ";
-      
-        if($village->awood < $u6['wood'] OR $village->aclay < $u6['clay'] OR $village->airon < $u6['iron'] OR $village->acrop < $u6['crop']) { 
-            $output.= "<span class=\"none\">Not enough resources</span>"; 
-        }else if($units['u6'] == 0){ 
-            $output.= "<span class=\"none\">Not available units</span>"; 
+
+        if($village->awood < $u6['wood'] OR $village->aclay < $u6['clay'] OR $village->airon < $u6['iron'] OR $village->acrop < $u6['crop']) {
+            $output.= "<span class=\"none\">Not enough resources</span>";
+        }else if($units['u6'] == 0){
+            $output.= "<span class=\"none\">Not available units</span>";
         }else {
             $output.= "<a href=\"build.php?id=".$id."&train=6\">Train</a>";
-        }  
-        
+        }
+
         $output.="</center></td>
                 </tr>";
-    }    
-}    
+    }
+}
 
 if($session->tribe == 2) {
 
@@ -225,21 +225,21 @@ $output.="<tr>
 				        $generator->getTimeFormat(round($u11['time'] / SPEED * $artefact_bonus2 / $artefact_bonus)*3)."
                     </div>
 				</td>
-				
+
                 <td class=\"val\" width=\"20%\"><center>";
 
-        if($village->awood < $u11['wood'] OR $village->aclay < $u11['clay'] OR $village->airon < $u11['iron'] OR $village->acrop < $u11['crop']) { 
-            $output.= "<span class=\"none\">Not enough resources</span>"; 
-        }else if($units['u11'] == 0){ 
-            $output.= "<span class=\"none\">Not available units</span>"; 
+        if($village->awood < $u11['wood'] OR $village->aclay < $u11['clay'] OR $village->airon < $u11['iron'] OR $village->acrop < $u11['crop']) {
+            $output.= "<span class=\"none\">Not enough resources</span>";
+        }else if($units['u11'] == 0){
+            $output.= "<span class=\"none\">Not available units</span>";
         }else {
             $output.= "<a href=\"build.php?id=".$id."&train=11\">Train</a>";
-        }  
+        }
     $output.="</center></td>
             </tr>";
-            
-            
-    if($database->checkIfResearched($village->wid, 't12') != 0){    
+
+
+    if($database->checkIfResearched($village->wid, 't12') != 0){
         $output.="<tr>
                 <td class=\"desc\">
 					<div class=\"tit\">
@@ -256,22 +256,22 @@ $output.="<tr>
 				        $generator->getTimeFormat(round($u12['time'] / SPEED * $artefact_bonus2 / $artefact_bonus)*3)."
                     </div>
 				</td>
-				
+
                 <td class=\"val\" width=\"20%\"><center>";
 
-        if($village->awood < $u12['wood'] OR $village->aclay < $u12['clay'] OR $village->airon < $u12['iron'] OR $village->acrop < $u12['crop']) { 
-            $output.= "<span class=\"none\">Not enough resources</span>"; 
-        }else if($units['u12'] == 0){ 
-            $output.= "<span class=\"none\">Not available units</span>"; 
+        if($village->awood < $u12['wood'] OR $village->aclay < $u12['clay'] OR $village->airon < $u12['iron'] OR $village->acrop < $u12['crop']) {
+            $output.= "<span class=\"none\">Not enough resources</span>";
+        }else if($units['u12'] == 0){
+            $output.= "<span class=\"none\">Not available units</span>";
         }else {
             $output.= "<a href=\"build.php?id=".$id."&train=12\">Train</a>";
-        }  
+        }
         $output.="</center></td>
             </tr>";
-    }    
+    }
 
-  
-    if($database->checkIfResearched($village->wid, 't13') != 0){    
+
+    if($database->checkIfResearched($village->wid, 't13') != 0){
         $output.="<tr>
                 <td class=\"desc\">
 					<div class=\"tit\">
@@ -288,21 +288,21 @@ $output.="<tr>
 				        $generator->getTimeFormat(round($u13['time'] / SPEED * $artefact_bonus2 / $artefact_bonus)*3)."
                     </div>
 				</td>
-				
+
                 <td class=\"val\" width=\"20%\"><center>";
 
-        if($village->awood < $u13['wood'] OR $village->aclay < $u13['clay'] OR $village->airon < $u13['iron'] OR $village->acrop < $u13['crop']) { 
-            $output.= "<span class=\"none\">Not enough resources</span>"; 
-        }else if($units['u13'] == 0){ 
-            $output.= "<span class=\"none\">Not available units</span>"; 
+        if($village->awood < $u13['wood'] OR $village->aclay < $u13['clay'] OR $village->airon < $u13['iron'] OR $village->acrop < $u13['crop']) {
+            $output.= "<span class=\"none\">Not enough resources</span>";
+        }else if($units['u13'] == 0){
+            $output.= "<span class=\"none\">Not available units</span>";
         }else {
             $output.= "<a href=\"build.php?id=".$id."&train=13\">Train</a>";
-        }  
+        }
         $output.="</center></td>
             </tr>";
-    }   
-    
-    if($database->checkIfResearched($village->wid, 't15') != 0){    
+    }
+
+    if($database->checkIfResearched($village->wid, 't15') != 0){
         $output.="<tr>
                 <td class=\"desc\">
 					<div class=\"tit\">
@@ -319,22 +319,22 @@ $output.="<tr>
 				        $generator->getTimeFormat(round($u15['time'] / SPEED * $artefact_bonus2 / $artefact_bonus)*3)."
                     </div>
 				</td>
-				
+
                 <td class=\"val\" width=\"20%\"><center>";
 
-        if($village->awood < $u15['wood'] OR $village->aclay < $u15['clay'] OR $village->airon < $u15['iron'] OR $village->acrop < $u15['crop']) { 
-            $output.= "<span class=\"none\">Not enough resources</span>"; 
-        }else if($units['u15'] == 0){ 
-            $output.= "<span class=\"none\">Not available units</span>"; 
+        if($village->awood < $u15['wood'] OR $village->aclay < $u15['clay'] OR $village->airon < $u15['iron'] OR $village->acrop < $u15['crop']) {
+            $output.= "<span class=\"none\">Not enough resources</span>";
+        }else if($units['u15'] == 0){
+            $output.= "<span class=\"none\">Not available units</span>";
         }else {
             $output.= "<a href=\"build.php?id=".$id."&train=15\">Train</a>";
-        }  
+        }
         $output.="</center></td>
             </tr>";
-    }  
-    
-    
-    if($database->checkIfResearched($village->wid, 't16') != 0){    
+    }
+
+
+    if($database->checkIfResearched($village->wid, 't16') != 0){
         $output.="<tr>
                 <td class=\"desc\">
 					<div class=\"tit\">
@@ -351,19 +351,19 @@ $output.="<tr>
 				        $generator->getTimeFormat(round($u16['time'] / SPEED * $artefact_bonus2 / $artefact_bonus)*3)."
                     </div>
 				</td>
-				
+
                 <td class=\"val\" width=\"20%\"><center>";
 
-        if($village->awood < $u16['wood'] OR $village->aclay < $u16['clay'] OR $village->airon < $u16['iron'] OR $village->acrop < $u16['crop']) { 
-            $output.= "<span class=\"none\">Not enough resources</span>"; 
-        }else if($units['u16'] == 0){ 
-            $output.= "<span class=\"none\">Not available units</span>"; 
+        if($village->awood < $u16['wood'] OR $village->aclay < $u16['clay'] OR $village->airon < $u16['iron'] OR $village->acrop < $u16['crop']) {
+            $output.= "<span class=\"none\">Not enough resources</span>";
+        }else if($units['u16'] == 0){
+            $output.= "<span class=\"none\">Not available units</span>";
         }else {
             $output.= "<a href=\"build.php?id=".$id."&train=16\">Train</a>";
-        }  
+        }
         $output.="</center></td>
             </tr>";
-    }  
+    }
 }
 
 
@@ -385,21 +385,21 @@ $output.="<tr>
 				        $generator->getTimeFormat(round($u21['time'] / SPEED * $artefact_bonus2 / $artefact_bonus)*3)."
                     </div>
 				</td>
-				
+
                 <td class=\"val\" width=\"20%\"><center>";
 
-        if($village->awood < $u21['wood'] OR $village->aclay < $u21['clay'] OR $village->airon < $u21['iron'] OR $village->acrop < $u21['crop']) { 
-            $output.= "<span class=\"none\">Not enough resources</span>"; 
-        }else if($units['u21'] == 0){ 
-            $output.= "<span class=\"none\">Not available units</span>"; 
+        if($village->awood < $u21['wood'] OR $village->aclay < $u21['clay'] OR $village->airon < $u21['iron'] OR $village->acrop < $u21['crop']) {
+            $output.= "<span class=\"none\">Not enough resources</span>";
+        }else if($units['u21'] == 0){
+            $output.= "<span class=\"none\">Not available units</span>";
         }else {
             $output.= "<a href=\"build.php?id=".$id."&train=21\">Train</a>";
-        }  
+        }
     $output.="</center></td>
             </tr>";
-            
-            
-    if($database->checkIfResearched($village->wid, 't22') != 0){    
+
+
+    if($database->checkIfResearched($village->wid, 't22') != 0){
         $output.="<tr>
                 <td class=\"desc\">
 					<div class=\"tit\">
@@ -416,22 +416,22 @@ $output.="<tr>
 				        $generator->getTimeFormat(round($u22['time'] / SPEED * $artefact_bonus2 / $artefact_bonus)*3)."
                     </div>
 				</td>
-				
+
                 <td class=\"val\" width=\"20%\"><center>";
 
-        if($village->awood < $u22['wood'] OR $village->aclay < $u22['clay'] OR $village->airon < $u22['iron'] OR $village->acrop < $u22['crop']) { 
-            $output.= "<span class=\"none\">Not enough resources</span>"; 
-        }else if($units['u22'] == 0){ 
-            $output.= "<span class=\"none\">Not available units</span>"; 
+        if($village->awood < $u22['wood'] OR $village->aclay < $u22['clay'] OR $village->airon < $u22['iron'] OR $village->acrop < $u22['crop']) {
+            $output.= "<span class=\"none\">Not enough resources</span>";
+        }else if($units['u22'] == 0){
+            $output.= "<span class=\"none\">Not available units</span>";
         }else {
             $output.= "<a href=\"build.php?id=".$id."&train=22\">Train</a>";
-        }  
+        }
         $output.="</center></td>
             </tr>";
-    }    
+    }
 
-  
-    if($database->checkIfResearched($village->wid, 't24') != 0){    
+
+    if($database->checkIfResearched($village->wid, 't24') != 0){
         $output.="<tr>
                 <td class=\"desc\">
 					<div class=\"tit\">
@@ -448,21 +448,21 @@ $output.="<tr>
 				        $generator->getTimeFormat(round($u24['time'] / SPEED * $artefact_bonus2 / $artefact_bonus)*3)."
                     </div>
 				</td>
-				
+
                 <td class=\"val\" width=\"20%\"><center>";
 
-        if($village->awood < $u24['wood'] OR $village->aclay < $u24['clay'] OR $village->airon < $u24['iron'] OR $village->acrop < $u24['crop']) { 
-            $output.= "<span class=\"none\">Not enough resources</span>"; 
-        }else if($units['u24'] == 0){ 
-            $output.= "<span class=\"none\">Not available units</span>"; 
+        if($village->awood < $u24['wood'] OR $village->aclay < $u24['clay'] OR $village->airon < $u24['iron'] OR $village->acrop < $u24['crop']) {
+            $output.= "<span class=\"none\">Not enough resources</span>";
+        }else if($units['u24'] == 0){
+            $output.= "<span class=\"none\">Not available units</span>";
         }else {
             $output.= "<a href=\"build.php?id=".$id."&train=24\">Train</a>";
-        }  
+        }
         $output.="</center></td>
             </tr>";
-    }   
-    
-    if($database->checkIfResearched($village->wid, 't25') != 0){    
+    }
+
+    if($database->checkIfResearched($village->wid, 't25') != 0){
         $output.="<tr>
                 <td class=\"desc\">
 					<div class=\"tit\">
@@ -479,22 +479,22 @@ $output.="<tr>
 				        $generator->getTimeFormat(round($u25['time'] / SPEED * $artefact_bonus2 / $artefact_bonus)*3)."
                     </div>
 				</td>
-				
+
                 <td class=\"val\" width=\"20%\"><center>";
 
-        if($village->awood < $u25['wood'] OR $village->aclay < $u25['clay'] OR $village->airon < $u25['iron'] OR $village->acrop < $u25['crop']) { 
-            $output.= "<span class=\"none\">Not enough resources</span>"; 
-        }else if($units['u25'] == 0){ 
-            $output.= "<span class=\"none\">Not available units</span>"; 
+        if($village->awood < $u25['wood'] OR $village->aclay < $u25['clay'] OR $village->airon < $u25['iron'] OR $village->acrop < $u25['crop']) {
+            $output.= "<span class=\"none\">Not enough resources</span>";
+        }else if($units['u25'] == 0){
+            $output.= "<span class=\"none\">Not available units</span>";
         }else {
             $output.= "<a href=\"build.php?id=".$id."&train=25\">Train</a>";
-        }  
+        }
         $output.="</center></td>
             </tr>";
-    }  
-    
-    
-    if($database->checkIfResearched($village->wid, 't26') != 0){    
+    }
+
+
+    if($database->checkIfResearched($village->wid, 't26') != 0){
         $output.="<tr>
                 <td class=\"desc\">
 					<div class=\"tit\">
@@ -511,25 +511,25 @@ $output.="<tr>
 				        $generator->getTimeFormat(round($u26['time'] / SPEED * $artefact_bonus2 / $artefact_bonus)*3)."
                     </div>
 				</td>
-				
+
                 <td class=\"val\" width=\"20%\"><center>";
 
-        if($village->awood < $u26['wood'] OR $village->aclay < $u26['clay'] OR $village->airon < $u26['iron'] OR $village->acrop < $u26['crop']) { 
-            $output.= "<span class=\"none\">Not enough resources</span>"; 
-        }else if($units['u26'] == 0){ 
-            $output.= "<span class=\"none\">Not available units</span>"; 
+        if($village->awood < $u26['wood'] OR $village->aclay < $u26['clay'] OR $village->airon < $u26['iron'] OR $village->acrop < $u26['crop']) {
+            $output.= "<span class=\"none\">Not enough resources</span>";
+        }else if($units['u26'] == 0){
+            $output.= "<span class=\"none\">Not available units</span>";
         }else {
             $output.= "<a href=\"build.php?id=".$id."&train=26\">Train</a>";
-        }  
+        }
         $output.="</center></td>
             </tr>";
-    }  
+    }
 }
 
 
 
         //HERO TRAINING
-		$count_hero = mysql_num_rows(mysql_query("SELECT * FROM " . TB_PREFIX . "hero WHERE `uid` = " . $session->uid . "")); 
+		$count_hero = mysql_num_rows(mysql_query("SELECT * FROM " . TB_PREFIX . "hero WHERE `uid` = " . $session->uid . ""));
         if($session->tribe == 1){
                 if($_GET['train'] == 1){
 				if($session->access != BANNED){
@@ -544,7 +544,7 @@ $output.="<tr>
 					}
 					header("Location: build.php?id=".$id."");
 					}else{
-					header("Location: banned.php"); 
+					header("Location: banned.php");
 					}
 					}
                 if($_GET['train'] == 2){
@@ -560,7 +560,7 @@ $output.="<tr>
 					}
 					header("Location: build.php?id=".$id."");
 					}else{
-					header("Location: banned.php"); 
+					header("Location: banned.php");
 					}
 					}
                 if($_GET['train'] == 3){
@@ -574,7 +574,7 @@ $output.="<tr>
 					mysql_query("UPDATE " . TB_PREFIX . "vdata SET `crop` = `crop` - ".$u3['crop']." WHERE `wref` = '" . $village->wid . "'");
 					header("Location: build.php?id=".$id."");
 					}else{
-					header("Location: banned.php"); 
+					header("Location: banned.php");
 					}
 					}
                 if($_GET['train'] == 5){
@@ -590,7 +590,7 @@ $output.="<tr>
 					}
 					header("Location: build.php?id=".$id."");
 					}else{
-					header("Location: banned.php"); 
+					header("Location: banned.php");
 					}
 					}
                 if($_GET['train'] == 6){
@@ -606,7 +606,7 @@ $output.="<tr>
 					}
 					header("Location: build.php?id=".$id."");
 					}else{
-					header("Location: banned.php"); 
+					header("Location: banned.php");
 					}
 				}
 			}
@@ -624,7 +624,7 @@ $output.="<tr>
 					}
                     header("Location: build.php?id=".$id."");
 					}else{
-					header("Location: banned.php"); 
+					header("Location: banned.php");
 					}
                 }
                 if($_GET['train'] == 12){
@@ -640,7 +640,7 @@ $output.="<tr>
 					}
 					header("Location: build.php?id=".$id."");
 					}else{
-					header("Location: banned.php"); 
+					header("Location: banned.php");
 					}
 					}
                 if($_GET['train'] == 13){
@@ -656,7 +656,7 @@ $output.="<tr>
 					}
 					header("Location: build.php?id=".$id."");
 					}else{
-					header("Location: banned.php"); 
+					header("Location: banned.php");
 					}
 					}
                 if($_GET['train'] == 15){
@@ -672,7 +672,7 @@ $output.="<tr>
 					}
 					header("Location: build.php?id=".$id."");
 					}else{
-					header("Location: banned.php"); 
+					header("Location: banned.php");
 					}
 					}
                 if($_GET['train'] == 16){
@@ -688,7 +688,7 @@ $output.="<tr>
 					}
 					header("Location: build.php?id=".$id."");
 					}else{
-					header("Location: banned.php"); 
+					header("Location: banned.php");
 					}
 					}
             }
@@ -706,7 +706,7 @@ $output.="<tr>
 					}
 					header("Location: build.php?id=".$id."");
 					}else{
-					header("Location: banned.php"); 
+					header("Location: banned.php");
 					}
 					}
                 if($_GET['train'] == 22){
@@ -722,7 +722,7 @@ $output.="<tr>
 					}
 					header("Location: build.php?id=".$id."");
 					}else{
-					header("Location: banned.php"); 
+					header("Location: banned.php");
 					}
 					}
                 if($_GET['train'] == 24){
@@ -738,7 +738,7 @@ $output.="<tr>
 					}
 					header("Location: build.php?id=".$id."");
 					}else{
-					header("Location: banned.php"); 
+					header("Location: banned.php");
 					}
 					}
                 if($_GET['train'] == 25){
@@ -754,7 +754,7 @@ $output.="<tr>
 					}
 					header("Location: build.php?id=".$id."");
 					}else{
-					header("Location: banned.php"); 
+					header("Location: banned.php");
 					}
 					}
                 if($_GET['train'] == 26){
@@ -770,15 +770,15 @@ $output.="<tr>
 					}
 					header("Location: build.php?id=".$id."");
 					}else{
-					header("Location: banned.php"); 
+					header("Location: banned.php");
 					}
 					}
 			}
-            
-        
-        
 
-echo  $output;  
+
+
+
+echo  $output;
 
 ?>
 </table>
