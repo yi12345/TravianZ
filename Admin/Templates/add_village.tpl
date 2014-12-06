@@ -18,12 +18,12 @@
 <table id="member" style="width: 225px;" align="center">
   <thead>
     <tr>
-        <th colspan="2">Add Village</th>
+        <th colspan="2">新增村莊</th>
     </tr>
   </thead>
 
 	<tr>
-        <td colspan="2"><center>Coordinates (<b>X</b>|<b>Y</b>)</center></td>
+        <td colspan="2"><center>座標 (<b>X</b>|<b>Y</b>)</center></td>
     </tr>
 
 	<tr>

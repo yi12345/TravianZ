@@ -215,17 +215,17 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
 	<p>
 	<span class="f10 c">NEWSBOX OPTIONS</span>
 	<table><tr>
-	<td><span class="f9 c6">Newsbox 1:</span></td><td><select name="box1">
-	  <option value="true">Enabled</option>
-	  <option value="false" selected="selected">Disabled</option>
+	<td><span class="f9 c6">資訊 1:</span></td><td><select name="box1">
+	  <option value="true">啟用</option>
+	  <option value="false" selected="selected">停用</option>
 	</select></td></tr>
-	<td><span class="f9 c6">Newsbox 2:</span></td><td><select name="box2">
-	  <option value="true">Enabled</option>
-	  <option value="false" selected="selected">Disabled</option>
+	<td><span class="f9 c6">資訊 2:</span></td><td><select name="box2">
+	  <option value="true">啟用</option>
+	  <option value="false" selected="selected">停用</option>
 	</select></td></tr>
-	<td><span class="f9 c6">Newsbox 3:</span></td><td><select name="box3">
-	  <option value="true">Enabled</option>
-	  <option value="false" selected="selected">Disabled</option>
+	<td><span class="f9 c6">資訊 3:</span></td><td><select name="box3">
+	  <option value="true">啟用</option>
+	  <option value="false" selected="selected">停用</option>
 	</select></td></tr>
 	</table>
 	</p>
