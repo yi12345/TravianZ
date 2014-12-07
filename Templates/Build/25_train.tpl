@@ -36,9 +36,9 @@
 <table cellpadding="1" cellspacing="1" class="build_details">
 <thead>
 <tr>
-<td>Name</td>
-<td>Quantity</td>
-<td>Max</td>
+<td>名稱</td>
+<td>數量</td>
+<td>最大</td>
 </tr>
 </thead>
 <tbody>

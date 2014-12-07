@@ -1,8 +1,8 @@
-<h2>Main Building</h2>
+<h2>村莊大樓</h2>
 
 <table class="new_building" cellpadding="1" cellspacing="1">
 	<tbody><tr>
-		<td class="desc">In the main building the village's master builders live. The higher its level the faster your master builders complete the construction of new buildings.</td>
+		<td class="desc">村莊大樓里建築大師的居住地。等級越高速度越快的完成新建築的建設。</td>
 		<td rowspan="3" class="bimg">
 							<a href="#" onClick="return Popup(10,4);">
 				<img class="building g15" src="img/x.gif" alt="Main Building" title="Main Building" /></a>

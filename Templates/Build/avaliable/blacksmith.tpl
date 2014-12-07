@@ -1,7 +1,7 @@
-<h2>Blacksmith</h2>
+<h2>鐵匠鋪</h2>
 	<table class="new_building" cellpadding="1" cellspacing="1">
 		<tbody><tr>
-			<td class="desc">In the blacksmith&#39;s melting furnaces your warriors&#39; weapons are enhanced. By increasing its level you can order the fabrication of even better weapons.
+			<td class="desc">在鐵匠，你可以使軍隊的武器增強。通過升級，你可以製作更好的武器來強化軍隊。
 
 </td>
 			<td rowspan="3" class="bimg">

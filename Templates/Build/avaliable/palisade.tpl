@@ -1,8 +1,8 @@
-<h2>Palisade</h2>
+<h2>柵欄</h2>
 
 <table class="new_building" cellpadding="1" cellspacing="1">
 	<tbody><tr>
-		<td class="desc">By building a Palisade you can protect your village against the barbarian hordes of your enemies. A higher level Palisade will give your troops a higher defence bonus.</td>
+		<td class="desc">通過建立柵欄，你可以保護你的村莊。在城柵欄級別越高，越提升防守的加成。</td>
 		<td rowspan="3" class="bimg">
 					</td>
 	</tr>
