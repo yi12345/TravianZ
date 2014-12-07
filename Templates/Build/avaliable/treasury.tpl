@@ -1,7 +1,8 @@
-<h2>Treasury</h2>
+<h2>金庫</h2>
 	<table class="new_building" cellpadding="1" cellspacing="1">
 		<tbody><tr>
-			<td class="desc">The riches of your empire are kept in the treasury. The treasury has room for one treasure. After you have captured an artefact it takes 24 hours to be effective.</td>
+			<td class="desc">
+你的帝國的財富保留在國庫。國庫可以放置一寶。如果捕獲的是假象它需要24小時是有效的。</td>
 			<td rowspan="3" class="bimg">
 				<a href="#" onClick="return Popup(27,4);">
 				<img class="building g27" src="img/x.gif" alt="Treasury" title="Treasury" /></a>

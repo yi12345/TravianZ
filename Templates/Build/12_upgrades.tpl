@@ -1,8 +1,8 @@
 <table cellpadding="1" cellspacing="1" class="build_details">
 	<thead>
 		<tr>
-			<td>Blacksmith</td>
-			<td>Action</td>
+			<td>鐵匠鋪</td>
+			<td>動作</td>
 		</tr>
 	</thead>
 	<tbody>

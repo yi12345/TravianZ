@@ -1,8 +1,8 @@
-<h2>Earth Wall</h2>
+<h2>高級城牆</h2>
 
 <table class="new_building" cellpadding="1" cellspacing="1">
 	<tbody><tr>
-		<td class="desc">By building an Earth Wall you can protect your village against the barbarian hordes of your enemies. A higher level Earth Wall will give your troops a higher defence bonus.</td>
+		<td class="desc">通過建造高級城牆，你可以保護你的村莊。在城牆級別越高，能提升防守的加成。</td>
 		<td rowspan="3" class="bimg">
 					</td>
 	</tr>

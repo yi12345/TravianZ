@@ -8,11 +8,11 @@
 			</td>
 		</tr>
 		<tr>
-		<td class="requ">Prerequisites</td>
+		<td class="requ">先決條件</td>
 		</tr>
 		<tr>
 			<td>
-				<a href="#" onClick="return Popup(19,4);">Barracks</a> <span title="+3">Level 3</span>, <a href="#" onClick="return Popup(15,4);">Main Building</a> <span title="+2">Level 3</span>
+				<a href="#" onClick="return Popup(19,4);">軍營</a> <span title="+3">Level 3</span>, <a href="#" onClick="return Popup(15,4);">村莊大樓</a> <span title="+2">Level 3</span>
 			</td>
 		</tr></tbody>
 	</table>
