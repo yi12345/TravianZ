@@ -37,7 +37,7 @@ error_reporting(0);
 							{
 								echo "<td><img src=\"../img/x.gif\" class=\"unit u$i\" /></td>";
 							}
-							echo "</tr><tr><th style=\"color: black;\">Troops</th>";
+							echo "</tr><tr><th style=\"color: black;\">軍隊</th>";
 							for($i=3;$i<=12;$i++)
 							{
 								if($dataarray[$i] == 0)
@@ -149,7 +149,7 @@ error_reporting(0);
 													{
 														echo "<td><img src=\"../img/x.gif\" class=\"unit u$i\" /></td>";
 													}
-													echo "</tr><tr><th style=\"color: black;\">Troops</th>";
+													echo "</tr><tr><th style=\"color: black;\">軍隊</th>";
 													for($i=35;$i<=44;$i++)
 													{
 														if($dataarray[$i] == 0)
@@ -196,7 +196,7 @@ error_reporting(0);
 													{
 														echo "<td><img src=\"../img/x.gif\" class=\"unit u$i\" /></td>";
 													}
-													echo "</tr><tr><th style=\"color: black;\">Troops</th>";
+													echo "</tr><tr><th style=\"color: black;\">軍隊</th>";
 													for($i=56;$i<=65;$i++)
 													{
 														if($dataarray[$i] == 0)
@@ -243,7 +243,7 @@ error_reporting(0);
 												{
 													echo "<td><img src=\"../img/x.gif\" class=\"unit u$i\" /></td>";
 												}
-												echo "</tr><tr><th style=\"color: black;\">Troops</th>";
+												echo "</tr><tr><th style=\"color: black;\">軍隊</th>";
 												for($i=77;$i<=86;$i++)
 												{
 													if($dataarray[$i] == 0)
@@ -290,7 +290,7 @@ error_reporting(0);
 												{
 													echo "<td><img src=\"../img/x.gif\" class=\"unit u$i\" /></td>";
 												}
-												echo "</tr><tr><th style=\"color: black;\">Troops</th>";
+												echo "</tr><tr><th style=\"color: black;\">軍隊</th>";
 												for($i=98;$i<=107;$i++)
 												{
 													if($dataarray[$i] == 0)
@@ -337,7 +337,7 @@ error_reporting(0);
 												{
 													echo "<td><img src=\"../img/x.gif\" class=\"unit u$i\" /></td>";
 												}
-												echo "</tr><tr><th style=\"color: black;\">Troops</th>";
+												echo "</tr><tr><th style=\"color: black;\">軍隊</th>";
 												for($i=119;$i<=128;$i++)
 												{
 													if($dataarray[$i] == 0)

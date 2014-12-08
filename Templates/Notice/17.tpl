@@ -48,7 +48,7 @@ for($i=$start;$i<=($start+9);$i++) {
 if(isset($dataarray[24]) and $dataarray[24]!=0){
 	echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=4;$i<=13;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">0</td>";

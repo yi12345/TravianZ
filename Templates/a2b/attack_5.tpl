@@ -153,7 +153,7 @@ $actionType = "Raid";
 					</tr>
 
 					<tr>
-						<th>Troops</th>
+						<th>軍隊</th>
 
 						<td <?php if (!isset($process['t1']) || $process['t1'] == ''){ echo "class=\"none\">0"; }else{ echo ">".$process['t1'];} ?></td>
 
