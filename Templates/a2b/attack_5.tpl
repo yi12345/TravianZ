@@ -216,7 +216,7 @@ $actionType = "Raid";
                             <?php } ?>
                             <?php if($building->getTypeLevel(16) >= 3) { ?>
                             <optgroup label="Infrastructure">
-                                <option value="10">Warehouse</option>
+                                <option value="10">倉庫</option>
                                 <option value="11">Granary</option>
                                 <?php if($building->getTypeLevel(16) >= 10) { ?>
                                 <option value="15">Main building</option>
@@ -270,7 +270,7 @@ $actionType = "Raid";
                             <?php } ?>
                             <?php if($building->getTypeLevel(16) >= 3) { ?>
                             <optgroup label="Infrastructure">
-                                <option value="10">Warehouse</option>
+                                <option value="10">倉庫</option>
                                 <option value="11">Granary</option>
                                 <?php if($building->getTypeLevel(16) >= 10) { ?>
                                 <option value="15">Main building</option>

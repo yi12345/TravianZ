@@ -12,7 +12,7 @@
 		</tr>
 		<tr>
 			<td>
-				<a href="#" onClick="return Popup(23,4);">Main Building</a> <span title="+2">Level 3</span>, <a href="#" onClick="return Popup(9,4);">Warehouse</a> <span title="+1">Level 1</span>, <a href="#" onClick="return Popup(10,4);">Granary</a> <span title="+1">Level 1</span>
+				<a href="#" onClick="return Popup(23,4);">Main Building</a> <span title="+2">Level 3</span>, <a href="#" onClick="return Popup(9,4);">倉庫</a> <span title="+1">Level 1</span>, <a href="#" onClick="return Popup(10,4);">Granary</a> <span title="+1">Level 1</span>
 			</td>
 		</tr></tbody>
 	</table>

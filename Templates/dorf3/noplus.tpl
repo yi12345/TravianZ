@@ -1,7 +1,7 @@
 <div id="textmenu">
    <a href="dorf3.php" class="selected ">Overview</a>
  | <span>Resources</span>
- | <span>Warehouse</span>
+ | <span>倉庫</span>
  | <span>CP</span>
  | <span>Troops</span>
 </div>

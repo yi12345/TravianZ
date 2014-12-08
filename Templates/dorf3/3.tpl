@@ -2,7 +2,7 @@
 include('menu.tpl');
 ?>
 <table id="warehouse" cellpadding="1" cellspacing="1">
-<thead><tr><th colspan="7">Warehouse</th></tr>
+<thead><tr><th colspan="7">倉庫</th></tr>
 <tr><td>Village</td>
 <td><img class="r1" src="img/x.gif" title="Wood" alt="Wood"></td>
 <td><img class="r2" src="img/x.gif" title="Clay" alt="Clay"></td>

@@ -59,7 +59,7 @@ Romans: Can build/extend a resource field and a village building at the same tim
 
     none</p>
 
-<h2>Warehouse</h2>
+<h2>倉庫</h2>
 
 
 
