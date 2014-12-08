@@ -69,7 +69,7 @@ if($session->tribe == 1) {
         $output.="<span class=\"none\">Not enough resources</span>";
     elseif($units['u1'] == 0)
         $output.="<span class=\"none\">Not available units</span>";
-    else $output.="<a href=\"build.php?id=".$id."&train=1\">Train</a>";
+    else $output.="<a href=\"build.php?id=".$id."&train=1\">訓練</a>";
 
 
     $output.="</center></td>
@@ -103,7 +103,7 @@ if($session->tribe == 1) {
         elseif($units['u2'] == 0)
             $output.="<span class=\"none\">Not available units</span>";
         else
-            $output.="<a href=\"build.php?id=".$id."&train=2\">Train</a>";
+            $output.="<a href=\"build.php?id=".$id."&train=2\">訓練</a>";
 
         $output.="</center></td>
                     </tr>";
@@ -137,7 +137,7 @@ if($session->tribe == 1) {
         }else if($units['u3'] == 0){
             $output.="<span class=\"none\">Not available units</span>";
         }else {
-            $output.="<a href=\"build.php?id=".$id."&train=3\">Train</a>";
+            $output.="<a href=\"build.php?id=".$id."&train=3\">訓練</a>";
         }
                  "</center></td>
                     </tr> " ;
@@ -168,7 +168,7 @@ if($session->tribe == 1) {
         }else if($units['u5'] == 0){
             $output.= "<span class=\"none\">Not available units</span>";
         }else {
-            $output.= "<a href=\"build.php?id=".$id."&train=5\">Train</a>";
+            $output.= "<a href=\"build.php?id=".$id."&train=5\">訓練</a>";
         }
         $output.="</center></td>
                 </tr>";
@@ -199,7 +199,7 @@ if($session->tribe == 1) {
         }else if($units['u6'] == 0){
             $output.= "<span class=\"none\">Not available units</span>";
         }else {
-            $output.= "<a href=\"build.php?id=".$id."&train=6\">Train</a>";
+            $output.= "<a href=\"build.php?id=".$id."&train=6\">訓練</a>";
         }
 
         $output.="</center></td>
@@ -233,7 +233,7 @@ $output.="<tr>
         }else if($units['u11'] == 0){
             $output.= "<span class=\"none\">Not available units</span>";
         }else {
-            $output.= "<a href=\"build.php?id=".$id."&train=11\">Train</a>";
+            $output.= "<a href=\"build.php?id=".$id."&train=11\">訓練</a>";
         }
     $output.="</center></td>
             </tr>";
@@ -264,7 +264,7 @@ $output.="<tr>
         }else if($units['u12'] == 0){
             $output.= "<span class=\"none\">Not available units</span>";
         }else {
-            $output.= "<a href=\"build.php?id=".$id."&train=12\">Train</a>";
+            $output.= "<a href=\"build.php?id=".$id."&train=12\">訓練</a>";
         }
         $output.="</center></td>
             </tr>";
@@ -296,7 +296,7 @@ $output.="<tr>
         }else if($units['u13'] == 0){
             $output.= "<span class=\"none\">Not available units</span>";
         }else {
-            $output.= "<a href=\"build.php?id=".$id."&train=13\">Train</a>";
+            $output.= "<a href=\"build.php?id=".$id."&train=13\">訓練</a>";
         }
         $output.="</center></td>
             </tr>";
@@ -327,7 +327,7 @@ $output.="<tr>
         }else if($units['u15'] == 0){
             $output.= "<span class=\"none\">Not available units</span>";
         }else {
-            $output.= "<a href=\"build.php?id=".$id."&train=15\">Train</a>";
+            $output.= "<a href=\"build.php?id=".$id."&train=15\">訓練</a>";
         }
         $output.="</center></td>
             </tr>";
@@ -359,7 +359,7 @@ $output.="<tr>
         }else if($units['u16'] == 0){
             $output.= "<span class=\"none\">Not available units</span>";
         }else {
-            $output.= "<a href=\"build.php?id=".$id."&train=16\">Train</a>";
+            $output.= "<a href=\"build.php?id=".$id."&train=16\">訓練</a>";
         }
         $output.="</center></td>
             </tr>";
@@ -393,7 +393,7 @@ $output.="<tr>
         }else if($units['u21'] == 0){
             $output.= "<span class=\"none\">Not available units</span>";
         }else {
-            $output.= "<a href=\"build.php?id=".$id."&train=21\">Train</a>";
+            $output.= "<a href=\"build.php?id=".$id."&train=21\">訓練</a>";
         }
     $output.="</center></td>
             </tr>";
@@ -424,7 +424,7 @@ $output.="<tr>
         }else if($units['u22'] == 0){
             $output.= "<span class=\"none\">Not available units</span>";
         }else {
-            $output.= "<a href=\"build.php?id=".$id."&train=22\">Train</a>";
+            $output.= "<a href=\"build.php?id=".$id."&train=22\">訓練</a>";
         }
         $output.="</center></td>
             </tr>";
@@ -456,7 +456,7 @@ $output.="<tr>
         }else if($units['u24'] == 0){
             $output.= "<span class=\"none\">Not available units</span>";
         }else {
-            $output.= "<a href=\"build.php?id=".$id."&train=24\">Train</a>";
+            $output.= "<a href=\"build.php?id=".$id."&train=24\">訓練</a>";
         }
         $output.="</center></td>
             </tr>";
@@ -487,7 +487,7 @@ $output.="<tr>
         }else if($units['u25'] == 0){
             $output.= "<span class=\"none\">Not available units</span>";
         }else {
-            $output.= "<a href=\"build.php?id=".$id."&train=25\">Train</a>";
+            $output.= "<a href=\"build.php?id=".$id."&train=25\">訓練</a>";
         }
         $output.="</center></td>
             </tr>";
@@ -519,7 +519,7 @@ $output.="<tr>
         }else if($units['u26'] == 0){
             $output.= "<span class=\"none\">Not available units</span>";
         }else {
-            $output.= "<a href=\"build.php?id=".$id."&train=26\">Train</a>";
+            $output.= "<a href=\"build.php?id=".$id."&train=26\">訓練</a>";
         }
         $output.="</center></td>
             </tr>";
