@@ -250,7 +250,7 @@ echo "<h4>Merchants coming:</h4>";
     }
     echo "at ".$datetime[1]."</div>";
     echo "</td></tr></tbody> <tr class=\"res\"> <th>Resource</th> <td colspan=\"2\"><span class=\"f10\">";
-    echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" />".$recieve['wood']." | <img class=\"r2\" src=\"img/x.gif\" alt=\"Clay\" title=\"Clay\" />".$recieve['clay']." | <img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" />".$recieve['iron']." | <img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" />".$recieve['crop']."</td></tr></tbody>";
+    echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" />".$recieve['wood']." | <img class=\"r2\" src=\"img/x.gif\" alt=\"磚塊\" title=\"磚塊\" />".$recieve['clay']." | <img class=\"r3\" src=\"img/x.gif\" alt=\"鋼鐵\" title=\"鋼鐵\" />".$recieve['iron']." | <img class=\"r4\" src=\"img/x.gif\" alt=\"穀物\" title=\"穀物\" />".$recieve['crop']."</td></tr></tbody>";
     echo "</table>";
     $timer +=1;
     }
@@ -272,7 +272,7 @@ if(count($market->sending) > 0) {
         }
         echo "at ".$datetime[1]."</div>";
         echo "</td> </tr> <tr class=\"res\"> <th>Resource</th><td>";
-        echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" />".$send['wood']." | <img class=\"r2\" src=\"img/x.gif\" alt=\"Clay\" title=\"Clay\" />".$send['clay']." | <img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" />".$send['iron']." | <img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" />".$send['crop']."</td></tr></tbody>";
+        echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" />".$send['wood']." | <img class=\"r2\" src=\"img/x.gif\" alt=\"磚塊\" title=\"磚塊\" />".$send['clay']." | <img class=\"r3\" src=\"img/x.gif\" alt=\"鋼鐵\" title=\"鋼鐵\" />".$send['iron']." | <img class=\"r4\" src=\"img/x.gif\" alt=\"穀物\" title=\"穀物\" />".$send['crop']."</td></tr></tbody>";
         echo "</table>";
         $timer += 1;
     }

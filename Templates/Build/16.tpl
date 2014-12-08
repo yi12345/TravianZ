@@ -80,7 +80,7 @@ echo $enforce['u'.$i]."</td>";
                                         echo "<td>".$enforce['hero']."</td>";
                                  }
 echo "</tr></tbody>
-<tbody class=\"infos\"><tr><th>".UPKEEP."</th><td colspan=\"$colspan\"><div class='sup'>".$technology->getUpkeep($enforce,$tribe)."<img class=\"r4\" src=\"img/x.gif\" title=\"Crop\" alt=\"Crop\" />".PER_HR."</div><div class='sback'><a href='a2b.php?w=".$enforce['id']."'>".SEND_BACK."</a></div></td></tr>";
+<tbody class=\"infos\"><tr><th>".UPKEEP."</th><td colspan=\"$colspan\"><div class='sup'>".$technology->getUpkeep($enforce,$tribe)."<img class=\"r4\" src=\"img/x.gif\" title=\"穀物\" alt=\"穀物\" />".PER_HR."</div><div class='sback'><a href='a2b.php?w=".$enforce['id']."'>".SEND_BACK."</a></div></td></tr>";
 echo "</tbody></table>";
                         }else{
                   echo "<table class=\"troop_details\" cellpadding=\"1\" cellspacing=\"1\"><thead><tr><td class=\"role\">
@@ -112,7 +112,7 @@ echo $enforce['u'.$i]."</td>";
                                         echo "<td>".$enforce['hero']."</td>";
                                  }
 echo "</tr></tbody>
-<tbody class=\"infos\"><tr><th>".UPKEEP."</th><td colspan=\"$colspan\"><div class='sup'>".$technology->getUpkeep($enforce,$tribe)."<img class=\"r4\" src=\"img/x.gif\" title=\"Crop\" alt=\"Crop\" />".PER_HR."</div><div class='sback'><span class=none><b>".SEND_BACK."</b></span></div></td></tr>";
+<tbody class=\"infos\"><tr><th>".UPKEEP."</th><td colspan=\"$colspan\"><div class='sup'>".$technology->getUpkeep($enforce,$tribe)."<img class=\"r4\" src=\"img/x.gif\" title=\"穀物\" alt=\"穀物\" />".PER_HR."</div><div class='sback'><span class=none><b>".SEND_BACK."</b></span></div></td></tr>";
 echo "</tbody></table>";
                         }
 }
@@ -170,7 +170,7 @@ if($enforce['hero']!=0){
                         echo "<td>".$enforce['hero']."</td>";
                     }
 echo "</tr></tbody>
-<tbody class=\"infos\"><tr><th>".UPKEEP."</th><td colspan=\"$colspan\"><div class='sup'>".$technology->getUpkeep($enforce,$tribe)."<img class=\"r4\" src=\"img/x.gif\" title=\"Crop\" alt=\"Crop\" />".PER_HR."</div><div class='sback'><a href='a2b.php?r=".$enforce['id']."'>".SEND_BACK."</a></div></td></tr>";
+<tbody class=\"infos\"><tr><th>".UPKEEP."</th><td colspan=\"$colspan\"><div class='sup'>".$technology->getUpkeep($enforce,$tribe)."<img class=\"r4\" src=\"img/x.gif\" title=\"穀物\" alt=\"穀物\" />".PER_HR."</div><div class='sback'><a href='a2b.php?r=".$enforce['id']."'>".SEND_BACK."</a></div></td></tr>";
 echo "</tbody></table>";
 }
 }
@@ -210,7 +210,7 @@ if($enforce['hero']!=0){
                         echo "<td>".$enforce['hero']."</td>";
                     }
 echo "</tr></tbody>
-<tbody class=\"infos\"><tr><th>".UPKEEP."</th><td colspan=\"$colspan\"><div class='sup'>".$technology->getUpkeep($enforce,$tribe)."<img class=\"r4\" src=\"img/x.gif\" title=\"Crop\" alt=\"Crop\" />".PER_HR."</div><div class='sback'><a href='a2b.php?r=".$enforce['id']."'>".SEND_BACK."</a></div></td></tr>";
+<tbody class=\"infos\"><tr><th>".UPKEEP."</th><td colspan=\"$colspan\"><div class='sup'>".$technology->getUpkeep($enforce,$tribe)."<img class=\"r4\" src=\"img/x.gif\" title=\"穀物\" alt=\"穀物\" />".PER_HR."</div><div class='sback'><a href='a2b.php?r=".$enforce['id']."'>".SEND_BACK."</a></div></td></tr>";
 echo "</tbody></table>";
 }
 }
@@ -247,7 +247,7 @@ echo $prisoners['t'.$i]."</td>";
                                         echo "<td>".$prisoners['t11']."</td>";
                                  }
 echo "</tr></tbody>
-<tbody class=\"infos\"><tr><th>".UPKEEP."</th><td colspan=\"$colspan\"><div class='sup'>".$technology->getUpkeep($prisoners,$tribe,0,1)."<img class=\"r4\" src=\"img/x.gif\" title=\"Crop\" alt=\"Crop\" />".PER_HR."</div><div class='sback'><a href='a2b.php?delprisoners=".$prisoners['id']."'>".KILL."</a></div></td></tr>";
+<tbody class=\"infos\"><tr><th>".UPKEEP."</th><td colspan=\"$colspan\"><div class='sup'>".$technology->getUpkeep($prisoners,$tribe,0,1)."<img class=\"r4\" src=\"img/x.gif\" title=\"穀物\" alt=\"穀物\" />".PER_HR."</div><div class='sback'><a href='a2b.php?delprisoners=".$prisoners['id']."'>".KILL."</a></div></td></tr>";
 echo "</tbody></table>";
 }
 }
@@ -285,7 +285,7 @@ echo $prisoners['t'.$i]."</td>";
                                         echo "<td>".$prisoners['t11']."</td>";
                                  }
 echo "</tr></tbody>
-<tbody class=\"infos\"><tr><td colspan=\"11\"><div class='sup'><img class=\"r6\" src=\"img/x.gif\" title=\"Crop\" alt=\"Crop\" /></div><div class='sback'><a href='a2b.php?delprisoners=".$prisoners['id']."'>".SEND_BACK."</a></div></td></tr>";
+<tbody class=\"infos\"><tr><td colspan=\"11\"><div class='sup'><img class=\"r6\" src=\"img/x.gif\" title=\"穀物\" alt=\"穀物\" /></div><div class='sback'><a href='a2b.php?delprisoners=".$prisoners['id']."'>".SEND_BACK."</a></div></td></tr>";
 echo "</tbody></table>";
 }
 }

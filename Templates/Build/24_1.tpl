@@ -14,7 +14,7 @@
 		$time = Time();
 		$i = 1;
 			echo "<tr><td class=\"desc\"><div class=\"tit\">".$cel[$i]['name']." (".$cel[$i]['attri']." culture points)</div>
-					<div class=\"details\"><img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" />".$cel[$i]['wood']."|<img class=\"r2\" src=\"img/x.gif\" alt=\"Clay\" title=\"Clay\" />".$cel[$i]['clay']."|<img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" />".$cel[$i]['iron']."|<img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" />".$cel[$i]['crop']."|<img class=\"clock\" src=\"img/x.gif\" alt=\"duration\" title=\"duration\" />";
+					<div class=\"details\"><img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" />".$cel[$i]['wood']."|<img class=\"r2\" src=\"img/x.gif\" alt=\"磚塊\" title=\"磚塊\" />".$cel[$i]['clay']."|<img class=\"r3\" src=\"img/x.gif\" alt=\"鋼鐵\" title=\"鋼鐵\" />".$cel[$i]['iron']."|<img class=\"r4\" src=\"img/x.gif\" alt=\"穀物\" title=\"穀物\" />".$cel[$i]['crop']."|<img class=\"clock\" src=\"img/x.gif\" alt=\"duration\" title=\"duration\" />";
                     echo $generator->getTimeFormat(round($cel[$i]['time'] * ($bid24[$building->getTypeLevel(24)]['attri'] / 100)/SPEED));
                     if($session->userinfo['gold'] >= 3 && $building->getTypeLevel(17) >= 1) {
                    echo "|<a href=\"build.php?gid=17&t=3&r1=".$cel[$i]['wood']."&r2=".$cel[$i]['clay']."&r3=".$cel[$i]['iron']."&r4=".$cel[$i]['crop']."\" title=\"NPC trade\"><img class=\"npc\" src=\"img/x.gif\" alt=\"NPC trade\" title=\"NPC trade\" /></a>";
@@ -45,7 +45,7 @@
 					<div class=\"tit\">
 						Great celebration (2000 culture points)
 					</div>
-					<div class=\"details\"><img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" />29700|<img class=\"r2\" src=\"img/x.gif\" alt=\"Clay\" title=\"Clay\" />33250|<img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" />32000|<img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" />6700|<img class=\"clock\" src=\"img/x.gif\" alt=\"duration\" title=\"duration\" />";
+					<div class=\"details\"><img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" />29700|<img class=\"r2\" src=\"img/x.gif\" alt=\"磚塊\" title=\"磚塊\" />33250|<img class=\"r3\" src=\"img/x.gif\" alt=\"鋼鐵\" title=\"鋼鐵\" />32000|<img class=\"r4\" src=\"img/x.gif\" alt=\"穀物\" title=\"穀物\" />6700|<img class=\"clock\" src=\"img/x.gif\" alt=\"duration\" title=\"duration\" />";
                     echo $generator->getTimeFormat(round($gc[$level]/SPEED));
                     if($session->userinfo['gold'] >= 3 && $building->getTypeLevel(17) > 1) {
                    echo "|<a href=\"build.php?gid=17&t=3&r1=29700&r2=33250&r3=32000&r4=6700\" title=\"NPC trade\"><img class=\"npc\" src=\"img/x.gif\" alt=\"NPC trade\" title=\"NPC trade\" /></a>";
