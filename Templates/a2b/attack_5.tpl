@@ -223,7 +223,7 @@ $actionType = "Raid";
                                 <option value="17">Marketplace</option>
                                 <option value="18">Embassy</option>
                                 <option value="24">Townhall</option>
-                                <option value="25">Residence</option>
+                                <option value="25">行宮</option>
                                 <option value="26">Palace</option>
 
                                 <option value="27">Treasury</option>
@@ -277,7 +277,7 @@ $actionType = "Raid";
                                 <option value="17">Marketplace</option>
                                 <option value="18">Embassy</option>
                                 <option value="24">Townhall</option>
-                                <option value="25">Residence</option>
+                                <option value="25">行宮</option>
                                 <option value="26">Palace</option>
 
                                 <option value="27">Treasury</option>
