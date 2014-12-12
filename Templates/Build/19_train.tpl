@@ -25,7 +25,7 @@ echo "<tr><td class=\"desc\">
 <a href=\"#\" onClick=\"return Popup(".$i.",1);\"> ".$technology->getUnitName($i)."</a> <span class=\"info\">(Available: ".$village->unitarray['u'.$i].")</span>
 </div>
 <div class=\"details\">
-<img class=\"r1\" src=\"img/x.gif\" alt=\"Wood\" title=\"Wood\" />".(${'u'.$i}['wood'])."|<img class=\"r2\" src=\"img/x.gif\" alt=\"Clay\" title=\"Clay\" />".(${'u'.$i}['clay'])."|<img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" />".(${'u'.$i}['iron'])."|<img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" />".(${'u'.$i}['crop'])."|<img class=\"r5\" src=\"img/x.gif\" alt=\"Crop consumption\" title=\"Crop consumption\" />".${'u'.$i}['pop']."|<img class=\"clock\" src=\"img/x.gif\" alt=\"Duration\" title=\"Duration\" />";
+<img class=\"r1\" src=\"img/x.gif\" alt=\"木材\" title=\"木材\" />".(${'u'.$i}['wood'])."|<img class=\"r2\" src=\"img/x.gif\" alt=\"磚塊\" title=\"磚塊\" />".(${'u'.$i}['clay'])."|<img class=\"r3\" src=\"img/x.gif\" alt=\"鋼鐵\" title=\"鋼鐵\" />".(${'u'.$i}['iron'])."|<img class=\"r4\" src=\"img/x.gif\" alt=\"穀物\" title=\"穀物\" />".(${'u'.$i}['crop'])."|<img class=\"r5\" src=\"img/x.gif\" alt=\"穀物消耗\" title=\"穀物消耗\" />".${'u'.$i}['pop']."|<img class=\"clock\" src=\"img/x.gif\" alt=\"Duration\" title=\"Duration\" />";
 $dur=round(${'u'.$i}['time'] * ($bid19[$village->resarray['f'.$id]]['attri'] / 100) / SPEED * $artefact_bonus2 / $artefact_bonus);
 					$foolartefact = $database->getFoolArtefactInfo(5,$village->wid,$session->uid);
 					if(count($foolartefact) > 0){
@@ -58,7 +58,7 @@ echo "<tr><td class=\"desc\">
 <a href=\"#\" onClick=\"return Popup(".$i.",1);\"> ".$technology->getUnitName($i)."</a> <span class=\"info\">(Available: ".$village->unitarray['u'.$i].")</span>
 </div>
 <div class=\"details\">
-<img class=\"r1\" src=\"img/x.gif\" alt=\"Wood\" title=\"Wood\" />".(${'u'.$i}['wood'])."|<img class=\"r2\" src=\"img/x.gif\" alt=\"Clay\" title=\"Clay\" />".(${'u'.$i}['clay'])."|<img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" />".(${'u'.$i}['iron'])."|<img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" />".(${'u'.$i}['crop'])."|<img class=\"r5\" src=\"img/x.gif\" alt=\"Crop consumption\" title=\"Crop consumption\" />".${'u'.$i}['pop']."|<img class=\"clock\" src=\"img/x.gif\" alt=\"Duration\" title=\"Duration\" />";
+<img class=\"r1\" src=\"img/x.gif\" alt=\"木材\" title=\"木材\" />".(${'u'.$i}['wood'])."|<img class=\"r2\" src=\"img/x.gif\" alt=\"磚塊\" title=\"磚塊\" />".(${'u'.$i}['clay'])."|<img class=\"r3\" src=\"img/x.gif\" alt=\"鋼鐵\" title=\"鋼鐵\" />".(${'u'.$i}['iron'])."|<img class=\"r4\" src=\"img/x.gif\" alt=\"穀物\" title=\"穀物\" />".(${'u'.$i}['crop'])."|<img class=\"r5\" src=\"img/x.gif\" alt=\"穀物消耗\" title=\"穀物消耗\" />".${'u'.$i}['pop']."|<img class=\"clock\" src=\"img/x.gif\" alt=\"Duration\" title=\"Duration\" />";
 $dur=round(${'u'.$i}['time'] * ($bid19[$village->resarray['f'.$id]]['attri'] / 100) / SPEED * $artefact_bonus2 / $artefact_bonus);
 					$foolartefact = $database->getFoolArtefactInfo(5,$village->wid,$session->uid);
 					if(count($foolartefact) > 0){

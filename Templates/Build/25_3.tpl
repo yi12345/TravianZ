@@ -1,4 +1,4 @@
-<div id="build" class="gid25"><h1>Residence <span class="level">level <?php echo $village->resarray['f'.$id]; ?></span></h1>
+<div id="build" class="gid25"><h1>行宮 <span class="level">level <?php echo $village->resarray['f'.$id]; ?></span></h1>
 <p class="build_desc">
 	<a href="#" onClick="return Popup(25,4, 'gid');"
 		class="build_logo"> <img

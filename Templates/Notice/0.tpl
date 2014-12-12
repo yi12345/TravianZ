@@ -33,7 +33,7 @@ $start = ($tribe-1)*10+1;
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=3;$i<=12;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">0</td>";
@@ -104,7 +104,7 @@ $start=1; ?>
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=35;$i<=44;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">0</td>";
@@ -143,7 +143,7 @@ $start=11;?>
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=56;$i<=65;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">0</td>";
@@ -181,7 +181,7 @@ $start=21; ?>
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=77;$i<=86;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">0</td>";
@@ -220,7 +220,7 @@ $start=31; ?>
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=98;$i<=107;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">0</td>";
@@ -259,7 +259,7 @@ $start=41; ?>
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=119;$i<=128;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">0</td>";

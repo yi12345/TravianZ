@@ -1,9 +1,9 @@
 <div id="textmenu">
    <a href="dorf3.php" class="selected ">Overview</a>
  | <span>Resources</span>
- | <span>Warehouse</span>
+ | <span>倉庫</span>
  | <span>CP</span>
- | <span>Troops</span>
+ | <span>軍隊</span>
 </div>
 <table cellpadding="1" cellspacing="1" id="overview">
 <thead><tr>
@@ -13,7 +13,7 @@
 	<td>Village</td>
 	<td>Attacks</td>
 	<td>Building</td>
-	<td>Troops</td>
+	<td>軍隊</td>
 	<td>Merchants</td>
 </tr></thead><tbody>
 <?php

@@ -59,7 +59,7 @@ Romans: Can build/extend a resource field and a village building at the same tim
 
     none</p>
 
-<h2>Warehouse</h2>
+<h2>倉庫</h2>
 
 
 
@@ -635,9 +635,9 @@ The Capital is the only place a stonemason's lodge can be erected. Also the capi
 
     <br>
 
-    Embassy Level 1, Main Building Level 5, <strike>Residence</strike></p>
+    Embassy Level 1, Main Building Level 5, <strike>行宮</strike></p>
 
-<h2>Residence</h2>
+<h2>行宮</h2>
 
 
 

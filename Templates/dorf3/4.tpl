@@ -4,7 +4,7 @@ include('menu.tpl');
 <table id="culture_points" cellpadding="1" cellspacing="1">
 <thead>
 <tr><th colspan="5">Culture points</th></tr>
-<tr><td>Village</td><td>CP/day</td><td>Celebrations</td><td>Troops</td><td>Slots</td></tr>
+<tr><td>Village</td><td>CP/day</td><td>Celebrations</td><td>軍隊</td><td>Slots</td></tr>
 </thead>
 <tbody>
 <?php

@@ -56,7 +56,7 @@ echo '</pre>';
 				} ?>
 		</tr>
 		<tr>
-			<th>Troops</th>
+			<th>軍隊</th>
 				<?php for($i=1;$i<=9;$i++) {
 					echo "<td class=\"none\">0</td>";
 				} ?>

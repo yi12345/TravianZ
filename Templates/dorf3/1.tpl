@@ -4,7 +4,7 @@
 <table id="overview" cellpadding="1" cellspacing="1">
 <thead>
 <tr><th colspan="5">Overview</th></tr>
-<tr><td>Village</td><td>Attacks</td><td>Building</td><td>Troops</td><td>Merchants</td></tr>
+<tr><td>Village</td><td>Attacks</td><td>Building</td><td>軍隊</td><td>Merchants</td></tr>
 </thead>
 <tbody>
 <?php

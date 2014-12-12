@@ -44,7 +44,7 @@ for($i=$start;$i<=($start+9);$i++) {
 if($dataarray[13]!=0){
 echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=3;$i<13;$i++) {
 $unitarray['u'.($i-3+$start).''] = $dataarray[$i];
 	if($dataarray[$i] == 0) {

@@ -2531,9 +2531,9 @@ class Automation {
                     if($scout){
 				if ($data['spy'] == 1){
 				$info_spy = "".$spy_pic.",<div class=\"res\"><img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" />".round($totwood)." |
-				 <img class=\"r2\" src=\"img/x.gif\" alt=\"Clay\" title=\"Clay\" />".round($totclay)." |
-				 <img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" />".round($totiron)." |
-				 <img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" />".round($totcrop)."</div>
+				 <img class=\"r2\" src=\"img/x.gif\" alt=\"磚塊\" title=\"磚塊\" />".round($totclay)." |
+				 <img class=\"r3\" src=\"img/x.gif\" alt=\"鋼鐵\" title=\"鋼鐵\" />".round($totiron)." |
+				 <img class=\"r4\" src=\"img/x.gif\" alt=\"穀物\" title=\"穀物\" />".round($totcrop)."</div>
 				 <div class=\"carry\"><img class=\"car\" src=\"img/x.gif\" alt=\"carry\" title=\"carry\" />Total Resources : ".round($totwood+$totclay+$totiron+$totcrop)."</div>
 	";
 				}else if($data['spy'] == 2){

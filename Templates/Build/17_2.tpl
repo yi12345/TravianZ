@@ -48,7 +48,7 @@
     <?php
         if(isset($_GET['e1']))
         {
-            echo "<p class=\"error2\">Not enough resources</p>";
+            echo "<p class=\"error2\">資源數量不足</p>";
         }
         elseif(isset($_GET['e2']))
         {
@@ -83,10 +83,10 @@ if(count($market->onmarket) > 0)
         }
         switch($offer['gtype'])
         {
-            case 1: echo "<img src=\"img/x.gif\" class=\"r1\" alt=\"Wood\" title=\"Wood\" />"; break;
-            case 2: echo "<img src=\"img/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\" />"; break;
-            case 3: echo "<img src=\"img/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\" />"; break;
-            case 4: echo "<img src=\"img/x.gif\" class=\"r4\" alt=\"Crop\" title=\"Crop\" />"; break;
+            case 1: echo "<img src=\"img/x.gif\" class=\"r1\" alt=\"木材\" title=\"木材\" />"; break;
+            case 2: echo "<img src=\"img/x.gif\" class=\"r2\" alt=\"磚塊\" title=\"磚塊\" />"; break;
+            case 3: echo "<img src=\"img/x.gif\" class=\"r3\" alt=\"鋼鐵\" title=\"鋼鐵\" />"; break;
+            case 4: echo "<img src=\"img/x.gif\" class=\"r4\" alt=\"穀物\" title=\"穀物\" />"; break;
         }
         echo $offer['gamt'];
 		$sss = ($offer['wamt']/$offer['gamt']);
@@ -101,10 +101,10 @@ if(count($market->onmarket) > 0)
 		echo "</td><td class=\"ratio\"> ".$ratio." </td> <td class=\"val\">";
         switch($offer['wtype'])
         {
-            case 1: echo "<img src=\"img/x.gif\" class=\"r1\" alt=\"Wood\" title=\"Wood\" />"; break;
-            case 2: echo "<img src=\"img/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\" />"; break;
-            case 3: echo "<img src=\"img/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\" />"; break;
-            case 4: echo "<img src=\"img/x.gif\" class=\"r4\" alt=\"Crop\" title=\"Crop\" />"; break;
+            case 1: echo "<img src=\"img/x.gif\" class=\"r1\" alt=\"木材\" title=\"木材\" />"; break;
+            case 2: echo "<img src=\"img/x.gif\" class=\"r2\" alt=\"磚塊\" title=\"磚塊\" />"; break;
+            case 3: echo "<img src=\"img/x.gif\" class=\"r3\" alt=\"鋼鐵\" title=\"鋼鐵\" />"; break;
+            case 4: echo "<img src=\"img/x.gif\" class=\"r4\" alt=\"穀物\" title=\"穀物\" />"; break;
         }
         echo $offer['wamt'];
         echo "</td><td class=\"tra\">".$offer['merchant']." </td><td class=\"al\">";

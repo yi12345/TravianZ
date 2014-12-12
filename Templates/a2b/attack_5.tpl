@@ -153,7 +153,7 @@ $actionType = "Raid";
 					</tr>
 
 					<tr>
-						<th>Troops</th>
+						<th>軍隊</th>
 
 						<td <?php if (!isset($process['t1']) || $process['t1'] == ''){ echo "class=\"none\">0"; }else{ echo ">".$process['t1'];} ?></td>
 
@@ -216,14 +216,14 @@ $actionType = "Raid";
                             <?php } ?>
                             <?php if($building->getTypeLevel(16) >= 3) { ?>
                             <optgroup label="Infrastructure">
-                                <option value="10">Warehouse</option>
+                                <option value="10">倉庫</option>
                                 <option value="11">Granary</option>
                                 <?php if($building->getTypeLevel(16) >= 10) { ?>
                                 <option value="15">Main building</option>
                                 <option value="17">Marketplace</option>
                                 <option value="18">Embassy</option>
                                 <option value="24">Townhall</option>
-                                <option value="25">Residence</option>
+                                <option value="25">行宮</option>
                                 <option value="26">Palace</option>
 
                                 <option value="27">Treasury</option>
@@ -270,14 +270,14 @@ $actionType = "Raid";
                             <?php } ?>
                             <?php if($building->getTypeLevel(16) >= 3) { ?>
                             <optgroup label="Infrastructure">
-                                <option value="10">Warehouse</option>
+                                <option value="10">倉庫</option>
                                 <option value="11">Granary</option>
                                 <?php if($building->getTypeLevel(16) >= 10) { ?>
                                 <option value="15">Main building</option>
                                 <option value="17">Marketplace</option>
                                 <option value="18">Embassy</option>
                                 <option value="24">Townhall</option>
-                                <option value="25">Residence</option>
+                                <option value="25">行宮</option>
                                 <option value="26">Palace</option>
 
                                 <option value="27">Treasury</option>

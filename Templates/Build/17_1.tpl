@@ -73,18 +73,18 @@ if($market->onsale[$i]['wamt'] > $market->maxcarry) {
 			}
 		}
 switch($market->onsale[$i]['gtype']) {
-    case 1: echo "<img src=\"img/x.gif\" class=\"r1\" alt=\"Wood\" title=\"Wood\" />"; break;
-    case 2: echo "<img src=\"img/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\" />"; break;
-    case 3: echo "<img src=\"img/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\" />"; break;
-    case 4: echo "<img src=\"img/x.gif\" class=\"r4\" alt=\"Crop\" title=\"Crop\" />"; break;
+    case 1: echo "<img src=\"img/x.gif\" class=\"r1\" alt=\"木材\" title=\"木材\" />"; break;
+    case 2: echo "<img src=\"img/x.gif\" class=\"r2\" alt=\"磚塊\" title=\"磚塊\" />"; break;
+    case 3: echo "<img src=\"img/x.gif\" class=\"r3\" alt=\"鋼鐵\" title=\"鋼鐵\" />"; break;
+    case 4: echo "<img src=\"img/x.gif\" class=\"r4\" alt=\"穀物\" title=\"穀物\" />"; break;
  	}
     echo $market->onsale[$i]['gamt'];
     echo "</td> <td class=\"val\">";
     switch($market->onsale[$i]['wtype']) {
-    case 1: echo "<img src=\"img/x.gif\" class=\"r1\" alt=\"Wood\" title=\"Wood\" />"; break;
-    case 2: echo "<img src=\"img/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\" />"; break;
-    case 3: echo "<img src=\"img/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\" />"; break;
-    case 4: echo "<img src=\"img/x.gif\" class=\"r4\" alt=\"Crop\" title=\"Crop\" />"; break;
+    case 1: echo "<img src=\"img/x.gif\" class=\"r1\" alt=\"木材\" title=\"木材\" />"; break;
+    case 2: echo "<img src=\"img/x.gif\" class=\"r2\" alt=\"磚塊\" title=\"磚塊\" />"; break;
+    case 3: echo "<img src=\"img/x.gif\" class=\"r3\" alt=\"鋼鐵\" title=\"鋼鐵\" />"; break;
+    case 4: echo "<img src=\"img/x.gif\" class=\"r4\" alt=\"穀物\" title=\"穀物\" />"; break;
     }
     echo $market->onsale[$i]['wamt'];
     echo "</td><td class=\"pla\" title=\"".$database->getVillageField($market->onsale[$i]['vref'],"name")."\">";

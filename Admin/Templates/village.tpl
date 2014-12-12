@@ -156,7 +156,7 @@ if(isset($id))
 				</tr>
 				<tr>
 					<td>Resource</td>
-					<td colspan="2">Warehouse</td>
+					<td colspan="2">倉庫</td>
 					<td>Production</td>
 				</tr>
 			</thead>
