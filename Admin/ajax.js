@@ -1,3 +1,4 @@
+// TODO: Translate this file from unknow language
 var http_request = false;
 
 function macheRequest(url, id)

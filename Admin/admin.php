@@ -21,7 +21,7 @@ session_start();
 include_once("../GameEngine/Database.php");
 include_once ("../GameEngine/Lang/" . LANG . ".php");
 include_once("../GameEngine/Admin/database.php");
-include_once("../GameEngine/Data/buidata.php"); 
+include_once("../GameEngine/Data/buidata.php");
 
 class timeFormatGenerator
 {
@@ -54,7 +54,7 @@ $up_avl = $latest - $ver ;
 <html>
 	<head>
 		<link REL="shortcut icon" HREF="favicon.ico"/>
-		<title>Admin Panel</title>
+		<title>管理頁面</title>
 		<link rel=stylesheet type="text/css" href="../img/admin/admin.css">
 		<link rel=stylesheet type="text/css" href="../img/admin/acp.css">
 		<link rel=stylesheet type="text/css" href="../img/img.css">
@@ -133,8 +133,8 @@ $up_avl = $latest - $ver ;
 			function go_url(url) {
 				location=url;
 				return(false);
-			}			
-			
+			}
+
 		</script>
 		<div id="ltop1">
 			<div style="position:relative; width:231px; height:100px; float:left;">

@@ -56,7 +56,7 @@ echo '</pre>';
 				} ?>
 		</tr>
 		<tr>
-			<th>Troops</th>
+			<th>軍隊</th>
 				<?php for($i=1;$i<=9;$i++) {
 					echo "<td class=\"none\">0</td>";
 				} ?>
@@ -73,9 +73,9 @@ echo '</pre>';
 		<tr>
 			<th>Resources</th>
 				<td colspan="10">
-				<img class="r1" src="img/x.gif" alt="Lumber" title="Wood" />750 | 
-				<img class="r2" src="img/x.gif" alt="Clay" title="Clay" />750 | 
-				<img class="r3" src="img/x.gif" alt="Iron" title="Iron" />750 | 
+				<img class="r1" src="img/x.gif" alt="Lumber" title="Wood" />750 |
+				<img class="r2" src="img/x.gif" alt="Clay" title="Clay" />750 |
+				<img class="r3" src="img/x.gif" alt="Iron" title="Iron" />750 |
 				<img class="r4" src="img/x.gif" alt="Crop" title="Crop" />750</td>
 		</tr>
 	</tbody>

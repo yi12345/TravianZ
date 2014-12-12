@@ -1,13 +1,13 @@
-<div id="build" class="gid17"><a href="#" onClick="return Popup(17,4);" class="build_logo"> 
-	<img class="building g17" src="img/x.gif" alt="Marketplace" title="Marketplace" /> 
-</a> 
-<h1>Marketplace <span class="level">level <?php echo $village->resarray['f'.$id]; ?></span></h1> 
+<div id="build" class="gid17"><a href="#" onClick="return Popup(17,4);" class="build_logo">
+	<img class="building g17" src="img/x.gif" alt="Marketplace" title="Marketplace" />
+</a>
+<h1>Marketplace <span class="level">level <?php echo $village->resarray['f'.$id]; ?></span></h1>
 <p class="build_desc">At the Marketplace you can trade resources with other players. The higher its level, the more resources can be transported at the same time.
-</p> 
- 
+</p>
+
 <?php include("17_menu.tpl"); ?>
 
-<script language="JavaScript"> 
+<script language="JavaScript">
 <!--
 var haendler = <?php echo $market->merchantAvail(); ?>;
 var carry = <?php echo $market->maxcarry; ?>;
@@ -33,37 +33,37 @@ $maxcarry = $market->maxcarry;
 $maxcarry *= $market->merchantAvail();
 if(isset($_POST['ft'])=='check' && $allres!=0 && $allres <= $maxcarry && ($_POST['x']!="" && $_POST['y']!="" or $_POST['dname']!="") && $checkexist && $userAccess == 2 && $userVacation == 0){
 ?>
-<form method="POST" name="snd" action="build.php"> 
+<form method="POST" name="snd" action="build.php">
 <input type="hidden" name="ft" value="mk1">
 <input type="hidden" name="id" value="<?php echo $id; ?>">
 <input type="hidden" name="send3" value="<?php echo $_POST['send3']; ?>">
 <table id="send_select" class="send_res" cellpadding="1" cellspacing="1">
 	<tr>
-		<td class="ico"><img class="r1" src="img/x.gif" alt="Lumber" title="Lumber" /></td> 
-		<td class="nam"> Wood</td> 
-		<td class="val"><input class="text disabled" type="text" name="r1" id="r1" value="<?php echo $_POST['r1']; ?>" readonly="readonly"></td> 
-		<td class="max"> / <span class="none"><B><?php echo $market->maxcarry; ?></B></span> </td> 
+		<td class="ico"><img class="r1" src="img/x.gif" alt="Lumber" title="Lumber" /></td>
+		<td class="nam"> Wood</td>
+		<td class="val"><input class="text disabled" type="text" name="r1" id="r1" value="<?php echo $_POST['r1']; ?>" readonly="readonly"></td>
+		<td class="max"> / <span class="none"><B><?php echo $market->maxcarry; ?></B></span> </td>
 	</tr>
-    <tr> 
-		<td class="ico"><img class="r2" src="img/x.gif" alt="Clay" title="Clay" /></td> 
-		<td class="nam"> Clay</td> 
-		<td class="val"><input class="text disabled" type="text" name="r2" id="r2" value="<?php echo $_POST['r2']; ?>" readonly="readonly"></td> 
-		<td class="max"> / <span class="none"><b><?php echo$market->maxcarry; ?></b></span> </td> 
+    <tr>
+		<td class="ico"><img class="r2" src="img/x.gif" alt="Clay" title="Clay" /></td>
+		<td class="nam"> Clay</td>
+		<td class="val"><input class="text disabled" type="text" name="r2" id="r2" value="<?php echo $_POST['r2']; ?>" readonly="readonly"></td>
+		<td class="max"> / <span class="none"><b><?php echo$market->maxcarry; ?></b></span> </td>
 	</tr>
-    <tr> 
-		<td class="ico"><img class="r3" src="img/x.gif" alt="Iron" title="Iron" /></td> 
-		<td class="nam"> Iron</td> 
-		<td class="val"><input class="text disabled" type="text" name="r3" id="r3" value="<?php echo $_POST['r3']; ?>" readonly="readonly"> 
-		</td> 
-		<td class="max"> / <span class="none"><b><?php echo $market->maxcarry; ?></b></span> </td> 
+    <tr>
+		<td class="ico"><img class="r3" src="img/x.gif" alt="Iron" title="Iron" /></td>
+		<td class="nam"> Iron</td>
+		<td class="val"><input class="text disabled" type="text" name="r3" id="r3" value="<?php echo $_POST['r3']; ?>" readonly="readonly">
+		</td>
+		<td class="max"> / <span class="none"><b><?php echo $market->maxcarry; ?></b></span> </td>
 	</tr>
-    <tr> 
-		<td class="ico"><img class="r4" src="img/x.gif" alt="Crop" title="Crop" /></td> 
-		<td class="nam"> Wheat</td> 
-		<td class="val"> <input class="text disabled" type="text" name="r4" id="r4" value="<?php echo $_POST['r4']; ?>" readonly="readonly"> 
-		</td> 
-		<td class="max"> / <span class="none"><B><?php echo $market->maxcarry; ?></B></span></td> 
-	</tr></table> 
+    <tr>
+		<td class="ico"><img class="r4" src="img/x.gif" alt="Crop" title="Crop" /></td>
+		<td class="nam"> Wheat</td>
+		<td class="val"> <input class="text disabled" type="text" name="r4" id="r4" value="<?php echo $_POST['r4']; ?>" readonly="readonly">
+		</td>
+		<td class="max"> / <span class="none"><B><?php echo $market->maxcarry; ?></B></span></td>
+	</tr></table>
 <table id="target_validate" class="res_target" cellpadding="1" cellspacing="1">
 	<tbody><tr>
 		<th>Coordinates:</th>
@@ -97,7 +97,7 @@ if(isset($_POST['ft'])=='check' && $allres!=0 && $allres <= $maxcarry && ($_POST
 	<tr>
 		<th>Merchants:</th>
 		<td><?php
-        $resource = array($_POST['r1'],$_POST['r2'],$_POST['r3'],$_POST['r4']); 
+        $resource = array($_POST['r1'],$_POST['r2'],$_POST['r3'],$_POST['r4']);
         echo ceil((array_sum($resource)-0.1)/$market->maxcarry); ?></td>
 	</tr>
 
@@ -112,75 +112,75 @@ if(isset($_POST['ft'])=='check' && $allres!=0 && $allres <= $maxcarry && ($_POST
 <p>
 <div class="clear"></div><p><input type="image" value="ok" name="s1" id="btn_ok" class="dynamic_img" src="img/x.gif" tabindex="8" alt="OK" <?php if(!$market->merchantAvail()) { echo "DISABLED"; }?>/></p></form>
 <?php }else{ ?>
-<form method="POST" name="snd" action="build.php"> 
+<form method="POST" name="snd" action="build.php">
 <input type="hidden" name="ft" value="check">
-<input type="hidden" name="id" value="<?php echo $id; ?>"> 
-<table id="send_select" class="send_res" cellpadding="1" cellspacing="1"><tr> 
-		<td class="ico"> 
-			<a href="#" onClick="upd_res(1,1); return false;"><img class="r1" src="img/x.gif" alt="Lumber" title="Lumber" /></a> 
-		</td> 
-		<td class="nam"> 
+<input type="hidden" name="id" value="<?php echo $id; ?>">
+<table id="send_select" class="send_res" cellpadding="1" cellspacing="1"><tr>
+		<td class="ico">
+			<a href="#" onClick="upd_res(1,1); return false;"><img class="r1" src="img/x.gif" alt="Lumber" title="Lumber" /></a>
+		</td>
+		<td class="nam">
 			Lumber:
-		</td> 
-		<td class="val"> 
-			<input class="text" type="text" name="r1" id="r1" value="" maxlength="5" onKeyUp="upd_res(1)" tabindex="1"> 
-		</td> 
-		<td class="max"> 
-			<a href="#" onMouseUp="add_res(1);" onClick="return false;">(<?php echo $market->maxcarry; ?>)</a> 
-		</td> 
-	</tr><tr> 
-		<td class="ico"> 
-			<a href="#" onClick="upd_res(2,1); return false;"><img class="r2" src="img/x.gif" alt="Clay" title="Clay" /></a> 
-		</td> 
-		<td class="nam"> 
+		</td>
+		<td class="val">
+			<input class="text" type="text" name="r1" id="r1" value="" maxlength="5" onKeyUp="upd_res(1)" tabindex="1">
+		</td>
+		<td class="max">
+			<a href="#" onMouseUp="add_res(1);" onClick="return false;">(<?php echo $market->maxcarry; ?>)</a>
+		</td>
+	</tr><tr>
+		<td class="ico">
+			<a href="#" onClick="upd_res(2,1); return false;"><img class="r2" src="img/x.gif" alt="Clay" title="Clay" /></a>
+		</td>
+		<td class="nam">
 			Clay:
-		</td> 
-		<td class="val"> 
-			<input class="text" type="text" name="r2" id="r2" value="" maxlength="5" onKeyUp="upd_res(2)" tabindex="2"> 
-		</td> 
-		<td class="max"> 
-			<a href="#" onMouseUp="add_res(2);" onClick="return false;">(<?php echo$market->maxcarry; ?>)</a> 
-		</td> 
-	</tr><tr> 
-		<td class="ico"> 
-			<a href="#" onClick="upd_res(3,1); return false;"><img class="r3" src="img/x.gif" alt="Iron" title="Iron" /></a> 
-		</td> 
-		<td class="nam"> 
+		</td>
+		<td class="val">
+			<input class="text" type="text" name="r2" id="r2" value="" maxlength="5" onKeyUp="upd_res(2)" tabindex="2">
+		</td>
+		<td class="max">
+			<a href="#" onMouseUp="add_res(2);" onClick="return false;">(<?php echo$market->maxcarry; ?>)</a>
+		</td>
+	</tr><tr>
+		<td class="ico">
+			<a href="#" onClick="upd_res(3,1); return false;"><img class="r3" src="img/x.gif" alt="Iron" title="Iron" /></a>
+		</td>
+		<td class="nam">
 			Iron:
-		</td> 
-		<td class="val"> 
-			<input class="text" type="text" name="r3" id="r3" value="" maxlength="5" onKeyUp="upd_res(3)" tabindex="3"> 
-		</td> 
-		<td class="max"> 
-			<a href="#" onMouseUp="add_res(3);" onClick="return false;">(<?php echo $market->maxcarry; ?>)</a> 
-		</td> 
-	</tr><tr> 
-		<td class="ico"> 
-			<a href="#" onClick="upd_res(4,1); return false;"><img class="r4" src="img/x.gif" alt="Crop" title="Crop" /></a> 
-		</td> 
-		<td class="nam"> 
+		</td>
+		<td class="val">
+			<input class="text" type="text" name="r3" id="r3" value="" maxlength="5" onKeyUp="upd_res(3)" tabindex="3">
+		</td>
+		<td class="max">
+			<a href="#" onMouseUp="add_res(3);" onClick="return false;">(<?php echo $market->maxcarry; ?>)</a>
+		</td>
+	</tr><tr>
+		<td class="ico">
+			<a href="#" onClick="upd_res(4,1); return false;"><img class="r4" src="img/x.gif" alt="Crop" title="Crop" /></a>
+		</td>
+		<td class="nam">
 			Crop:
-		</td> 
-		<td class="val"> 
-			<input class="text" type="text" name="r4" id="r4" value="" maxlength="5" onKeyUp="upd_res(4)" tabindex="4"> 
-		</td> 
-		<td class="max"> 
-			<a href="#" onMouseUp="add_res(4);" onClick="return false;">(<?php echo $market->maxcarry; ?>)</a> 
-		</td> 
-	</tr></table> 
- 
-<table id="target_select" class="res_target" cellpadding="1" cellspacing="1"> 
-	<tr> 
-		<td class="mer">Merchants <?php echo $market->merchantAvail(); ?>/<?php echo $market->merchant; ?></td> 
-	</tr> 
-		<td class="vil"> 
-			<span>Villages:</span> 
-			<input class="text" type="text" name="dname" value="" maxlength="30" tabindex="5"> 
-		</td> 
-	<tr> 
-		<td class="or">or</td> 
-	</tr> 
-   <tr> 
+		</td>
+		<td class="val">
+			<input class="text" type="text" name="r4" id="r4" value="" maxlength="5" onKeyUp="upd_res(4)" tabindex="4">
+		</td>
+		<td class="max">
+			<a href="#" onMouseUp="add_res(4);" onClick="return false;">(<?php echo $market->maxcarry; ?>)</a>
+		</td>
+	</tr></table>
+
+<table id="target_select" class="res_target" cellpadding="1" cellspacing="1">
+	<tr>
+		<td class="mer">Merchants <?php echo $market->merchantAvail(); ?>/<?php echo $market->merchant; ?></td>
+	</tr>
+		<td class="vil">
+			<span>Villages:</span>
+			<input class="text" type="text" name="dname" value="" maxlength="30" tabindex="5">
+		</td>
+	<tr>
+		<td class="or">or</td>
+	</tr>
+   <tr>
 <?php
 if(isset($_GET['z'])){
 $coor = $database->getCoor($_GET['z']);
@@ -190,11 +190,11 @@ $coor['x'] = "";
 $coor['y'] = "";
 }
 ?>
-      <td class="coo"> 
-         <span>X:</span><input class="text" type="text" name="x" value="<?php echo $coor['x']; ?>" maxlength="4" tabindex="6"> 
-         <span>Y:</span><input class="text" type="text" name="y" value="<?php echo $coor['y']; ?>" maxlength="4" tabindex="7"> 
-      </td> 
-   </tr> 
+      <td class="coo">
+         <span>X:</span><input class="text" type="text" name="x" value="<?php echo $coor['x']; ?>" maxlength="4" tabindex="6">
+         <span>Y:</span><input class="text" type="text" name="y" value="<?php echo $coor['y']; ?>" maxlength="4" tabindex="7">
+      </td>
+   </tr>
 </table>
 <div class="clear"></div>
 <?php if($session->goldclub == 1){?>
@@ -234,7 +234,7 @@ if(isset($_POST['ft'])=='check'){
 <p>Each merchant can carry <b><?php echo $market->maxcarry; ?></b> units of resource</p>
 <?php
 $timer = 1;
-if(count($market->recieving) > 0) { 
+if(count($market->recieving) > 0) {
 echo "<h4>Merchants coming:</h4>";
     foreach($market->recieving as $recieve) {
        echo "<table class=\"traders\" cellpadding=\"1\" cellspacing=\"1\">";
@@ -250,7 +250,7 @@ echo "<h4>Merchants coming:</h4>";
     }
     echo "at ".$datetime[1]."</div>";
     echo "</td></tr></tbody> <tr class=\"res\"> <th>Resource</th> <td colspan=\"2\"><span class=\"f10\">";
-    echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" />".$recieve['wood']." | <img class=\"r2\" src=\"img/x.gif\" alt=\"Clay\" title=\"Clay\" />".$recieve['clay']." | <img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" />".$recieve['iron']." | <img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" />".$recieve['crop']."</td></tr></tbody>";
+    echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" />".$recieve['wood']." | <img class=\"r2\" src=\"img/x.gif\" alt=\"磚塊\" title=\"磚塊\" />".$recieve['clay']." | <img class=\"r3\" src=\"img/x.gif\" alt=\"鋼鐵\" title=\"鋼鐵\" />".$recieve['iron']." | <img class=\"r4\" src=\"img/x.gif\" alt=\"穀物\" title=\"穀物\" />".$recieve['crop']."</td></tr></tbody>";
     echo "</table>";
     $timer +=1;
     }
@@ -272,7 +272,7 @@ if(count($market->sending) > 0) {
         }
         echo "at ".$datetime[1]."</div>";
         echo "</td> </tr> <tr class=\"res\"> <th>Resource</th><td>";
-        echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" />".$send['wood']." | <img class=\"r2\" src=\"img/x.gif\" alt=\"Clay\" title=\"Clay\" />".$send['clay']." | <img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" />".$send['iron']." | <img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" />".$send['crop']."</td></tr></tbody>";
+        echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" />".$send['wood']." | <img class=\"r2\" src=\"img/x.gif\" alt=\"磚塊\" title=\"磚塊\" />".$send['clay']." | <img class=\"r3\" src=\"img/x.gif\" alt=\"鋼鐵\" title=\"鋼鐵\" />".$send['iron']." | <img class=\"r4\" src=\"img/x.gif\" alt=\"穀物\" title=\"穀物\" />".$send['crop']."</td></tr></tbody>";
         echo "</table>";
         $timer += 1;
     }
@@ -300,4 +300,4 @@ if(count($market->return) > 0) {
 }
 include("upgrade.tpl");
 ?>
-</p></div> 
+</p></div>

@@ -44,7 +44,7 @@ global $database;
                     $from_time=time() - (86400*7);
                     $q = "SELECT * FROM ".TB_PREFIX."users where $from_time > timestamp AND id>5";
                 }
-                
+
                 $result = $database->query($q);
                 $active = $database->mysql_fetch_all($result);
                 for ($i = 0; $i <= count($active)-1; $i++){
@@ -67,7 +67,7 @@ global $database;
                     $getmin=((time()-$active[$i]['timestamp'])/60);
                     $gethr=((time()-$active[$i]['timestamp'])/3600);
                     $getday=intval((time()-$active[$i]['timestamp'])/86400);
-            
+
                     echo "
                     <tr>
                         <td><a href=\"?p=player&uid=".$uid."\">".$active[$i]['username']." [".$active[$i]['access']."]</a></td>
@@ -79,7 +79,7 @@ global $database;
                         <td><img src=\"../gpack/travian_default/img/a/online".($h+2).".gif\"></td>
                     </tr>";
                 }
-            }    
+            }
         ?>
     </tbody>
 </table>

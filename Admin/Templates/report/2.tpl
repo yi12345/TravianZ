@@ -37,7 +37,7 @@ $dataarray = explode(",",$rep['data']);
 							{
 								echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" /></td>";
 							}
-							echo "</tr><tr><th>Troops</th>";
+							echo "</tr><tr><th>軍隊</th>";
 							for($i=3;$i<=12;$i++)
 							{
 								if($dataarray[$i] == 0)
@@ -74,8 +74,8 @@ $dataarray = explode(",",$rep['data']);
 											?>
 										</td>
 									</tr>
-								</tbody><?php 
-							} 
+								</tbody><?php
+							}
 							if ($dataarray[141]!='' and $dataarray[142]!='')
 							{ //cata ?>
 								<tbody class="goods">
@@ -102,8 +102,8 @@ $dataarray = explode(",",$rep['data']);
 											?>
 										</td>
 									</tr>
-								</tbody><?php 
-							} 
+								</tbody><?php
+							}
 							if ($dataarray[145]!='' and $dataarray[146]!='')
 							{ //spy ?>
 								<tbody class="goods">
@@ -116,7 +116,7 @@ $dataarray = explode(",",$rep['data']);
 										</td>
 									</tr>
 								</tbody><?php
-							} 
+							}
 						?>
 					<tbody class="goods">
 						<tr>
@@ -133,7 +133,7 @@ $dataarray = explode(",",$rep['data']);
 					$targettribe=$dataarray['31'];
 					if ($dataarray[34]=='1')
 					{
-						$start=1; ?>	
+						$start=1; ?>
 						<table cellpadding="1" cellspacing="1" class="defender">
 							<thead>
 								<tr>
@@ -149,7 +149,7 @@ $dataarray = explode(",",$rep['data']);
 										{
 											echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" /></td>";
 										}
-										echo "</tr><tr><th>Troops</th>";
+										echo "</tr><tr><th>軍隊</th>";
 										for($i=35;$i<=44;$i++)
 										{
 											if($dataarray[$i] == 0)
@@ -176,11 +176,11 @@ $dataarray = explode(",",$rep['data']);
 									?>
 								</tr>
 							</tbody>
-						</table><?php 
-					} 
+						</table><?php
+					}
 					if ($dataarray[55]=='1')
-					{ 
-						$start=11; ?>	
+					{
+						$start=11; ?>
 						<table cellpadding="1" cellspacing="1" class="defender">
 							<thead>
 								<tr>
@@ -196,7 +196,7 @@ $dataarray = explode(",",$rep['data']);
 										{
 											echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" /></td>";
 										}
-										echo "</tr><tr><th>Troops</th>";
+										echo "</tr><tr><th>軍隊</th>";
 										for($i=56;$i<=65;$i++)
 										{
 											if($dataarray[$i] == 0)
@@ -223,11 +223,11 @@ $dataarray = explode(",",$rep['data']);
 									?>
 								</tr>
 							</tbody>
-						</table><?php 
+						</table><?php
 					}
 						if ($dataarray[76]=='1')
 						{
-							$start=21; ?>	
+							$start=21; ?>
 							<table cellpadding="1" cellspacing="1" class="defender">
 								<thead>
 									<tr>
@@ -243,14 +243,14 @@ $dataarray = explode(",",$rep['data']);
 											{
 												echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" /></td>";
 											}
-											echo "</tr><tr><th>Troops</th>";
+											echo "</tr><tr><th>軍隊</th>";
 											for($i=77;$i<=86;$i++)
 											{
 												if($dataarray[$i] == 0)
 												{
 													echo "<td class=\"none\">0</td>";
 												}
-												else 
+												else
 												{
 													echo "<td>".$dataarray[$i]."</td>";
 												}
@@ -270,11 +270,11 @@ $dataarray = explode(",",$rep['data']);
 										?>
 									</tr>
 								</tbody>
-							</table><?php 
-						} 
+							</table><?php
+						}
 						if ($dataarray[97]=='1')
-						{ 
-							$start=31; ?>	
+						{
+							$start=31; ?>
 							<table cellpadding="1" cellspacing="1" class="defender">
 								<thead>
 									<tr>
@@ -290,7 +290,7 @@ $dataarray = explode(",",$rep['data']);
 											{
 												echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" /></td>";
 											}
-											echo "</tr><tr><th>Troops</th>";
+											echo "</tr><tr><th>軍隊</th>";
 											for($i=98;$i<=107;$i++)
 											{
 												if($dataarray[$i] == 0)
@@ -317,11 +317,11 @@ $dataarray = explode(",",$rep['data']);
 										?>
 									</tr>
 								</tbody>
-							</table><?php 
+							</table><?php
 						}
 							if ($dataarray[118]=='1')
 							{
-								$start=41; ?>	
+								$start=41; ?>
 								<table cellpadding="1" cellspacing="1" class="defender">
 									<thead>
 										<tr>
@@ -337,7 +337,7 @@ $dataarray = explode(",",$rep['data']);
 												{
 													echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" /></td>";
 												}
-												echo "</tr><tr><th>Troops</th>";
+												echo "</tr><tr><th>軍隊</th>";
 												for($i=119;$i<=128;$i++)
 												{
 													if($dataarray[$i] == 0)
@@ -364,8 +364,8 @@ $dataarray = explode(",",$rep['data']);
 											?>
 										</tr>
 									</tbody>
-								</table><?php 
-							} 
+								</table><?php
+							}
 						?>
 					</td>
 				</tr>

@@ -39,7 +39,7 @@
 </tr>
 </tbody></table>
 
-<img id="big_unit" class="big_u21" src="img/x.gif" alt="Phalanx" title="Phalanx" /><div id="t_desc">As they are infantry, the Phalanx is cheap and fast to produce. 
+<img id="big_unit" class="big_u21" src="img/x.gif" alt="Phalanx" title="Phalanx" /><div id="t_desc">As they are infantry, the Phalanx is cheap and fast to produce.
 <br /><br />
 Though their attack power is low, in defence they are quite strong against both infantry and cavalry.</div><div id="prereqs"><b>Prerequisites</b><br /><a href="manual.php?typ=4&amp;gid=19">Barracks</a> Level 1</div><map id="nav" name="nav">
  <area href="manual.php?typ=1&amp;s=20" title="back" coords="0,0,45,18" shape="rect" alt="" />

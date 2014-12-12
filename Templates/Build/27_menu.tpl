@@ -7,7 +7,7 @@
 
 ?>
     ">Own artefacts</a>
-         
+
  | <a href="build.php?id=<?php echo $id; ?>&t=2" <?php
 
         if(isset($_GET['t']) && $_GET['t'] == 2) {

@@ -77,14 +77,14 @@ function showCheckList() {
 
 </script>
 <script language="JavaScript" type="text/javascript">
-	
+
     function checkInputs(id, typ) {
 		id_field = document.getElementById(typ+'_by_id_'+id);
 		name_field = document.getElementById(typ+'_by_name_'+id);
-		
+
 		//alert(id_field.value);
 		//alert(name_field.value);
-		
+
 		if (id_field.value != '' && id_field.disabled == false) {
 			name_field.disabled = true;
 			name_field.style.border = '1px solid #999';
@@ -93,7 +93,7 @@ function showCheckList() {
 			name_field.disabled = false;
 			name_field.style.border = '1px solid #71D000';
 		}
-		
+
 		if (name_field.value != '' && name_field.disabled == false) {
 			id_field.disabled = true;
 			id_field.style.border = '1px solid #999';
@@ -103,7 +103,7 @@ function showCheckList() {
 			id_field.style.border = '1px solid #71D000';
 		}
 	}
-    
+
 	</script><form method="post" action="allianz.php?s=2">
 	<input type="hidden" name="new" value="1">
 

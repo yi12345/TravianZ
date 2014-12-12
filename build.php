@@ -345,7 +345,7 @@ if(isset($_GET['id']) or isset($_GET['gid']) or $route == 1 or isset($_GET['rout
             		$building->finishAll();
             		header("Location: build.php?gid=".$_GET['id']."&ty=".$_GET['ty']);
         	}
-        	}  
+        	}
 	}
 }else{
 header("Location: dorf1.php");
@@ -374,11 +374,11 @@ include("Templates/res.tpl");
 <div id="stime">
 <div id="ltime">
 <div id="ltimeWrap">
-Calculated in <b><?php
+運算耗時  <b><?php
 echo round(($generator->pageLoadTimeEnd()-$start)*1000);
 ?></b> ms
 
-<br />Server time: <span id="tp1" class="b"><?php echo date('H:i:s'); ?></span>
+<br />伺服器時間: <span id="tp1" class="b"><?php echo date('H:i:s'); ?></span>
 </div>
 	</div>
 </div>

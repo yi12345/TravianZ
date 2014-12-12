@@ -17,7 +17,7 @@ include("next.tpl");
 		<td><b><?php echo $bid36[$village->resarray['f'.$id]]['attri']*TRAPPER_CAPACITY; ?></b> Traps</td>
 	</tr>
 	<tr>
-	<?php 
+	<?php
         if(!$building->isMax($village->resarray['f'.$id.'t'],$id)) {
 		$next = $village->resarray['f'.$id]+1+$loopsame+$doublebuild+$master;
 		if($next<=20){
@@ -66,7 +66,7 @@ include("next.tpl");
 				alt="Iron" title="Iron" />10|</span><span><img class="r4" src="img/x.gif"
 				alt="Crop" title="Crop" />20|</span><span><img class="r5" src="img/x.gif" alt="Crop consumption"
 				title="Crop consumption" />0|<img class="clock" src="img/x.gif"
-				alt="Duration" title="Duration" /><?php $dur=$generator->getTimeFormat(round(${'u99'}['time'] * ($bid19[$village->resarray['f'.$id]]['attri']*TRAPPER_CAPACITY / 100) / SPEED)); 
+				alt="Duration" title="Duration" /><?php $dur=$generator->getTimeFormat(round(${'u99'}['time'] * ($bid19[$village->resarray['f'.$id]]['attri']*TRAPPER_CAPACITY / 100) / SPEED));
 				echo ($dur=="0:00:00")? "0:00:01":$dur; ?></span>
 
 			</div>
@@ -76,7 +76,7 @@ include("next.tpl");
 			foreach($trainlist as $train) {
 			$train_amt += $train['amt'];
 			}
-			
+
 			$max = $technology->maxUnit(99,false);
 			$max1 = 0;
 			for($i=19;$i<41;$i++){

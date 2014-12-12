@@ -139,7 +139,7 @@ include("Templates/Plus/pmenu.tpl");
 	<tr>
 		<td class="preview"><a href="plus.php?id=3"><img class="p1_25" src="img/x.gif" alt="Production bonus for lumber" title="Production bonus for lumber" /></a></td>
 
-		<td class="text">With this Gold advantage all your villages' lumber production will be increased by 25%. 
+		<td class="text">With this Gold advantage all your villages' lumber production will be increased by 25%.
 <br /><br />
 The bonus will not be added to the single resource fields but to the sum of the production.
 <br /><br />
@@ -198,7 +198,7 @@ The bonus will not be added to the single resource fields but to the sum of the 
 		<td class="preview"><a href="plus.php?id=3"><img class="bau0" src="img/x.gif" alt="Complete construction orders & research immediately." title="Complete construction orders & research immediately." /></a></td>
 		<td class="text">In the current village all construction orders and research in the academy as well as the blacksmith and armoury will be completed immediately.
 <br /><br />
-However, the <i>buildings</i> Residence and Palace and <i>villages</i> with a wonder of the world inside them are excluded.
+However, the <i>buildings</i>行宮 and Palace and <i>villages</i> with a wonder of the world inside them are excluded.
 
 <br /><br />
 <span style="color:#FF0000">This feature is NOT included in the gold club!</span></p></td>

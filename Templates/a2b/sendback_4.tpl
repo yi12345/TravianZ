@@ -7,7 +7,7 @@ $tocoor = $database->getCoor($enforce['vref']);
 	$toCor = array('x'=>$fromcoor['x'], 'y'=>$fromcoor['y']);
 ?>
 
-<h1>Send units back</h1>			
+<h1>Send units back</h1>
 
 <form method="POST" name="snd" action="a2b.php">
 
@@ -49,65 +49,65 @@ $tocoor = $database->getCoor($enforce['vref']);
 		<table id="troops" cellpadding="1" cellspacing="1">
 	<tbody><tr>
 		<td class="line-first column-first large"><img class="unit u31" src="img/x.gif" title="Clubswinger" alt="Clubswinger"> <input class="text" <?php if ($enforce['u31']<=0) {echo ' disabled="disabled"';}?> name="t1" value="<?php echo $enforce['u31']; ?>" maxlength="6" type="text">
-		<?php 
+		<?php
        	echo"<span class=\"none\">(".$enforce['u31'].")</span></td>";
 
         ?>
-		
+
         <td class="line-first large"><img class="unit u34" src="img/x.gif" title="Scout" alt="Scout"> <input class="text" <?php if ($enforce['u14']<=0) {echo ' disabled="disabled"';}?> name="t4" value="<?php echo $enforce['u14']; ?>" maxlength="6" type="text">
-		<?php 
+		<?php
        	echo"<span class=\"none\">(".$enforce['u34'].")</span></td>";
 
         ?>
         <td class="line-first regular"><img class="unit u37" src="img/x.gif" title="Ram" alt="Ram"> <input class="text" <?php if ($enforce['u17']<=0) {echo ' disabled="disabled"';}?> name="t7" value="<?php echo $enforce['u17']; ?>" maxlength="6" type="text">
-		<?php 
+		<?php
        	echo"<span class=\"none\">(".$enforce['u37'].")</span></td>";
 
         ?>
 
-		
+
         <td class="line-first column-last small"><img class="unit u39" src="img/x.gif" title="Chief" alt="Chief"> <input class="text" <?php if ($enforce['u19']<=0) {echo ' disabled="disabled"';}?> name="t9" value="<?php echo $enforce['u19']; ?>" maxlength="6" type="text">
-		<?php 
+		<?php
        	echo"<span class=\"none\">(".$enforce['u39'].")</span></td>";
 
         ?>
 	</tr>
 	<tr>
 		<td class="column-first large"><img class="unit u32" src="img/x.gif" title="Spearman" alt="Spearman"> <input class="text" <?php if ($enforce['u12']<=0) {echo ' disabled="disabled"';}?> name="t2" value="<?php echo $enforce['u12']; ?>" maxlength="6" type="text">
-		<?php 
+		<?php
        	echo"<span class=\"none\">(".$enforce['u32'].")</span></td>";
 
         ?>
 
 		<td class="large"><img class="unit u35" src="img/x.gif" title="Paladin" alt="Paladin"> <input class="text" <?php if ($enforce['u15']<=0) {echo ' disabled="disabled"';}?> name="t5" value="<?php echo $enforce['u15']; ?>" maxlength="6" type="text">
-		<?php 
+		<?php
        	echo"<span class=\"none\">(".$enforce['u35'].")</span></td>";
 
         ?>
 		<td class="regular"><img class="unit u38" src="img/x.gif" title="Catapult" alt="Catapult"> <input class="text" <?php if ($enforce['u18']<=0) {echo ' disabled="disabled"';}?> name="t8" value="<?php echo $enforce['u18']; ?>" maxlength="6" type="text">
-		<?php 
+		<?php
        	echo"<span class=\"none\">(".$enforce['u38'].")</span></td>";
 
         ?>
 		<td class="column-last small"><img class="unit u40" src="img/x.gif" title="Settler" alt="Settler"> <input class="text" <?php if ($enforce['u20']<=0) {echo ' disabled="disabled"';}?> name="t10" value="<?php echo $enforce['u20']; ?>" maxlength="6" type="text">
-		<?php 
+		<?php
        	echo"<span class=\"none\">(".$enforce['u40'].")</span></td>";
 
         ?>
 	</tr>
 	<tr>
 		<td class="line-last column-first large"><img class="unit u33" src="img/x.gif" title="Axeman" alt="Axeman"> <input class="text" <?php if ($enforce['u13']<=0) {echo ' disabled="disabled"';}?> name="t3" value="<?php echo $enforce['u13']; ?>" maxlength="6" type="text">
-		<?php 
+		<?php
        	echo"<span class=\"none\">(".$enforce['u33'].")</span></td>";
 
         ?>
 		<td class="line-last large"><img class="unit u36" src="img/x.gif" title="Teutonic Knight" alt="Teutonic Knight"> <input class="text" <?php if ($enforce['u16']<=0) {echo ' disabled="disabled"';}?> name="t6" value="<?php echo $enforce['u16']; ?>" maxlength="6" type="text">
-		<?php 
+		<?php
        	echo"<span class=\"none\">(".$enforce['u36'].")</span></td>";
 		if($enforce['hero']>0){
         ?>
 		<td class="line-last large"><img class="unit uhero" src="img/x.gif" title="Hero" alt="Hero"> <input class="text" name="t11" value="<?php echo $enforce['hero']; ?>" maxlength="6" type="text">
-		<?php 
+		<?php
        	echo"<span class=\"none\">(".$enforce['hero'].")</span></td>";
 		}
         ?>
@@ -121,7 +121,7 @@ $tocoor = $database->getCoor($enforce['vref']);
 			<th>Arrived:</th>
 
 			<?php
-			$att_tribe = $database->getUserField($to['owner'],'tribe',0);  
+			$att_tribe = $database->getUserField($to['owner'],'tribe',0);
             $start = ($att_tribe-1)*10+1;
             $end = ($att_tribe*10);
             $speeds = array();
@@ -129,20 +129,20 @@ $tocoor = $database->getCoor($enforce['vref']);
                 for($i=$start;$i<=$end;$i++)
                 {
                     if (isset($enforce['u'.$i]))
-                    { 
+                    {
                         if($enforce['u'.$i]!='' && $enforce['u'.$i]>0)
-                        { 
+                        {
                             //$speeds[] = $unitspeeds[$i-2];
                             $speeds[] = ${'u'.$i}['speed'];
                         }
                     }
                 }
 			if ($enforce['hero']>0){
-                $qh = "SELECT * FROM ".TB_PREFIX."hero WHERE uid = ".$to['owner'].""; 
-                $resulth = mysql_query($qh); 
-                $hero_f=mysql_fetch_array($resulth); 
+                $qh = "SELECT * FROM ".TB_PREFIX."hero WHERE uid = ".$to['owner']."";
+                $resulth = mysql_query($qh);
+                $hero_f=mysql_fetch_array($resulth);
                 $hero_unit=$hero_f['unit'];
-                $speeds[] = $GLOBALS['u'.$hero_unit]['speed']; 
+                $speeds[] = $GLOBALS['u'.$hero_unit]['speed'];
 			}
       		$artefact = count($database->getOwnUniqueArtefactInfo2($session->uid,2,3,0));
 			$artefact1 = count($database->getOwnUniqueArtefactInfo2($village->wid,2,1,1));
@@ -179,8 +179,8 @@ $tocoor = $database->getCoor($enforce['vref']);
 </table>
 
 
-<input name="ckey" value="<?php echo $ckey; ?>" type="hidden"> 
-<input name="id" value="39" type="hidden"> 
+<input name="ckey" value="<?php echo $ckey; ?>" type="hidden">
+<input name="id" value="39" type="hidden">
 <input name="a" value="533374" type="hidden">
 <input name="c" value="8" type="hidden">
 

@@ -1,8 +1,8 @@
 <table cellpadding="1" cellspacing="1" class="build_details">
 	<thead>
 		<tr>
-			<td>Blacksmith</td>
-			<td>Action</td>
+			<td>鐵匠鋪</td>
+			<td>動作</td>
 		</tr>
 	</thead>
 	<tbody>
@@ -18,7 +18,7 @@
 <a href=\"#\" onClick=\"return Popup(".$i.",1);\">".$technology->getUnitName($i)."</a> (Level ".$abdata['b'.$j].")
 </div>";
 				if($abdata['b'.$j] != 20) {
-echo "<div class=\"details\"><img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" />".${'ab'.$i}[$abdata['b'.$j]+1]['wood']."|<img class=\"r2\" src=\"img/x.gif\" alt=\"Clay\" title=\"Clay\" />".${'ab'.$i}[$abdata['b'.$j]+1]['clay']."|<img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" />".${'ab'.$i}[$abdata['b'.$j]+1]['iron']."|<img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" />".${'ab'.$i}[$abdata['b'.$j]+1]['crop']."|<img class=\"clock\" src=\"img/x.gif\" alt=\"duration\" title=\"duration\" />";
+echo "<div class=\"details\"><img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" />".${'ab'.$i}[$abdata['b'.$j]+1]['wood']."|<img class=\"r2\" src=\"img/x.gif\" alt=\"磚塊\" title=\"磚塊\" />".${'ab'.$i}[$abdata['b'.$j]+1]['clay']."|<img class=\"r3\" src=\"img/x.gif\" alt=\"鋼鐵\" title=\"鋼鐵\" />".${'ab'.$i}[$abdata['b'.$j]+1]['iron']."|<img class=\"r4\" src=\"img/x.gif\" alt=\"穀物\" title=\"穀物\" />".${'ab'.$i}[$abdata['b'.$j]+1]['crop']."|<img class=\"clock\" src=\"img/x.gif\" alt=\"duration\" title=\"duration\" />";
 				echo $generator->getTimeFormat(round(${'ab'.$i}[$abdata['b'.$j]+1]['time']*($bid12[$building->getTypeLevel(12)]['attri'] / 100)/SPEED));
 					if($session->userinfo['gold'] >= 3 && $building->getTypeLevel(17) >= 1) {
 					echo "|<a href=\"build.php?gid=17&t=3&r1=".${'ab'.$i}[$abdata['b'.$j]+1]['wood']."&r2=".${'ab'.$i}[$abdata['b'.$j]+1]['clay']."&r3=".${'ab'.$i}[$abdata['b'.$j]+1]['iron']."&r4=".${'ab'.$i}[$abdata['b'.$j]+1]['crop']."\" title=\"NPC trade\"><img class=\"npc\" src=\"img/x.gif\" alt=\"NPC trade\" title=\"NPC trade\" /></a>";

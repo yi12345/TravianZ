@@ -18,7 +18,7 @@ if($database->getVillageField($dataarray[0],'name')!="??" || $dataarray[0] == 0)
 					<th>Subject:</th>
 					<th><?php echo $message->readingNotice['topic']; ?></th>
 				</tr>
- 
+
 				<tr>
                 <?php
                 $date = $generator->procMtime($message->readingNotice['time']); ?>
@@ -30,7 +30,7 @@ if($database->getVillageField($dataarray[0],'name')!="??" || $dataarray[0] == 0)
 				<tr><td colspan="2" class="empty"></td></tr>
 				<tr><td colspan="2" class="report_content">
 		<table cellpadding="1" cellspacing="1" id="reinforcement">
-		
+
 <thead><tr>
 <td class="role">sender</td><td colspan="<?php echo $colspan ?>"><?php echo $user_url;?> from the village <?php echo $from_url;?></td></tr></thead>
 <tbody class="units"><tr>
@@ -44,7 +44,7 @@ for($i=$start;$i<=($start+9);$i++) {
 if($dataarray[13]!=0){
 echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=3;$i<13;$i++) {
 $unitarray['u'.($i-3+$start).''] = $dataarray[$i];
 	if($dataarray[$i] == 0) {
@@ -58,7 +58,7 @@ if($dataarray[13] != 0) {
 	echo "<td>".$dataarray[13]."</td>";
 	$unitarray['hero'] = 1;
 }
-	
+
 ?></tr></tbody>
 <tbody class="infos"><tr><th>upkeep</th><td colspan="11">
 <?php echo $technology->getUpkeep($unitarray,$dataarray[2]); ?><img src="img/x.gif" class="r4" title="Crop" alt="Crop" />per hour</td>

@@ -9,39 +9,39 @@ $online = mysql_num_rows(mysql_query("SELECT * FROM " . TB_PREFIX . "users WHERE
 <div class="news">
 <table width="100%" border="0">
 <tr>
-<td align="left"><b>Online Users</td>
+<td align="left"><b>在線玩家</td>
 <td>: <font color="Red"><?php echo $online ?> users</font></b></td>
 </tr>
 <tr>
-<td><b>Server Speed</td>
+<td><b>伺服器速度</td>
 <td>: <font color="Red"><?php echo ''.SPEED.'x';?></font></b></td>
 </tr>
 <tr>
-<td><b>Troop Speed</td>
+<td><b>行軍速度</td>
 <td>: <font color="Red"><?php echo INCREASE_SPEED;?>x</font></b></td>
 </tr>
 <tr>
-<td><b>Evasion Speed</td>
+<td><b>閃避速度</td>
 <td>: <font color="Red"><?php echo EVASION_SPEED;?></font></b></td>
 </tr>
 <tr>
-<td><b>Map Size</td>
+<td><b>地圖大小</td>
 <td>: <font color="Red"><?php echo WORLD_MAX;?>x<?php echo WORLD_MAX;?></font></b></td>
 </tr>
 <tr>
-<td><b>Village Exp.</td>
+<td><b>村莊拓展速度</td>
 <td>: <font color="Red"><?php if(CP == 0){ echo "Fast"; } else if(CP == 1){ echo "Slow"; } ?></font></b></td>
 </tr>
 <tr>
-<td><b>Beginners Prot.</td>
+<td><b>新手保護</td>
 <td>: <font color="Red"><?php echo (PROTECTION/3600);?> hrs</font></b></td>
 </tr>
 <tr>
-<td><b>Medal Interval</td>
+<td><b>獎牌持續時間</td>
 <td>: <font color="Red"><?php if(MEDALINTERVAL >= 86400){ echo ''.(MEDALINTERVAL/86400).' Days'; } else if(MEDALINTERVAL < 86400){ echo ''.(MEDALINTERVAL/3600).' Hours'; } ?></font></b></td>
 </tr>
 <tr>
-<td><b>Server Start</td>
+<td><b>開服日期</td>
 <td>: <font color="Red"><?php echo START_DATE;?></font></b></td>
 </tr>
 </table>

@@ -84,7 +84,7 @@ class adm_DB {
 	}
 	return $popT;
   }
-  
+
           function buildingCP($f,$lvl){
         $name = "bid".$f;
         global $$name;
@@ -96,7 +96,7 @@ class adm_DB {
                 }
         return $popT;
         }
-  
+
           function recountCP($vid){
         global $database;
         $fdata = $database->getResourceLevel($vid);
@@ -206,7 +206,7 @@ class adm_DB {
           }
          $q = "DELETE FROM ".TB_PREFIX."hero where uid = $uid";
         mysql_query($q, $this->connection);
- 
+
         $name = $database->getUserField($uid,"username",0);
         mysql_query("Insert into ".TB_PREFIX."admin_log values (0,$ID,'Deleted user <a>$name</a>',".time().")");
         $q = "DELETE FROM ".TB_PREFIX."users WHERE `id` = $uid;";
@@ -244,7 +244,7 @@ class adm_DB {
             mysql_query("Insert into ".TB_PREFIX."admin_log values (0,".$_SESSION['id'].",'Deleted village <b>$wref</b>',".time().")");
 
             $database->clearExpansionSlot($wref);
-        
+
             $q = "DELETE FROM ".TB_PREFIX."abdata where vref = $wref";
             mysql_query($q, $this->connection);
             $q = "DELETE FROM ".TB_PREFIX."bdata where wid = $wref";
@@ -267,29 +267,29 @@ class adm_DB {
             mysql_query($q, $this->connection);
             $q = "DELETE FROM ".TB_PREFIX."raidlist where towref = $wref";
             mysql_query($q, $this->connection);
-        
+
             $q = "DELETE FROM ".TB_PREFIX."movement where `from` = $wref and proc=0";
             mysql_query($q, $this->connection);
-                
+
             $getmovement = $database->getMovement(3,$wref,1);
             foreach($getmovement as $movedata) {
                 $time = microtime(true);
                 $time2 = $time - $movedata['starttime'];
                 $database->setMovementProc($movedata['moveid']);
                 $database->addMovement(4,$movedata['to'],$movedata['from'],$movedata['ref'],$time,$time+$time2);
-            
+
             }
 
             //check    return enforcement from del village
             $this->returnTroops($wref);
-        
+
             $q = "DELETE FROM ".TB_PREFIX."vdata WHERE `wref` = $wref";
             mysql_query($q, $this->connection);
-    
+
             if (mysql_affected_rows()>0) {
                 $q = "UPDATE ".TB_PREFIX."wdata set occupied = 0 where id = $wref";
                 mysql_query($q, $this->connection);
-            
+
                 $getprisoners = $database->getPrisoners($wref);
                 foreach($getprisoners as $pris) {
                     $troops = 0;
@@ -311,21 +311,21 @@ class adm_DB {
             }
         }
     }
-    
+
         public function returnTroops($wref) {
         global $database;
 
         $getenforce=$database->getEnforceVillage($wref,0);
-        
+
         foreach($getenforce as $enforce) {
-            
+
             $to = $database->getVillage($enforce['from']);
             $Gtribe = "";
             if ($database->getUserField($to['owner'],'tribe',0) ==  '2'){ $Gtribe = "1"; }
             else if ($database->getUserField($to['owner'],'tribe',0) == '3'){ $Gtribe =  "2"; }
             else if ($database->getUserField($to['owner'],'tribe',0) ==  '4'){ $Gtribe = "3"; }
             else if  ($database->getUserField($to['owner'],'tribe',0) == '5'){ $Gtribe =  "4"; }
-                    
+
             $start = ($database->getUserField($to['owner'],'tribe',0)-1)*10+1;
             $end = ($database->getUserField($to['owner'],'tribe',0)*10);
 
@@ -339,20 +339,20 @@ class adm_DB {
 
             //find slowest unit.
             for($i=$start;$i<=$end;$i++){
-                
+
                 if(intval($enforce['u'.$i]) > 0){
                     if($unitarray) { reset($unitarray); }
                     $unitarray = $GLOBALS["u".$i];
                     $speeds[] = $unitarray['speed'];
                     //echo print_r(array_keys($speeds))."unitspd\n".$i."trib\n";
-                    
+
 
                 } else {
                     $enforce['u'.$i]='0';
                 }
-                
+
             }
-            
+
             if( intval($enforce['hero']) > 0){
                 $q = "SELECT * FROM ".TB_PREFIX."hero WHERE uid = ".$from['owner']."";
                 $result = mysql_query($q);
@@ -362,7 +362,7 @@ class adm_DB {
             } else {
                 $enforce['hero']='0';
             }
-            
+
             $artefact = count($database->getOwnUniqueArtefactInfo2($from['owner'],2,3,0));
             $artefact1 = count($database->getOwnUniqueArtefactInfo2($enforce['from'],2,1,1));
             $artefact2 = count($database->getOwnUniqueArtefactInfo2($from['owner'],2,2,0));
@@ -376,7 +376,7 @@ class adm_DB {
                 $fastertroops = 1;
             }
             $time = round($this->procDistanceTime($fromCor,$toCor,min($speeds),$enforce['from'])/$fastertroops);
-            
+
             $foolartefact2 = $database->getFoolArtefactInfo(2,$enforce['from'],$from['owner']);
             if(count($foolartefact2) > 0){
                 foreach($foolartefact2 as $arte){
@@ -397,7 +397,7 @@ class adm_DB {
     public function getTypeLevel($tid,$vid) {
         global $village,$database;
         $keyholder = array();
-        
+
         if($vid == 0) {
             $resourcearray = $village->resarray;
         } else {
@@ -446,7 +446,7 @@ class adm_DB {
 
        public function procDistanceTime($coor,$thiscoor,$ref,$vid) {
         global $bid28,$bid14;
-        
+
         $xdistance = ABS($thiscoor['x'] - $coor['x']);
         if($xdistance > WORLD_MAX) {
             $xdistance = (2 * WORLD_MAX + 1) - $xdistance;

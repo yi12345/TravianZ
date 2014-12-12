@@ -21,7 +21,7 @@ if($_SESSION['access'] < 9) die("Access Denied: You are not Admin!");
 				if($tribe ==4){ $img = "3";}
 				if($tribe ==5){ $img = "4";}
 				if($tribe ==6){ $img = "5";}
-				
+
 				for($i=1; $i<9; $i++)
 				{
 					echo '<td><center><img src="../img/un/u/'.$img.''.$i.'.gif"></center></td>';
@@ -60,5 +60,4 @@ if($_SESSION['access'] < 9) die("Access Denied: You are not Admin!");
 			echo '<div align="right"><font color="Red"><b>AB Tech Troops upgrades</font></b></div>';
 		}
 	?>
-	
-	
+

@@ -13,7 +13,7 @@ include("next.tpl");
 		<td><b><?php echo $bid4[$village->resarray['f'.$id]]['prod']* SPEED; ?></b> <?php echo PER_HR; ?></td>
 	</tr>
 	<tr>
-	 <?php 
+	 <?php
     if(!$building->isMax($village->resarray['f'.$id.'t'],$id)) {
 	$next = $village->resarray['f'.$id]+1+$loopsame+$doublebuild+$master;
 	if($village->capital == 1) {
@@ -23,13 +23,13 @@ include("next.tpl");
 		<th><?php echo NEXT_PROD; echo $next; ?>:</th>
 		<td><b><?php echo $bid4[$next]['prod']* SPEED; ?></b> <?php echo PER_HR; ?></td>
 	</tr>
-    <?php 
+    <?php
     }else{
 	?>
 	<tr>
 		<th><?php echo NEXT_PROD; echo 20; ?>:</th>
 		<td><b><?php echo $bid4[20]['prod']* SPEED; ?></b> <?php echo PER_HR; ?></td>
-	</tr>	
+	</tr>
 	<?php
 	}}else{
 	if($next<=10){
@@ -38,19 +38,19 @@ include("next.tpl");
 		<th><?php echo NEXT_PROD; echo $next; ?>:</th>
 		<td><b><?php echo $bid4[$next]['prod']* SPEED; ?></b> <?php echo PER_HR; ?></td>
 	</tr>
-    <?php 
+    <?php
     }else{
 	?>
 	<tr>
 		<th><?php echo NEXT_PROD; echo 10; ?>:</th>
 		<td><b><?php echo $bid4[10]['prod']* SPEED; ?></b> <?php echo PER_HR; ?></td>
-	</tr>	
+	</tr>
 	<?php
 	}}}
     ?>
 	</tr>
 </table>
 
-<?php 
+<?php
 include("upgrade.tpl");
 ?></p></div>

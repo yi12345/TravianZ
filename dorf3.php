@@ -15,7 +15,7 @@ include("GameEngine/Village.php");
 $start = $generator->pageLoadTimeStart();
 if(isset($_GET['newdid'])) {
     $_SESSION['wid'] = $_GET['newdid'];
-    $database->query("UPDATE ".TB_PREFIX."users SET village_select=".$_GET['newdid']." WHERE id=".$session->uid);  
+    $database->query("UPDATE ".TB_PREFIX."users SET village_select=".$_GET['newdid']." WHERE id=".$session->uid);
 	if(isset($_GET['s'])){
 	header("Location: ".$_SERVER['PHP_SELF']."?s=".$_GET['s']);
 	}else{
@@ -106,11 +106,11 @@ include("Templates/res.tpl");
 <div id="stime">
 <div id="ltime">
 <div id="ltimeWrap">
-Calculated in <b><?php
+運算耗時  <b><?php
 echo round(($generator->pageLoadTimeEnd()-$start)*1000);
 ?></b> ms
 
-<br />Server time: <span id="tp1" class="b"><?php echo date('H:i:s'); ?></span>
+<br />伺服器時間: <span id="tp1" class="b"><?php echo date('H:i:s'); ?></span>
 </div>
 	</div>
 </div>

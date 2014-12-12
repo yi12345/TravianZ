@@ -50,7 +50,7 @@ foreach($forumcat as $arr) {
 						$owner = $database->getUserArray($las['owner'],1);
 					}
 				}
-			}	
+			}
 		echo	'<tr><td class="ico">';
 		if($database->CheckEditRes($aid)=="1"){
 			echo '<a class="up_arr" href="allianz.php?s=2&fid='.$arr['id'].'&bid=0&admin=pos&res=-1" title="To top">
@@ -62,17 +62,17 @@ foreach($forumcat as $arr) {
 			<img src="img/x.gif" alt="delete" /></a>';
 		}else{
 			echo '<img class="folder" src="img/x.gif" title="Thread without new posts" alt="Thread without new posts">';
-		}		
+		}
 		echo '</td><td class="tit">
 		<a href="allianz.php?s=2&fid='.$arr['id'].'&pid='.$aid.'" title="'.stripslashes($arr['forum_name']).'">'.stripslashes($arr['forum_name']).'</a><br />'.stripslashes($arr['forum_des']).'</td>
 		<td class="cou">'.$countop.'</td>
 		<td class="last">'.$lpost.'</span><span><br />';
 		if ($owner!="") {
 			echo '<a href="spieler.php?uid='.$owner['id'].'">'.$owner['username'].'</a> <img class="latest_reply" src="img/x.gif" alt="Show last post" title="Show last post" />';
-		}	
+		}
 		echo '</td>
 		</tr>';
-		
+
 	}
 }
 ?>
@@ -111,23 +111,23 @@ foreach($forumcat as $arr) {
 						$owner = $database->getUserArray($las['owner'],1);
 					}
 				}
-			}	
+			}
 		echo	'<tr><td class="ico">';
 		if($database->CheckEditRes($aid)=="1"){
 			echo '<a class="up_arr" href="allianz.php?s=2&fid='.$arr['id'].'&bid=0&admin=pos&res=-1" title="To top"><img src="img/x.gif" alt="To top" /></a><a class="edit" href="allianz.php?s=2&idf='.$arr['id'].'&admin=editforum" title="edit"><img src="img/x.gif" alt="edit" /></a><br /><a class="down_arr" href="allianz.php?s=2&fid='.$arr['id'].'&bid=0&admin=pos&res=1" title="To bottom"><img src="img/x.gif" alt="To bottom" /></a><a class="fdel" href="allianz.php?s=2&idf='.$arr['id'].'&admin=delforum" onClick="return confirm(\'confirm delete?\');" title="delete"><img src="img/x.gif" alt="delete" /></a>';
 		}else{
 			echo '<img class="folder" src="img/x.gif" title="Thread without new posts" alt="Thread without new posts">';
-		}		
+		}
 		echo '</td><td class="tit">
 		<a href="allianz.php?s=2&fid='.$arr['id'].'&pid='.$aid.'" title="'.stripslashes($arr['forum_name']).'">'.stripslashes($arr['forum_name']).'</a><br />'.stripslashes($arr['forum_des']).'</td>
 		<td class="cou">'.$countop.'</td>
 		<td class="last">'.$lpost.'</span><span><br />';
 		if ($owner!="") {
 			echo '<a href="spieler.php?uid='.$owner['id'].'">'.$owner['username'].'</a> <img class="latest_reply" src="img/x.gif" alt="Show last post" title="Show last post" />';
-		}	
+		}
 		echo '</td>
 		</tr>';
-		
+
 	}
 }
 ?>
@@ -166,13 +166,13 @@ foreach($forumcat as $arr) {
 						$owner = $database->getUserArray($las['owner'],1);
 					}
 				}
-			}	
+			}
 				echo	'<tr><td class="ico">';
 				if($database->CheckEditRes($aid)=="1"){
 					echo '<a class="up_arr" href="allianz.php?s=2&fid='.$arr['id'].'&bid=0&admin=pos&res=-1" title="To top"><img src="img/x.gif" alt="To top" /></a><a class="edit" href="allianz.php?s=2&idf='.$arr['id'].'&admin=editforum" title="edit"><img src="img/x.gif" alt="edit" /></a><br /><a class="down_arr" href="allianz.php?s=2&fid='.$arr['id'].'&bid=0&admin=pos&res=1" title="To bottom"><img src="img/x.gif" alt="To bottom" /></a><a class="fdel" href="allianz.php?s=2&idf='.$arr['id'].'&admin=delforum" onClick="return confirm(\'confirm delete?\');" title="delete"><img src="img/x.gif" alt="delete" /></a>';
 				}else{
 					echo '<img class="folder" src="img/x.gif" title="Thread without new posts" alt="Thread without new posts">';
-				}		
+				}
 				echo '</td><td class="tit"><a href="allianz.php?s=2&fid='.$arr['id'].'&pid='.$aid.'" title="'.stripslashes($arr['forum_name']).'">'.stripslashes($arr['forum_name']).'</a><br />'.stripslashes($arr['forum_des']).'</td>
 				<td class="cou">'.$countop.'</td>
 				<td class="last">'.$lpost.'</span><span><br />';
@@ -181,9 +181,9 @@ foreach($forumcat as $arr) {
 				}
 				echo '</td>
 				</tr>';
-			
+
 		}
-	}	
+	}
 ?>
 		</tbody></table>
 <?php
@@ -221,22 +221,22 @@ if($closed1 != 0){
 						$owner = $database->getUserArray($las['owner'],1);
 					}
 				}
-			}	
+			}
 		echo	'<tr><td class="ico">';
 		if($database->CheckEditRes($aid)=="1"){
 			echo '<a class="up_arr" href="allianz.php?s=2&fid='.$arr['id'].'&bid=0&admin=pos&res=-1" title="To top"><img src="img/x.gif" alt="To top" /></a><a class="edit" href="allianz.php?s=2&idf='.$arr['id'].'&admin=editforum" title="edit"><img src="img/x.gif" alt="edit" /></a><br /><a class="down_arr" href="allianz.php?s=2&fid='.$arr['id'].'&bid=0&admin=pos&res=1" title="To bottom"><img src="img/x.gif" alt="To bottom" /></a><a class="fdel" href="allianz.php?s=2&idf='.$arr['id'].'&admin=delforum" onClick="return confirm(\'confirm delete?\');" title="delete"><img src="img/x.gif" alt="delete" /></a>';
 		}else{
 			echo '<img class="folder" src="img/x.gif" title="Thread without new posts" alt="Thread without new posts">';
-		}		
+		}
 		echo '</td><td class="tit"><a href="allianz.php?s=2&fid='.$arr['id'].'&pid='.$aid.'" title="'.stripslashes($arr['forum_name']).'">'.stripslashes($arr['forum_name']).'</a><br />'.stripslashes($arr['forum_des']).'</td>
 			<td class="cou">'.$countop.'</td>
 			<td class="last">'.$lpost.'</span><span><br />';
 			if ($owner!="") {
 				echo '<a href="spieler.php?uid='.$owner['id'].'">'.$owner['username'].'</a> <img class="latest_reply" src="img/x.gif" alt="Show last post" title="Show last post" />';
-			}	
+			}
 			echo '</td>
 		</tr>';
-		
+
 	}
 }
 ?>

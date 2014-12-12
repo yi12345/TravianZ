@@ -7,7 +7,7 @@ $aid = $session->alliance;
 }
 $allianceinfo = $database->getAlliance($aid);
 echo "<h1>".$allianceinfo['tag']." - ".$allianceinfo['name']."</h1>";
-include("alli_menu.tpl"); 
+include("alli_menu.tpl");
 ?>
 <table cellpadding="1" cellspacing="1" id="quit" class="small_option"><thead>
 

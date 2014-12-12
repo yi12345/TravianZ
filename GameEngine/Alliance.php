@@ -450,7 +450,7 @@
 			header("Location: banned.php");
 			}
 		}
-		
+
 		private function updateMax($leader) {
 			global $bid18, $database;
 			$q = mysql_query("SELECT * FROM " . TB_PREFIX . "alidata where leader = $leader");

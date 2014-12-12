@@ -1,4 +1,4 @@
-<h1><img class="unit ugeb" src="img/x.gif"> Brewery</h1><img class="building g35" src="img/x.gif" alt="Brewery" title="Brewery" />Tasty mead is brewed in the brewery and later quaffed by the soldiers during the celebrations. 
+<h1><img class="unit ugeb" src="img/x.gif"> Brewery</h1><img class="building g35" src="img/x.gif" alt="Brewery" title="Brewery" />Tasty mead is brewed in the brewery and later quaffed by the soldiers during the celebrations.
 <br /><br />
 These drinks make your soldiers braver and stronger in battles (1% per level). Unfortunately the chiefs’ power of persuasion is decreased and catapults can only do random hits.
 <br /><br />

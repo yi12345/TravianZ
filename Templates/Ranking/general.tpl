@@ -101,7 +101,7 @@
             </tr>
         </tbody>
     </table>
-	
+
     <table cellpadding="1" cellspacing="1" id="world_tribes" class="world">
         <thead>
             <tr>
@@ -125,7 +125,7 @@
 
                 <td><?php echo date("j. M"); ?></td>
             </tr>
-			
+
             <tr>
                 <td><?php echo $database->getAttackByDate(time()-(86400*1)); ?></td>
 
@@ -175,5 +175,5 @@
         </tbody>
     </table>
 	<?php  ?>
-	
+
 <table cellpadding="1" cellspacing="1" id="search_navi"> <?php //fix the problem with footer.php, don't change or remove it ?>

@@ -1,11 +1,11 @@
-<h2>Great Workshop</h2>
+<h2>高級攻城所</h2>
         <table class="new_building" cellpadding="1" cellspacing="1">
                 <tbody><tr>
-                        <td class="desc">In the great workshop siege engines like catapults and rams can be built, albeit at triple the cost of a standard unit. The higher its level the faster units are produced.</td>
+                        <td class="desc">在高級的攻城所可以訓練高級攻城器，儘管訓練一個是標準單位的三倍的成本。等級越高訓練速度越快。</td>
                         <td rowspan="3" class="bimg">
                                 <a href="#" onClick="return Popup(42,4);">
                                 <img class="building g42" src="img/x.gif" alt="Great Workshop" title="Great Workshop" /></a>
-                        </td>
+                    </td>
                 </tr>
                 <tr>
                 <?php

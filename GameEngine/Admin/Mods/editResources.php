@@ -24,13 +24,13 @@ $sessionaccess = $access['access'];
 
 if($sessionaccess != 9) die("<h1><font color=\"red\">Access Denied: You are not Admin!</font></h1>");
 
-mysql_query("UPDATE ".TB_PREFIX."vdata SET 
-	wood  = '".$_POST['wood']."', 
-	clay  = '".$_POST['clay']."', 
-	iron  = '".$_POST['iron']."', 
-	crop  = '".$_POST['crop']."', 
-	maxstore  = '".$_POST['maxstore']."', 
-	maxcrop   = '".$_POST['maxcrop']."' 
+mysql_query("UPDATE ".TB_PREFIX."vdata SET
+	wood  = '".$_POST['wood']."',
+	clay  = '".$_POST['clay']."',
+	iron  = '".$_POST['iron']."',
+	crop  = '".$_POST['crop']."',
+	maxstore  = '".$_POST['maxstore']."',
+	maxcrop   = '".$_POST['maxcrop']."'
 	WHERE wref = '".$id."'") or die(mysql_error());
 
 header("Location: ../../../Admin/admin.php?p=village&did=".$id."");

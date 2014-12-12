@@ -16,14 +16,14 @@ if($database->getVillageField($dataarray[26],'name')!="??") {
 <table cellpadding="1" cellspacing="1" id="report_surround">
                         <thead>
                                 <tr>
-                                        <th>Subject:</th>
+                                        <th>主旨:</th>
                                         <th><?php echo $rep[0]['topic']; ?></th>
                                 </tr>
                                 <tr>
                                         <?php
 $date = $generator->procMtime($rep[0]['time']); ?>
-                                        <td class="sent">Sent:</td>
-                                        <td>on <?php echo $date[0]."<span> at ".$date[1]; ?></span> <span>hour</span></td>
+                                        <td class="sent">寄送時間:</td>
+                                        <td>on <?php echo $date[0]."<span> at ".$date[1]; ?></span> <span>小時</span></td>
                                 </tr>
                         </thead>
                         <tbody>
@@ -31,8 +31,8 @@ $date = $generator->procMtime($rep[0]['time']); ?>
                                 <tr><td colspan="2" class="report_content">
                 <table cellpadding="1" cellspacing="1" class="defender"><thead>
 <tr>
-<td class="role">Defender</td>
-<td colspan="<?php echo $colspan ?>"><?php echo $user_url;?> from the village <?php echo $from_url;?></td>
+<td class="role">防禦者</td>
+<td colspan="<?php echo $colspan ?>"><?php echo $user_url;?> 來自村莊 <?php echo $from_url;?></td>
 </tr>
 </thead>
 <tbody class="units">
@@ -47,7 +47,7 @@ for($i=$start;$i<=($start+9);$i++) {
 if(isset($dataarray[24]) and $dataarray[24]!=0){
         echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=4;$i<=13;$i++) {
         if($dataarray[$i] == 0) {
             echo "<td class=\"none\">0</td>";
@@ -59,7 +59,7 @@ else {
 if(isset($dataarray[24]) and $dataarray[24]!=0){
         echo "<td>$dataarray[24]</td>";
 }
-echo "<tr><th>Casualties</th>";
+echo "<tr><th>傷亡</th>";
 for($i=14;$i<=23;$i++) {
         if($dataarray[$i] == 0) {
             echo "<td class=\"none\">0</td>";

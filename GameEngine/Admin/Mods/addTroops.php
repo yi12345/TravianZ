@@ -15,8 +15,8 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 include_once("../../Database.php");
 
 $id = $_POST['id'];
-$village = $database->getVillage($id);  
-$user = $database->getUserArray($village['owner'],1);  
+$village = $database->getVillage($id);
+$user = $database->getUserArray($village['owner'],1);
 $units="";
 	$tribe = $user['tribe'];
 	if($tribe ==1){ $u = 0;}

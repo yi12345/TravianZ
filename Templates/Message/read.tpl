@@ -7,12 +7,12 @@ $report = $message->reading['report'];
 include("GameEngine/BBCode.php");
 ?>
 <div id="content"  class="messages">
-<h1>Messages</h1>
-<?php 
+<h1>短消息</h1>
+<?php
 include("menu.tpl");
 ?>
 <form method="post" action="nachrichten.php">
- 
+
 <div id="read_head" class="msg_head"></div>
 <div id="read_content" class="msg_content">
 	<img src="img/x.gif" id="label" class="read" alt="" />
@@ -26,7 +26,7 @@ include("menu.tpl");
 	</div>
 	<div class="clear"></div>
 	<div class="line"></div>
-	<div class="message"><?php echo stripslashes(nl2br($bbcoded)); ?></div> 
+	<div class="message"><?php echo stripslashes(nl2br($bbcoded)); ?></div>
 	<input type="hidden" name="id" value="<?php echo $message->reading['id']; ?>" />
     <input type="hidden" name="ft" value="m1" />
 	<input type="hidden" name="t" value="1" />
@@ -36,6 +36,6 @@ include("menu.tpl");
 </div>
 <div id="read_foot" class="msg_foot"></div>
 </form>
- 
- 
+
+
 </div>

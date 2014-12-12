@@ -1,6 +1,6 @@
 <div id="content"  class="messages">
-<h1>Messages</h1>
-<?php 
+<h1>短消息</h1>
+<?php
 include("menu.tpl");
 $user = $database->getUserArray($session->uid, 1);
 ?>
@@ -48,13 +48,13 @@ $user = $database->getUserArray($session->uid, 1);
 		<img src="img/x.gif" id="label" class="send" alt="" />
 	<div id="heading">
 		<input class="text" type="text" name="an" id="receiver" value="<?php if(isset($id)) { echo $database->getUserField($id,'username',0); } ?>" maxlength="20" onkeyup="copyElement('receiver')" tabindex=1; /><br />
-<input class="text" type="text" name="be" id="subject" value="<?php if(isset($message->reply['topic'])) 
-{ 
-   if (preg_match("/re([0-9]+)/i",$message->reply['topic'],$c)) 
-   { 
-       $c = $c[1]+1; 
-       echo $message->reply['topic'] = preg_replace("/re[0-9]+/i","re".($c),$message->reply['topic']); 
-}else{ 
+<input class="text" type="text" name="be" id="subject" value="<?php if(isset($message->reply['topic']))
+{
+   if (preg_match("/re([0-9]+)/i",$message->reply['topic'],$c))
+   {
+       $c = $c[1]+1;
+       echo $message->reply['topic'] = preg_replace("/re[0-9]+/i","re".($c),$message->reply['topic']);
+}else{
 echo "re1:".$message->reply['topic']; }} ?>" maxlength="35" onkeyup="copyElement('subject')" tabindex=2/>
 	</div>
 <a id="adbook" href="#" onclick="toggleFriendsList(); return false;"><img src="img/x.gif" alt="Addressbook" title="Addressbook" /></a>
@@ -82,19 +82,19 @@ echo "re1:".$message->reply['topic']; }} ?>" maxlength="35" onkeyup="copyElement
 					</div>
 				</div>
 				<div class="line bbLine"></div>
-	
+
 				<textarea id="message" name="message" onkeyup="copyElement('body')" tabindex="3" class="textarea write message"><?php if(isset($message->reply['message'])) { echo " \n\n_________________________
 Reply: ".$database->getUserField($id,'username',0)."
 \n".stripslashes($message->reply['message']); } ?></textarea>
 				<div id="message_preview" name="message_preview" class="message"></div>
 			</div>
-			
+
 				<script>
 				var bbEditor = new BBEditor("message");
 			</script>
 					<p class="btn">
 		<input type="hidden" name="ft" value="m2" />
-		<input type="image" value="" name="s1" id="btn_send" class="dynamic_img" src="img/x.gif" alt="send" onclick="this.disabled=true;this.form.submit();" tabindex=4; />			
+		<input type="image" value="" name="s1" id="btn_send" class="dynamic_img" src="img/x.gif" alt="send" onclick="this.disabled=true;this.form.submit();" tabindex=4; />
 	</p>
 	</form>
 	<div id="adressbook" class="hide"><h2>Addressbook</h2>
@@ -118,13 +118,13 @@ if(is_int($i/2)){ echo "<tr>"; } ?><td class="end"><a href="nachrichten.php?delf
 		if ((time()-600) < $friend['timestamp']){ // 0 Min - 10 Min
             echo "    <td class=on><img class=online1 src=img/x.gif title='Now online' alt='Now online' /></td>";
         }elseif ((time()-86400) < $friend['timestamp'] && (time()-600) > $friend['timestamp']){ // 10 Min - 1 Days
-            echo "    <td class=on><img class=online2 src=img/x.gif title='Offline' alt='Offline' /></td>";              
+            echo "    <td class=on><img class=online2 src=img/x.gif title='Offline' alt='Offline' /></td>";
             }elseif ((time()-259200) < $friend['timestamp'] && (time()-86400) > $friend['timestamp']){ // 1-3 Days
-            echo "    <td class=on><img class=online3 src=img/x.gif title='Last 3 days' alt='Last 3 days' /></td>";    
+            echo "    <td class=on><img class=online3 src=img/x.gif title='Last 3 days' alt='Last 3 days' /></td>";
         }elseif ((time()-604800) < $friend['timestamp'] && (time()-259200) > $friend['timestamp']){
-            echo "    <td class=on><img class=online4 src=img/x.gif title='Last 7 days' alt='Last 7 days' /></td>";    
+            echo "    <td class=on><img class=online4 src=img/x.gif title='Last 7 days' alt='Last 7 days' /></td>";
         }else{
-             echo "    <td class=on><img class=online5 src=img/x.gif title=inactive alt=inactive /></td>";   
+             echo "    <td class=on><img class=online5 src=img/x.gif title=inactive alt=inactive /></td>";
         }
 if(!is_int($i/2)){ echo "</tr>"; }else{ echo "<td></td>";}
   }else{
@@ -148,7 +148,7 @@ if(!is_int($i/2)){ echo "</tr>"; }else{ echo "<td></td>";}
 if(is_int($i/2)){ echo "<tr>"; } ?><td class="end"><a href="nachrichten.php?delfriend=<?php echo $i; ?>"><img class="del" src="img/x.gif" alt="delete" title="delete"></td>
   <td class="pla">
   <?php echo "<a href=\"nachrichten.php?t=1&id=".$friendwait."\">".$database->getUserField($friendwait,"username",0)."</a>"; ?>
-  </td>		
+  </td>
             <td class="on"><a href="nachrichten.php?confirm=<?php echo $i; ?>"><img src="../../<?php echo GP_LOCATE; ?>img/a/online6.gif" alt="confirm" title="confirm"></a></td>
 <?php
 if(!is_int($i/2)){ echo "</tr>"; }else{ echo "<td></td>";}
@@ -156,7 +156,7 @@ if(!is_int($i/2)){ echo "</tr>"; }else{ echo "<td></td>";}
   }} ?>
   </tr></table>
   <p class="btn">
-  <input type="image" value="" name="s1" id="btn_save" class="dynamic_img" src="img/x.gif" alt="save" />  
+  <input type="image" value="" name="s1" id="btn_save" class="dynamic_img" src="img/x.gif" alt="save" />
   </p>
   </form><a href="#" onclick="closeFriendsList(); return false;"><img src="img/x.gif" id="close" alt="close adressbook" title="close adressbook"/></a></div></div>
 <div id="write_foot" class="msg_foot">

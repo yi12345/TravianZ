@@ -1,14 +1,14 @@
 <div id="content"  class="messages">
-<h1>Messages</h1>
-<?php 
+<h1>短消息</h1>
+<?php
 include("menu.tpl");
 ?>
 <form method="post" action="nachrichten.php" name="msg" ><table cellpadding="1" cellspacing="1" id="overview">
 <thead>
 <tr>
-<th colspan="2">Subject</th>
-<th>Sender</th>
-<th class="sent">Sent</th>
+<th colspan="2">主旨</th>
+<th>發送者</th>
+<th class="sent">發送時間</th>
 </tr></thead><tfoot><tr><th>
 <?php
 		$MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysql_error());
@@ -23,7 +23,7 @@ include("menu.tpl");
 		<input name="delmsg" value="delete" type="image" id="btn_delete" class="dynamic_img" src="img/x.gif" alt="delete" />
         <?php if($session->plus) { echo "<input name=\"archive\" value=\"Archive\" type=\"image\" id=\"btn_archiv\" class=\"dynamic_img\" src=\"img/x.gif\" alt=\"Archive\" />"; } ?>
         <input name="ft" value="m3" type="hidden" />
-	</th><th class="navi"><?php 
+	</th><th class="navi"><?php
     if(!isset($_GET['s']) && count($message->inbox1) < 10) {
     echo "&laquo;&raquo;";
     }
@@ -42,7 +42,7 @@ include("menu.tpl");
         }
     }
     ?></th></tr></tfoot><tbody>
-    <?php 
+    <?php
     if(isset($_GET['s'])) {
     $s = $_GET['s'];
     }
@@ -61,7 +61,7 @@ include("menu.tpl");
     echo "<td class=\"sel\"><input class=\"check\" type=\"checkbox\" name=\"n".$name."\" value=\"".$message->inbox1[$i-1]['id']."\" /></td>
 		<td class=\"top\"><a href=\"nachrichten.php?id=".$message->inbox1[$i-1]['id']."\">".$message->inbox1[$i-1]['topic']."</a> ";
     if($message->inbox1[$i-1]['viewed'] == 0) {
-    echo "(new)";
+    echo "(新)";
     }
     $date = $generator->procMtime($message->inbox1[$i-1]['time']);
     if($message->inbox1[$i-1]['owner'] <= 1) {
@@ -76,7 +76,7 @@ include("menu.tpl");
         $name++;
     }
     if(count($message->inbox1) == 0) {
-    echo "<td colspan=\"4\" class=\"none\">There are no messages available.</td></tr>";
+    echo "<td colspan=\"4\" class=\"none\">無訊息</td></tr>";
     }
     ?>
         </tbody></table>

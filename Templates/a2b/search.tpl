@@ -6,11 +6,11 @@
 
             <label>
                 <input class="radio" name="c" <?php if (!$checked) {?> checked=checked <?php }?>value="2" type="radio" <?php echo $disabledr; ?>>
-                Reinforcement
+                增援
             </label>
         </td>
         <td class="vil">
-            <span>Village:</span>
+            <span>村莊:</span>
              <input class="text" name="dname" value="<?php echo $form->getValue('dname');?>" maxlength="20" type="text" >
         </td>
 
@@ -19,18 +19,18 @@
         <td class="sel">
             <label>
                 <input class="radio" name="c" value="3" type="radio" <?php echo $disabled; ?>>
-                Normal attack
+                攻擊
             </label>
         </td>
         <td class="or">
 
-            or        </td>
+            或是輸入座標        </td>
     </tr>
     <tr>
         <td class="sel">
             <label>
                 <input class="radio" name="c" <?php echo $checked; ?> value="4" type="radio">
-                Raid
+                搶奪
             </label>
         </td>
 

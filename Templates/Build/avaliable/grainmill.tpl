@@ -1,7 +1,7 @@
-<h2>Grain Mill</h2>
+<h2>麵粉廠</h2>
 	<table class="new_building" cellpadding="1" cellspacing="1">
 		<tbody><tr>
-			<td class="desc">Here your grain is milled in order to produce flour. Based on its level your grain mill can increase your crop production by up to 25 percent.</td>
+			<td class="desc">在這裡，能將穀物碾碎以產生麵粉。根據其級別的麵粉最高可增加25％作物產量。</td>
 			<td rowspan="3" class="bimg">
 				<a href="#" onClick="return Popup(8,4);">
 				<img class="building g8" src="img/x.gif" alt="Grain Mill" title="Grain Mill" /></a>

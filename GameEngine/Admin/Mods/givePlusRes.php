@@ -42,10 +42,10 @@ for($i = 0; $i < $loops + 1; $i++)
 		if($row['b3'] < time()) { $b3before = time(); $addb3 = $b1before + $iron; } elseif($row['b3'] > time()) { $b3before = $row['b3']; $addb3 = $b1before + $iron; }
 		if($row['b4'] < time()) { $b4before = time(); $addb4 = $b1before + $crop; } elseif($row['b4'] > time()) { $b4before = $row['b4']; $addb4 = $b1before + $crop; }
 		mysql_query("UPDATE ".TB_PREFIX."users SET
-			b1 = '".$addb1."', 
-			b2 = '".$addb2."', 
-			b3 = '".$addb3."', 
-			b4 = '".$addb4."' 
+			b1 = '".$addb1."',
+			b2 = '".$addb2."',
+			b3 = '".$addb3."',
+			b4 = '".$addb4."'
 			WHERE id = '".$row['id']."'");
 	}
 }

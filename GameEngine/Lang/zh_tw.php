@@ -20,7 +20,7 @@ define("TRIBE2","條頓人");
 define("TRIBE3","高盧人");
 define("TRIBE4","自然界");
 define("TRIBE5","達賴族");
-define("TRIBE6","Monsters");
+define("TRIBE6","野獸");
 
 define("HOME","首頁");
 define("INSTRUCT","說明");
@@ -32,40 +32,40 @@ define("SUPPORT","支援");
 define("UPDATE_T_10","更新前10名");
 define("SYSTEM_MESSAGE","系統公告");
 define("TRAVIAN_PLUS","Travian <b><span class=\"plus_g\">P</span><span class=\"plus_o\">l</span><span class=\"plus_g\">u</span><span class=\"plus_o\">s</span></span></span></b>");
-define("CONTACT","聯絡我們!");
+define("CONTACT","聯絡我們！");
 define("GAME_RULES","遊戲規定");
 
 //MENU
 define("REG","註冊");
 define("FORUM","論壇");
 define("CHAT","聊天室");
-define("IMPRINT","Imprint");
+define("IMPRINT","版本說明");
 define("MORE_LINKS","更多連結");
-define("TOUR","Game Tour");
+define("TOUR","遊戲瀏覽");
 
 
 //ERRORS
-define("USRNM_EMPTY","(Username empty)");
-define("USRNM_TAKEN","(Name is already in use.)");
-define("USRNM_SHORT","(min. ".USRNM_MIN_LENGTH." figures)");
-define("USRNM_CHAR","(Invalid Characters)");
-define("PW_EMPTY","(Password empty)");
-define("PW_SHORT","(min. ".PW_MIN_LENGTH." figures)");
-define("PW_INSECURE","(Password insecure. Please choose a more secure one.)");
-define("EMAIL_EMPTY","(Email Empty)");
-define("EMAIL_INVALID","(Invalid email address)");
-define("EMAIL_TAKEN","(Email is already in use)");
-define("TRIBE_EMPTY","<li>Please choose a tribe.</li>");
-define("AGREE_ERROR","<li>You have to agree to the game rules and the general terms & conditions in order to register.</li>");
-define("LOGIN_USR_EMPTY","Enter name.");
-define("LOGIN_PASS_EMPTY","Enter password.");
-define("EMAIL_ERROR","Email does not match existing");
-define("PASS_MISMATCH","Passwords do not match");
-define("ALLI_OWNER","Please appoint an alliance owner before deleting");
-define("SIT_ERROR","Sitter already set");
-define("USR_NT_FOUND","Name does not exist.");
-define("LOGIN_PW_ERROR","The password is wrong.");
-define("WEL_TOPIC","Useful tips & information ");
+define("USRNM_EMPTY","(玩家名稱空白)");
+define("USRNM_TAKEN","(玩家名稱已存在)");
+define("USRNM_SHORT","(玩家名稱至少 ".USRNM_MIN_LENGTH." 字)");
+define("USRNM_CHAR","(無效文字)");
+define("PW_EMPTY","(密碼空白)");
+define("PW_SHORT","(密碼至少 ".PW_MIN_LENGTH." 字)");
+define("PW_INSECURE","(密碼不安全. 請使用一個更有保障的)");
+define("EMAIL_EMPTY","(電子郵件地址空白)");
+define("EMAIL_INVALID","(電子郵件地址無效)");
+define("EMAIL_TAKEN","(電子郵件已存在)");
+define("TRIBE_EMPTY","<li>請選擇一個種族</li>");
+define("AGREE_ERROR","<li>你必須同意以上遊戲規則以及一般條款條件，才能進行註冊，本伺服器保留任何權力。</li>");
+define("LOGIN_USR_EMPTY","輸入玩家名稱");
+define("LOGIN_PASS_EMPTY","輸入密碼");
+define("EMAIL_ERROR","電子郵件不正確");
+define("PASS_MISMATCH","密碼不正確");
+define("ALLI_OWNER","在刪除前，請先指派一名委任盟主");
+define("SIT_ERROR","照看者已設立");
+define("USR_NT_FOUND","玩家名稱不存在");
+define("LOGIN_PW_ERROR","密碼不正確");
+define("WEL_TOPIC","錦囊妙計");
 define("ATAG_EMPTY","Tag empty");
 define("ANAME_EMPTY","Name empty");
 define("ATAG_EXIST","Tag taken");
@@ -102,11 +102,11 @@ define("CLAY","磚塊");
 define("IRON","鋼鐵");
 define("CROP","穀物");
 define("LEVEL","等級");
-define("CROP_COM",CROP." consumption");
+define("CROP_COM",CROP." 消耗");
 define("PER_HR","每小時");
 define("PROD_HEADER","生產");
 define("MULTI_V_HEADER","村莊");
-define("ANNOUNCEMENT","Announcement");
+define("ANNOUNCEMENT","公告");
 define("GO2MY_VILLAGE","回到我的村莊");
 define("VILLAGE_CENTER","地圖中心");
 define("FINISH_GOLD","花費2金,結束這個村莊當前建築任務或者兵種研發, 升級的任務. (除了皇宮和行宮)");
@@ -114,15 +114,15 @@ define("WAITING_LOOP","(等待建築)");
 define("HRS","(hrs.)");
 define("DONE_AT","結束在");
 define("CANCEL","取消");
-define("LOYALTY","Loyalty:");
+define("LOYALTY","忠誠度:");
 define("CALCULATED_IN","產生在");
 define("SEVER_TIME","伺服器時間:");
 
 //QUEST
-define("Q_CONTINUE","Continue with the next task.");
-define("Q_REWARD","Your reward:");
-define("Q_BUTN","complete task");
-define("Q0","Welcome to ");
+define("Q_CONTINUE","繼續下個任務");
+define("Q_REWARD","你的任務獎勵:");
+define("Q_BUTN","完成任務");
+define("Q0","歡迎來到");
 define("Q0_DESC","As I see you have been made chieftain of this little village. I will be your counselor for the first few days and never leave your (right hand) side.");
 define("Q0_OPT1","To the first task.");
 define("Q0_OPT2","Look around on your own.");
@@ -334,65 +334,65 @@ define("T8","2 days Travian ");
 define("U0","英雄");
 
 //ROMAN UNITS
-define("U1","Legionnaire");
-define("U2","Praetorian");
-define("U3","Imperian");
-define("U4","Equites Legati");
-define("U5","Equites Imperatoris");
-define("U6","Equites Caesaris");
-define("U7","Battering Ram");
-define("U8","Fire Catapult");
-define("U9","Senator");
-define("U10","Settler");
+define("U1","古羅馬步兵");
+define("U2","禁衛兵");
+define("U3","帝國兵");
+define("U4","使者騎士");
+define("U5","帝國騎士");
+define("U6","將軍騎士");
+define("U7","衝撞車");
+define("U8","火焰投石機");
+define("U9","參議員");
+define("U10","拓荒者");
 
 //TEUTON UNITS
-define("U11","Clubswinger");
-define("U12","Spearman");
-define("U13","Axeman");
-define("U14","Scout");
-define("U15","Paladin");
-define("U16","Teutonic Knight");
-define("U17","Ram");
-define("U18","Catapult");
-define("U19","Chief");
-define("U20","Settler");
+define("U11","棍棒兵");
+define("U12","矛兵");
+define("U13","斧頭兵");
+define("U14","偵查兵");
+define("U15","聖騎士");
+define("U16","條頓騎士");
+define("U17","衝撞車");
+define("U18","投石機");
+define("U19","首領");
+define("U20","拓荒者");
 
 //GAUL UNITS
-define("U21","Phalanx");
-define("U22","Swordsman");
-define("U23","Pathfinder");
-define("U24","Theutates Thunder");
-define("U25","Druidrider");
-define("U26","Haeduan");
-define("U27","Ram");
-define("U28","Trebuchet");
-define("U29","Chieftain");
-define("U30","Settler");
-define("U99","Trap");
+define("U21","方陣兵");
+define("U22","劍士");
+define("U23","探路者");
+define("U24","雷法師");
+define("U25","德魯依騎兵");
+define("U26","海頓聖騎士");
+define("U27","衝撞車");
+define("U28","投石器");
+define("U29","首領");
+define("U30","拓荒者");
+define("U99","陷阱");
 
 //NATURE UNITS
-define("U31","Rat");
-define("U32","Spider");
-define("U33","Snake");
-define("U34","Bat");
-define("U35","Wild Boar");
-define("U36","Wolf");
-define("U37","Bear");
-define("U38","Crocodile");
-define("U39","Tiger");
-define("U40","Elephant");
+define("U31","老鼠");
+define("U32","蜘蛛");
+define("U33","蛇");
+define("U34","蝙蝠");
+define("U35","野豬");
+define("U36","狼");
+define("U37","熊");
+define("U38","鱷魚");
+define("U39","老虎");
+define("U40","大象");
 
 //NATARS UNITS
-define("U41","Pikeman");
-define("U42","Thorned Warrior");
-define("U43","Guardsman");
-define("U44","Birds Of Prey");
-define("U45","Axerider");
-define("U46","Natarian Knight");
-define("U47","War Elephant");
-define("U48","Ballista");
-define("U49","Natarian Emperor");
-define("U50","Natarian Settler");
+define("U41","長槍兵");
+define("U42","刺錘武士");
+define("U43","近衛兵");
+define("U44","狩獵鳥");
+define("U45","斧騎兵");
+define("U46","達賴騎士");
+define("U47","戰象");
+define("U48","投石車");
+define("U49","達賴國王");
+define("U50","拓荒者");
 
 //MONSTER UNITS
 define("U51","Monster Peon");
@@ -407,17 +407,17 @@ define("U59","Monster Chief");
 define("U60","Monster Settler");
 
 // RESOURCES
-define("R1","Lumber");
-define("R2","Clay");
-define("R3","Iron");
-define("R4","Crop");
+define("R1","木材");
+define("R2","磚塊");
+define("R3","鋼鐵");
+define("R4","穀物");
 
 //INDEX.php
-define("LOGIN","Login");
-define("PLAYERS","Players");
-define("ACTIVE","Active");
-define("ONLINE","Online");
-define("TUTORIAL","Tutorial");
+define("LOGIN","登入");
+define("PLAYERS","總玩家數量");
+define("ACTIVE","活躍玩家");
+define("ONLINE","線上玩家");
+define("TUTORIAL","教學");
 define("PLAYER_STATISTICS","Player statistics");
 define("TOTAL_PLAYERS","".PLAYERS." in total");
 define("ACTIVE_PLAYERS","Active players");
@@ -544,50 +544,50 @@ define("MASS_ABORT","Aborting right now");
 define("MASS_SENT","Mass IGM was sent");
 
 //BUILDINGS
-define("WOODCUTTER","Woodcutter");
-define("CLAYPIT","Clay Pit");
-define("IRONMINE","Iron Mine");
-define("CROPLAND","Cropland");
-define("SAWMILL","Sawmill");
-define("BRICKYARD","Brickyard");
-define("IRONFOUNDRY","Iron Foundry");
-define("GRAINMILL","Grain Mill");
-define("BAKERY","Bakery");
-define("WAREHOUSE","Warehouse");
-define("GRANARY","Granary");
-define("BLACKSMITH","Blacksmith");
-define("ARMOURY","Armoury");
-define("TOURNAMENTSQUARE","Tournament Square");
-define("MAINBUILDING","Main Building");
-define("RALLYPOINT","Rally Point");
+define("WOODCUTTER","伐木場");
+define("CLAYPIT","泥坑");
+define("IRONMINE","鐵礦場");
+define("CROPLAND","農場");
+define("SAWMILL","鋸木廠");
+define("BRICKYARD","磚塊廠");
+define("IRONFOUNDRY","鋼鐵鑄造廠");
+define("GRAINMILL","麵粉廠");
+define("BAKERY","麵包房");
+define("WAREHOUSE","倉庫");
+define("GRANARY","糧倉");
+define("BLACKSMITH","鐵匠鋪");
+define("ARMOURY","軍械庫");
+define("TOURNAMENTSQUARE","競技場");
+define("MAINBUILDING","村莊大樓");
+define("RALLYPOINT","集結點");
 define("OVERVIEW","Resumen");
 define("RALLYPOINT_DESC","Your village's troops meet here. From here you can send them out to conquer, raid or reinforce other villages.");
-define("MARKETPLACE","Marketplace");
-define("EMBASSY","Embassy");
-define("BARRACKS","Barracks");
-define("STABLE","Stable");
-define("WORKSHOP","Workshop");
-define("ACADEMY","Academy");
-define("CRANNY","Cranny");
-define("TOWNHALL","Town Hall");
-define("RESIDENCE","Residence");
-define("PALACE","Palace");
-define("TREASURY","Treasury");
-define("TRADEOFFICE","Trade Office");
-define("GREATBARRACKS","Great Barracks");
-define("GREATSTABLE","Great Stable");
-define("CITYWALL","City Wall");
-define("EARTHWALL","Earth Wall");
-define("PALISADE","Palisade");
-define("STONEMASON","Stonemason's Lodge");
-define("BREWERY","Brewery");
-define("TRAPPER","Trapper");
-define("HEROSMANSION","Hero's Mansion");
-define("GREATWAREHOUSE","Great Warehouse");
-define("GREATGRANARY","Great Granary");
-define("WONDER","Wonder of the World");
-define("HORSEDRINKING","Horse Drinking Trough");
-define("GREATWORKSHOP","Great Workshop");
+define("MARKETPLACE","市場");
+define("EMBASSY","大使館");
+define("BARRACKS","兵營");
+define("STABLE","馬廄");
+define("WORKSHOP","工場");
+define("ACADEMY","研發所");
+define("CRANNY","山洞");
+define("TOWNHALL","城鎮廳");
+define("RESIDENCE","行宮");
+define("PALACE","皇宮");
+define("TREASURY","寶庫");
+define("TRADEOFFICE","交易所");
+define("GREATBARRACKS","大兵營");
+define("GREATSTABLE","大馬廄");
+define("CITYWALL","城牆");
+define("EARTHWALL","土牆");
+define("PALISADE","圍欄");
+define("STONEMASON","石匠鋪");
+define("BREWERY","釀酒廠");
+define("TRAPPER","陷阱");
+define("HEROSMANSION","英雄館");
+define("GREATWAREHOUSE","大倉庫");
+define("GREATGRANARY","大糧倉");
+define("WONDER","世界奇觀");
+define("HORSEDRINKING","飲馬槽");
+define("GREATWORKSHOP","大工場");
 
 //artefact
 define("ARCHITECTS_DESC","All buildings in the area of effect are stronger. This means that you will need more catapults to damage buildings protected by this artifacts powers.");
@@ -669,7 +669,7 @@ If not, the next attack on that village, winning with a hero and empty treasury 
 
 To build a WW, you must own a plan yourself (you = the WW village owner) from lvl 0 to 49, from 50 to 100 you need an additional plan in your alliance! Two plans in the WW village account would not work!
 
-The construction plans are conquerable immediately when they appear to the server. 
+The construction plans are conquerable immediately when they appear to the server.
 
 There will be a countdown in game, showing the exact time of the release, 5 days prior to the launch. ");
 
@@ -678,16 +678,16 @@ There will be a countdown in game, showing the exact time of the release, 5 days
 define("PLAN","Ancient Construction Plan");
 define("PLANVILLAGE","WW Buildingplan");
 define("PLAN_DESC","With this ancient construction plan you will able to build World Wonder to level 50. to build further, your alliance must hold at least two plans.");
-define("PLAN_INFO","World Wonder Construction Plans 
+define("PLAN_INFO","World Wonder Construction Plans
 
 
-Many moons ago the tribes of Travian were surprised by the unforeseen return of the Natars. This tribe from immemorial times surpassing all in wisdom, might and glory was about to trouble the free ones again. Thus they put all their efforts in preparing a last war against the Natars and vanquishing them forever. Many thought about the so-called 'Wonders of the World', a construction of many legends, as the only solution. It was told that it would render anyone invincible once completed. Ultimately making the constructors the rulers and conquerors of all known Travian. 
+Many moons ago the tribes of Travian were surprised by the unforeseen return of the Natars. This tribe from immemorial times surpassing all in wisdom, might and glory was about to trouble the free ones again. Thus they put all their efforts in preparing a last war against the Natars and vanquishing them forever. Many thought about the so-called 'Wonders of the World', a construction of many legends, as the only solution. It was told that it would render anyone invincible once completed. Ultimately making the constructors the rulers and conquerors of all known Travian.
 
-However, it was also told that one would need construction plans to construct such a building. Due to this fact, the architects devised cunning plans about how to store these safely. After a while, one could see temple-like buildings in many a city and metropolis - the Treasure Chambers (Treasuries). 
+However, it was also told that one would need construction plans to construct such a building. Due to this fact, the architects devised cunning plans about how to store these safely. After a while, one could see temple-like buildings in many a city and metropolis - the Treasure Chambers (Treasuries).
 
-Sadly, no one - not even the wise and well versed - knew where to find these construction plans. The harder people tried to locate them, the more it seemed as if they where only legends. 
+Sadly, no one - not even the wise and well versed - knew where to find these construction plans. The harder people tried to locate them, the more it seemed as if they where only legends.
 
-Today, however, this last secret will be revealed. Deprivations and endeavors of the past will not have been in vain, as today scouts of several tribes have successfully obtained the whereabouts of the construction plans. Well guarded by the Natars, they lie hidden in several oases to be found all over Travian. Only the most valiant heroes will be able to secure such a plan and bring it home safely so that the construction can begin. 
+Today, however, this last secret will be revealed. Deprivations and endeavors of the past will not have been in vain, as today scouts of several tribes have successfully obtained the whereabouts of the construction plans. Well guarded by the Natars, they lie hidden in several oases to be found all over Travian. Only the most valiant heroes will be able to secure such a plan and bring it home safely so that the construction can begin.
 
 In the end, we will see whether the free tribes of Travian can once again outwit the Natars and vanquish them once and for all. Do not be so foolish as to assume that the Natars will leave without a fight, though!
 
@@ -713,19 +713,19 @@ define("WWVILLAGE","WW village");
 |--------------------------------------------------------------------------
 */
 
-	   $lang['index'][0][1] = "Welcome to " . SERVER_NAME . "";
-	   $lang['index'][0][2] = "Manual";
+	   $lang['index'][0][1] = "歡迎來到 " . SERVER_NAME . "";
+	   $lang['index'][0][2] = "資料";
 	   $lang['index'][0][3] = "這是免費的, 現在就加入!";
-	   $lang['index'][0][4] = "What is " . SERVER_NAME . "";
+	   $lang['index'][0][4] = "" . SERVER_NAME . "是什麼";
 	   $lang['index'][0][5] = "" . SERVER_NAME . " 是 <b>網頁遊戲</b> 是架構於瀏覽器的遊戲<BR />TRAVIAN世界內有數千至數萬名玩家，一名玩家就是一個村莊的領主，以外交、權謀、諜戰、結盟、分工等等謀略，成為中世紀霸主<br /><p>這是 <strong>免費的</strong> 而且 <strong>不用下載</strong>.";
 	   $lang['index'][0][6] = "點擊這裡玩 " . SERVER_NAME . "";
 	   $lang['index'][0][7] = "總人數";
 	   $lang['index'][0][8] = "活躍的玩家";
 	   $lang['index'][0][9] = "在線的玩家";
-	   $lang['index'][0][10] = "About the game";
-	   $lang['index'][0][11] = "You will begin as the chief of a tiny village and will embark on an exciting quest.";
-	   $lang['index'][0][12] = "Build up villages, wage wars or establish trade routes with your neighbours.";
-	   $lang['index'][0][13] = "Play with and against thousands of other real players and conquer the the world of Travian.";
+	   $lang['index'][0][10] = "關於遊戲";
+	   $lang['index'][0][11] = "一開始你的村莊只有一個建築物。 ";
+	   $lang['index'][0][12] = "在發展成大帝國之前，你須要開發你的資源以增加生產力。";
+	   $lang['index'][0][13] = "在 OC TRAVIAN 的世界您並不孤單，您將和成千上萬的玩家在虛擬的世界裡一起互動。";
 	   $lang['index'][0][14] = "新聞";
 	   $lang['index'][0][15] = "說明";
 	   $lang['index'][0][16] = "遊戲截圖";

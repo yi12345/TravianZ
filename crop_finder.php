@@ -337,13 +337,13 @@ include("Templates/links.tpl");
 <div id="stime">
 <div id="ltime">
 <div id="ltimeWrap">
-Calculated in <b><?php
+運算耗時  <b><?php
 
    echo round(($generator->pageLoadTimeEnd() - $start) * 1000);
 
 ?></b> ms
 
-<br />Server time: <span id="tp1" class="b"><?php
+<br />伺服器時間: <span id="tp1" class="b"><?php
 
    echo date('H:i:s');
 

@@ -13,11 +13,11 @@ else {
 			<thead>
 				<tr>
 					<th colspan="5">
-						The largest villages								    
+						The largest villages
 					</th>
 				</tr>
 		<tr><td></td><td>Village</td><td>Player</td><td>Inhabitants</td><td>Coordinates</td></tr>
-		</thead><tbody>  
+		</thead><tbody>
          <?php
         if(isset($_GET['rank'])){
 		$multiplier = 1;

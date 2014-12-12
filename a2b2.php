@@ -23,7 +23,7 @@ else {
 }
 $automation->isWinner();
 ?>
-    
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
@@ -66,16 +66,16 @@ $automation->isWinner();
 <?php include("Templates/Plus/pmenu.tpl"); ?>
 <h1>Account transactions</h1>
 <div id="products">
-<?        
+<?
 if ($amount == 199) {
 // Kontoauszug aufrufen f&uuml;r Goldpaket A
 $MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysql_error());
 $golds = mysql_fetch_array($MyGold);
-$goldnow = $golds['6'] + 60; 
+$goldnow = $golds['6'] + 60;
 mysql_query("UPDATE ".TB_PREFIX."users set gold = '".$goldnow."' where `id`='".$session->uid."'") or die(mysql_error());
 $MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysql_error());
 $golds1 = mysql_fetch_array($MyGold);
-?><p>Thank you for your purchase here at Travianist.com</p><p>Below you see the entry record.  Out of it, you can observe your old as well as your new account balance.</p> 
+?><p>Thank you for your purchase here at Travianist.com</p><p>Below you see the entry record.  Out of it, you can observe your old as well as your new account balance.</p>
 <table class="plusFunctions" cellpadding="1" cellspacing="1">
 		<thead>
 			<tr>
@@ -111,7 +111,7 @@ $golds1 = mysql_fetch_array($MyGold);
              </tbody></table>
             <p>Please verify the information.<br />It will let us know if the data is incorrect.</p>
             <p>Please mail your username, package, order time and email used to <a href="mailto:diq@xygen.us">our billing address</a>.</p>
-          
+
 <?
 
 }
@@ -119,11 +119,11 @@ if ($amount == 499) {
 // Kontoauszug aufrufen f&uuml;r Goldpaket B
 $MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysql_error());
 $golds = mysql_fetch_array($MyGold);
-$goldnow = $golds['6'] + 120; 
+$goldnow = $golds['6'] + 120;
 mysql_query("UPDATE ".TB_PREFIX."users set gold = '".$goldnow."' where `id`='".$session->uid."'") or die(mysql_error());
 $MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysql_error());
 $golds1 = mysql_fetch_array($MyGold);
-?><p>Thank you for your purchase here at TravianX.</p><p>Below you see the entry record.  Out of it, you can observe your old as well as your new account balance.</p> 
+?><p>Thank you for your purchase here at TravianX.</p><p>Below you see the entry record.  Out of it, you can observe your old as well as your new account balance.</p>
 <table class="plusFunctions" cellpadding="1" cellspacing="1">
 		<thead>
 			<tr>
@@ -166,7 +166,7 @@ if ($amount == 999) {
 // Kontoauszug aufrufen f&uuml;r Goldpaket C
 $MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysql_error());
 $golds = mysql_fetch_array($MyGold);
-$goldnow = $golds['6'] + 360; 
+$goldnow = $golds['6'] + 360;
 mysql_query("UPDATE ".TB_PREFIX."users set gold = '".$goldnow."' where `id`='".$session->uid."'") or die(mysql_error());
 $MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysql_error());
 $golds1 = mysql_fetch_array($MyGold);
@@ -213,7 +213,7 @@ if ($amount == 1999) {
 // Kontoauszug aufrufen f&uuml;r Goldpaket D
 $MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysql_error());
 $golds = mysql_fetch_array($MyGold);
-$goldnow = $golds['6'] + 1000; 
+$goldnow = $golds['6'] + 1000;
 mysql_query("UPDATE ".TB_PREFIX."users set gold = '".$goldnow."' where `id`='".$session->uid."'") or die(mysql_error());
 $MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysql_error());
 $golds1 = mysql_fetch_array($MyGold);
@@ -260,7 +260,7 @@ if ($amount == 4999) {
 // Kontoauszug aufrufen f&uuml;r Goldpaket E
 $MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysql_error());
 $golds = mysql_fetch_array($MyGold);
-$goldnow = $golds['6'] + 2000; 
+$goldnow = $golds['6'] + 2000;
 mysql_query("UPDATE ".TB_PREFIX."users set gold = '".$goldnow."' where `id`='".$session->uid."'") or die(mysql_error());
 $MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysql_error());
 $golds1 = mysql_fetch_array($MyGold);
@@ -302,13 +302,13 @@ $golds1 = mysql_fetch_array($MyGold);
             <p>Please mail your username, package, order time and email used to <a href="mailto:diq@xygen.us">our billing address</a>.</p>
 <?
 }
-				if ($amount == 0) 
+				if ($amount == 0)
 				{
 				$MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysql_error());
-				$golds = mysql_fetch_array($MyGold);	
+				$golds = mysql_fetch_array($MyGold);
 					 ?>
-                
-<p>Here you can see your current account statement.</p> 
+
+<p>Here you can see your current account statement.</p>
 <table class="plusFunctions" cellpadding="1" cellspacing="1">
 		<thead>
 			<tr>
@@ -329,8 +329,8 @@ $golds1 = mysql_fetch_array($MyGold);
              </tbody></table>
                        <p>Please verify the information.<br />It will let us know if the data is incorrect.</p>
             <p>Please mail your username, package, order time and email used to <a href="mailto:contact@shadowss.ro">our billing address</a>.</p>
-				<? 
-				
+				<?
+
 				}
 
 ?>
@@ -358,11 +358,11 @@ include("Templates/res.tpl");
 <div id="stime">
 <div id="ltime">
 <div id="ltimeWrap">
-Calculated in <b><?php
+運算耗時  <b><?php
 echo round(($generator->pageLoadTimeEnd()-$start)*1000);
 ?></b> ms
 
-<br />Server time: <span id="tp1" class="b"><?php echo date('H:i:s'); ?></span>
+<br />伺服器時間: <span id="tp1" class="b"><?php echo date('H:i:s'); ?></span>
 </div>
 	</div>
 </div>

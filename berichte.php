@@ -69,17 +69,17 @@ if(isset($_GET['t'])) {
 <div id="mid">
 <?php include("Templates/menu.tpl"); ?>
 		<div id="content"  class="reports">
-<h1>Reports</h1>
+<h1>報告</h1>
 <div id="textmenu">
-   <a href="berichte.php" <?php if (!isset($_GET['t'])) { echo "class=\"selected \""; } ?>>All</a>
- | <a href="berichte.php?t=2" <?php if (isset($_GET['t']) && $_GET['t'] == 2) { echo "class=\"selected \""; } ?>>Trade</a>
- | <a href="berichte.php?t=1" <?php if (isset($_GET['t']) && $_GET['t'] == 1) { echo "class=\"selected \""; } ?>>Reinforcement</a>
- | <a href="berichte.php?t=3" <?php if (isset($_GET['t']) && $_GET['t'] == 3) { echo "class=\"selected \""; } ?>>Attacks</a>
- | <a href="berichte.php?t=4" <?php if (isset($_GET['t']) && $_GET['t'] == 4) { echo "class=\"selected \""; } ?>>Miscellaneous</a>
+   <a href="berichte.php" <?php if (!isset($_GET['t'])) { echo "class=\"selected \""; } ?>>全部</a>
+ | <a href="berichte.php?t=2" <?php if (isset($_GET['t']) && $_GET['t'] == 2) { echo "class=\"selected \""; } ?>>交易</a>
+ | <a href="berichte.php?t=1" <?php if (isset($_GET['t']) && $_GET['t'] == 1) { echo "class=\"selected \""; } ?>>增援</a>
+ | <a href="berichte.php?t=3" <?php if (isset($_GET['t']) && $_GET['t'] == 3) { echo "class=\"selected \""; } ?>>攻擊</a>
+ | <a href="berichte.php?t=4" <?php if (isset($_GET['t']) && $_GET['t'] == 4) { echo "class=\"selected \""; } ?>>其他</a>
  <?php if($session->plus) {
  echo "| <a href=\"berichte.php?t=5\"";
  if (isset($_GET['t']) && $_GET['t'] == 5) { echo "class=\"selected \""; }
- echo ">Archive</a>";
+ echo ">存檔</a>";
  }
  ?>
 </div>
@@ -145,11 +145,11 @@ include("Templates/res.tpl");
 <div id="stime">
 <div id="ltime">
 <div id="ltimeWrap">
-Calculated in <b><?php
+產生在 <b><?php
 echo round(($generator->pageLoadTimeEnd()-$start)*1000);
 ?></b> ms
 
-<br />Server time: <span id="tp1" class="b"><?php echo date('H:i:s'); ?></span>
+<br />伺服器時間: <span id="tp1" class="b"><?php echo date('H:i:s'); ?></span>
 </div>
 	</div>
 </div>

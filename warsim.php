@@ -84,7 +84,7 @@ if(isset($_POST['result'])) {
             echo "Damage done by ram: from level <b>".$form->getValue('walllevel')."</b> to level <b>".$totallvl."</b></p>";
         }
     }
-    
+
     if (isset($_POST['result'][3])&&isset($_POST['result'][4])){
         if ($form->getValue('ktyp') == 1) {
             echo "Hint: The catapult does not shoot during a raid.</p>";
@@ -99,7 +99,7 @@ if(isset($_POST['result'])) {
             $totallvl = round(sqrt(pow(($form->getValue('kata')+0.5),2)-($_POST['result'][4]*8)));
             echo "Damage done by catapult: from level <b>".$form->getValue('kata')."</b> to level <b>".$totallvl."</b></p>";
         }
-    } 
+    }
 }
 $target = isset($_POST['target'])? $_POST['target'] : array();
 $tribe = isset($_POST['mytribe'])? $_POST['mytribe'] : $session->tribe;
@@ -170,11 +170,11 @@ include("Templates/res.tpl");
 <div id="stime">
 <div id="ltime">
 <div id="ltimeWrap">
-Calculated in <b><?php
+運算耗時  <b><?php
 echo round(($generator->pageLoadTimeEnd()-$start)*1000);
 ?></b> ms
 
-<br />Server time: <span id="tp1" class="b"><?php echo date('H:i:s'); ?></span>
+<br />伺服器時間: <span id="tp1" class="b"><?php echo date('H:i:s'); ?></span>
 </div>
 	</div>
 </div>

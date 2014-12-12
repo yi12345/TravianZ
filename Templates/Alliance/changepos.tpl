@@ -10,7 +10,7 @@ $playername = $database->getUserField($_POST['a_user'],'username',0);
 
 $allianceinfo = $database->getAlliance($aid);
 echo "<h1>".$allianceinfo['tag']." - ".$allianceinfo['name']."</h1>";
-include("alli_menu.tpl"); 
+include("alli_menu.tpl");
 ?>
 <form method="post" action="allianz.php">
 	<table cellpadding="1" cellspacing="1" id="position" class="small_option">

@@ -37,7 +37,7 @@
 
 <p class="question">Help, my crop production sinks more and more!</p>
 
-<p class="answer">At <i>Production</i> (e.g. 10) your crop production minus your use of crop because of <i>population</i> (e.g. 5) and <i>Troops</i> is shown. Your total crop production is shown in the upper right corner. e.g. <img src="img/un/res/5.gif" width="18" height="12" border="0" alt="use of crop" title="use of crop"> 5/15
+<p class="answer">At <i>Production</i> (e.g. 10) your crop production minus your use of crop because of <i>population</i> (e.g. 5) and <i>軍隊</i> is shown. Your total crop production is shown in the upper right corner. e.g. <img src="img/un/res/5.gif" width="18" height="12" border="0" alt="use of crop" title="use of crop"> 5/15
 
 <br>In the example 8 would be your use of crop, 15 your total crop production, <br>15 - 8 = 7 units of crop per hour. </p>
 
@@ -60,9 +60,9 @@
 <p class="answer">Every village can be catapulted to 0 inhabitants and as long as it is not the last of your account it will disappear after a short time. The only village that cannot be conquered is the capital. Note that destroying the capital is still possible.</p>
 
 </div>
-	<div class="clear"></div> 
-</div> 
- 
+	<div class="clear"></div>
+</div>
+
 <div id="footer">
 
 	<div class="container">
@@ -73,5 +73,5 @@
 
 	</div>
 
-</div> 
-</div> 
+</div>
+</div>

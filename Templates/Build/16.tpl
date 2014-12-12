@@ -31,7 +31,7 @@ if($units_incoming > 0 or $settlers_incoming > 0 or $oasis_incoming > 0){
         <?php include("16_incomming.tpl");
         }
 ?>
-                
+
 <h4><?php echo TROOPS_IN_THE_VILLAGE;?></h4>
 <table class="troop_details" cellpadding="1" cellspacing="1">
         <thead>
@@ -54,14 +54,14 @@ if (LANG == "es") {
                   echo "<a href=\"spieler.php?uid=".$database->getVillageField($enforce['from'],"owner")."\">".TROOPSFROM." ".$database->getUserField($database->getVillageField($enforce['from'],"owner"),"username",0)." </a>";
      }else{       echo "<a href=\"spieler.php?uid=".$database->getVillageField($enforce['from'],"owner")."\">".$database->getUserField($database->getVillageField($enforce['from'],"owner"),"username",0)." ".TROOPSFROM."</a>";
 
-}	 
+}
 				  echo "</td></tr></thead><tbody class=\"units\">";
                   $tribe = $database->getUserField($database->getVillageField($enforce['from'],"owner"),"tribe",0);
                   $start = ($tribe-1)*10+1;
                   $end = ($tribe*10);
                   echo "<tr><th>&nbsp;</th>";
                   for($i=$start;$i<=($end);$i++) {
-                          echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";        
+                          echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
                   }
                                  if($enforce['hero']!=0){
                                         echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";
@@ -80,7 +80,7 @@ echo $enforce['u'.$i]."</td>";
                                         echo "<td>".$enforce['hero']."</td>";
                                  }
 echo "</tr></tbody>
-<tbody class=\"infos\"><tr><th>".UPKEEP."</th><td colspan=\"$colspan\"><div class='sup'>".$technology->getUpkeep($enforce,$tribe)."<img class=\"r4\" src=\"img/x.gif\" title=\"Crop\" alt=\"Crop\" />".PER_HR."</div><div class='sback'><a href='a2b.php?w=".$enforce['id']."'>".SEND_BACK."</a></div></td></tr>";
+<tbody class=\"infos\"><tr><th>".UPKEEP."</th><td colspan=\"$colspan\"><div class='sup'>".$technology->getUpkeep($enforce,$tribe)."<img class=\"r4\" src=\"img/x.gif\" title=\"穀物\" alt=\"穀物\" />".PER_HR."</div><div class='sback'><a href='a2b.php?w=".$enforce['id']."'>".SEND_BACK."</a></div></td></tr>";
 echo "</tbody></table>";
                         }else{
                   echo "<table class=\"troop_details\" cellpadding=\"1\" cellspacing=\"1\"><thead><tr><td class=\"role\">
@@ -93,7 +93,7 @@ echo "</tbody></table>";
                   $end = ($tribe*10);
                   echo "<tr><th>&nbsp;</th>";
                   for($i=$start;$i<=($end);$i++) {
-                          echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";        
+                          echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
                   }
                                  if($enforce['hero']!=0){
                                         echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";
@@ -112,7 +112,7 @@ echo $enforce['u'.$i]."</td>";
                                         echo "<td>".$enforce['hero']."</td>";
                                  }
 echo "</tr></tbody>
-<tbody class=\"infos\"><tr><th>".UPKEEP."</th><td colspan=\"$colspan\"><div class='sup'>".$technology->getUpkeep($enforce,$tribe)."<img class=\"r4\" src=\"img/x.gif\" title=\"Crop\" alt=\"Crop\" />".PER_HR."</div><div class='sback'><span class=none><b>".SEND_BACK."</b></span></div></td></tr>";
+<tbody class=\"infos\"><tr><th>".UPKEEP."</th><td colspan=\"$colspan\"><div class='sup'>".$technology->getUpkeep($enforce,$tribe)."<img class=\"r4\" src=\"img/x.gif\" title=\"穀物\" alt=\"穀物\" />".PER_HR."</div><div class='sback'><span class=none><b>".SEND_BACK."</b></span></div></td></tr>";
 echo "</tbody></table>";
                         }
 }
@@ -170,7 +170,7 @@ if($enforce['hero']!=0){
                         echo "<td>".$enforce['hero']."</td>";
                     }
 echo "</tr></tbody>
-<tbody class=\"infos\"><tr><th>".UPKEEP."</th><td colspan=\"$colspan\"><div class='sup'>".$technology->getUpkeep($enforce,$tribe)."<img class=\"r4\" src=\"img/x.gif\" title=\"Crop\" alt=\"Crop\" />".PER_HR."</div><div class='sback'><a href='a2b.php?r=".$enforce['id']."'>".SEND_BACK."</a></div></td></tr>";
+<tbody class=\"infos\"><tr><th>".UPKEEP."</th><td colspan=\"$colspan\"><div class='sup'>".$technology->getUpkeep($enforce,$tribe)."<img class=\"r4\" src=\"img/x.gif\" title=\"穀物\" alt=\"穀物\" />".PER_HR."</div><div class='sback'><a href='a2b.php?r=".$enforce['id']."'>".SEND_BACK."</a></div></td></tr>";
 echo "</tbody></table>";
 }
 }
@@ -210,7 +210,7 @@ if($enforce['hero']!=0){
                         echo "<td>".$enforce['hero']."</td>";
                     }
 echo "</tr></tbody>
-<tbody class=\"infos\"><tr><th>".UPKEEP."</th><td colspan=\"$colspan\"><div class='sup'>".$technology->getUpkeep($enforce,$tribe)."<img class=\"r4\" src=\"img/x.gif\" title=\"Crop\" alt=\"Crop\" />".PER_HR."</div><div class='sback'><a href='a2b.php?r=".$enforce['id']."'>".SEND_BACK."</a></div></td></tr>";
+<tbody class=\"infos\"><tr><th>".UPKEEP."</th><td colspan=\"$colspan\"><div class='sup'>".$technology->getUpkeep($enforce,$tribe)."<img class=\"r4\" src=\"img/x.gif\" title=\"穀物\" alt=\"穀物\" />".PER_HR."</div><div class='sback'><a href='a2b.php?r=".$enforce['id']."'>".SEND_BACK."</a></div></td></tr>";
 echo "</tbody></table>";
 }
 }
@@ -228,7 +228,7 @@ if(count($database->getPrisoners3($village->wid)) > 0) {
                   $end = ($tribe*10);
                   echo "<tr><th>&nbsp;</th>";
                   for($i=$start;$i<=($end);$i++) {
-                          echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";        
+                          echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
                   }
                                  if($prisoners['t11']!=0){
                                         echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";
@@ -247,7 +247,7 @@ echo $prisoners['t'.$i]."</td>";
                                         echo "<td>".$prisoners['t11']."</td>";
                                  }
 echo "</tr></tbody>
-<tbody class=\"infos\"><tr><th>".UPKEEP."</th><td colspan=\"$colspan\"><div class='sup'>".$technology->getUpkeep($prisoners,$tribe,0,1)."<img class=\"r4\" src=\"img/x.gif\" title=\"Crop\" alt=\"Crop\" />".PER_HR."</div><div class='sback'><a href='a2b.php?delprisoners=".$prisoners['id']."'>".KILL."</a></div></td></tr>";
+<tbody class=\"infos\"><tr><th>".UPKEEP."</th><td colspan=\"$colspan\"><div class='sup'>".$technology->getUpkeep($prisoners,$tribe,0,1)."<img class=\"r4\" src=\"img/x.gif\" title=\"穀物\" alt=\"穀物\" />".PER_HR."</div><div class='sback'><a href='a2b.php?delprisoners=".$prisoners['id']."'>".KILL."</a></div></td></tr>";
 echo "</tbody></table>";
 }
 }
@@ -266,7 +266,7 @@ if(count($database->getPrisoners($village->wid)) > 0) {
                   $end = ($tribe*10);
                   echo "<tr><th>&nbsp;</th>";
                   for($i=$start;$i<=($end);$i++) {
-                          echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";        
+                          echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
                   }
                                  if($prisoners['t11']!=0){
                                         echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";
@@ -285,7 +285,7 @@ echo $prisoners['t'.$i]."</td>";
                                         echo "<td>".$prisoners['t11']."</td>";
                                  }
 echo "</tr></tbody>
-<tbody class=\"infos\"><tr><td colspan=\"11\"><div class='sup'><img class=\"r6\" src=\"img/x.gif\" title=\"Crop\" alt=\"Crop\" /></div><div class='sback'><a href='a2b.php?delprisoners=".$prisoners['id']."'>".SEND_BACK."</a></div></td></tr>";
+<tbody class=\"infos\"><tr><td colspan=\"11\"><div class='sup'><img class=\"r6\" src=\"img/x.gif\" title=\"穀物\" alt=\"穀物\" /></div><div class='sback'><a href='a2b.php?delprisoners=".$prisoners['id']."'>".SEND_BACK."</a></div></td></tr>";
 echo "</tbody></table>";
 }
 }

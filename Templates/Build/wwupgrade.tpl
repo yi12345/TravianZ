@@ -40,14 +40,14 @@ if($bindicate == 1) {
     $mastertime = $uprequire['time'];
     $_SESSION['mas'][$bid]=$bid.",".$id.",".$mastertime;
     $currentLevel=$village->resarray['f'.$id]+1+$loopsame+$doublebuild+$master;
-        
+
     $wwlevel = $currentLevel;
     if($wwlevel > 50){
         $needed_plan = 1;
     }else{
         $needed_plan = 0;
     }
-    if($wwbuildingplan > $needed_plan){    
+    if($wwbuildingplan > $needed_plan){
 ?>
         <p id="contract"><b>Costs</b> for upgrading to level <?php echo $village->resarray['f'.$id]+1+$loopsame+$doublebuild+$master; ?>:<br />
         <img class="r1" src="img/x.gif" alt="Lumber" title="Lumber" /><span class="little_res"><?php echo $uprequire['wood']; ?>
@@ -55,7 +55,7 @@ if($bindicate == 1) {
         </span> | <img class="r3" src="img/x.gif" alt="Iron" title="Iron" /><span class="little_res"><?php echo $uprequire['iron']; ?>
         </span> | <img class="r4" src="img/x.gif" alt="Crop" title="Crop" /><span class="little_res"><?php echo $uprequire['crop']; ?>
         </span> | <img class="r5" src="img/x.gif" alt="Crop consumption" title="Crop consumption" /><?php echo $uprequire['pop']; ?> | <img class="clock" src="img/x.gif" alt="duration" title="duration" />
-        <?php echo $generator->getTimeFormat($uprequire['time']); 
+        <?php echo $generator->getTimeFormat($uprequire['time']);
         if($session->userinfo['gold'] >= 3 && $building->getTypeLevel(17) >= 1) {
             echo "|<a href=\"build.php?gid=17&t=3&r1=".$uprequire['wood']."&r2=".$uprequire['clay']."&r3=".$uprequire['iron']."&r4=".$uprequire['crop']."\" title=\"NPC trade\"><img class=\"npc\" src=\"img/x.gif\" alt=\"NPC trade\" title=\"NPC trade\" /></a>";
         } ?><br />
@@ -169,4 +169,4 @@ if($bindicate == 1) {
         }
     }
 }
-?> 
+?>

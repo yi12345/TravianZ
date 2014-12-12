@@ -47,7 +47,7 @@ include("next.tpl");
 		?>
 	</tr>
 	<tr>
-<?php 
+<?php
         if(!$building->isMax($village->resarray['f'.$id.'t'],$id)) {
 		if($next<=10){
         ?>
@@ -77,7 +77,7 @@ include("next.tpl");
         ?>
 	</tr>
 	</table>
-<?php 
+<?php
 include("upgrade.tpl");
 ?>
 </p></div>

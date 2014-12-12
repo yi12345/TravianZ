@@ -1,4 +1,4 @@
-<?php 
+<?php
 if(isset($_GET['del']) && is_numeric($_GET['del'])){
 	$database->removeLinks($_GET['del'],$session->uid);
 	header("Location: spieler.php?s=2");
@@ -20,34 +20,34 @@ if(isset($_GET['del']) && is_numeric($_GET['del'])){
 // Save new link or just edit a link
 if($_POST) {
     $links = array();
-    
+
     // let's do some complicated code x'D
     foreach($_POST as $key => $value) {
 	if(substr($key, 0, 2) == 'nr') {
 	    $i = substr($key, 2);
 	    $links[$i]['nr'] = mysql_real_escape_string($value);
 	}
-	
+
 	if(substr($key, 0, 2) == 'id') {
 	    $i = substr($key, 2);
 	    $links[$i]['id'] = mysql_real_escape_string($value);
 	}
-	
+
 	if(substr($key, 0, 8) == 'linkname') {
 	    $i = substr($key, 8);
 	    $links[$i]['linkname'] = mysql_real_escape_string($value);
 	}
-	
+
 	if(substr($key, 0, 8) == 'linkziel') {
 	    $i = substr($key, 8);
 	    $links[$i]['linkziel'] = mysql_real_escape_string($value);
 	}
     }
-    
+
     // Save
     foreach($links as $link) {
 	settype($link['nr'], 'int');
-	
+
 	if(trim($link['nr']) != '' AND trim($link['linkname']) != '' AND trim($link['linkziel']) != '' AND trim($link['id']) == '') {
 	    // Add new link
 	    $userid = $session->uid;
@@ -60,7 +60,7 @@ if($_POST) {
 	    // Update link
 	    $query = mysql_query('SELECT * FROM `' . TB_PREFIX . 'links` WHERE `id` = ' . $link['id']);
 	    $data = mysql_fetch_assoc($query);
-	    
+
 	    // May the user update this entry?
 	    if($data['userid'] == $session->uid) {
 		$query2 = mysql_query('UPDATE `' . TB_PREFIX . 'links` SET `name` = \'' . $link['linkname'] . '\', `url` = \'' . $link['linkziel'] . '\', `pos` = ' . $link['nr'] . ' WHERE `id` = ' . $link['id']);
@@ -69,14 +69,14 @@ if($_POST) {
 	    // Delete entry
 	    $query = mysql_query('SELECT * FROM `' . TB_PREFIX . 'links` WHERE `id` = ' . $link['id']);
 	    $data = mysql_fetch_assoc($query);
-	    
+
 	    // May the user delete this entry?
 	    if($data['userid'] == $session->uid) {
 		$query2 = mysql_query('DELETE FROM `' . TB_PREFIX . 'links` WHERE `id` = ' . $link['id']);
 	    }
 	}
     }
-    
+
     print '<meta http-equiv="refresh" content="0">';
 }
 
@@ -106,7 +106,7 @@ while($data = mysql_fetch_assoc($query)) {
 	<td>Link name</td>
 	<td>Link target</td>
       </tr>
-    </thead>      
+    </thead>
     <tbody>
 	  <?php $i = 0; foreach($links as $link): ?>
       <tr>
@@ -115,7 +115,7 @@ while($data = mysql_fetch_assoc($query)) {
 	  </td>
 	 <td class="nr"><input <?php if(!$session->plus){echo"disabled";} ?> class="text" type="text" name="nr<?php print $i; ?>" value="<?php print $link['pos']; ?>" size="1" maxlength="3" /><input type="hidden" name="id<?php print $i; ?>" value="<?php print $link['id']; ?>" /></td>
 	 <td class="nam"><input <?php if(!$session->plus){echo"disabled";} ?> class="text" type="text" name="linkname<?php print $i; ?>" value="<?php print $link['name']; ?>" maxlength="30" /></td>
-	 <td class="txt"><input <?php if(!$session->plus){echo"disabled";} ?> class="text" type="text" name="linkziel<?php print $i; ?>" value="<?php print $link['url']; ?>" maxlength="255" /></td>          
+	 <td class="txt"><input <?php if(!$session->plus){echo"disabled";} ?> class="text" type="text" name="linkziel<?php print $i; ?>" value="<?php print $link['url']; ?>" maxlength="255" /></td>
       </tr>
       <?php ++$i; $last_pos = $link['pos']; endforeach; ?>
       <tr>
@@ -233,7 +233,7 @@ while($data = mysql_fetch_assoc($query)) {
 	   <option value="10">UTC+11</option>
 
 	   <option value="11">UTC+12</option>
-	   
+
 	</optgroup></select>
 
     </td>
@@ -250,5 +250,5 @@ while($data = mysql_fetch_assoc($query)) {
 </tbody>
 </table><p class="btn"><input type="image" value="" name="s1" id="btn_ok" class="dynamic_img" src="img/x.gif" alt="OK" /></p>
 
-</form> 
+</form>
 

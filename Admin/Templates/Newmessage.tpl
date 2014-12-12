@@ -69,7 +69,7 @@ if(isset($id))
 	<?php
 	if(isset($_GET['msg']))
 	{
-		echo "<font color=\"blue\">Message Sent</font>";
+		echo "<font color=\"blue\">訊息已送出</font>";
 	}
 	else
 	{
@@ -78,5 +78,5 @@ if(isset($id))
 }
 else
 {
-	echo "<br /><br />Not found. <a href=\"javascript: history.go(-1)\"> Go Back</a>";
+	echo "<br /><br />找不到. <a href=\"javascript: history.go(-1)\"> 上一頁</a>";
 }?>

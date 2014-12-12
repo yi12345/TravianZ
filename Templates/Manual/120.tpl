@@ -39,9 +39,9 @@
 </tr>
 </tbody></table>
 
-<img id="big_unit" class="big_u20" src="img/x.gif" alt="Settler" title="Settler" /><div id="t_desc">Settlers are brave and daring citizens who move out of the village after a long training session to found a new village in your honour. 
+<img id="big_unit" class="big_u20" src="img/x.gif" alt="Settler" title="Settler" /><div id="t_desc">Settlers are brave and daring citizens who move out of the village after a long training session to found a new village in your honour.
 <br /><br />
-As the journey and the founding of the new village are very difficult, three settlers are bound to stick together. They need a basis of 750 units per resource.</div><div id="prereqs"><b>Prerequisites</b><br /><a href="manual.php?typ=4&amp;gid=26">Palace</a> Level 10 or <a href="manual.php?typ=4&amp;gid=25">Residence</a> Level 10</div><map id="nav" name="nav">
+As the journey and the founding of the new village are very difficult, three settlers are bound to stick together. They need a basis of 750 units per resource.</div><div id="prereqs"><b>Prerequisites</b><br /><a href="manual.php?typ=4&amp;gid=26">Palace</a> Level 10 or <a href="manual.php?typ=4&amp;gid=25">行宮</a> Level 10</div><map id="nav" name="nav">
  <area href="manual.php?typ=1&amp;s=19" title="back" coords="0,0,45,18" shape="rect" alt="" />
  <area href="manual.php?s=1" title="Overview" coords="46,0,70,18" shape="rect" alt="" />
 

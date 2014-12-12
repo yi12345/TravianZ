@@ -273,6 +273,6 @@
 			echo '<a href="admin.php?p=addTroops&did='.$_GET['did'].'">Edit Troops</a>';
 			if(isset($_GET['d'])){
 				echo '<div align="right"><font color="Red"><b>Troops edited</font></b></div>';
-			}	
+			}
 		}
 	?>

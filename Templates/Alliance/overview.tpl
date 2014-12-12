@@ -5,7 +5,7 @@ $aid = $_GET['aid'];
 else {
 $aid = $session->alliance;
 }
-$varmedal = $database->getProfileMedalAlly($aid);  
+$varmedal = $database->getProfileMedalAlly($aid);
 
 $allianceinfo = $database->getAlliance($aid);
 $memberlist = $database->getAllMember($aid);
@@ -22,7 +22,7 @@ $profiel="".$allianceinfo['notice']."".md5('skJkev3')."".$allianceinfo['desc']."
 require("medal.php");
 $profiel=explode("".md5('skJkev3')."", $profiel);
 
-include("alli_menu.tpl"); 
+include("alli_menu.tpl");
 
 ?>
 <table cellpadding="1" cellspacing="1" id="profile">
@@ -68,25 +68,25 @@ include("alli_menu.tpl");
                 </tr>
                 <?php
                 foreach($memberlist as $member) {
-                
+
                 //rank name
                 $rank = $database->getAlliancePermission($member['id'],"rank",0);
-                
+
                 //username
                 $name = $database->getUserField($member['id'],"username",0);
-                
+
                 //if there is no rank defined, user will not be printed
                 if($rank == ''){
                 echo '';
                 }
-                
+
                 //if there is user rank defined, user will be printed
                 else if($rank != ''){
                 echo "<tr>";
                 echo "<th>".stripslashes($rank)."</th>";
                 echo "<td><a href='spieler.php?uid=".$member['id']."'>".$name."</td>";
                 echo "</tr>";
-                } 
+                }
 				}
 			if($allianceinfo['forumlink'] != ''){
                 echo "<tr>";
@@ -114,7 +114,7 @@ include("alli_menu.tpl");
 <th>Player</th>
 <th>Population</th>
 <th>Villages</th>
-<?php    
+<?php
 if($aid == $session->alliance){
      echo "<th>&nbsp;</th>";
 }
@@ -129,31 +129,31 @@ foreach($memberlist as $member) {
 
     $rank = $rank+1;
   $TotalUserPop = $database->getVSumField($member['id'],"pop");
-    $TotalVillages = $database->getProfileVillages($member['id']);    
-    
+    $TotalVillages = $database->getProfileVillages($member['id']);
+
   echo "    <tr>";
   echo "    <td class=ra>".$rank.".</td>";
-    echo "    <td class=pla><a href=spieler.php?uid=".$member['id'].">".$member['username']."</a></td>"; 
-    echo "    <td class=hab>".$TotalUserPop."</td>"; 
+    echo "    <td class=pla><a href=spieler.php?uid=".$member['id'].">".$member['username']."</a></td>";
+    echo "    <td class=hab>".$TotalUserPop."</td>";
     echo "    <td class=vil>".count($TotalVillages)."</td>";
-    
-    if($aid == $session->alliance){    
+
+    if($aid == $session->alliance){
         if ((time()-600) < $member['timestamp']){ // 0 Min - 10 Min
             echo "    <td class=on><img class=online1 src=img/x.gif title='Now online' alt='Now online' /></td>";
         }elseif ((time()-86400) < $member['timestamp'] && (time()-600) > $member['timestamp']){ // 10 Min - 1 Days
-            echo "    <td class=on><img class=online2 src=img/x.gif title='Offline' alt='Offline' /></td>";              
+            echo "    <td class=on><img class=online2 src=img/x.gif title='Offline' alt='Offline' /></td>";
             }elseif ((time()-259200) < $member['timestamp'] && (time()-86400) > $member['timestamp']){ // 1-3 Days
-            echo "    <td class=on><img class=online3 src=img/x.gif title='Last 3 days' alt='Last 3 days' /></td>";    
+            echo "    <td class=on><img class=online3 src=img/x.gif title='Last 3 days' alt='Last 3 days' /></td>";
         }elseif ((time()-604800) < $member['timestamp'] && (time()-259200) > $member['timestamp']){
-            echo "    <td class=on><img class=online4 src=img/x.gif title='Last 7 days' alt='Last 7 days' /></td>";    
+            echo "    <td class=on><img class=online4 src=img/x.gif title='Last 7 days' alt='Last 7 days' /></td>";
         }else{
-             echo "    <td class=on><img class=online5 src=img/x.gif title=inactive alt=inactive /></td>";   
+             echo "    <td class=on><img class=online5 src=img/x.gif title=inactive alt=inactive /></td>";
         }
     }
-    
-    echo "    </tr>";    
+
+    echo "    </tr>";
 }
 
-?> 
+?>
 </tbody>
 </table>

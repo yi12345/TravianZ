@@ -4,7 +4,7 @@
 <h1>Horse Drinking Trough <span class="level">Level <?php echo $village->resarray['f'.$id]; ?></span></h1>
 <p class="build_desc">The horse drinking trough of the Romans decreases the training time of cavalry and the upkeep of these troops as well.</p>
 
-<?php 
+<?php
 include("upgrade.tpl");
 ?>
 </p></div>

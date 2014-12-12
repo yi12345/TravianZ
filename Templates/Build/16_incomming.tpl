@@ -39,10 +39,10 @@ if ($units[$y]['sort_type']==3){
 				  $end = ($tribe*10);
                   echo "<tr><th>&nbsp;</th>";
                   for($i=$start;$i<=($end);$i++) {
-                  	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";	
+                  	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
                   }
 				  if($units[$y]['t11'] != 0 && $reinfowner == $session->uid) {
-                   echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";    
+                   echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";
                   }
                   echo "</tr><tr><th>".TROOPS."</th>";
                   for($i=1;$i<=$colspan;$i++) {
@@ -72,7 +72,7 @@ if ($units[$y]['sort_type']==3){
                     echo "<td class=\"none\">0</td>";
 				  }else{
 					echo "<td>?</td>";
-                  }	
+                  }
 				  }
 				  }
 				  }
@@ -105,7 +105,7 @@ if ($units[$y]['sort_type']==3){
                   $end = ($tribe*10);
                   echo "<tr><th>&nbsp;</th>";
                   for($i=$start;$i<=($end);$i++) {
-                  	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";	
+                  	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
                   }
                    echo "</tr><tr><th>".TROOPS."</th>";
                   for($i=1;$i<=10;$i++) {
@@ -142,14 +142,14 @@ if ($units[$y]['sort_type']==3){
 		$actionType = RETURNFROM;
 	}
 $isoasis = $database->isVillageOases($units[$y]['from']);
-if ($isoasis ==0){ 	
+if ($isoasis ==0){
 $from = $database->getMInfo($units[$y]['from']);
 } else {
 $from = $database->getOMInfo($units[$y]['from']);}
 
 $to = $database->getMInfo($units[$y]['vref']);
 ?>
-<table class="troop_details" cellpadding="1" cellspacing="1">            
+<table class="troop_details" cellpadding="1" cellspacing="1">
 	<thead>
 		<tr>
 			<td class="role"><a href="karte.php?d=<?php echo $village->wid."&c=".$generator->getMapCheck($village->wid); ?>"><?php echo $village->vname; ?></a></td>
@@ -163,10 +163,10 @@ $to = $database->getMInfo($units[$y]['vref']);
                   $end = ($tribe*10);
                   echo "<tr><th>&nbsp;</th>";
                   for($i=$start;$i<=($end);$i++) {
-                  	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";	
+                  	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
                   }
                   if($units[$y]['t11'] != 0) {
-                   echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";    
+                   echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";
                   }
 			?>
 			</tr>
@@ -191,12 +191,12 @@ $to = $database->getMInfo($units[$y]['vref']);
 			<td colspan="<?php if($units[$y]['t11'] == 0) {echo"10";}else{echo"11";}?>">
 			<?php
 			$totalcarry = $units[$y]['t1']*${'u'.$start.''}['cap']+$units[$y]['t2']*${'u'.($start+1).''}['cap']+$units[$y]['t3']*${'u'.($start+2).''}['cap']+$units[$y]['t4']*${'u'.($start+3).''}['cap']+$units[$y]['t5']*${'u'.($start+4).''}['cap']+$units[$y]['t6']*${'u'.($start+5).''}['cap']+$units[$y]['t7']*${'u'.($start+6).''}['cap']+$units[$y]['t8']*${'u'.($start+7).''}['cap']+$units[$y]['t9']*${'u'.($start+8).''}['cap']+$units[$y]['t10']*${'u'.($start+9).''}['cap'];
-			echo "<div class=\"in small\"><img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" />".$res['wood']."<img class=\"r2\" src=\"img/x.gif\" alt=\"Clay\" title=\"Clay\" />".$res['clay']."<img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" />".$res['iron']."<img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" />".$res['crop']."</div>";
+			echo "<div class=\"in small\"><img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" />".$res['wood']."<img class=\"r2\" src=\"img/x.gif\" alt=\"磚塊\" title=\"磚塊\" />".$res['clay']."<img class=\"r3\" src=\"img/x.gif\" alt=\"鋼鐵\" title=\"鋼鐵\" />".$res['iron']."<img class=\"r4\" src=\"img/x.gif\" alt=\"穀物\" title=\"穀物\" />".$res['crop']."</div>";
 			echo "<div class=\"in small\"><img class=\"car\" src=\"gpack/travian_default/img/a/car.gif\" alt=\"carry\" title=\"carry\"/>".$totalres."/".$totalcarry."</div>";
             ?>
            </tr>
 		   <?php } ?>
-		   				    
+
 		<tbody class="infos">
 			<tr>
 				<th><?php echo ARRIVAL;?></th>
@@ -247,10 +247,10 @@ $timer = $y+1;
 				  $end = ($tribe*10);
                   echo "<tr><th>&nbsp;</th>";
                   for($i=$start;$i<=($end);$i++) {
-                  	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";	
+                  	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
                   }
 				  if($oasis[$y]['t11'] != 0 && $reinfowner == $session->uid) {
-                   echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";    
+                   echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";
                   }
                   echo "</tr><tr><th>".TROOPS."</th>";
                   for($i=1;$i<=$colspan;$i++) {
@@ -280,7 +280,7 @@ $timer = $y+1;
                     echo "<td class=\"none\">0</td>";
 				  }else{
 					echo "<td>?</td>";
-                  }	
+                  }
 				  }
 				  }
 				  }
@@ -311,7 +311,7 @@ for($x=0;$x < $total_for3;$x++){
 $timer = $x+1;
 $to = $database->getMInfo($settlers[$x]['to']);
 ?>
-<table class="troop_details" cellpadding="1" cellspacing="1">            
+<table class="troop_details" cellpadding="1" cellspacing="1">
 	<thead>
 		<tr>
 			<td class="role"><a href="karte.php?d=<?php echo $village->wid."&c=".$generator->getMapCheck($village->wid); ?>"><?php echo $village->vname; ?></a></td>
@@ -325,7 +325,7 @@ $to = $database->getMInfo($settlers[$x]['to']);
                   $end = ($tribe*10);
                   echo "<tr><th>&nbsp;</th>";
                   for($i=$start;$i<=($end);$i++) {
-                  	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";	
+                  	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
                   }
 			?>
 			</tr>
@@ -346,7 +346,7 @@ $to = $database->getMInfo($settlers[$x]['to']);
 			}
             ?>
            </tr>
-		   				    
+
 		<tbody class="infos">
 			<tr>
 				<th><?php echo ARRIVAL;?></th>

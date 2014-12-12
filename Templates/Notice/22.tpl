@@ -26,7 +26,7 @@ $message1 = "".$database->getUserField($dataarray[0],"username",0)." wishes you 
 					<th>Subject:</th>
 					<th><?php echo $message->readingNotice['topic']; ?></th>
 				</tr>
- 
+
 				<tr>
 					<?php
                 $date = $generator->procMtime($message->readingNotice['time']); ?>
@@ -55,7 +55,7 @@ for($i=$start;$i<=($start+9);$i++) {
 if(isset($dataarray[14]) and $dataarray[14]!=0){
 	echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=4;$i<=13;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">0</td>";

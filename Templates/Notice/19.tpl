@@ -38,7 +38,7 @@ if($database->isVillageOases($dataarray[29])){
 					<th>Subject:</th>
 					<th><?php echo $message->readingNotice['topic']; ?></th>
 				</tr>
- 
+
 				<tr>
 					<?php
                 $date = $generator->procMtime($message->readingNotice['time']); ?>
@@ -64,7 +64,7 @@ $start = ($tribe-1)*10+1;
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=3;$i<=12;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">0</td>";
@@ -94,35 +94,35 @@ for($i=153;$i<=162;$i++) {
 }
 }
 if(isset($dataarray[171]) && $dataarray[171] !=''){ //troop not return
-?>	
+?>
 	<tbody class="goods"><tr><th>Information</th><td colspan="<?php echo $colspan; ?>">
 	<?php echo $dataarray[171]; ?>
     </td></tr></tbody>
 <?php }?>
 </table>
-	
+
 <?php
 $targettribe=$dataarray['31'];
 
 
 if ($dataarray[34]=='1'){
-$start=1; ?>	
+$start=1; ?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
 	<td class="role">Defender</th>
-	<td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='1'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>		
+	<td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='1'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>
 	</tr></thead>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 	<?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=35;$i<=44;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">?</td>";
@@ -143,25 +143,25 @@ for($i=45;$i<=54;$i++) {
 ?>
 </tr></tbody></table>
 
-<?php } 
-if ($dataarray[55]=='1'){ 
-$start=11;?>	
+<?php }
+if ($dataarray[55]=='1'){
+$start=11;?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
 	<td class="role">Defender</th>
-	<td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='2'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>		
+	<td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='2'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>
 	</tr></thead>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 <?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=56;$i<=65;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">?</td>";
@@ -183,23 +183,23 @@ for($i=66;$i<=75;$i++) {
 </tr></tbody></table>
 <?php } ?>
 <?php  if ($dataarray[76]=='1'){
-$start=21; ?>	
+$start=21; ?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
 	<td class="role">Defender</th>
-	<td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='3'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>		
+	<td colspan="<?php echo $colspan2; ?>"><?php if($targettribe=='3'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>
 	</tr></thead>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 	<?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=77;$i<=86;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">?</td>";
@@ -221,8 +221,8 @@ for($i=87;$i<=96;$i++) {
 </tr></tbody></table>
 
 <?php } ?>
-<?php  if ($dataarray[97]=='1'){ 
-$start=31; ?>	
+<?php  if ($dataarray[97]=='1'){
+$start=31; ?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
@@ -232,13 +232,13 @@ $start=31; ?>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 	<?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=98;$i<=107;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">?</td>";
@@ -261,23 +261,23 @@ for($i=108;$i<=117;$i++) {
 
 <?php } ?>
 <?php  if ($dataarray[118]=='1'){
-$start=41; ?>	
+$start=41; ?>
 	<table cellpadding="1" cellspacing="1" class="defender">
 	<thead>
 	<tr>
 	<td class="role">Defender</th>
-	<td colspan="10"><?php if($targettribe=='5'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>		
+	<td colspan="10"><?php if($targettribe=='5'){ echo $defuser_url." from the village ".$deffrom_url; } else { echo"Reinforcement"; } ?></td>
 	</tr></thead>
 	<tbody class="units">
 	<tr>
 	<td>&nbsp;</td>
-	
-	
+
+
 	<?php
 for($i=$start;$i<=($start+9);$i++) {
 	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";
 }
-echo "</tr><tr><th>Troops</th>";
+echo "</tr><tr><th>軍隊</th>";
 for($i=119;$i<=128;$i++) {
 	if($dataarray[$i] == 0) {
     	echo "<td class=\"none\">?</td>";

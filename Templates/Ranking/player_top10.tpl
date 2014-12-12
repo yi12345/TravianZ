@@ -11,7 +11,7 @@
     for($i=1;$i<=0;$i++) {
     echo "Row ".$i;
     }
-             
+
     //mysql_select_db($db_name, $con);
 
     $result = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE access<".(INCLUDE_ADMIN?"10":"8")." AND id > 5 AND tribe<=3 AND tribe > 0 ORDER BY ap DESC, id DESC Limit 10");
@@ -106,7 +106,7 @@
       echo "</tr>";
       }
 ?>
-	
+
 		 <tr>
 			<td colspan="3" class="empty"></td>
 		</tr>
@@ -124,7 +124,7 @@
 ?>
          </tbody>
 </table>
-	
+
 <?php
     for($i=1;$i<=0;$i++) {
     echo "Row ".$i;
@@ -228,7 +228,7 @@
       echo "<td class=\"val lc\">".$row['RR']."</td>";
       echo "</tr>";
       }
-	  
+
 //	mysql_close($con);
 ?>
          </tbody>

@@ -59,12 +59,12 @@ if($b4dur > 1){ $crop = (time() + $b4dur); } else { $crop = time(); }
 if($b4dur > 1){ $crop = ($user['b4'] + $b4dur); } else { $crop = $user['b4']; }
 }
 
-mysql_query("UPDATE ".TB_PREFIX."users SET 
+mysql_query("UPDATE ".TB_PREFIX."users SET
 	plus = '".$plus."',
-	b1 = '".$wood."', 
+	b1 = '".$wood."',
 	b2 = '".$clay."',
 	b3 = '".$iron."',
-	b4 = '".$crop."' 
+	b4 = '".$crop."'
 	WHERE id = $id") or die(mysql_error());
 
 header("Location: ../../../Admin/admin.php?p=player&uid=".$id."");

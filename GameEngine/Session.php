@@ -146,7 +146,7 @@ class Session {
                     			return false;
                 		}
             		}
-			
+
 
 			/***************************
 			Function to check Real Hero
@@ -169,7 +169,7 @@ class Session {
 					$result3 = mysql_query($q3, $database->connection);
 					$he3=mysql_fetch_array($result3);
 					$hero+=$he3[0];
-					$hero+=$database->HeroNotInVil($myvill); // check if hero is not in village (come back from attack , raid , etc.)  
+					$hero+=$database->HeroNotInVil($myvill); // check if hero is not in village (come back from attack , raid , etc.)
      				}
      				$yes=true; //fix by ronix
             if($database->getHeroDead($this->uid) and !$hero){ // check if hero is already dead
@@ -178,9 +178,9 @@ class Session {
                 $yes=false;
             }elseif($database->getHeroInTraining($this->uid) and !$hero){ // check if hero is in training
                 $yes=false;
-            } 
+            }
             if($yes and !$hero) $database->KillMyHero($this->uid);
-				} 
+				}
 
 			private function PopulateVar() {
 				global $database;

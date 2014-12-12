@@ -5,7 +5,7 @@ if($session->access != BANNED){
     $database->delDemolition($village->wid);
     header("Location: build.php?gid=15&ty=$ty&cancel=0&demolish=0");
 }else{
-header("Location: banned.php"); 
+header("Location: banned.php");
 }
 }
 
@@ -18,7 +18,7 @@ if($session->access != BANNED){
         header("Location: build.php?gid=15&ty=$type&cancel=0&demolish=0");
     }
 }else{
-header("Location: banned.php"); 
+header("Location: banned.php");
 }
 }
 
@@ -60,4 +60,4 @@ if($village->resarray['f'.$id] >= DEMOLISH_LEVEL_REQ) {
         echo "</select><input id=\"btn_demolish\" name=\"demolish\" class=\"dynamic_img\" value=\"Demolish\" type=\"image\" src=\"img/x.gif\" alt=\"Demolish\" title=\"Demolish\" /></form>";
     }
 }
-?> 
+?>

@@ -7,10 +7,10 @@ include('menu.tpl');
 <td>Village</td><td><img class="r1" src="img/x.gif" title="" alt=""></td><td><img class="r2" src="img/x.gif" title="" alt=""></td><td><img class="r3" src="img/x.gif" title="" alt=""></td><td><img class="r4" src="img/x.gif" title="" alt=""></td><td>Merchants</td>
 </tr></thead><tbody>
 <?php
-$varray = $database->getProfileVillages($session->uid);  
-foreach($varray as $vil){  
+$varray = $database->getProfileVillages($session->uid);
+foreach($varray as $vil){
 	$vid = $vil['wref'];
-	$vdata = $database->getVillage($vid);   
+	$vdata = $database->getVillage($vid);
 	$totalmerchants = $building->getTypeLevel(17,$vid);
 	$availmerchants = $totalmerchants - $database->totalMerchantUsed($vid);
 	if($vdata['wood'] > $vdata['maxstore']) { $wood = $vdata['maxstore']; } else { $wood = $vdata['wood']; }
@@ -19,16 +19,16 @@ foreach($varray as $vil){
 	if($vdata['crop'] > $vdata['maxcrop'] ) { $crop = $vdata['maxcrop'];  } else { $crop = $vdata['crop']; }
 	if($vdata['capital'] == 1){$class = 'hl';}else{$class = '';}
 	echo '
-	<tr class="'.$class.'"> 
+	<tr class="'.$class.'">
 		<td class="vil fc"><a href="dorf1.php?newdid='.$vid.'">'.$vdata['name'].'</a></td>
 		<td class="lum">'.number_format(round($wood)).'</td>
 		<td class="clay">'.number_format(round($clay)).'</td>
 		<td class="iron">'.number_format(round($iron)).'</td>
 		<td class="crop">'.number_format(round($crop)).'</td>
-		<td class="tra lc">'.($totalmerchants>0?'<a href="build.php?newdid='.$vid.'&amp;gid=17">':'').$availmerchants.'/'.$totalmerchants.'</a></td>  
+		<td class="tra lc">'.($totalmerchants>0?'<a href="build.php?newdid='.$vid.'&amp;gid=17">':'').$availmerchants.'/'.$totalmerchants.'</a></td>
 	</tr>
 	';
-	$woodSUM += $wood;  
+	$woodSUM += $wood;
 	$claySUM += $clay;
 	$ironSUM += $iron;
 	$cropSUM += $crop;
