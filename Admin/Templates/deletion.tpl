@@ -8,10 +8,9 @@
 ##  Copyright:     TravianX (c) 2010-2011. All rights reserved.                ##
 ##                                                                             ##
 #################################################################################
-
+include_once("../GameEngine/Ranking.php");
 if($_GET['uid'])
 {
-	$user = $database->getUserArray($_GET['uid'],1);
 	$varray = $database->getProfileVillages($_GET['uid']);
 	if($user)
 	{
@@ -50,8 +49,8 @@ if($_GET['uid'])
 						<td>Villages:</td>
 						<td>
 							<?php
-								$result = mysql_query("SELECT SQL_CACHE * FROM ".TB_PREFIX."vdata WHERE owner = ".$user['id']."");
-								$num_rows = mysql_num_rows($result);
+								$result = mysqli_query($GLOBALS["link"], "SELECT SQL_CACHE * FROM ".TB_PREFIX."vdata WHERE owner = ".(int) $user['id']."");
+								$num_rows = mysqli_num_rows($result);
 								echo $num_rows;
 							?>
 						</td>
@@ -74,7 +73,7 @@ if($_GET['uid'])
 					</tr>
 					<tr>
 						<td>Password:</td>
-						<td><input type="text" name="pass"></td>
+						<td><input type="password" name="pass"></td>
 						<td colspan="2"><input type="submit" class="c5" value="Delete player"></td>
 					</tr>
 				</tbody>

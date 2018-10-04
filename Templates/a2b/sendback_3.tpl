@@ -83,7 +83,7 @@ $tocoor = $database->getCoor($enforce['vref']);
        	echo"<span class=\"none\">(".$enforce['u25'].")</span></td>";
 
         ?>
-		<td class="regular"><img class="unit u28" src="img/x.gif" title="Trebuchet" alt="Trebuchet"> <input class="text" <?php if ($enforce['u28']<=0) {echo ' disabled="disabled"';}?> name="t8" value="<?php echo $enforce['u26']; ?>" maxlength="6" type="text">
+		<td class="regular"><img class="unit u28" src="img/x.gif" title="Trebuchet" alt="Trebuchet"> <input class="text" <?php if ($enforce['u28']<=0) {echo ' disabled="disabled"';}?> name="t8" value="<?php echo $enforce['u28']; ?>" maxlength="6" type="text">
 		<?php 
        	echo"<span class=\"none\">(".$enforce['u28'].")</span></td>";
 
@@ -137,9 +137,9 @@ $tocoor = $database->getCoor($enforce['vref']);
                     }
                 }
 			if ($enforce['hero']>0){
-                $qh = "SELECT * FROM ".TB_PREFIX."hero WHERE uid = ".$to['owner'].""; 
-                $resulth = mysql_query($qh); 
-                $hero_f=mysql_fetch_array($resulth); 
+                $qh = "SELECT unit FROM ".TB_PREFIX."hero WHERE uid = ".(int) $to['owner']." AND dead = 0"; 
+                $resulth = mysqli_query($GLOBALS['link'],$qh); 
+                $hero_f=mysqli_fetch_array($resulth); 
                 $hero_unit=$hero_f['unit'];
                 $speeds[] = $GLOBALS['u'.$hero_unit]['speed']; 
 			}

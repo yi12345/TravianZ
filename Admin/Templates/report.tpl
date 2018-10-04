@@ -15,14 +15,14 @@ if ($_GET['bid']){
 $rep = $database->getNotice4($_GET['bid']);
 }else
 $sql = "SELECT * FROM ".TB_PREFIX."ndata ORDER BY time DESC ";
-$result = mysql_query($sql);
-$rep1 = $database->mysql_fetch_all($result);
+$result = mysqli_query($GLOBALS["link"], $sql);
+$rep1 = $database->mysqli_fetch_all($result);
 if($rep1)
 {
 	//$att = $database->getUserArray($rep1['uid'],1);
 	?>
-	<link href="../<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7c" rel="stylesheet" type="text/css">
-	<link href="../<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7c" rel="stylesheet" type="text/css">
+	<link href="../<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7d" rel="stylesheet" type="text/css">
+	<link href="../<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7g" rel="stylesheet" type="text/css">
 	<link href="../<?php echo GP_LOCATE; ?>travian.css?e21d2" rel="stylesheet" type="text/css">
 	<link href="../<?php echo GP_LOCATE; ?>lang/en/lang.css?e21d2" rel="stylesheet" type="text/css">
 	<h1>Under Construction</h1>
@@ -35,8 +35,8 @@ if($rep1)
 }
 if($rep)
 { ?>
-	<link href="../<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7c" rel="stylesheet" type="text/css">
-	<link href="../<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7c" rel="stylesheet" type="text/css">
+	<link href="../<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7d" rel="stylesheet" type="text/css">
+	<link href="../<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7g" rel="stylesheet" type="text/css">
 	<link href="../<?php echo GP_LOCATE; ?>travian.css?e21d2" rel="stylesheet" type="text/css">
 	<link href="../<?php echo GP_LOCATE; ?>lang/en/lang.css?e21d2" rel="stylesheet" type="text/css">
 	

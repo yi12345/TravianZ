@@ -4,10 +4,10 @@
     $lid = $_POST['lid'];
     $tribe = $_POST['tribe'];
     $getFLData = $database->getFLData($lid);
-    $sql = "SELECT * FROM ".TB_PREFIX."raidlist WHERE lid = ".$lid." order by id asc";
+    $sql = "SELECT id, towref, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10 FROM ".TB_PREFIX."raidlist WHERE lid = ".$database->escape((int) $lid)." order by id asc";
 	$array = $database->query_return($sql);
     foreach($array as $row){
-	$sql1 = mysql_fetch_array(mysql_query("SELECT * FROM ".TB_PREFIX."units WHERE vref = ".$getFLData['wref']));
+	$sql1 = mysqli_fetch_array(mysqli_query($GLOBALS['link'],"SELECT * FROM ".TB_PREFIX."units WHERE vref = ".(int) $getFLData['wref']));
         $sid = $row['id'];
         $wref = $row['towref'];
         $t1 = $row['t1'];$t2 = $row['t2'];$t3 = $row['t3'];$t4 = $row['t4'];$t5 = $row['t5'];
@@ -15,7 +15,7 @@
         $t11 = 0;
 		$villageOwner = $database->getVillageField($wref,'owner');
 		$userAccess = $database->getUserField($villageOwner,'access',0);
-		if($userAccess != '0' && $userAccess != '8' && $userAccess != '9'){
+		if($userAccess != '0' && $userAccess != '8' && ($userAccess != '9' || (ADMIN_ALLOW_INCOMING_RAIDS && $userAccess == '9'))){
 		if($tribe == 1){ $uname = "u"; } elseif($tribe == 2){ $uname = "u1"; } elseif($tribe == 3){ $uname = "u2"; }elseif($tribe == 4){ $uname = "u3"; }else {$uname = "u4"; }
 		if($tribe == 1){ $uname1 = "u1"; } elseif($tribe == 2){ $uname1 = "u2"; } elseif($tribe == 3){ $uname1 = "u3"; }elseif($tribe == 4){ $uname1 = "u4"; }else {$uname1 = "u5"; }
 		if($tribe == 1){ $uname2 = ""; } elseif($tribe == 2){ $uname2 = "1"; } elseif($tribe == 3){ $uname2 = "2"; }elseif($tribe == 4){ $uname2 = "3"; }else {$uname2 = "4"; }
@@ -60,7 +60,7 @@
 			$fastertroops = 1;
 			}
 			$time = round($generator->procDistanceTime($from,$to,min($speeds),1)/$fastertroops);
-			$foolartefact = $database->getFoolArtefactInfo(2,$village->wid,$seesion->uid);
+			$foolartefact = $database->getFoolArtefactInfo(2,$village->wid,$session->uid);
 			if(count($foolartefact) > 0){
 			foreach($foolartefact as $arte){
 			if($arte['bad_effect'] == 1){
@@ -98,4 +98,5 @@
 	}
 	}
 header("Location: build.php?id=39&t=99");
+exit;
 ?>

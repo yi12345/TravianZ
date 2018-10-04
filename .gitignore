@@ -10,3 +10,29 @@ Desktop.ini
 
 # Mac crap
 .DS_Store
+
+# Ignore generated config file
+GameEngine/config.php
+
+# Ignore generated prevention and notes
+GameEngine/Prevention/*
+GameEngine/Notes/*
+
+# Install instalation_done marker left by install script
+/.buildpath
+/.project
+/installed_*/
+/var/installed
+
+# Eclipse settings
+.settings
+
+# PHPStorm
+.idea
+
+# additional constant_format.tpl file, copied over from the installation folder
+GameEngine/Admin/Mods/constant_format.tpl
+
+# These 2 files change frequently on the server but not in the repository code.
+Templates/text.tpl
+var/log/access.log

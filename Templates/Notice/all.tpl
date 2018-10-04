@@ -12,8 +12,8 @@ $noticeClass = array("Scout Report","Won as attacker without losses","Won as att
 		</tr>
 	</thead><tfoot>
 		<tr><th><?php
-		$MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysql_error());
-		$golds = mysql_fetch_array($MyGold);
+		$MyGold = mysqli_query($GLOBALS['link'],"SELECT plus FROM ".TB_PREFIX."users WHERE `id`='".(int) $session->uid."'") or die(mysqli_error($database->dblink));
+		$golds = mysqli_fetch_array($MyGold);
 		$date2=strtotime("NOW");
 		if ($golds['plus'] <= $date2) { ?>
 		<?php } else { ?>
@@ -35,7 +35,7 @@ $noticeClass = array("Scout Report","Won as attacker without losses","Won as att
     echo "&laquo;&raquo;";
     }
     else if (!isset($_GET['s']) && count($message->noticearray) > 10) {
-    echo "&laquo;<a href=\"?s=10&o=0\">&raquo;</a>";
+    echo "&laquo;<a href=\"?".(!empty($_GET['t']) ? 't='.$_GET['t'].'&amp;' : '')."s=10&amp;o=0\">&raquo;</a>";
     }
     else if(isset($_GET['s']) && count($message->noticearray) > $_GET['s']) {
     	if(count($message->noticearray) > ($_GET['s']+10) && $_GET['s']-10 < count($message->noticearray) && $_GET['s'] != 0) {

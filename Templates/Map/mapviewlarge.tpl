@@ -121,7 +121,7 @@ $query2 = "SELECT
 			ORDER BY FIND_IN_SET(".TB_PREFIX."wdata.id,'$maparray2')";
 
 //echo $query2;
-$result2 = mysql_query($query2) or die(mysql_error());
+$result2 = mysqli_query($GLOBALS['link'],$query2) or die(mysqli_error($database->dblink));
 
 $targetalliance = array();
 $neutralarray = array();
@@ -307,7 +307,7 @@ $coorarray = array(
 ,"924, 253, 961, 273, 924, 293, 887, 273"
 );
 
-while ($donnees = mysql_fetch_assoc($result2)){
+while ($donnees = mysqli_fetch_assoc($result2)){
 
 $targetalliance=$donnees["aliance_id"];
 $friendarray=$database->getAllianceAlly($donnees["aliance_id"],1);
@@ -401,7 +401,7 @@ if (isset($neutralarray[0])) {
 <div id="map_content">
 	<div id="mbig">
 		<div id="lightframe">
-			<div id="darkframe"><a id="map_popclose" onClick="Close();"><img src="img/x.gif" alt="close Map" title="close Map"></a>
+			<div id="darkframe"><a id="map_popclose" onClick="pb=document.getElementById('drag2');if(pb!=null){pb.innerHTML='';};return false;"><img src="img/x.gif" alt="close Map" title="close Map"></a>
 				<h1>Map(<span id="x"><?php echo $x;?></span>|<span id="y"><?php echo $y;?></span>)</h1>
 				<div id="map">
 					<script type="text/javascript">

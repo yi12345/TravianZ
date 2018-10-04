@@ -1,18 +1,25 @@
 <?php
 //fix by ronix
+use App\Utils\AccessLogger;
+
 if(isset($_GET['aid']) && !is_numeric($_GET['aid'])) die('Hacking Attemp');
 include ("GameEngine/Village.php");
 include ("GameEngine/Chat.php");
-$start = $generator->pageLoadTimeStart();
+AccessLogger::logRequest();
+
+$start_timer = $generator->pageLoadTimeStart();
 $alliance->procAlliance($_GET);
 if(isset($_GET['newdid'])) {
 	$_SESSION['wid'] = $_GET['newdid'];
 	if(isset($_GET['s'])){
 		header("Location: ".$_SERVER['PHP_SELF']."?s=".preg_replace("/[^a-zA-Z0-9_-]/","",$_GET['s']));
+		exit;
 	}else if(isset($_GET['aid'])){
 		header("Location: ".$_SERVER['PHP_SELF']."?aid=".preg_replace("/[^a-zA-Z0-9_-]/","",$_GET['aid']));
+		exit;
 	}else{
 		header("Location: ".$_SERVER['PHP_SELF']);
+		exit;
 	}
 }
 if(isset($_GET['s'])){
@@ -21,33 +28,38 @@ if(isset($_GET['s'])){
 
 if(isset($_GET['fid'])){
 	$fid = preg_replace("/[^0-9]/","",$_GET['fid']);
-	$forum = mysql_query("SELECT * FROM " . TB_PREFIX . "forum_cat WHERE id = ".$fid."");
-	$forum_type = mysql_fetch_array($forum);
+	$forum = mysqli_query($GLOBALS['link'],"SELECT * FROM " . TB_PREFIX . "forum_cat WHERE id = ".(int) $fid."");
+	$forum_type = mysqli_fetch_array($forum);
 	if($forum_type['forum_name'] != "" && $forum_type['forum_area'] == 0){
 		if($forum_type['alliance'] != $session->alliance){
 			header("Location: ".$_SERVER['PHP_SELF']);
+			exit;
 		}
 	}
 }else if(isset($_GET['fid2'])){
 	$fid = preg_replace("/[^0-9]/","",$_GET['fid2']);
-	$forum = mysql_query("SELECT * FROM " . TB_PREFIX . "forum_cat WHERE id = ".$fid."");
+	$forum = mysqli_query($GLOBALS['link'],"SELECT * FROM " . TB_PREFIX . "forum_cat WHERE id = ".(int) $fid."");
 	if (!empty($forum)) {
-		$forum_type = mysql_fetch_array($forum);
+		$forum_type = mysqli_fetch_array($forum);
 		if($forum_type['forum_name'] != "" && $forum_type['forum_area'] != 1){
 			if($forum_type['forum_area'] == 0){
 				if($forum_type['alliance'] != $session->alliance){
 					header("Location: ".$_SERVER['PHP_SELF']);
+					exit;
 				}
 			}else if($forum_type['forum_area'] == 2){
 				if($forum_type['alliance'] != $session->alliance){
 					header("Location: ".$_SERVER['PHP_SELF']);
+					exit;
 				}
 			}else if($forum_type['forum_area'] == 3){
 				if($forum_type['alliance'] != $session->alliance){
 					header("Location: ".$_SERVER['PHP_SELF']);
+					exit;
 				}
 			}else{
 				header("Location: ".$_SERVER['PHP_SELF']);
+				exit;
 			}
 		}
 	}	
@@ -59,28 +71,54 @@ if(isset($_GET['aid']) or isset($_GET['fid']) or isset($_GET['fid2']) or $sessio
 <head>
 	<title><?php
 
-	   echo SERVER_NAME
+	   echo SERVER_NAME . ' &raquo; &raquo; &raquo; Alliance ';
+	   
+	   if (!empty($_GET['s'])) {
+	       switch ($_GET['s']) {
+	           case '2':
+	               echo 'Forum ('.$alliance->allianceArray['tag'] . ' - ' . $alliance->allianceArray['name'].')';
+	               break;
+	               
+	           case '6':
+	               echo 'Chat ('.$alliance->allianceArray['tag'] . ' - ' . $alliance->allianceArray['name'].')';
+	               break;
+	               
+	           case '3':
+	               echo 'Attacks ('.$alliance->allianceArray['tag'] . ' - ' . $alliance->allianceArray['name'].')';
+	               break;
+	               
+	           case '4':
+	               echo 'News ('.$alliance->allianceArray['tag'] . ' - ' . $alliance->allianceArray['name'].')';
+	               break;
+	               
+	           case '5':
+	               echo 'Options ('.$alliance->allianceArray['tag'] . ' - ' . $alliance->allianceArray['name'].')';
+	               break;
+	       }
+	   } else {
+	       echo $alliance->allianceArray['tag'] . ' - ' . $alliance->allianceArray['name'];
+	   }
 
 ?></title>
-	<link REL="shortcut icon" HREF="favicon.ico"/>
+	<link rel="shortcut icon" href="favicon.ico"/>
 	<meta http-equiv="cache-control" content="max-age=0" />
 	<meta http-equiv="pragma" content="no-cache" />
 	<meta http-equiv="expires" content="0" />
 	<meta http-equiv="imagetoolbar" content="no" />
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<script src="mt-full.js?0faaa" type="text/javascript"></script>
-	<script src="unx.js?0faaa" type="text/javascript"></script>
-	<script src="new.js?0faaa" type="text/javascript"></script>
+	<script src="mt-full.js?0faab" type="text/javascript"></script>
+	<script src="unx.js?f4b7g" type="text/javascript"></script>
+	<script src="new.js?0faab" type="text/javascript"></script>
 	<link href="<?php
 
 	   echo GP_LOCATE;
 
-?>lang/en/lang.css?f4b7c" rel="stylesheet" type="text/css" />
+?>lang/en/lang.css?f4b7d" rel="stylesheet" type="text/css" />
 	<link href="<?php
 
 	   echo GP_LOCATE;
 
-?>lang/en/compact.css?f4b7c" rel="stylesheet" type="text/css" />
+?>lang/en/compact.css?f4b7g" rel="stylesheet" type="text/css" />
 	<?php
 
 	   if($session->gpack == null || GP_ENABLE == false) {
@@ -151,7 +189,6 @@ if(isset($_GET['aid']) or isset($_GET['fid']) or isset($_GET['fid2']) or $sessio
 <div id="dynamic_header">
 	</div>
 <?php
-
 	   include ("Templates/header.tpl");
 
 ?>
@@ -195,6 +232,7 @@ $invite_permission = $database->getAlliancePermission($session->uid, "opt4", 0);
 		// Options
 	   }else{
 		header("Location: ".$_SERVER['PHP_SELF']);
+		exit;
 	   }}else if(isset($_GET['delinvite']) && $invite_permission == 1){
 		include ("Templates/Alliance/invite.tpl");
 	    } elseif(isset($_POST['o'])) {
@@ -291,7 +329,7 @@ $invite_permission = $database->getAlliancePermission($session->uid, "opt4", 0);
 
 ?>
 </div>
-</br></br></br></br><div id="side_info">
+<br /><br /><br /><br /><div id="side_info">
 <?php
 include("Templates/multivillage.tpl");
 include("Templates/quest.tpl");
@@ -319,7 +357,7 @@ include("Templates/links.tpl");
 
 ?> <b><?php
 
-	   echo round(($generator->pageLoadTimeEnd() - $start) * 1000);
+	   echo round(($generator->pageLoadTimeEnd() - $start_timer) * 1000);
 
 ?></b> ms
 
@@ -342,5 +380,6 @@ include("Templates/links.tpl");
 <?php
 }else{
 header("Location: spieler.php?uid=".$session->uid);
+exit;
 }
 ?>

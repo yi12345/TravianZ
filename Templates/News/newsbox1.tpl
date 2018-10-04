@@ -1,8 +1,8 @@
 <h5><img src="img/en/t2/newsbox1.gif" alt="newsbox 1"></h5>
 <?php
 
-$online = mysql_num_rows(mysql_query("SELECT * FROM " . TB_PREFIX . "users WHERE " . time() . "-timestamp < (60*10) AND tribe!=0 AND tribe!=4 AND tribe!=5"));
-
+$online = mysqli_query($GLOBALS['link'],"SELECT Count(*) as Total FROM " . TB_PREFIX . "users WHERE timestamp > ".(time() - (60*10))." AND tribe!=0 AND tribe!=4 AND tribe!=5");
+$top_rank = mysqli_fetch_assoc(mysqli_query($GLOBALS['link'],"SELECT username FROM ".TB_PREFIX."users WHERE ".(INCLUDE_ADMIN ? '' : 'access< 8 AND ')."id > 5 AND tribe<=3 AND tribe > 0 ORDER BY oldrank ASC Limit 1"));
 
 ?>
 
@@ -10,7 +10,15 @@ $online = mysql_num_rows(mysql_query("SELECT * FROM " . TB_PREFIX . "users WHERE
 <table width="100%" border="0">
 <tr>
 <td align="left"><b>Online Users</td>
-<td>: <font color="Red"><?php echo $online ?> users</font></b></td>
+<td>: <font color="Red"><?php
+
+	if (!empty($online)) {
+    	echo mysqli_fetch_assoc($online)['Total'];
+    } else {
+    	echo 0;
+    }
+
+?> users</font></b></td>
 </tr>
 <tr>
 <td><b>Server Speed</td>
@@ -43,6 +51,10 @@ $online = mysql_num_rows(mysql_query("SELECT * FROM " . TB_PREFIX . "users WHERE
 <tr>
 <td><b>Server Start</td>
 <td>: <font color="Red"><?php echo START_DATE;?></font></b></td>
+</tr>
+<tr>
+<td><b>Best Player</td>
+<td>:  <font color="Red"><?php echo $top_rank['username'] ?></font></b></td>
 </tr>
 </table>
 </div>

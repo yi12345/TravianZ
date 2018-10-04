@@ -3,15 +3,16 @@
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
-##  Project:       TravianZ                        		       	       		   ##
-##  Version:       01.09.2013 						       					   ##
-##  Filename       Units.php	                                               ##
-##  Developed by:  Advocaite , yi12345 , Shadow  	       					   ##
-##  Fixed by:      Shadow - Doubleing Troops , Catapult fix if have artefact.  ##
+##  Project:       TravianZ                                                    ##
+##  Version:       22.06.2015                    			       ## 
+##  Filename       Units.php                                                   ##
+##  Developed by:  Mr.php , Advocaite , brainiacX , yi12345 , Shadow , ronix   ## 
+##  Fixed by:      Shadow - STARVATION , HERO FIXED COMPL.  		       ##
+##  Fixed by:      InCube - double troops				       ##
 ##  License:       TravianZ Project                                            ##
-##  Copyright:     TravianZ (c) 2010-2013. All rights reserved.                ##
-##  URLs:          http://travian.shadowss.ro 				       			   ##
-##  Source code:   http://github.com/Shadowss/TravianZ				       	   ##
+##  Copyright:     TravianZ (c) 2010-2015. All rights reserved.                ##
+##  URLs:          http://travian.shadowss.ro                		       ##
+##  Source code:   https://github.com/Shadowss/TravianZ		               ## 
 ##                                                                             ##
 #################################################################################
 
@@ -123,12 +124,12 @@ class Units {
                 if($disabled != "" && $post['c'] == 3){
                 $form->addError("error","You can't attack this village/oasis with normal attack");
                 }
-                if(    !$post['t1'] && !$post['t2'] &&  !$post['t3'] && !$post['t4'] && !$post['t5'] &&
-                    !$post['t6'] && !$post['t7'] &&  !$post['t8'] && !$post['t9'] && !$post['t10'] &&  !$post['t11']){
+                if(empty($post['t1']) && empty($post['t2']) &&  empty($post['t3']) && empty($post['t4']) && empty($post['t5']) &&
+                    empty($post['t6']) && empty($post['t7']) &&  empty($post['t8']) && empty($post['t9']) && empty($post['t10']) &&  empty($post['t11'])){
                 $form->addError("error","You need to mark min. one troop");
                 }
 
-                if(!$post['dname'] && !$post['x'] && !$post['y']){
+                if(!empty($post['dname']) && !empty($post['x']) && !empty($post['y'])){
                 $form->addError("error","Insert name or coordinates");
                 }
 
@@ -148,11 +149,6 @@ class Units {
             $id = $generator->getBaseID($coor['x'],$coor['y']);
             if (!$database->getVillageState($id)){
                 $form->addError("error","Coordinates do not exist");
-				//check vaction mode- by advocaite
-			if($database->getvacmodexy($id)){
-			$form->addError("error","User is on vacation mode");
-			}
-				//END Vaction mode check
             }
         }   
         if (!empty($coor)) {    
@@ -178,7 +174,7 @@ class Units {
                 }
             }
         }
-                if ($database->isVillageOases($id) == 0) {
+                if (isset($id) && $database->isVillageOases($id) == 0) {
                 if($database->hasBeginnerProtection($id)==1) {
                     $form->addError("error","Player is under beginners protection. You can't attack him");
                 }
@@ -186,8 +182,13 @@ class Units {
                 //check if banned/admin:
                 $villageOwner = $database->getVillageField($id,'owner');
                 $userAccess = $database->getUserField($villageOwner,'access',0);
-                    if($userAccess == '0' or $userAccess == '8' or $userAccess == '9'){
+                if($userAccess == '0' or $userAccess == '8' or (!ADMIN_ALLOW_INCOMING_RAIDS && $userAccess == '9')){
                                 $form->addError("error","Player is Banned. You can't attack him");
+                                //break;
+                    }
+                //check if vacation mode:
+                    if($database->getvacmodexy($id)){
+                                $form->addError("error","User is on vacation mode");
                                 //break;
                     }
 
@@ -201,6 +202,7 @@ class Units {
                     $_SESSION['errorarray'] = $form->getErrors();
                     $_SESSION['valuearray'] = $_POST;
                     header("Location: a2b.php");
+                    exit;
                 }else{
                 // We must return an array with $ post, which contains all the data more
                 // another variable that will define the flag is raised and is being sent and the type of shipping
@@ -217,8 +219,8 @@ class Units {
                     $_SESSION['errorarray'] = $form->getErrors();
                     $_SESSION['valuearray'] = $_POST;
                     header("Location: a2b.php");
-                }else{
-
+                    exit;
+                } else if (isset($id)) {
                 $villageName = $database->getOasisField($id,"name");
                 $speed= 300;
                 $timetaken = $generator->procDistanceTime($coor,$village->coor,INCREASE_SPEED,1);
@@ -245,11 +247,7 @@ class Units {
         }
         //set oasis to default
         if (count($getenforce1)>0) {
-            $q = "DELETE FROM ".TB_PREFIX."ndata WHERE toWref=".$getenforce1[0]['vref'];
-            $database->query($q);
-            $database->populateOasisUnits($getenforce1[0]['vref'],$getenforce1[0]['high']);
-            $q = "UPDATE ".TB_PREFIX."odata SET conqured=0,wood=800,iron=800,clay=800,maxstore=800,crop=800,maxcrop=800,lastupdated=". time().",lastupdated2=".time().",loyalty=100,owner=2,name='Unoccupied Oasis' WHERE conqured=$wref";
-            $database->query($q);
+            $database->regenerateOasisUnits($getenforce1[0]['vref']);
         }    
     }
 
@@ -285,9 +283,9 @@ class Units {
             }
         }
         if( intval($enforce['hero']) > 0){
-            $q = "SELECT * FROM ".TB_PREFIX."hero WHERE uid = ".$from['owner']."";
-            $result = mysql_query($q);
-            $hero_f=mysql_fetch_array($result);
+            $q = "SELECT unit FROM ".TB_PREFIX."hero WHERE uid = ".(int) $from['owner']." AND dead = 0";
+            $result = mysqli_query($GLOBALS['link'],$q);
+            $hero_f=mysqli_fetch_array($result);
             $hero_unit=$hero_f['unit'];
             $speeds[] = $GLOBALS['u'.$hero_unit]['speed'];
         }else{
@@ -353,18 +351,17 @@ class Units {
                     if ($data['u11'] > $village->unitarray['hero'])
                             {
                                 $form->addError("error","You can't send more units than you have");
-                                break;
                             }
 
                             if($data['u11']<0)
                             {
                                 $form->addError("error","You can't send negative units.");
-                                break;
                             }
                 if($form->returnErrors() > 0) {
                     $_SESSION['errorarray'] = $form->getErrors();
                     $_SESSION['valuearray'] = $_POST;
                     header("Location: a2b.php");
+                    exit;
                 } else {
 
 if($session->access != BANNED){
@@ -379,14 +376,12 @@ if($session->access != BANNED){
                 array(0,0,0,0,0,0,0,0,0,0,0)
             );
 
-    $query1 = mysql_query('SELECT * FROM `' . TB_PREFIX . 'vdata` WHERE `wref` = ' . mysql_escape_string($data['to_vid']));
-    $data1 = mysql_fetch_assoc($query1);
-    $query2 = mysql_query('SELECT * FROM `' . TB_PREFIX . 'users` WHERE `id` = ' . $data1['owner']);
-    $data2 = mysql_fetch_assoc($query2);
-    $query11 = mysql_query('SELECT * FROM `' . TB_PREFIX . 'vdata` WHERE `wref` = ' . mysql_escape_string($village->wid));
-    $data11 = mysql_fetch_assoc($query11);
-    $query21 = mysql_query('SELECT * FROM `' . TB_PREFIX . 'users` WHERE `id` = ' . $data11['owner']);
-    $data21 = mysql_fetch_assoc($query21);
+            $query1 = mysqli_query($GLOBALS['link'],'SELECT owner FROM `' . TB_PREFIX . 'vdata` WHERE `wref` = ' . mysqli_escape_string($GLOBALS['link'],(int) $data['to_vid']));
+    $data1 = mysqli_fetch_assoc($query1);
+    $query11 = mysqli_query($GLOBALS['link'],'SELECT owner FROM `' . TB_PREFIX . 'vdata` WHERE `wref` = ' . mysqli_escape_string($GLOBALS['link'],(int) $village->wid));
+    $data11 = mysqli_fetch_assoc($query11);
+    $query21 = mysqli_query($GLOBALS['link'],'SELECT tribe FROM `' . TB_PREFIX . 'users` WHERE `id` = ' . (int) $data11['owner']);
+    $data21 = mysqli_fetch_assoc($query21);
 
 
 
@@ -446,8 +441,8 @@ if($session->access != BANNED){
 		// If is a WW village you can target on WW , if is not a WW village catapults will target randomly.
 		// Like it says : Exceptions are the WW which can always be targeted and the treasure chamber which can always be targeted, except with the unique artifact.
 		// Fixed by Advocaite and Shadow
-        $q = mysql_query("SELECT vref FROM ".TB_PREFIX."fdata WHERE f99t = '40' AND vref = ".$data['to_vid']."");
-        $isThere = mysql_num_rows($q);
+        $q = mysqli_fetch_array(mysqli_query($GLOBALS['link'],"SELECT Count(*) as Total FROM ".TB_PREFIX."fdata WHERE f99t = '40' AND vref = ".(int) $data['to_vid']), MYSQLI_ASSOC);
+        $isThere = $q['Total'];
         if($isThere > 0)
         {
         $iswwvilla = 1;
@@ -516,7 +511,7 @@ if($session->access != BANNED){
         if($checkexist or $checkoexist){
         $database->addMovement(3,$village->wid,$data['to_vid'],$reference,time(),($time+time()));
         if(($database->hasBeginnerProtection($village->wid)==1)&&($checkexist)){
-        mysql_query("UPDATE ".TB_PREFIX."users SET protect = 0 WHERE id = $session->uid");
+            mysqli_query($GLOBALS['link'],"UPDATE ".TB_PREFIX."users SET protect = 0 WHERE id = ". (int) $session->uid);
 		}
         }
 
@@ -524,11 +519,14 @@ if($session->access != BANNED){
             $_SESSION['errorarray'] = $form->getErrors();
             $_SESSION['valuearray'] = $_POST;
             header("Location: a2b.php");
+            exit;
         }
         header("Location: build.php?id=39");
+        exit;
 
 }else{
 header("Location: banned.php");
+exit;
 }
     }}
 
@@ -565,13 +563,11 @@ if($session->access != BANNED){
                                 if ($post['t11'] > $enforce['hero'])
                                 {
                                     $form->addError("error","You can't send more units than you have");
-                                    break;
                                 }
 
                                 if($post['t11']<0)
                                 {
                                     $form->addError("error","You can't send negative units.");
-                                    break;
                                 }
                         } else {
                         $post['t11']='0';
@@ -581,6 +577,7 @@ if($session->access != BANNED){
                     $_SESSION['errorarray'] = $form->getErrors();
                     $_SESSION['valuearray'] = $_POST;
                     header("Location: a2b.php");
+                    exit;
                 } else {
 
                     //change units
@@ -617,9 +614,9 @@ if($session->access != BANNED){
                 }
                     if (isset($post['t11'])){
                         if( $post['t11'] != '' && $post['t11'] > 0){
-                        $qh = "SELECT * FROM ".TB_PREFIX."hero WHERE uid = ".$from['owner']."";
-                        $resulth = mysql_query($qh);
-                        $hero_f=mysql_fetch_array($resulth);
+                            $qh = "SELECT unit FROM ".TB_PREFIX."hero WHERE uid = ".(int) $from['owner']." AND dead = 0";
+                        $resulth = mysqli_query($GLOBALS['link'],$qh);
+                        $hero_f=mysqli_fetch_array($resulth);
                         $hero_unit=$hero_f['unit'];
                         $speeds[] = $GLOBALS['u'.$hero_unit]['speed'];
                     } else {
@@ -657,6 +654,7 @@ if($session->access != BANNED){
                 $technology->checkReinf($post['ckey']);
 
                         header("Location: build.php?id=39");
+                        exit;
 
                 }
         } else {
@@ -665,10 +663,12 @@ if($session->access != BANNED){
                     $_SESSION['errorarray'] = $form->getErrors();
                     $_SESSION['valuearray'] = $_POST;
                     header("Location: a2b.php");
+                    exit;
                 }
         }
 }else{
 header("Location: banned.php");
+exit;
 }
     }
     
@@ -687,35 +687,128 @@ header("Location: banned.php");
           $database->modifyUnit($village->wid,array($unit),array(3),array(0));
           $database->addMovement(5,$village->wid,$post['s'],0,time(),time()+$post['timestamp']);
           header("Location: build.php?id=39");
+          exit;
 
           if($form->returnErrors() > 0) {
               $_SESSION['errorarray'] = $form->getErrors();
               $_SESSION['valuearray'] = $_POST;
               header("Location: a2b.php");
+              exit;
           }
     } else {
       header("Location: build.php?id=39");
+      exit;
     }
     }else{
       header("Location: dorf1.php");
+      exit;
     }
     }else{
         header("Location: banned.php");
+        exit;
     }
     }
 
-    public function Hero($uid,$all=0) {
+    public function Hero($uid, $all = 0, $include_dead = false) {
         global $database;
-        $heroarray = $database->getHero($uid,$all);
-        $herodata = $GLOBALS["h".$heroarray[0]['unit']];
+        $heroarray = $database->getHero($uid, $all, $include_dead);
+        $herodata = false;
+        $singleHeroArrayID = 0;
 
-        $h_atk = $herodata['atk'] + 5 * floor($heroarray[0]['attack'] * $herodata['atkp'] / 5);
-        $h_di = $herodata['di'] + 5 * floor($heroarray[0]['defence'] * $herodata['dip'] / 5);
-        $h_dc = $herodata['dc'] + 5 * floor($heroarray[0]['defence'] * $herodata['dcp'] / 5);
-        $h_ob = 1 + 0.002 * $heroarray[0]['attackbonus'];
-        $h_db = 1 + 0.002 * $heroarray[0]['defencebonus'];
+        // no hero data found
+        if (!count($heroarray)) {
+            return false;
+        }
 
-        return  array('heroid'=>$heroarray[0]['heroid'],'unit'=>$heroarray[0]['unit'],'atk'=>$h_atk,'di'=>$h_di,'dc'=>$h_dc,'ob'=>$h_ob,'db'=>$h_db,'health'=>$heroarray[0]['health']);
+        // check all heroes and load hero data for the one,
+        // whose data were updated more recently - if we're not getting all of them
+        if (!$all) {
+            foreach ($heroarray as $id => $hero) {
+                // try to load a hero who's alive first
+                if (!$herodata && $hero['dead'] != 1) {
+                    // this global value comes from GameEngine/Data/unitdata.php
+                    $herodata = $GLOBALS["h".$hero['unit']];
+                    $singleHeroArrayID = $id;
+                    break;
+                }
+            }
+
+            // if we couldn't get a living hero,
+            // resort to loading the first one from the list,
+            // as that would be the one most recently updated/used
+            if (!$herodata) {
+                // this global value comes from GameEngine/Data/unitdata.php
+                $herodata = $GLOBALS["h".$heroarray[0]['unit']];
+            }
+
+            $h_atk = $herodata['atk'] + 5 * floor($heroarray[$singleHeroArrayID]['attack'] * $herodata['atkp'] / 5);
+            $h_di = $herodata['di'] + 5 * floor($heroarray[$singleHeroArrayID]['defence'] * $herodata['dip'] / 5);
+            $h_dc = $herodata['dc'] + 5 * floor($heroarray[$singleHeroArrayID]['defence'] * $herodata['dcp'] / 5);
+            $h_ob = 1 + 0.002 * $heroarray[$singleHeroArrayID]['attackbonus'];
+            $h_db = 1 + 0.002 * $heroarray[$singleHeroArrayID]['defencebonus'];
+    
+            return [
+                    'heroid' => $heroarray[$singleHeroArrayID]['heroid'],
+                    'unit' => $heroarray[$singleHeroArrayID]['unit'],
+                    'name' => $heroarray[$singleHeroArrayID]['name'],
+                    'inrevive' => $heroarray[$singleHeroArrayID]['inrevive'],
+                    'intraining' => $heroarray[$singleHeroArrayID]['intraining'],
+                    'trainingtime' => $heroarray[$singleHeroArrayID]['trainingtime'],
+                    'level' => $heroarray[$singleHeroArrayID]['level'],
+                    'attack' => $heroarray[$singleHeroArrayID]['attack'],
+                    'atk' => $h_atk,
+                    'defence' => $heroarray[$singleHeroArrayID]['defence'],
+                    'di' => $h_di,
+                    'dc' => $h_dc,
+                    'attackbonus' => $heroarray[$singleHeroArrayID]['attackbonus'],
+                    'ob' => $h_ob,
+                    'defencebonus' => $heroarray[$singleHeroArrayID]['defencebonus'],
+                    'db' => $h_db,
+                    'regeneration' => $heroarray[$singleHeroArrayID]['regeneration'],
+                    'health' => $heroarray[$singleHeroArrayID]['health'],
+                    'dead' => $heroarray[$singleHeroArrayID]['dead'],
+                    'points' => $heroarray[$singleHeroArrayID]['points'],
+                    'experience' => $heroarray[$singleHeroArrayID]['experience']
+            ];
+        } else {
+            // build up a full array of heroes and their stats
+            $heroes = [];
+            foreach ($heroarray as $id => $hero) {
+                $herodata = $GLOBALS["h".$heroarray[$id]['unit']];
+
+                $h_atk = $herodata['atk'] + 5 * floor($heroarray[$id]['attack'] * $herodata['atkp'] / 5);
+                $h_di = $herodata['di'] + 5 * floor($heroarray[$id]['defence'] * $herodata['dip'] / 5);
+                $h_dc = $herodata['dc'] + 5 * floor($heroarray[$id]['defence'] * $herodata['dcp'] / 5);
+                $h_ob = 1 + 0.002 * $heroarray[$id]['attackbonus'];
+                $h_db = 1 + 0.002 * $heroarray[$id]['defencebonus'];
+                
+                $heroes[] = [
+                    'heroid' => $heroarray[$id]['heroid'],
+                    'unit' => $heroarray[$id]['unit'],
+                    'name' => $heroarray[$id]['name'],
+                    'inrevive' => $heroarray[$id]['inrevive'],
+                    'intraining' => $heroarray[$id]['intraining'],
+                    'trainingtime' => $heroarray[$id]['trainingtime'],
+                    'level' => $heroarray[$id]['level'],
+                    'attack' => $heroarray[$id]['attack'],
+                    'atk' => $h_atk,
+                    'defence' => $heroarray[$id]['defence'],
+                    'di' => $h_di,
+                    'dc' => $h_dc,
+                    'attackbonus' => $heroarray[$id]['attackbonus'],
+                    'ob' => $h_ob,
+                    'defencebonus' => $heroarray[$id]['defencebonus'],
+                    'db' => $h_db,
+                    'regeneration' => $heroarray[$id]['regeneration'],
+                    'health' => $heroarray[$id]['health'],
+                    'dead' => $heroarray[$id]['dead'],
+                    'points' => $heroarray[$id]['points'],
+                    'experience' => $heroarray[$id]['experience']
+                ];
+            }
+            
+            return $heroes;
+        }
     }
 };
 

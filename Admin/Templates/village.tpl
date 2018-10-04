@@ -15,8 +15,6 @@ error_reporting(0);
 $id = $_GET['did'];
 if(isset($id))
 {
-	$village = $database->getVillage($id);
-	$user = $database->getUserArray($village['owner'],1);
 	$coor = $database->getCoor($village['wref']);
 	$varray = $database->getProfileVillages($village['owner']);
 	$type = $database->getVillageType($village['wref']);
@@ -37,7 +35,7 @@ if(isset($id))
 	elseif($type == 12){ $typ = array(5,4,3,6); }
 	$ocounter = array();
 	$wood = $clay = $iron =$crop = 0;
-	$q = "SELECT o.*, w.x, w.y FROM ".TB_PREFIX."odata AS o LEFT JOIN ".TB_PREFIX."wdata AS w ON o.wref=w.id WHERE conqured = ".$village['wref'];
+	$q = "SELECT o.*, w.x, w.y FROM ".TB_PREFIX."odata AS o LEFT JOIN ".TB_PREFIX."wdata AS w ON o.wref=w.id WHERE conqured = ".(int) $village['wref'];
 	$result = $database->query_return($q);
 	if(count($result) >0)
 		{
@@ -60,24 +58,17 @@ if(isset($id))
 		}
 	$ocounter = array($wood,$clay,$iron,$crop);
 	$production=$admin->calculateProduction($id,$user['id'],$user['b1'],$user['b2'],$user['b3'],$user['b4'],$fdata, $ocounter, $village['pop']);
-	$refreshiconfrm = "data:image/png;base64,
-	iVBORw0KGgoAAAANSUhEUgAAAAkAAAAKCAIAAADpZ+PpAAAAAXNSR0IArs4c6QAAAARnQU1BAACx
-	jwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEQSURBVChTY/gPBkevHfRrtjMsU9bJ05+5eylE
-	kAGI117fKFsqYzhTNeSQY8xhP8vJJmVrK3eeP8Bw58kt03rTkHnRxdvrnKd4m83SCTtsaLZI1K7H
-	mGH2xpnHLh+GGPL7/7/S1dVKU2Usd6roTZBh+Pj3M0QCCL78+Fw6v1ooR1myWU2zzpjBb2Ko8xwf
-	91l+gRNDLzw6f+nepcsPrl14cPXW8wcMWqVaEYdtPdZYubUHww0AMs5cusygU68UtVUr87CPWbdd
-	9Ly83TcO7Lq2I7ozoXfZTAalCjWZemnlaYo2u0wVFkoJdwoyZDOZNDi//vqRwbkjac+dC827p2h3
-	Gyh3S6m0a0Qszrnz6RnQWAAxV5tT/VAiNQAAAABJRU5ErkJggg==";
+	$refreshiconfrm = "../img/admin/refresh.png";
 	$refreshicon  = "<img src=\"".$refreshiconfrm."\">";
 	
-	class Generator
+	class MyGenerator
 	{
 		public function getMapCheck($wref)
 		{
 			return substr(md5($wref),5,2);
 		}
 	};
-	$generator = new Generator;
+	$generator = new MyGenerator;
 	
 	if($village and $user)
 	{
@@ -85,7 +76,7 @@ if(isset($id))
 		<style>
 			.del {width:12px; height:12px; background-image: url(img/admin/icon/del.gif);}
 		</style>
-		<link href="../<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7c" rel="stylesheet" type="text/css">
+		<link href="../<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7g" rel="stylesheet" type="text/css">
 		<br />
 
 		<table id="profile" cellpadding="1" cellspacing="1" >
@@ -216,7 +207,7 @@ if(isset($id))
 						else
 						{
 							$vill = $database->getVillage($exp);
-							$link = '<a href="admin.php?=village&did='.$vill['wref'].'">'.$vill['name'].'</a>';
+							$link = '<a href="admin.php?p=village&did='.$vill['wref'].'">'.$vill['name'].'</a>';
 							echo '
 								<tr>
 									<td class="hab">'.$link.'</td>
@@ -252,7 +243,7 @@ if(isset($id))
 						{
 							echo "
 							<tr>
-								<td><a href=\"?delOas&oid=\" onClick=\"return del('oas',".$row['wref'].")\"><img src=\"../img/admin/del.gif\"></a></td>
+								<td><a href=\"?action=delOas&oid=".$row['wref']."\" onClick=\"return del('oas',".$row['wref'].")\"><img src=\"../img/admin/del.gif\"></a></td>
 								<td class=\"hab\">".$row['name']."</td>
 								<td class=\"hab\"><a href=\"../karte.php?d=".$row['wref']."&c=".$generator->getMapCheck($row['wref'])."\" target=\"blank\">(".$row['x']."|".$row['y'].")</a></td>
 								<td class=\"hab\">".round($row['loyalty'])."%</td>

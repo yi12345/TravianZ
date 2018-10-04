@@ -1,4 +1,8 @@
-<?php include("templates/script.tpl");
+<?php
+// don't let SQL time out when 30-500 seconds (depending on php.ini) is not enough
+@set_time_limit(0);
+
+include("templates/script.tpl");
 
 if(!isset($_GET['s'])) {
 	$_GET['s']=0;
@@ -32,11 +36,11 @@ date_default_timezone_set($t_zone);
 	<meta http-equiv="expires" content="0" />
 	<meta http-equiv="imagetoolbar" content="no" />
 	<meta http-equiv="content-type" content="text/html; charset=us-ascii" />
-	<script src="mt-full.js?0ac36" type="text/javascript"></script>
-	<script src="unx.js?0ac36" type="text/javascript"></script>
-	<script src="new.js?0ac36" type="text/javascript"></script>
-	<link href="../gpack/travian_default/lang/en/lang.css?f4b7c" rel="stylesheet" type="text/css" />
-	<link href="../gpack/travian_default/lang/en/compact.css?f4b7c" rel="stylesheet" type="text/css" />
+	<script src="mt-full.js?0ac37" type="text/javascript"></script>
+	<script src="unx.js?f4b7g" type="text/javascript"></script>
+	<script src="new.js?0ac37" type="text/javascript"></script>
+	<link href="../gpack/travian_default/lang/en/lang.css?f4b7d" rel="stylesheet" type="text/css" />
+	<link href="../gpack/travian_default/lang/en/compact.css?f4b7g" rel="stylesheet" type="text/css" />
 	<link href="../gpack/travian_default/travian.css?e21d2" rel="stylesheet" type="text/css" />
 	<link href="../gpack/travian_default/lang/en/lang.css?e21d2" rel="stylesheet" type="text/css" />
 </head>
@@ -49,8 +53,16 @@ function refresh(tz) {
     location="?s=1&t="+tz;
 }
 function proceed() {
-    document.dataform.Submit.disabled=true;
-    return(true);
+	var e = document.getElementById('Submit');
+
+	// if we disable the button right away, we wouldn't be able to submit the form
+    setTimeout(function() {
+        e.disabled = "disabled";
+    }, 200);
+
+    e.value = "Processing...";
+
+    return true;
 }
 </script>
 	<div class="wrapper">
@@ -70,7 +82,7 @@ function proceed() {
 				<div id="content" class="login">
 					<?php
 					IHG_Progressbar::draw_css();
-					$bar = new IHG_Progressbar(7, 'Step %d from %d ');
+					$bar = new IHG_Progressbar(6, 'Step %d from %d ');
 					$bar->draw();
 					for($i = 0; $i < ($_GET['s']+1); $i++) {
 						$bar->tick();
@@ -83,7 +95,11 @@ function proceed() {
 				<?php
 				if(substr(sprintf('%o', fileperms('../')), -4)<'700'){
 					echo"<span class='f18 c5'>ERROR!</span><br />It's not possible to write the config file. Change the permission to '777'. After that, refresh this page!";
-				} else
+				} 
+				else if (file_exists("../var/installed")) {
+					echo"<span class='f18 c5'>ERROR!</span><br />Installation appears to have been completed.<br />If this is an error remove /var/installed file in install directory.";
+				}
+				else
 					switch($_GET['s']){
 						case 0:
 						include("templates/greet.tpl");
@@ -95,15 +111,12 @@ function proceed() {
 						include("templates/dataform.tpl");
 						break;
 						case 3:
-						include("templates/field.tpl");
+						include("templates/wdata.tpl");
 						break;
 						case 4:
-						include("templates/multihunter.tpl");
-						break;
+					    include("templates/accounts.tpl");
+					    break;
 						case 5:
-						include("templates/oasis.tpl");
-						break;
-						case 6:
 						include("templates/end.tpl");
 						break;
 					}

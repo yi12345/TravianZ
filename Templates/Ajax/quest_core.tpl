@@ -19,6 +19,7 @@
 include("GameEngine/Village.php");
 include("GameEngine/Data/cp.php");
 
+$user_sanitized = $database->escape($_SESSION['username']);
 $uArray = $database->getUserArray($_SESSION['username'],0);
 $check_quest=$database->getUserField($_SESSION['username'],'quest','username');
 
@@ -31,7 +32,7 @@ else { $messagelol = "i4"; }
 if(SPEED == '1'){ 
 	$skipp_time="43200"; 
 } else if(SPEED == '2'){ 
-	$skipp_time="21600"; 
+	$skipp_time="21600";
 } else if(SPEED == '3'){ 
 	$skipp_time="11988"; 
 } else if(SPEED <= '5'){
@@ -40,7 +41,15 @@ if(SPEED == '1'){
 	$skipp_time="3600"; 
 } 
 $_SESSION['qst_time'] = $uArray['quest_time'];
+
 if (isset($qact)){
+
+	// check that the quest we're on is not lower than the quest we're requesting
+	$currentQuest = $database->getUserField($_SESSION['username'],"quest",1);
+	if ($qact < $currentQuest) {
+		$qact = $currentQuest;
+	}
+
 	if ($check_quest==$qact) {
 		//avoid hacking gold, resources or reward -- added by Ronix
 	}else {
@@ -71,7 +80,7 @@ if (isset($qact)){
 			$_SESSION['qst']= 3;
 			//Give Reward
 			if(!$session->plus){
-				mysql_query("UPDATE ".TB_PREFIX."users set plus = ('".mktime(date("H"),date("i"), date("s"),date("m") , date("d"), date("Y"))."')+86400 where `username`='".$_SESSION['username']."'") or die(mysql_error());
+				mysqli_query($GLOBALS['link'],"UPDATE ".TB_PREFIX."users set plus = ('".mktime(date("H"),date("i"), date("s"),date("m") , date("d"), date("Y"))."')+86400 where `username`='".$user_sanitized."'") or die(mysqli_error($database->dblink));
 			} else {
 				$plus=$database->getUserField($_SESSION['username'],'plus','username');
 				$plus+=86400;
@@ -103,6 +112,7 @@ if (isset($qact)){
 			$Subject="Message From The Taskmaster";
 			$Subject=Q6_SUBJECT;
 			$Message=Q6_MESSAGE;
+			$database->sendMessage($session->userinfo['id'],4,$Subject,$Message,0,0,0,0,0);
 			$RB=true;
 			//Give Reward
 			$database->modifyResource($session->villages[0],50,60,30,30,1);	
@@ -151,7 +161,7 @@ if (isset($qact)){
 			$_SESSION['qst']= 11;
 			//Give Reward
 			if(!$session->plus){
-				mysql_query("UPDATE ".TB_PREFIX."users set plus = ('".mktime(date("H"),date("i"), date("s"),date("m") , date("d"), date("Y"))."')+172800 where `username`='".$_SESSION['username']."'") or die(mysql_error());
+				mysqli_query($GLOBALS['link'],"UPDATE ".TB_PREFIX."users set plus = ('".mktime(date("H"),date("i"), date("s"),date("m") , date("d"), date("Y"))."')+172800 where `username`='".$user_sanitized."'") or die(mysqli_error());
 			} else {
 				$plus=$database->getUserField($_SESSION['username'],'plus','username');
 				$plus+=172800;
@@ -338,7 +348,7 @@ if (isset($qact)){
 			$_SESSION['qst_time'] = time()+$skipp_time;
 			//Give Reward
 			if(!$session->plus){
-				mysql_query("UPDATE ".TB_PREFIX."users set plus = ('".mktime(date("H"),date("i"), date("s"),date("m") , date("d"), date("Y"))."')+86400 where `username`='".$_SESSION['username']."'") or die(mysql_error());
+				mysqli_query($GLOBALS['link'],"UPDATE ".TB_PREFIX."users set plus = ('".mktime(date("H"),date("i"), date("s"),date("m") , date("d"), date("Y"))."')+86400 where `username`='".$user_sanitized."'") or die(mysqli_error());
 			} else {
 				$plus=$database->getUserField($_SESSION['username'],'plus','username');
 				$plus+=86400;
@@ -401,7 +411,7 @@ if (isset($qact)){
 			$_SESSION['qst']= 97;
 			//Give Reward 20 gold + 2 days plus
 			if(!$session->plus){
-				mysql_query("UPDATE ".TB_PREFIX."users set plus = ('".mktime(date("H"),date("i"), date("s"),date("m") , date("d"), date("Y"))."')+172800 where `username`='".$_SESSION['username']."'") or die(mysql_error());
+				mysqli_query($GLOBALS['link'],"UPDATE ".TB_PREFIX."users set plus = ('".mktime(date("H"),date("i"), date("s"),date("m") , date("d"), date("Y"))."')+172800 where `username`='".$user_sanitized."'") or die(mysqli_error());
 			} else {
 				$plus=$database->getUserField($_SESSION['username'],'plus','username');
 				$plus+=172800;
@@ -417,6 +427,15 @@ if (isset($qact)){
 
 header("Content-Type: application/json;");
 if($session->access!=BANNED){
+	// check that the quest we're on is not lower than the quest we're requesting
+	if (!isset($currentQuest)) {
+		$currentQuest = $database->getUserField($_SESSION['username'],"quest",1);
+	}
+
+	if (empty($_SESSION['qst']) || $_SESSION['qst'] < $currentQuest) {
+		$_SESSION['qst'] = $currentQuest;
+	}
+
       if($_SESSION['qst']== 0){
 	  ?>
 
@@ -436,7 +455,7 @@ $woodL=$tRes['f1']+$tRes['f3']+$tRes['f14']+$tRes['f17'];
 if ($woodL<1){?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> <?php echo Q1; ?><\/h1><br \/><i>&rdquo;<?php echo Q1_DESC; ?>&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><?php echo Q1_ORDER; ?><\/div><br \/><span id=\"qst_accpt\"><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"wood\"><\/div>\n\t\t","number":"-1","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":99}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
-{"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> <?php echo Q1; ?><\/h1><br \/><i>&rdquo;<?php echo Q1_RESP; ?>&rdquo;<\/i><br \/><br \/><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/><div class=\"rew\"><p class=\"ta_aw\"><?php echo Q1_REWARD; ?><br \/><\/div><br \/><span id=\"qst_accpt\"><a href=\"javascript: qst_next('','2');\"><?php echo Q_CONTINUE; ?><\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"wood\"><\/div>\n\t\t","number":"-1","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":99}
+{"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> <?php echo Q1; ?><\/h1><br \/><i>&rdquo;<?php echo Q1_RESP; ?>&rdquo;<\/i><br \/><br \/><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/><div class=\"rew\"><p class=\"ta_aw\"><?php echo Q1_REWARD; ?><br \/><\/div><br \/><span id=\"qst_accpt\"><a href=\"javascript: qst_next('','2');\"><?php echo Q_CONTINUE; ?><\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"wood\"><\/div>\n\t\t","number":"-1","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":99,"ar":1}
 <?php }?>
 
 <?php } elseif($_SESSION['qst']== 2){ 
@@ -468,7 +487,10 @@ $temp['uid']=$session->userinfo['id'];
 $ranking->procRankReq($temp);
 $displayarray = $database->getUserArray($temp['uid'],1);
 $rRes=$ranking->searchRank($displayarray['username'],"username");
-if ($rRes!=$rSubmited){?>
+if (!isset($rSubmited)) {
+	$rSubmited = null;
+}
+if ($rRes!=$rSubmited && $rRes !== 'Multihunter'){?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/><?php echo Q4; ?><\/h1><br \/><i>&rdquo;<?php echo Q4_DESC; ?>&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><?php echo Q4_ORDER; ?><\/div><br \/><input id=\"qst_val\" class=\"text\" type=\"text\" name=\"qstin\" \/> <input onclick=\"qst_next('','rank',document.getElementById('qst_val').value)\" type=\"button\" value=\"<?php echo Q4_BUTN; ?>\"\/><br \/><span id=\"qst_accpt\"><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"rank\"><\/div>\n\t\t","number":-4,"reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":99}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/><?php echo Q4; ?><\/h1><br \/><i>&rdquo;<?php echo Q4_RESP; ?>&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/><?php echo Q_REWARD; ?><\/p><img src=\"img\/x.gif\" class=\"r1\" alt=\"Lumber\" title=\"Lumber\" \/>40&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\" \/>30&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\" \/>20&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r4\" alt=\"Crop\" title=\"Crop\" \/>30&nbsp;&nbsp;<\/div><br \/><span id=\"qst_accpt\"><a href=\"javascript: qst_next('','5');\"><?php echo Q_CONTINUE; ?><\/a><\/span><\/div>\n\t\t","number":4,"reward":{"wood":40,"clay":30,"iron":20,"crop":30},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":99}
@@ -489,6 +511,9 @@ if ($ironL<1 || $clayL<1){?>
 <?php } elseif($_SESSION['qst']== 6){ 
 
 //Check message is viewed or no
+if (!isset($RB)) {
+	$RB = null;
+}
 if ($message->unread || $RB==true){?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> <?php echo Q6; ?><\/h1><br \/><i>&rdquo;<?php echo Q6_DESC; ?>&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><?php echo Q6_ORDER; ?><\/div><br \/><span id=\"qst_accpt\"><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"msg\"><\/div>\n\t\t","number":"-6","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"i2","altstep":99}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
@@ -506,7 +531,7 @@ if($tRes['f1']>0){$woodL++;};if($tRes['f3']>0){$woodL++;};if($tRes['f14']>0){$wo
 if($tRes['f2']>0){$cropL++;};if($tRes['f8']>0){$cropL++;};if($tRes['f9']>0){$cropL++;};if($tRes['f12']>0){$cropL++;};if($tRes['f13']>0){$cropL++;};if($tRes['f15']>0){$cropL++;}
 
 if ($ironL<2 || $clayL<2 || $woodL<2 || $cropL<2){?>
-{"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/><?php echo $questc->q;?><?php echo Q7; ?><\/h1><br \/><i>&rdquo;<?php echo Q7_DESC; ?>&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><?php echo Q7_ORDER; ?><\/div><br \/><span id=\"qst_accpt\"><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"allres\"><\/div>\n\t\t","number":-7,"reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":99}
+{"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/><?php echo (isset($questc) ? $questc->q : '');?><?php echo Q7; ?><\/h1><br \/><i>&rdquo;<?php echo Q7_DESC; ?>&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><?php echo Q7_ORDER; ?><\/div><br \/><span id=\"qst_accpt\"><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"allres\"><\/div>\n\t\t","number":-7,"reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":99}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> <?php echo Q7; ?><\/h1><br \/><i>&rdquo;<?php echo Q7_RESP; ?>&rdquo;\r\n<br \/><br \/>\r\n<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/><?php echo Q_REWARD; ?><\/p><img src=\"img\/x.gif\" class=\"r1\" alt=\"Lumber\" title=\"Lumber\" \/>75&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\" \/>80&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\" \/>30&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r4\" alt=\"Crop\" title=\"Crop\" \/>50&nbsp;&nbsp;<\/div><br \/><span id=\"qst_accpt\"><a href=\"javascript: qst_next('','8');\"><?php echo Q_CONTINUE; ?><\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"allres\"><\/div>\n\t\t","number":7,"reward":{"wood":75,"clay":80,"iron":30,"crop":50},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":99}
 <?php }?>
@@ -524,7 +549,7 @@ if($tRes['f5']>0){$clayL++;};if($tRes['f6']>0){$clayL++;};if($tRes['f16']>0){$cl
 if($tRes['f1']>0){$woodL++;};if($tRes['f3']>0){$woodL++;};if($tRes['f14']>0){$woodL++;};if($tRes['f17']>0){$woodL++;}
 if($tRes['f2']>0){$cropL++;};if($tRes['f8']>0){$cropL++;};if($tRes['f9']>0){$cropL++;};if($tRes['f12']>0){$cropL++;};if($tRes['f13']>0){$cropL++;};if($tRes['f15']>0){$cropL++;}
 if ($ironL<4 || $clayL<4 || $woodL<4 || $cropL<6){?>
-{"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/><?php echo $questc->q;?> <?php echo Q9; ?><\/h1><br \/><i>&rdquo;<?php echo Q9_DESC; ?>&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><?php echo Q9_ORDER; ?><\/div><br \/><span id=\"qst_accpt\"><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"allres\"><\/div>\n\t\t","number":-9,"reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":99}
+{"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/><?php echo (isset($questc) ? $questc->q : '');?> <?php echo Q9; ?><\/h1><br \/><i>&rdquo;<?php echo Q9_DESC; ?>&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><?php echo Q9_ORDER; ?><\/div><br \/><span id=\"qst_accpt\"><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"allres\"><\/div>\n\t\t","number":-9,"reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":99}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> <?php echo Q9; ?><\/h1><br \/><i>&rdquo;<?php echo Q9_RESP; ?>.&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/><?php echo Q_REWARD; ?><\/p><img src=\"img\/x.gif\" class=\"r1\" alt=\"Lumber\" title=\"Lumber\" \/>75&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\" \/>80&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\" \/>30&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r4\" alt=\"Crop\" title=\"Crop\" \/>50&nbsp;&nbsp;<\/div><br \/><span id=\"qst_accpt\"><a href=\"javascript: qst_next('','10');\"><?php echo Q_CONTINUE; ?><\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"allres\"><\/div>\n\t\t","number":9,"reward":{"wood":75,"clay":80,"iron":30,"crop":50},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":99}
 <?php }?>
@@ -546,7 +571,7 @@ $getvID = $database->getVillageID($session->uid);
 $nvillage = $database->getFieldDistance($getvID);
 $ncoor = $database->getCoor($nvillage);
 $nvillagename = $database->getVillageField($nvillage,"name");
-if ($x!=$ncoor['x'] or $y!=$ncoor['y']){?>
+if (!isset($x) || !isset($y) || $x!=$ncoor['x'] || $y!=$ncoor['y']){?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> <?php echo Q11; ?></h1><br><i>&rdquo;<?php echo Q11_DESC; ?> <b><?php echo $nvillagename; ?></b>. <?php echo Q11_DESC1; ?>&rdquo;</i><div class=\"rew\"><p class=\"ta_aw\"><?php echo Q11_ORDER; ?> <b><?php echo $nvillagename; ?></b> <?php echo Q11_ORDER1; ?></div><div id=\"map_coords\"><span>X </span><input class=\"text\" value=\"\" maxlength=\"4\" id=\"qst_val_x\" name=\"xp\"><span> Y </span><input class=\"text\" value=\"\" maxlength=\"4\" id=\"qst_val_y\" name=\"xy\"> <input type=\"button\" value=\"<?php echo Q11_BUTN; ?>\" onclick=\"qst_next2('1','coor',document.getElementById('qst_val_x').value,document.getElementById('qst_val_y').value)\"></div></div><span id=\"qst_accpt\"><\/span><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"neighbour\"><\/div>\n\t\t","number":-11,"reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> <?php echo Q11; ?><\/h1><br \/><i>&rdquo;<?php echo Q11_RESP; ?> <b> <?php echo $nvillagename;?> <\/b> <?php echo Q11_RESP1; ?>&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/><?php echo Q_REWARD; ?><\/p><img src=\"img\/x.gif\" class=\"r1\" alt=\"Lumber\" title=\"Lumber\" \/>60&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\" \/>30&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\" \/>40&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r4\" alt=\"Crop\" title=\"Crop\" \/>90&nbsp;&nbsp;<\/div><br \/><span id=\"qst_accpt\"><a href=\"javascript: qst_next('','12');\"><?php echo Q_CONTINUE; ?><\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"neighbour\"><\/div>\n\t\t","number":11,"reward":{"wood":60,"clay":30,"iron":40,"crop":90},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":99}
@@ -580,7 +605,7 @@ if ($ironL<1 || $clayL<1 || $woodL<1 || $cropL<1){?>
 <?php } elseif($_SESSION['qst']== 14){ 
 
 //Check player submited number Barracks cost lumber
-if ($lSubmited!=210){?>
+if (!isset($lSubmited) || $lSubmited!=210){?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> <?php echo Q14; ?><\/h1><br \/><i>&rdquo;<?php echo Q14_DESC; ?>&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><?php echo Q14_ORDER; ?><\/div><br \/><input id=\"qst_val\" class=\"text\" type=\"text\" name=\"qstin\" \/> <input onclick=\"qst_next('','lumber',document.getElementById('qst_val').value)\" type=\"button\" value=\"<?php echo Q14_BUTN; ?>\"\/><br \/><span id=\"qst_accpt\"><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"cost\"><\/div>\n\t\t","number":"-14","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":99}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> <?php echo Q14; ?><\/h1><br \/><i>&rdquo;<?php echo Q14_RESP; ?>&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/><?php echo Q_REWARD; ?><\/p><img src=\"img\/x.gif\" class=\"r1\" alt=\"Lumber\" title=\"Lumber\" \/>50&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\" \/>30&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\" \/>60&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r4\" alt=\"Crop\" title=\"Crop\" \/>20&nbsp;&nbsp;<\/div><br \/><span id=\"qst_accpt\"><a href=\"javascript: qst_next('','15');\"><?php echo Q_CONTINUE; ?><\/a><\/span><\/div>\n\t\t","number":14,"reward":{"wood":50,"clay":30,"iron":60,"crop":20},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":99}
@@ -603,7 +628,7 @@ $temp['uid']=$session->userinfo['id'];
 $ranking->procRankReq($temp);
 $displayarray = $database->getUserArray($temp['uid'],1);
 $rRes=$ranking->searchRank($displayarray['username'],"username");
-if ($rRes!=$rSubmited){ ?>
+if (!isset($rSubmited) || $rRes!=$rSubmited){ ?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> <?php echo Q16; ?><\/h1><br \/><i>&rdquo;<?php echo Q16_DESC; ?>&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><?php echo Q16_ORDER; ?><\/div><br \/><input id=\"qst_val\" class=\"text\" type=\"text\" name=\"qstin\" \/> <input onclick=\"qst_next('','rank',document.getElementById('qst_val').value)\" type=\"button\" value=\"<?php echo Q_BUTN; ?>\"\/><br \/><span id=\"qst_accpt\"><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"rank\"><\/div>\n\t\t","number":"-16","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":99}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> <?php echo Q16; ?><\/h1><br \/><i>&rdquo;<?php echo Q16_RESP; ?>&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/><?php echo Q_REWARD; ?><\/p><img src=\"img/x.gif\" class=\"r1\" alt=\"Lumber\" title=\"Lumber\">100&nbsp;&nbsp;<img src=\"img/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\">90&nbsp;&nbsp;<img src=\"img/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\">100&nbsp;&nbsp;<img src=\"img/x.gif\" class=\"r4\" alt=\"Crop\" title=\"Crop\">60&nbsp;&nbsp;<\/div><br \/><span id=\"qst_accpt\"><a href=\"javascript: qst_next('','17');\"><?php echo Q_CONTINUE; ?><\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"allres\"><\/div>\n\t\t","number":16,"reward":{"wood":100,"clay":90,"iron":100,"crop":60},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":99}
@@ -790,7 +815,7 @@ $unarray=array("",CITYWALL,EARTHWALL,"PALISADE");
 
 $wall = $village->resarray['f40'];
 if ($wall==0){?>
-{"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> <?php echo Q36; ?>*<?php echo $unarray[$session->userinfo['tribe']];?>*<\/h1><br \/><i>&rdquo;<?php echo Q36_DESC; ?><b> <?php echo $unarray[$session->userinfo['tribe']];?><\/b> <?php echo Q36_DESC1; ?>&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><?php echo Q36_ORDER; ?><b><?php echo $unarray[$session->userinfo['tribe']];?><\/b>.<\/div><br \/><span id=\"qst_accpt\"><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"intro\"><\/div>\n\t\t","number":"-36","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":99}
+{"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> <?php echo Q36; ?>*<?php echo $unarray[$session->userinfo['tribe']];?>*<\/h1><br \/><i>&rdquo;<?php echo Q36_DESC; ?><b> <?php echo $unarray[$session->userinfo['tribe']];?><\/b> <?php echo Q36_DESC1; ?>&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><?php echo Q36_ORDER; ?><b><?php echo $unarray[$session->userinfo['tribe']];?><\/b>.<\/div><br \/><span id=\"qst_accpt\"><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"intro\"><\/div>\n\t\t","number":"-36","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> <?php echo Q36; ?>*<?php echo $unarray[$session->userinfo['tribe']];?>*<\/h1><br \/><i>&rdquo;<?php echo Q36_RESP; ?> <b><?php echo $unarray[$session->userinfo['tribe']];?> <\/b> <?php echo Q36_RESP1; ?>&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/><?php echo Q_REWARD; ?><\/p><img src=\"img\/x.gif\" class=\"r1\" alt=\"Lumber\" title=\"Lumber\" \/>1700&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\" \/>2100&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\" \/>1900&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r4\" alt=\"Crop\" title=\"Crop\" \/>1400&nbsp;&nbsp;<\/div><br \/><span id=\"qst_accpt\"><a href=\"javascript: qst_next('','37');\"><?php echo Q_CONTINUE; ?><\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"intro\"><\/div>\n\t\t","number":36,"reward":{"wood":1700,"clay":2100,"iron":1900,"crop":1400},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":99}
 <?php } ?>
@@ -800,9 +825,9 @@ if ($wall==0){?>
 
 // End tasks message
 <?php } elseif($_SESSION['qst']== 37 ){
-$database->updateUserField($_SESSION['username'],'quest','38',0);
+$database->updateUserField($_SESSION['username'],'quest','38',99);
 $_SESSION['qst']= 38; ?>
-{"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> <?php echo Q37; ?><\/h1><br \/><i>&rdquo;<?php echo Q37_DESC; ?>&rdquo;<\/i><br \/><br \/><br \/><\/div>\n\t\t<div id=\"qstbg\" class=\"allres\"><\/div>\n\t\t","number":37,"reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> <?php echo Q37; ?><\/h1><br \/><i>&rdquo;<?php echo Q37_DESC; ?>&rdquo;<\/i><br \/><br \/><br \/><\/div>\n\t\t<div id=\"qstbg\" class=\"allres\"><\/div>\n\t\t","number":37,"reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":99}
 <?php
 } elseif($_SESSION['qst']==90){
 $time=time();?>
@@ -933,7 +958,7 @@ $temp['uid']=$session->userinfo['id'];
 $ranking->procRankReq($temp);
 $displayarray = $database->getUserArray($temp['uid'],1);
 $rRes=$ranking->searchRank($displayarray['username'],"username");
-if ($rRes!=$rSubmited){?>
+if (!isset($rSubmited) || $rRes!=$rSubmited){ ?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> Task 4: Other Players<\/h1><br \/><i>&rdquo;In <?php echo SERVER_NAME; ?> you play along with billions of other players. Click 'statistics' in the top menu to look up your rank and enter it here.&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Look for your rank in the statistics and enter it here.<\/div><br \/><input id=\"qst_val\" class=\"text\" type=\"text\" name=\"qstin\" \/> <input onclick=\"banned.php\" type=\"button\" value=\"complete task\"\/><br \/><span id=\"qst_accpt\"><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"rank\"><\/div>\n\t\t","number":-4,"reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> Task 4: Other Players<\/h1><br \/><i>&rdquo;Exactly! That's your rank.&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Your reward:<\/p><img src=\"img\/x.gif\" class=\"r1\" alt=\"Lumber\" title=\"Lumber\" \/>40&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\" \/>30&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\" \/>20&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r4\" alt=\"Crop\" title=\"Crop\" \/>30&nbsp;&nbsp;<\/div><br \/><span id=\"qst_accpt\"><a href=\"banned.php\">Continue with the next task.<\/a><\/span><\/div>\n\t\t","number":4,"reward":{"wood":40,"clay":30,"iron":20,"crop":30},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
@@ -973,7 +998,7 @@ if($tRes['f5']>0){$clayL++;};if($tRes['f6']>0){$clayL++;};if($tRes['f16']>0){$cl
 if($tRes['f1']>0){$woodL++;};if($tRes['f3']>0){$woodL++;};if($tRes['f14']>0){$woodL++;};if($tRes['f17']>0){$woodL++;}
 if($tRes['f2']>0){$cropL++;};if($tRes['f8']>0){$cropL++;};if($tRes['f9']>0){$cropL++;};if($tRes['f12']>0){$cropL++;};if($tRes['f13']>0){$cropL++;};if($tRes['f15']>0){$cropL++;}
 if ($ironL<4 || $clayL<4 || $woodL<4 || $cropL<6){?>
-{"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/><?php echo $questc->q;?> Task 8: Everything to 1.<\/h1><br \/><i>&rdquo;Now we should increase your resource production a bit. Extend all your resource tiles to level 1.&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Extend all resource tiles to level 1.<\/div><br \/><span id=\"qst_accpt\"><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"allres\"><\/div>\n\t\t","number":-12,"reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/><?php echo (isset($questc) ? $questc->q : '');?> Task 8: Everything to 1.<\/h1><br \/><i>&rdquo;Now we should increase your resource production a bit. Extend all your resource tiles to level 1.&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Extend all resource tiles to level 1.<\/div><br \/><span id=\"qst_accpt\"><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"allres\"><\/div>\n\t\t","number":-12,"reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> Task 8: Everything to 1.<\/h1><br \/><i>&rdquo;Very good, your resource production just thrives.\r\n<br \/><br \/>\r\nSoon we can start with constructing buildings in the village.&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Your reward:<\/p><img src=\"img\/x.gif\" class=\"r1\" alt=\"Lumber\" title=\"Lumber\" \/>75&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\" \/>80&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\" \/>30&nbsp;&nbsp;<img src=\"img\/x.gif\" class=\"r4\" alt=\"Crop\" title=\"Crop\" \/>50&nbsp;&nbsp;<\/div><br \/><span id=\"qst_accpt\"><a href=\"banned.php\">Continue with the next task.<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"allres\"><\/div>\n\t\t","number":12,"reward":{"wood":75,"clay":80,"iron":30,"crop":50},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php }?>
@@ -1040,7 +1065,7 @@ $temp['uid']=$session->userinfo['id'];
 $ranking->procRankReq($temp);
 $displayarray = $database->getUserArray($temp['uid'],1);
 $rRes=$ranking->searchRank($displayarray['username'],"username");
-if ($rRes!=$rSubmited){ ?>
+if (!isset($rSubmited) || $rRes!=$rSubmited){ ?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> Task 14: Advanced!<\/h1><br \/><i>&rdquo;Look up your rank in the player statistics again and enjoy your progress.&rdquo;<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Look for your rank in the statistics and enter it here.<\/div><br \/><input id=\"qst_val\" class=\"text\" type=\"text\" name=\"qstin\" \/> <input onclick=\"banned.php\" type=\"button\" value=\"complete task\"\/><br \/><span id=\"qst_accpt\"><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"rank\"><\/div>\n\t\t","number":"-18","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
 {"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> Task 14: Advanced!<\/h1><br \/><i>"Well done! That's your current rank."<\/i><br \/><br \/><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Your reward:<\/p><img src=\"img/x.gif\" class=\"r1\" alt=\"Lumber\" title=\"Lumber\">100&nbsp;&nbsp;<img src=\"img/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\">90&nbsp;&nbsp;<img src=\"img/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\">100&nbsp;&nbsp;<img src=\"img/x.gif\" class=\"r4\" alt=\"Crop\" title=\"Crop\">60&nbsp;&nbsp;<\/div><br \/><span id=\"qst_accpt\"><a href=\"banned.php\">Continue with the next task.<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"allres\"><\/div>\n\t\t","number":18,"reward":{"wood":100,"clay":90,"iron":100,"crop":60},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}

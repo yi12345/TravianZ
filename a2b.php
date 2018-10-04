@@ -9,25 +9,33 @@
 ##                                                                             ##
 #################################################################################
 
-include("GameEngine/Village.php");
+use App\Utils\AccessLogger;
 
-$start = $generator->pageLoadTimeStart();
+include("GameEngine/Village.php");
+AccessLogger::logRequest();
+
+$start_timer = $generator->pageLoadTimeStart();
 if(isset($_GET['newdid'])) {
 	$_SESSION['wid'] = $_GET['newdid'];
 if(isset($_GET['w'])) {
 	header("Location: ".$_SERVER['PHP_SELF']."?w=".$_GET['w']);
+	exit;
 }
 else if(isset($_GET['r'])) {
 	header("Location: ".$_SERVER['PHP_SELF']."?r=".$_GET['r']);
+	exit;
 }
 else if(isset($_GET['o'])) {
 	header("Location: ".$_SERVER['PHP_SELF']."?o=".$_GET['o']);
+	exit;
 }
 else if(isset($_GET['z'])) {
 	header("Location: ".$_SERVER['PHP_SELF']."?z=".$_GET['z']);
+	exit;
 }
 else if($_GET['id']!=0){
 	header("Location: ".$_SERVER['PHP_SELF']);
+	exit;
 }
 }
 else {
@@ -75,28 +83,28 @@ if(isset($_GET['o'])) {
 <head>
 	<title><?php
 
-		echo SERVER_NAME
+		echo SERVER_NAME . ' - Send Troops'
 
 ?></title>
-	<link REL="shortcut icon" HREF="favicon.ico"/>
+	<link rel="shortcut icon" href="favicon.ico"/>
 	<meta http-equiv="cache-control" content="max-age=0" />
 	<meta http-equiv="pragma" content="no-cache" />
 	<meta http-equiv="expires" content="0" />
 	<meta http-equiv="imagetoolbar" content="no" />
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<script src="mt-full.js?0faaa" type="text/javascript"></script>
-	<script src="unx.js?0faaa" type="text/javascript"></script>
-	<script src="new.js?0faaa" type="text/javascript"></script>
+	<script src="mt-full.js?0faab" type="text/javascript"></script>
+	<script src="unx.js?f4b7g" type="text/javascript"></script>
+	<script src="new.js?0faab" type="text/javascript"></script>
 	<link href="<?php
 
 		echo GP_LOCATE;
 
-?>lang/en/lang.css?f4b7c" rel="stylesheet" type="text/css" />
+?>lang/en/lang.css?f4b7d" rel="stylesheet" type="text/css" />
 	<link href="<?php
 
 		echo GP_LOCATE;
 
-?>lang/en/compact.css?f4b7c" rel="stylesheet" type="text/css" />
+?>lang/en/compact.css?f4b7g" rel="stylesheet" type="text/css" />
 	<?php
 
 		if($session->gpack == null || GP_ENABLE == false) {
@@ -185,9 +193,9 @@ if(isset($_GET['o'])) {
             }
 			
 			if ($prisoner['t11']>0){
-				$p_qh = "SELECT * FROM ".TB_PREFIX."hero WHERE uid = ".$p_owner."";
-				$p_resulth = mysql_query($p_qh);
-				$p_hero_f=mysql_fetch_array($p_resulth);
+			    $p_qh = "SELECT unit FROM ".TB_PREFIX."hero WHERE uid = ".(int) $p_owner." AND dead = 0";
+				$p_resulth = mysqli_query($GLOBALS['link'],$p_qh);
+				$p_hero_f=mysqli_fetch_array($p_resulth);
 				$p_hero_unit=$p_hero_f['unit'];
 				$p_speeds[] = $GLOBALS['u'.$p_hero_unit]['speed'];
 			}
@@ -214,12 +222,14 @@ if(isset($_GET['o'])) {
 			$troops = $prisoner['t1']+$prisoner['t2']+$prisoner['t3']+$prisoner['t4']+$prisoner['t5']+$prisoner['t6']+$prisoner['t7']+$prisoner['t8']+$prisoner['t9']+$prisoner['t10']+$prisoner['t11'];
 			if($prisoner['t11'] > 0){
 			$p_owner = $database->getVillageField($prisoner['from'],"owner");
-			mysql_query("UPDATE ".TB_PREFIX."hero SET `dead` = '1', `health` = '0' WHERE `uid` = '".$p_owner."'");
+			mysqli_query($GLOBALS['link'],"UPDATE ".TB_PREFIX."hero SET `dead` = '1', `health` = '0' WHERE `uid` = '".$p_owner."' AND dead = 0");
 			}
 			$database->modifyUnit($prisoner['wref'],array("99o"),array($troops),array(0));
 			$database->deletePrisoners($prisoner['id']);
 				}
-				header("Location: build.php?id=39");} else {
+				header("Location: build.php?id=39");
+				exit;
+				} else {
 					if(isset($process['0'])) {
 						$coor = $database->getCoor($process['0']);
 						include ("Templates/a2b/attack.tpl");
@@ -231,7 +241,7 @@ if(isset($_GET['o'])) {
 
 ?>
 
-</br></br></br></br><div id="side_info">
+<br /><br /><br /><br /><div id="side_info">
 <?php
 include("Templates/multivillage.tpl");
 include("Templates/quest.tpl");
@@ -258,7 +268,7 @@ include("Templates/links.tpl");
 
 ?> <b><?php
 
-		echo round(($generator->pageLoadTimeEnd() - $start) * 1000);
+		echo round(($generator->pageLoadTimeEnd() - $start_timer) * 1000);
 
 ?></b> ms
 

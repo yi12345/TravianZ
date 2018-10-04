@@ -45,12 +45,26 @@ div.c1 {text-align: center}
                     echo "<a href=\"sysmsg.php\">".SYSTEM_MESSAGE."</a>";
 					echo "<a href=\"create_account.php\">Create Natars</a>";
                     } ?> <a href="logout.php"><?php echo LOGOUT;?></a></p>
+        <?php
+        	// no PLUS needed for Support
+        	if ($_SESSION['id_user'] != 1) {
+        ?>
         <p>
             <a href="plus.php?id=3"><?php echo SERVER_NAME; ?> <b><span class="plus_g">P</span><span class="plus_o">l</span><span class="plus_g">u</span><span class="plus_o">s</span></b></a>
         </p>
+        <?php
+        	}
+        ?>
         <p>
-            <a href="rules.php"><b><?php echo GAME_RULES;?></b></a> 
-            <a href="support.php"><b><?php echo SUPPORT;?></b></a> 
+            <a href="rules.php"><b><?php echo GAME_RULES;?></b></a>
+            <?php
+            	// no support for support :-D
+            	if ($_SESSION['id_user'] != 1) {
+            ?> 
+            <a href="support.php"><b><?php echo SUPPORT;?></b></a>
+            <?php
+            	}
+            ?> 
         <br></p>
 		<?php
 		$timestamp = $database->isDeleting($session->uid);
@@ -103,7 +117,7 @@ div.c1 {text-align: center}
         <div id="ltime">
             <div id="ltimeWrap">
                 Calculated in <b><?php
-                echo round(($generator->pageLoadTimeEnd()-$start)*1000);
+                echo round(($generator->pageLoadTimeEnd()-$start_timer)*1000);
                 ?></b> ms
                 <br>
                 Server time: <span id="tp1" class="b"><?php echo date('H:i:s'); ?></span>

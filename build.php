@@ -10,18 +10,24 @@
 ##                                                                             ##
 #################################################################################
 
+use App\Utils\AccessLogger;
+
 ob_start();
 include_once("GameEngine/Village.php");
 include_once("GameEngine/Units.php");
+AccessLogger::logRequest();
+
 if(isset($_GET['newdid'])) {
 	$_SESSION['wid'] = $_GET['newdid'];
 	header("Location: ".$_SERVER['PHP_SELF'].(isset($_GET['id'])?'?id='.$_GET['id']:(isset($_GET['gid'])?'?gid='.$_GET['gid']:'')));
+	exit;
 }
-if($_GET['id'] == 99 && $village->natar == 0){
+if(isset($_GET['id']) && $_GET['id'] == 99 && $village->natar == 0){
 header("Location: dorf2.php");
+exit;
 }
 
-$start = $generator->pageLoadTimeStart();
+$pagestart = $generator->pageLoadTimeStart();
 $alliance->procAlliForm($_POST);
 $technology->procTech($_POST);
 $market->procMarket($_POST);
@@ -33,9 +39,14 @@ if(isset($_GET['gid'])) {
 if(isset($_POST['t'])){
 	$_GET['t'] = preg_replace("/[^a-zA-Z0-9_-]/","",$_POST['t']);
 }
-if(isset($_GET['id'])) {
+if(isset($_GET['id'])) {    
 	if (!ctype_digit(preg_replace("/[^a-zA-Z0-9_-]/","",$_GET['id']))){
 		$_GET['id'] = "1";
+	}
+	$checkBuildings = array(0,16,17,25,26,27);
+	if($_GET['id'] < 19 || (isset($_GET['gid']) && !in_array($_GET['gid'], $checkBuildings))){
+	    $_GET['t'] = "";
+	    $_GET['s'] = "";
 	}
 	if($village->resarray['f'.$_GET['id'].'t'] == 17) {
 		$market->procRemove($_GET);
@@ -73,15 +84,18 @@ if($session->goldclub == 1 && count($session->villages) > 1){
 			if($totalres > 0){
 				$database->createTradeRoute($session->uid,$_POST['tvillage'],$village->wid,$_POST['r1'],$_POST['r2'],$_POST['r3'],$_POST['r4'],$_POST['start'],$_POST['deliveries'],$reqMerc,$timestamp);
 				header("Location: build.php?gid=17&t=4");
+				exit;
 				$route = 1;
 			}else{
 				header("Location: build.php?gid=17&t=4&create");
+				exit;
 				$route = 1;
 			}
 		}
 		}else{
 		$route = 0;
 		header("Location: banned.php");
+		exit;
 		}
 		}
 		if(isset($_GET['action']) && $_GET['action'] == 'extendRoute') {
@@ -93,20 +107,24 @@ if($session->goldclub == 1 && count($session->villages) > 1){
 		$newgold = $session->gold-2;
 		$database->updateUserField($session->uid,'gold',$newgold,1);
 		header("Location: build.php?gid=17&t=4");
+		exit;
 		$route = 1;
 		unset($routeid);
 		}else{
 		header("Location: build.php?gid=17&t=4");
+		exit;
 		$route = 1;
 		unset($routeid);
 		}
 		}else{
 		header("Location: build.php?gid=17&t=4");
+		exit;
 		$route = 1;
 		}
 		}else{
 		$route = 0;
 		header("Location: banned.php");
+		exit;
 		}
 		}
 		if(isset($_POST['action']) && $_POST['action'] == 'editRoute') {
@@ -133,11 +151,13 @@ if($session->goldclub == 1 && count($session->villages) > 1){
 		$database->editTradeRoute($_POST['routeid'],"timestamp",$timestamp,0);
 		}
 		header("Location: build.php?gid=17&t=4");
+		exit;
 		$route = 1;
 		unset($routeid);
 		}else{
 		$route = 0;
 		header("Location: banned.php");
+		exit;
 		}
 		}
 		if(isset($_GET['action']) && $_GET['action'] == 'delRoute') {
@@ -146,51 +166,57 @@ if($session->goldclub == 1 && count($session->villages) > 1){
 		if($traderoute == $session->uid){
 		$database->deleteTradeRoute($_GET['routeid']);
 		header("Location: build.php?gid=17&t=4");
+		exit;
 		$route = 1;
 		unset($routeid);
 		}else{
 		header("Location: build.php?gid=17&t=4");
+		exit;
 		$route = 1;
 		unset($routeid);
 		}
 		}else{
 		$route = 0;
 		header("Location: banned.php");
+		exit;
 		}
 		}
 }
 if($session->goldclub == 1){
 		if(isset($_GET['t'])==99) {
 
-			if($_GET['action'] == 'addList') {
+		    if(isset($_GET['action']) && $_GET['action'] == 'addList') {
 				$create = 1;
-			}else if($_GET['action'] == 'addraid') {
+		    }else if(isset($_GET['action']) && $_GET['action'] == 'addraid') {
 				$create = 2;
-			}else if($_GET['action'] == 'showSlot' && $_GET['eid']) {
+		    }else if(isset($_GET['action']) && $_GET['action'] == 'showSlot' && $_GET['eid']) {
 				$create = 3;
 			}else{
 				$create = 0;
 			}
 
-			if($_GET['slid']) {
+			if(isset($_GET['slid']) && $_GET['slid']) {
 			$FLData = $database->getFLData($_GET['slid']);
 			if($FLData['owner'] == $session->uid){
 			$checked[$_GET['slid']] = 1;
 			}
 			}
 
-			if($_GET['action'] == 'deleteList') {
+			if(isset($_GET['action']) && $_GET['action'] == 'deleteList') {
 				$database->delFarmList($_GET['lid'], $session->uid);
 				header("Location: build.php?id=39&t=99");
-			}elseif($_GET['action'] == 'deleteSlot') {
+				exit;
+			}elseif(isset($_GET['action']) && $_GET['action'] == 'deleteSlot') {
 				$database->delSlotFarm($_GET['eid']);
 				   header("Location: build.php?id=39&t=99");
+				   exit;
 			}
-			if($_POST['action'] == 'startRaid'){
+			if(isset($_POST['action']) && $_POST['action'] == 'startRaid'){
 			if($session->access != BANNED){
 			include ("Templates/a2b/startRaid.tpl");
 			}else{
 			header("Location: banned.php");
+			exit;
 			}
 			}
 
@@ -207,11 +233,13 @@ if($session->goldclub == 1){
 			$database->setVillageEvasion($_GET['evasion']);
 			}
 			header("Location: build.php?id=39&t=99");
+			exit;
 			}
 
 			if(isset($_POST['maxevasion']) && is_numeric($_POST['maxevasion'])) {
 			$database->updateUserField($session->uid, "maxevasion", $_POST['maxevasion'], 1);
 			header("Location: build.php?id=39&t=99");
+			exit;
 			}
 		}
 }else{
@@ -223,25 +251,26 @@ if($session->access != BANNED){
 	$units->Settlers($_POST);
 }else{
 header("Location: banned.php");
+exit;
 }
 }
-if($_GET['mode']=='troops' && $_GET['cancel']==1){
+if(isset($_GET['mode']) && $_GET['mode']=='troops' && isset($_GET['cancel']) && $_GET['cancel']==1){
 if($session->access != BANNED){
 $oldmovement=$database->getMovementById($_GET['moveid']);
 $now=time();
 if(($now-$oldmovement[0]['starttime'])<90 && $oldmovement[0]['from'] == $village->wid){
 
-$qc="SELECT * FROM " . TB_PREFIX . "movement where proc = 0 and moveid = ".$_GET['moveid'];
-$resultc=$database->query($qc) or die(mysql_error());
+    $qc="SELECT Count(*) as Total FROM " . TB_PREFIX . "movement where proc = 0 and moveid = ".$database->escape((int) $_GET['moveid']);
+    $resultc=mysqli_fetch_array(mysqli_query($database->dblink, $qc), MYSQLI_ASSOC);
 
-	if (mysql_num_rows($resultc)==1){
+	if ($resultc['Total']==1){
 
-	$q = "UPDATE " . TB_PREFIX . "movement set proc  = 1 where proc = 0 and moveid = ".$_GET['moveid'];
+	    $q = "UPDATE " . TB_PREFIX . "movement set proc  = 1 where proc = 0 and moveid = ".$database->escape((int) $_GET['moveid']);
 	$database->query($q);
 	$end=$now+($now-$oldmovement[0]['starttime']);
 	//echo "6,".$oldmovement[0]['to'].",".$oldmovement[0]['from'].",0,".$now.",".$end;
 	$q2 = "SELECT id FROM " . TB_PREFIX . "send ORDER BY id DESC";
-	$lastid=mysql_fetch_array(mysql_query($q2));
+	$lastid=mysqli_fetch_array(mysqli_query($GLOBALS['link'],$q2));
 	$newid=$lastid['id']+1;
 	$q2 = "INSERT INTO " . TB_PREFIX . "send values ($newid,0,0,0,0,0)";
 	$database->query($q2);
@@ -252,8 +281,10 @@ $resultc=$database->query($qc) or die(mysql_error());
 	}
 }
 header("Location: ".$_SERVER['PHP_SELF']."?id=".$_GET['id']);
+exit;
 }else{
 header("Location: banned.php");
+exit;
 }
 }
 if(isset($_GET['id'])){
@@ -264,7 +295,7 @@ $automation->isWinner();
 <html>
 <head>
 	<title><?php echo SERVER_NAME; ?></title>
-	<link REL="shortcut icon" HREF="favicon.ico"/>
+	<link rel="shortcut icon" href="favicon.ico"/>
 	<meta http-equiv="cache-control" content="max-age=0" />
 	<meta http-equiv="pragma" content="no-cache" />
 	<meta http-equiv="expires" content="0" />
@@ -272,10 +303,10 @@ $automation->isWinner();
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
 	<script src="mt-full.js?ebe79" type="text/javascript"></script>
-	<script src="unx.js?ebe79" type="text/javascript"></script>
+	<script src="unx.js?f4b7g" type="text/javascript"></script>
 	<script src="new.js?ebe79" type="text/javascript"></script>
-	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7c" rel="stylesheet" type="text/css" />
-	<link href="<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7c" rel="stylesheet" type="text/css" />
+	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7d" rel="stylesheet" type="text/css" />
+	<link href="<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7g" rel="stylesheet" type="text/css" />
 	<?php
 	if($session->gpack == null || GP_ENABLE == false) {
 	echo "
@@ -340,21 +371,22 @@ if(isset($_GET['id']) or isset($_GET['gid']) or $route == 1 or isset($_GET['rout
 		else {
 			include("Templates/Build/".$village->resarray['f'.$_GET['id'].'t'].".tpl");
 		}
-        	if($_GET['buildingFinish'] == 1) {
+		if((isset($_GET['buildingFinish'])) && $_GET['buildingFinish'] == 1) {
         	if($session->gold >= 2) {
-            		$building->finishAll();
-            		header("Location: build.php?gid=".$_GET['id']."&ty=".$_GET['ty']);
+            		$building->finishAll("build.php?gid=".$_GET['id']."&ty=".$_GET['ty']);
+            		exit;
         	}
         	}  
 	}
 }else{
-header("Location: dorf1.php");
+header("Location: ".$_SERVER['PHP_SELF']."?id=39");
+exit;
 }
 ?>
 
 </div>
 
-</br></br></br></br><div id="side_info">
+<br /><br /><br /><br /><div id="side_info">
 <?php
 include("Templates/multivillage.tpl");
 include("Templates/quest.tpl");
@@ -374,8 +406,8 @@ include("Templates/res.tpl");
 <div id="stime">
 <div id="ltime">
 <div id="ltimeWrap">
-Calculated in <b><?php
-echo round(($generator->pageLoadTimeEnd()-$start)*1000);
+<?php echo CALCULATED_IN;?> <b><?php
+echo round(($generator->pageLoadTimeEnd()-$pagestart)*1000);
 ?></b> ms
 
 <br />Server time: <span id="tp1" class="b"><?php echo date('H:i:s'); ?></span>
@@ -384,5 +416,13 @@ echo round(($generator->pageLoadTimeEnd()-$start)*1000);
 </div>
 
 <div id="ce">    </div>
+<script type="text/javascript">
+	// update TITLE to include building name, as it's not very possible to do in PHP in current codebase
+	if (document.getElementsByTagName('h1').length) {
+		document.title = document.title + ' » » ' + document.getElementsByTagName('h1')[0].innerHTML.replace(/(<([^>]+)>)/ig,"");
+	} else {
+		document.title + ' » » New Building'
+	}
+</script>
 </body>
 </html>

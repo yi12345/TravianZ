@@ -354,24 +354,27 @@ if (!isset($SAJAX_INCLUDED)) {
 
 		//$data = explode("|",$data);
 		if (is_array($data)){$msg = htmlspecialchars($data[1]);}else{$msg = htmlspecialchars($data);};
+		$msg = $database->escape($msg);
 //		$msg=htmlspecialchars($msg);
 		$name = addslashes($session->username);
 
-		$id_user = $session->uid;
-		$alliance = $session->alliance;
-		$now = time();
-			echo $q = "INSERT into ".TB_PREFIX."chat (id_user,name,alli,date,msg) values ('$id_user','$name','$alliance','$now','$msg')";
-			mysql_query($q, $database->connection);
+		if ($msg != ""){
+		    $id_user = (int) $session->uid;
+			$alliance = $database->escape($session->alliance);
+			$now = time();
+				echo $q = "INSERT into ".TB_PREFIX."chat (id_user,name,alli,date,msg) values ($id_user,'$name','$alliance','$now','$msg')";
+				mysqli_query($GLOBALS['link'],$q);
+		}
 	}
 
 	function get_data() {
 		global $session,$database;
 
-		$alliance = $session->alliance;
-		$query = mysql_query("select * from ".TB_PREFIX."chat where alli='$alliance' order by id desc limit 0,13");
-			while ($r = mysql_fetch_array($query)) {
-			$dates = date("g:i",$r[date]);
-			$data .= "[{$dates}] <a href='spieler.php?uid={$r['id_user']}'>{$r['name']}</a>: {$r[msg]} <br>";
+		$alliance = $database->escape($session->alliance);
+		$query = mysqli_query($GLOBALS['link'],"select id_user, name, date, msg from ".TB_PREFIX."chat where alli='$alliance' order by id desc limit 0,13");
+			while ($r = mysqli_fetch_array($query)) {
+			$dates = date("g:i",$r['date']);
+			$data .= "[{$dates}] <a href='spieler.php?uid={$r['id_user']}'>{$r['name']}</a>: {$r['msg']} <br>";
 			}
 		return $data;
 	}

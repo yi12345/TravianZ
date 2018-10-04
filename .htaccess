@@ -1,4 +1,14 @@
 <Files "*.tpl">
-	Order Deny,Allow
+	Order Allow,Deny
 	Deny from all
+</Files>
+
+<Files "*.sql">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+<Files "*.log">
+    Order Allow,Deny
+    Deny from all
 </Files>

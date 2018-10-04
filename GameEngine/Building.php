@@ -3,10 +3,16 @@
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
-##  Filename       Buildng.php                                                 ##
-##  Developed by:  Dzoki & Dixie                                               ##
-##  License:       TravianX Project                                            ##
-##  Copyright:     TravianX (c) 2010-2011. All rights reserved.                ##
+##  Project:       TravianZ                                                    ##
+##  Version:       22.06.2015                    			       ## 
+##  Filename       Building.php                                                ##
+##  Developed by:  Mr.php , Advocaite , brainiacX , yi12345 , Shadow , ronix   ## 
+##  Fixed by:      Shadow - STARVATION , HERO FIXED COMPL., TPLinux            ##
+##  Fixed by:      InCube - double troops				       ##
+##  License:       TravianZ Project                                            ##
+##  Copyright:     TravianZ (c) 2010-2015. All rights reserved.                ##
+##  URLs:          http://travian.shadowss.ro                		       ##
+##  Source code:   https://github.com/Shadowss/TravianZ		               ## 
 ##                                                                             ##
 #################################################################################
 
@@ -19,7 +25,7 @@ class Building {
 	private $basic,$inner,$plus = 0;
 	public $buildArray = array();
 
-	public function Building() {
+	public function __construct() {
 		global $session;
 		$this->maxConcurrent = BASIC_MAX;
 		if(ALLOW_ALL_TRIBE || $session->tribe == 1) {
@@ -41,14 +47,16 @@ class Building {
                 global $session;
         if($session->access==BANNED){
             header("Location: banned.php");
-                        exit;
+            exit;
         } else {
             if ($this->checkResource($id,$tid)!=4) {
                 if($tid >= 19) {
                     header("Location: dorf2.php");
+                    exit;
                              }
                 else {
                     header("Location: dorf1.php");
+                    exit;
                               }
                                 exit;
              		}
@@ -66,32 +74,33 @@ class Building {
                 $this->upgradeBuilding($get['a']);
             }
         }
-        if(isset($get['master']) && isset($get['id']) && isset($get['time']) && $session->gold >= 1 && $session->goldclub && $village->master == 0 && (isset($get['c']) && $get['c']== $session->checker) && isset($_SESSION['mas'])) {
+        if(isset($get['master']) && isset($get['id']) && isset($get['time']) && $session->gold >= 1 && $session->goldclub && $village->master == 0 && (isset($get['c']) && $get['c']== $session->checker)) {
             $m=$get['master'];
-            $master=explode(",",$_SESSION['mas'][$m]);
-            if($get['master']==$master[0] && $get['id']==$master[1] && $get['time']==$master[2]) {
-                $session->changeChecker();
-                unset($_SESSION['mas']);
-                if($session->access==BANNED){
-                    header("Location: banned.php");
-                    exit;
-                }    
-                $level = $database->getResourceLevel($village->wid);
-                $database->addBuilding($village->wid, $get['id'], $get['master'], 1, $get['time'], 1, $level['f'.$get['id']] + 1 + count($database->getBuildingByField($village->wid,$get['id'])));
-                if($get['id'] > 18) {
-                    header("Location: dorf2.php");
-                } else {
-                    header("Location: dorf1.php");
-                }
+            $master = $_GET;
+            $session->changeChecker();
+            if($session->access==BANNED){
+                header("Location: banned.php");
+                exit;
             }    
+            $level = $database->getResourceLevel($village->wid);
+            $database->addBuilding($village->wid, $get['id'], $get['master'], 1, $get['time'], 1, $level['f'.$get['id']] + 1 + count($database->getBuildingByField($village->wid,$get['id'])));
+            if($get['id'] > 18) {
+                header("Location: dorf2.php");
+                exit;
+            } else {
+                header("Location: dorf1.php");
+                exit;
+            }
         }
         if(isset($get['a']) && $get['c'] == $session->checker && isset($get['id'])) {
-            $session->changeChecker();
-            $this->canProcess($get['a'],$get['id']);
-            $this->constructBuilding($get['id'],$get['a']);
+            if  ($get['id'] > 18 && ($get['id'] < 41 || $get['id'] == 99)){
+            	$session->changeChecker();
+            	$this->canProcess($get['a'],$get['id']);
+            	$this->constructBuilding($get['id'],$get['a']);
+            }
         }
         if(isset($get['buildingFinish']) && $session->plus) {
-            if($session->gold >= 2 && $session->sit == 0) {
+            if(intval($session->gold) >= 2 && $session->sit == 0) {
                 $this->finishAll();
             }
         }
@@ -100,7 +109,7 @@ class Building {
 	public function canBuild($id,$tid) {
 		global $village,$session,$database;
 		$demolition = $database->getDemolition($village->wid);
-		if($demolition[0]['buildnumber']==$id) { return 11; }
+		if((isset($demolition[0])) && $demolition[0]['buildnumber']==$id) { return 11; }
 		if($this->isMax($tid,$id)) {
 			return 1;
 		} else if($this->isMax($tid,$id,1) && ($this->isLoop($id) || $this->isCurrent($id))) {
@@ -272,7 +281,7 @@ class Building {
 		return $build;
 	}
 
-	private function loadBuilding() {
+	public function loadBuilding() {
 		global $database,$village,$session;
 		$this->buildArray = $database->getJobs($village->wid);
 		$this->allocated = count($this->buildArray);
@@ -295,8 +304,11 @@ class Building {
 					}
 				}
 			}
+            // echo var_dump($this->buildArray);
 			$this->NewBuilding = true;
-		}
+		}else{
+            $this->NewBuilding = false;
+        }
 	}
 
 	private function removeBuilding($d) {
@@ -310,9 +322,11 @@ class Building {
 					}
 					if($jobs['field'] >= 19) {
 						header("Location: dorf2.php");
+						exit;
 					}
 					else {
 						header("Location: dorf1.php");
+						exit;
 					}
 				}
 			}
@@ -361,13 +375,16 @@ class Building {
 				$logging->addBuildLog($village->wid,$this->procResType($village->resarray['f'.$id.'t']),($village->resarray['f'.$id]+($loopsame>0?2:1)),0);
 				if($id >= 19) {
 					header("Location: dorf2.php");
+					exit;
 				}
 				else {
 					header("Location: dorf1.php");
+					exit;
 				}
 			}
 			}else{
-			header("Location: banned.php");
+			    header("Location: banned.php");
+			    exit;
 			}
 		}
 	}
@@ -404,17 +421,18 @@ class Building {
 			if($database->addBuilding($village->wid,$id,$village->resarray['f'.$id.'t'],$loop,$time,0,0,$level['f'.$id] + 1 + count($database->getBuildingByField($village->wid,$id)))) {
 				$logging->addBuildLog($village->wid,$this->procResType($village->resarray['f'.$id.'t']),($village->resarray['f'.$id]-1),2);
 				header("Location: dorf2.php");
+				exit;
 			}
 			}else{
-			header("Location: banned.php");
+			    header("Location: banned.php");
+			    exit;
 			}
 		}
 	}
 
-
-
 	private function constructBuilding($id,$tid) {
 		global $database,$village,$session,$logging;
+
 		if($this->allocated < $this->maxConcurrent) {
 			if($tid == 16) {
 				$id = 39;
@@ -440,9 +458,11 @@ class Building {
 					$logging->addBuildLog($village->wid,$this->procResType($tid),($village->resarray['f'.$id]+1),1);
 					$database->modifyResource($village->wid,$uprequire['wood'],$uprequire['clay'],$uprequire['iron'],$uprequire['crop'],0);
 					header("Location: dorf2.php");
+					exit;
 				}
 			}else{
-			header("Location: banned.php");
+			    header("Location: banned.php");
+			    exit;
 			}
 			}
 		}
@@ -512,7 +532,7 @@ class Building {
 			if($this->getTypeLevel(22) >= 10 && $this->getTypeLevel(15) >= 10) { return true; } else { return false; }
 			break;
 			case 25:
-			if($this->getTypeLevel(15) >= 5) { return true; } else { return false; }
+			if($this->getTypeLevel(15) >= 5 && $this->getTypeLevel(26) == 0) { return true; } else { return false; }
 			break;
 			case 26:
 			if($this->getTypeLevel(18) >= 1 && $this->getTypeLevel(15) >= 5 && $this->getTypeLevel(25) == 0) { return true; } else { return false; }
@@ -530,23 +550,23 @@ class Building {
 			if($this->getTypeLevel(20) == 20 && $village->capital == 0) { return true; } else { return false; }
 			break;
 			case 34:
-			if($this->getTypeLevel(26) >= 3 && $this->getTypeLevel(15) >= 5 && $this->getTypeLevel(25) == 0) { return true; } else { return false; }
+		    if($this->getTypeLevel(26) >= 3 && $this->getTypeLevel(15) >= 5 && $this->getTypeLevel(25) == 0 && $village->capital != 0) { return true; } else { return false; }
 			break;
 			case 35:
-			if($this->getTypeLevel(16) >= 10 && $this->getTypeLevel(11) == 20) { return true; } else { return false; }
+		    if($this->getTypeLevel(16) >= 10 && $this->getTypeLevel(11) == 20 && $session->tribe == 2 && $village->capital != 0) { return true; } else { return false; }
 			break;
 			case 36:
-			if($this->getTypeLevel(16) >= 1) { return true; } else { return false; }
+			if($this->getTypeLevel(16) >= 1 && $session->tribe == 3) { return true; } else { return false; }
 			break;
 			case 37:
 			if($this->getTypeLevel(15) >= 3 && $this->getTypeLevel(16) >= 1) { return true; } else { return false; }
 			break;
 			case 38:
-            		if($this->getTypeLevel(15) >= 10) { return true; } else { return false; }
-            		break;
-            		case 39:
-            		if($this->getTypeLevel(15) >= 10) { return true; } else { return false; }
-            		break; 
+		    if($this->getTypeLevel(15) >= 10 && $village->natar == 1) { return true; } else { return false; }
+    		break;
+    		case 39:
+		    if($this->getTypeLevel(15) >= 10 && $village->natar == 1) { return true; } else { return false; }
+    		break; 
 			case 40:
 			$wwlevel = $village->resarray['f99'];
 			if($wwlevel > 50){
@@ -579,10 +599,10 @@ class Building {
 			if($village->natar == 1 && $wwbuildingplan > $needed_plan) { return true; } else { return false; }
 			break;
 			case 41:
-			if($this->getTypeLevel(16) >= 10 && $this->getTypeLevel(20) == 20) { return true; } else { return false; }
+			if($this->getTypeLevel(16) >= 10 && $this->getTypeLevel(20) == 20 && $session->tribe == 1) { return true; } else { return false; }
 			break;
 			case 42:
-			if($this->getTypeLevel(21) == 20 && $village->capital == 0) { return true; } else { return false; }
+		    if(GREAT_WKS && $this->getTypeLevel(21) == 20 && $village->capital == 0) { return true; } else { return false; }
 			break;
 		}
 	}
@@ -626,8 +646,19 @@ class Building {
 
 	public function isMax($id,$field,$loop=0) {
 		$name = "bid".$id;
-		global $$name,$village;
+		global $$name,$village,$session;
 		$dataarray = $$name;
+
+		// special case for Multihunter login which mathematically (because of the resarray length)
+		// allows for building resource fields above level 20
+		if ($session->tribe == 0) {
+		    if ($village->resarray['f'.$field] == 20) {
+		      return true;
+		    } else {
+		      return false;
+		    }
+		}
+
 		if($id <= 4) {
 			if($village->capital == 1) {
 				return ($village->resarray['f'.$field] == (count($dataarray) - 1 - $loop));
@@ -637,38 +668,59 @@ class Building {
 			}
 		}
 		else {
-			return ($village->resarray['f'.$field] == count($dataarray) - $loop);
+		    return ($village->resarray['f'.$field] == count($dataarray) - $loop);
 		}
 	}
 
 	public function getTypeLevel($tid,$vid=0) {
-		global $village,$database;
+		global $village,$database,$session;
+
+		// Support would not have a village, so this is irrelevant
+		if ($session->uid  == 1) {
+		    return 0;
+		}
+		
 		$keyholder = array();
+
 		if($vid == 0) {
 			$resourcearray = $village->resarray;
 		} else {
 			$resourcearray = $database->getResourceLevel($vid);
 		}
+		
 		foreach(array_keys($resourcearray,$tid) as $key) {
 			if(strpos($key,'t')) {
 				$key = preg_replace("/[^0-9]/", '', $key);
 				array_push($keyholder, $key);
 			}
 		}
+
 		$element = count($keyholder);
+
+		// if we count more than 1 instance of the building (mostly resource fields)
 		if($element >= 2) {
+		    // resource field
 			if($tid <= 4) {
 				$temparray = array();
+				
 				for($i=0;$i<=$element-1;$i++) {
+				    // collect current field level
 					array_push($temparray,$resourcearray['f'.$keyholder[$i]]);
 				}
+
+				// find out the maximum field level for this village
+				$maValue = max($temparray);
 				foreach ($temparray as $key => $val) {
-					if ($val == max($temparray))
-					$target = $key;
+				    if ($val == $maValue) {
+					   $target = $key;
+					}
 				}
 			}
+			// village building
 			else {
 				$target = 0;
+				
+				// find the highest level built for this building type
 				for($i=1;$i<=$element-1;$i++) {
 					if($resourcearray['f'.$keyholder[$i]] > $resourcearray['f'.$keyholder[$target]]) {
 						$target = $i;
@@ -676,12 +728,15 @@ class Building {
 				}
 			}
 		}
+		// if we count only a single building
 		else if($element == 1) {
 			$target = 0;
 		}
+		// no building matching search criteria
 		else {
 			return 0;
 		}
+
 		if($keyholder[$target] != "") {
 			return $resourcearray['f'.$keyholder[$target]];
 		}
@@ -708,78 +763,129 @@ class Building {
 		return false;
 	}
 
-    public function finishAll() {
+    public function finishAll($redirect_url = '') {
         global $database,$session,$logging,$village,$bid18,$bid10,$bid11,$technology,$_SESSION;
-        if($session->access!=BANNED){
-        $finish = 0;
-        
-        foreach($this->buildArray as $jobs) {
-        if($jobs['wid']==$village->wid){
-            $finish=2;
-        $wwvillage = $database->getResourceLevel($jobs['wid']);
-        if($wwvillage['f99t']!=40){
-            $level = $jobs['level'];
-            if($jobs['type'] != 25 AND $jobs['type'] != 26 AND $jobs['type'] != 40) {
-            $finish = 1;
-                $resource = $this->resourceRequired($jobs['field'],$jobs['type']);
-                if($jobs['master'] == 0){
-                $q = "UPDATE ".TB_PREFIX."fdata set f".$jobs['field']." = ".$jobs['level'].", f".$jobs['field']."t = ".$jobs['type']." where vref = ".$jobs['wid'];
-                }else{
-                $villwood = $database->getVillageField($jobs['wid'],'wood');
-                $villclay = $database->getVillageField($jobs['wid'],'clay');
-                $villiron = $database->getVillageField($jobs['wid'],'iron');
-                $villcrop = $database->getVillageField($jobs['wid'],'crop');
-                $type = $jobs['type'];
-                $buildarray = $GLOBALS["bid".$type];
-                $buildwood = $buildarray[$level]['wood'];
-                $buildclay = $buildarray[$level]['clay'];
-                $buildiron = $buildarray[$level]['iron'];
-                $buildcrop = $buildarray[$level]['crop'];
-                if($buildwood < $villwood && $buildclay < $villclay && $buildiron < $villiron && $buildcrop < $villcrop){
-                $newgold = $session->gold-1;
-                $database->updateUserField($session->uid, "gold", $newgold, 1);
-                $enought_res = 1;
-                $q = "UPDATE ".TB_PREFIX."fdata set f".$jobs['field']." = ".$jobs['level'].", f".$jobs['field']."t = ".$jobs['type']." where vref = ".$jobs['wid'];
-                }
-                }
-                if($database->query($q) && ($enought_res == 1 or $jobs['master'] == 0)) {
-                    $database->modifyPop($jobs['wid'],$resource['pop'],0);
-                    $database->addCP($jobs['wid'],$resource['cp']);
-                    $q = "DELETE FROM ".TB_PREFIX."bdata where id = ".$jobs['id'];
-                    $database->query($q);
-                    if($jobs['type'] == 18) {
-                        $owner = $database->getVillageField($jobs['wid'],"owner");
-                        $max = $bid18[$level]['attri'];
-                        $q = "UPDATE ".TB_PREFIX."alidata set max = $max where leader = $owner";
-                        $database->query($q);
+
+        if ($session->access!=BANNED) {
+            // will be true if we should decrease player's gold by 2
+            // for the immediate completion action
+            $countPlus2Gold  = false;
+            // will be true if we should decrease player's gold by 1
+            // for master builder queue
+            $countMasterGold = false;
+            // number of jobs to finish
+            $buildcount = ($this->buildArray ? count($this->buildArray) : 0);
+            // will be true if the job was successfully finished
+            $jobFinishSuccess = false;
+
+            foreach ($this->buildArray as $jobs) {
+                if ($jobs['wid']==$village->wid) {
+                    $wwvillage = $database->getResourceLevel($jobs['wid']);
+                    if ($wwvillage['f99t']!=40) {
+                        $level = $jobs['level'];
+                        if ($jobs['type'] != 25 AND $jobs['type'] != 26 AND $jobs['type'] != 40) {
+                            $resource = $this->resourceRequired($jobs['field'],$jobs['type']);
+                            // master builder involved
+                            if ($jobs['master'] != 0) {
+                            	if ($this->meetRequirement($jobs['field'])) {
+                                    // don't allow master builder to build anything
+                                    // if we only have 2 gold, since that would take us to -1 gold
+                                    if ( $session->gold > 2 ) {
+                                        $villwood   = $database->getVillageField( $jobs['wid'], 'wood' );
+                                        $villclay   = $database->getVillageField( $jobs['wid'], 'clay' );
+                                        $villiron   = $database->getVillageField( $jobs['wid'], 'iron' );
+                                        $villcrop   = $database->getVillageField( $jobs['wid'], 'crop' );
+                                        $type       = $jobs['type'];
+                                        $buildarray = $GLOBALS[ "bid" . $type ];
+                                        $buildwood  = $buildarray[ $level ]['wood'];
+                                        $buildclay  = $buildarray[ $level ]['clay'];
+                                        $buildiron  = $buildarray[ $level ]['iron'];
+                                        $buildcrop  = $buildarray[ $level ]['crop'];
+                                        if ( $buildwood < $villwood && $buildclay < $villclay && $buildiron < $villiron && $buildcrop < $villcrop ) {
+                                            $jobFinishSuccess = true;
+                                            $countMasterGold  = true;
+                                            $enought_res      = 1;
+                                            // we need to subtract resources for this, if another 2 jobs are active,
+                                            // as we'd never subtract those otherwise
+                                            if ( $buildcount > 2 ) {
+                                                $database->setVillageField( $jobs['wid'], 'wood', ( $villwood - $buildwood ) );
+                                                $database->setVillageField( $jobs['wid'], 'clay', ( $villclay - $buildclay ) );
+                                                $database->setVillageField( $jobs['wid'], 'iron', ( $villiron - $buildiron ) );
+                                                $database->setVillageField( $jobs['wid'], 'crop', ( $villcrop - $buildcrop ) );
+                                            }
+                                        }
+                                    } else {
+                                        // if we only have 2 gold, we need to cancel this job, as there will never
+                                        // be enough gold now in our account to finish this up
+                                        $exclude_master = true;
+                                        $q              = "DELETE FROM " . TB_PREFIX . "bdata WHERE id = " . (int) $jobs['id'];
+                                        $database->query( $q );
+                                    }
+                                }
+                            } else {
+                                // non-master builder build, we should count +2 gold for it
+                                $countPlus2Gold = true;
+                                $jobFinishSuccess = true;
+                            }
+
+                            // update build level in the database
+                            if ($jobFinishSuccess) {
+                                $q = "UPDATE ".TB_PREFIX."fdata set f".$jobs['field']." = ".$jobs['level'].", f".$jobs['field']."t = ".$jobs['type']." where vref = ".$jobs['wid'];
+                            }
+
+                            if (!isset($exclude_master) && $database->query($q) && ($enought_res == 1 or $jobs['master'] == 0)) {
+                                $database->modifyPop($jobs['wid'],$resource['pop'],0);
+                                $database->addCP($jobs['wid'],$resource['cp']);
+                                $q = "DELETE FROM ".TB_PREFIX."bdata where id = ".(int) $jobs['id'];
+                                $database->query($q);
+                                if($jobs['type'] == 18) {
+                                    $owner = $database->getVillageField($jobs['wid'],"owner");
+                                    $max = $bid18[$level]['attri'];
+                                    $q = "UPDATE ".TB_PREFIX."alidata set max = $max where leader = $owner";
+                                    $database->query($q);
+                                }
+                            }
+
+                            if (($jobs['field'] >= 19 && ($session->tribe == 1 || ALLOW_ALL_TRIBE)) || (!ALLOW_ALL_TRIBE && $session->tribe != 1)) {
+                                $innertimestamp = $jobs['timestamp'];
+                            }
+                        }
                     }
                 }
-                if(($jobs['field'] >= 19 && ($session->tribe == 1 || ALLOW_ALL_TRIBE)) || (!ALLOW_ALL_TRIBE && $session->tribe != 1)) { $innertimestamp = $jobs['timestamp']; }
+
+                // reset the flag for the next job
+                $jobFinishSuccess = false;
             }
-        }
-        }
-        }
-        if($finish != 2){
-            $demolition=$database->finishDemolition($village->wid);
-            $tech=$technology->finishTech();
-            if ($finish==1 || $demolition>0 || $tech>0) {
+
+            $demolition = $database->finishDemolition($village->wid);
+            $tech = $technology->finishTech();
+            if ($demolition > 0 || $tech > 0) {
+                $countPlus2Gold = true;
                 $logging->goldFinLog($village->wid);
-                $database->modifyGold($session->uid,2,0);
             }
-                        $stillbuildingarray = $database->getJobs($village->wid);  
-        if(count($stillbuildingarray) == 1) {
-            if($stillbuildingarray[0]['loopcon'] == 1) {
-                //$q = "UPDATE ".TB_PREFIX."bdata SET loopcon=0,timestamp=".(time()+$stillbuildingarray[0]['timestamp']-$innertimestamp)." WHERE id=".$stillbuildingarray[0]['id'];
-                $q = "UPDATE ".TB_PREFIX."bdata SET loopcon=0 WHERE id=".$stillbuildingarray[0]['id'];
-                $database->query($q);
+
+            // deduct the right amount of gold
+            if ($countMasterGold || $countPlus2Gold) {
+                $newgold = $session->gold - (($countMasterGold && $countPlus2Gold) ? 3 : 2);
+                $database->updateUserField($session->uid, "gold", $newgold, 1);
             }
+
+            $stillbuildingarray = $database->getJobs($village->wid);  
+            if (count($stillbuildingarray) == 1) {
+                if($stillbuildingarray[0]['loopcon'] == 1) {
+                    //$q = "UPDATE ".TB_PREFIX."bdata SET loopcon=0,timestamp=".(time()+$stillbuildingarray[0]['timestamp']-$innertimestamp)." WHERE id=".$stillbuildingarray[0]['id'];
+                    $q = "UPDATE ".TB_PREFIX."bdata SET loopcon=0 WHERE id=".(int) $stillbuildingarray[0]['id'];
+                    $database->query($q);
+                }
+            }
+
+            header("Location: ".($redirect_url ? $redirect_url : $session->referrer));
+            exit;
+        } else {
+            header("Location: banned.php");
+            exit;
         }
-        }
-        header("Location: ".$session->referrer);
-        }else{
-        header("Location: banned.php");
-        }
-    }  
+    }
 
 	public function resourceRequired($id,$tid,$plus=1) {
 		$name = "bid".$tid;

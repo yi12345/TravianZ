@@ -11,9 +11,13 @@
 #################################################################################
 
 
+use App\Utils\AccessLogger;
+
 include("GameEngine/Village.php");
+AccessLogger::logRequest();
+
 $__start = $generator->pageLoadTimeStart();
-if(isset($_GET['rank'])){ $_POST['rank']==$_GET['rank']; }
+if(isset($_GET['rank'])){ $_POST['rank']=$_GET['rank']; }
 $_GET['aid'] = $session->alliance;
 $_GET['hero'] = count($database->getHero($session->uid));
 $ranking->procRankReq($_GET);
@@ -21,23 +25,54 @@ $ranking->procRank($_POST);
 if(isset($_GET['newdid'])) {
 	$_SESSION['wid'] = $_GET['newdid'];
 	header("Location: ".$_SERVER['PHP_SELF']."?id=".$_GET['id']);
+	exit;
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<title><?php echo SERVER_NAME ?></title>
-	<link REL="shortcut icon" HREF="favicon.ico"/>
+	<title><?php
+	echo SERVER_NAME . ' &raquo; &raquo; &raquo; Statistics (';
+	
+	if (!empty($_GET['id'])) {
+	    switch ($_GET['id']) {
+	        case '4':
+	            echo 'Alliances';
+	            break;
+	            
+	        case '2':
+	            echo 'Villages';
+	            break;
+	            
+	        case '8':
+	            echo 'Heroes';
+	            break;
+	            
+	        case '0':
+	            echo 'General';
+	            break;
+	            
+	        case '99':
+	            echo 'WW';
+	            break;
+	    }
+	} else {
+	    echo 'Players';
+	}
+	
+	echo ')';
+	?></title>
+	<link rel="shortcut icon" href="favicon.ico"/>
 	<meta http-equiv="cache-control" content="max-age=0" />
 	<meta http-equiv="pragma" content="no-cache" />
 	<meta http-equiv="expires" content="0" />
 	<meta http-equiv="imagetoolbar" content="no" />
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<script src="mt-full.js?0faaa" type="text/javascript"></script>
-	<script src="unx.js?0faaa" type="text/javascript"></script>
-	<script src="new.js?0faaa" type="text/javascript"></script>
-	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7c" rel="stylesheet" type="text/css" />
-	<link href="<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7c" rel="stylesheet" type="text/css" />
+	<script src="mt-full.js?0faab" type="text/javascript"></script>
+	<script src="unx.js?f4b7g" type="text/javascript"></script>
+	<script src="new.js?0faab" type="text/javascript"></script>
+	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7d" rel="stylesheet" type="text/css" />
+	<link href="<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7g" rel="stylesheet" type="text/css" />
 	<?php
 	if($session->gpack == null || GP_ENABLE == false) {
 	echo "
@@ -73,59 +108,57 @@ if(isset($_GET['newdid'])) {
  | <a href="statistiken.php?id=8" <?php if(isset($_GET['id']) && $_GET['id'] == 8) { echo "class=\"selected \""; } ?>>Heroes</a>
  | <a href="statistiken.php?id=0" <?php if(isset($_GET['id']) && $_GET['id'] == 0) { echo "class=\"selected \""; } ?>>General</a>
  <?php if(WW == true) { echo
- '|'; } else { echo ''; } ?></a> <a href="statistiken.php?id=99" <?php if(isset($_GET['id']) && $_GET['id'] == 99) { echo "class=\"selected \""; } ?>><?php if(WW == true) { echo
+ '|'; } else { echo ''; } ?> <a href="statistiken.php?id=99" <?php if(isset($_GET['id']) && $_GET['id'] == 99) { echo "class=\"selected \""; } ?>><?php if(WW == true) { echo
  'WW'; } else { echo ''; }?></a>
 </div>
 <?php
 if(isset($_GET['id'])) {
 	switch($_GET['id']) {
-		 case 31:
-		include("Templates/Ranking/player_attack.tpl");
-		break;
+		case 31:
+			include("Templates/Ranking/player_attack.tpl");
+			break;
 		case 32:
-		include("Templates/Ranking/player_defend.tpl");
-		break;
+			include("Templates/Ranking/player_defend.tpl");
+			break;
 		case 7:
-		include("Templates/Ranking/player_top10.tpl");
-		break;
+			include("Templates/Ranking/player_top10.tpl");
+			break;
 		case 2:
-		include("Templates/Ranking/villages.tpl");
-		break;
+			include("Templates/Ranking/villages.tpl");
+			break;
 		case 4:
-		include("Templates/Ranking/alliance.tpl");
-		break;
+			include("Templates/Ranking/alliance.tpl");
+			break;
 		case 8:
-		include("Templates/Ranking/heroes.tpl");
-		break;
+			include("Templates/Ranking/heroes.tpl");
+			break;
 		case 11:
-		include("Templates/Ranking/player_1.tpl");
-		break;
+			include("Templates/Ranking/player_1.tpl");
+			break;
 		case 12:
-		include("Templates/Ranking/player_2.tpl");
-		break;
+			include("Templates/Ranking/player_2.tpl");
+			break;
 		case 13:
-		include("Templates/Ranking/player_3.tpl");
-		break;
+			include("Templates/Ranking/player_3.tpl");
+			break;
 		case 41:
-		include("Templates/Ranking/alliance_attack.tpl");
-		break;
+			include("Templates/Ranking/alliance_attack.tpl");
+			break;
 		case 42:
-		include("Templates/Ranking/alliance_defend.tpl");
-		break;
+			include("Templates/Ranking/alliance_defend.tpl");
+			break;
 		case 43:
-		include("Templates/Ranking/ally_top10.tpl");
-		break;
+			include("Templates/Ranking/ally_top10.tpl");
+			break;
 		case 0:
-		include("Templates/Ranking/general.tpl");
-		break;
+			include("Templates/Ranking/general.tpl");
+			break;
 		case 1:
-		default:
-		include("Templates/Ranking/overview.tpl");
-		break;
+			include("Templates/Ranking/overview.tpl");
+			break;
 		case 99:
-		default:
-		include("Templates/Ranking/ww.tpl");
-		break;
+			include("Templates/Ranking/ww.tpl");
+			break;
 	}
 }
 else {
@@ -138,7 +171,7 @@ else {
 				</table>
 </div>
 
-</br></br></br></br><div id="side_info">
+<br /><br /><br /><br /><div id="side_info">
 <?php
 include("Templates/multivillage.tpl");
 include("Templates/quest.tpl");

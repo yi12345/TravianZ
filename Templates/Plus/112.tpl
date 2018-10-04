@@ -3,7 +3,7 @@ include("Templates/Plus/pmenu.tpl");
 $free = $session->uid;
 ?>
 <!-- Hinweis -->
-
+<!--
 <table class="rate_details lang_ltr lang_de" cellpadding="1" cellspacing="1">
 	<thead>
 
@@ -85,28 +85,60 @@ $free = $session->uid;
 		</tr>
 	</tbody>
 </table>
+-->
 <table class="rate_details lang_ltr lang_de" cellpadding="1" cellspacing="1">
 	<thead>
 
 		<tr>
-			<th colspan="2">4. Paypal</th>
+			<th colspan="2">Paypal</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td class="pic"><img src="img/bezahlung/paypal.jpg" style="99px; height:99px;" alt="Paket A" />
-
-			<div>Gold : 360<br />Cost : 9,99 Euro<br />Wait: 24 hours</div>
-			</td>
-			<td class="desc">Bezahlung per Paypal einleiten<br />
-            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RDW6U6UGFP9F4" target="_blank">
-				<img src="img/bezahlung/paypal1.gif" style="width:126px; height:47px;" alt="Moneybookers" /></a><br />
-            Mehr Information zu PayPal findest du hier:       <br />                         <a href="#"
-				onclick="window.open('https://www.paypal.com/de/cgi-bin/webscr?cmd=xpt/cps/popup/OLCWhatIsPayPal-outside','external','scrollbars=yes,status=yes,resizable=yes,toolbar=yes,width=800,height=600');return false;">Weitere Infos</a>                <br /> </td>
-
-		</tr>
+			<td class="pic">
+                <img src="img/bezahlung/paypal.jpg" style="99px; height:99px;" alt="Package C" />
+    
+                <div>
+                    Gold : <?php echo (defined('PLUS_PACKAGE_C_GOLD') ? PLUS_PACKAGE_C_GOLD : 360); ?>
+                    <br />
+                    Cost : <?php echo (defined('PLUS_PACKAGE_C_PRICE') ? PLUS_PACKAGE_C_PRICE : '9,99') . ' ' . (defined('PAYPAL_CURRENCY') ? PAYPAL_CURRENCY : 'EUR'); ?>
+                    <br />
+                    Wait: 24 hours
+                </div>
+                </td>
+                <td class="desc">
+                    Initiate Payment by Paypal
+                    <br /><br />
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+    
+                      <!-- Identify your business so that you can collect the payments. -->
+                      <input type="hidden" name="business" value="<?php echo (defined('PAYPAL_EMAIL') ? PAYPAL_EMAIL : 'martin@martinambrus.com'); ?>">
+                    
+                      <!-- Specify a Buy Now button. -->
+                      <input type="hidden" name="cmd" value="_xclick">
+                    
+                      <!-- Specify details about the item that buyers will purchase. -->
+                      <input type="hidden" name="item_name" value="<?php echo SERVER_NAME . ' Package C Gold Pack'; ?>">
+                      <input type="hidden" name="amount" value="<?php echo (defined('PLUS_PACKAGE_C_PRICE') ? str_replace(",", ".", PLUS_PACKAGE_C_PRICE) : '9,99'); ?>">
+                      <input type="hidden" name="currency_code" value="<?php echo (defined('PAYPAL_CURRENCY') ? PAYPAL_CURRENCY : 'EUR'); ?>">
+                    
+                      <!-- Display the payment button. -->
+                      <input type="image" name="submit" border="0"
+                      src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/btn_buynow_107x26.png"
+                      alt="Buy Now">
+                      <img alt="" border="0" width="1" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" >
+        
+                    </form>
+    
+                <br />
+                More Info about PayPal can be found here: <br />
+                <a href="#" onclick="window.open('https://www.paypal.com/en/cgi-bin/webscr?cmd=xpt/cps/popup/OLCWhatIsPayPal-outside','external','scrollbars=yes,status=yes,resizable=yes,toolbar=yes,width=800,height=600');return false;">More Info</a>
+                <br />
+            </td>
+        </tr>
 	</tbody>
 </table>
+<!--
 <table class="rate_details lang_ltr lang_de" cellpadding="1" cellspacing="1">
 	<thead>
 
@@ -121,14 +153,14 @@ $free = $session->uid;
 			<div>Gold : 360<br />Cost : 9,99 Euro<br />Wait: 24 hours</div>
 			</td>
 			<td class="desc">
-							Mit Skrill (moneybookers) kannst du mit deiner Kreditkarte oder per Überweisung von deinem Konto zahlen.                <br />
+							Mit Skrill (moneybookers) kannst du mit deiner Kreditkarte oder per Ãœberweisung von deinem Konto zahlen.                <br />
                 
             				 <?PHP echo'<form action="https://www.moneybookers.com/app/payment.pl" target="_blank">
  <input type="hidden" name="pay_to_email" value="novgorodschi@icloud.com">
  <input type="hidden" name="recipient_description" value="netsoundradio">
  <input type="hidden" name="transaction_id" value="112">
  <input type="hidden" name="return_url" value="http://www.merchant.com/payment_made.htm">
- <input type="hidden" name="return_url_text" value="Danke für deinen Einkauf">
+ <input type="hidden" name="return_url_text" value="Danke fÃ¼r deinen Einkauf">
  <input type="hidden" name="return_url_target" value="1">
  <input type="hidden" name="cancel_url" value="http://www.merchant.com/payment_cancelled.htm">
  <input type="hidden" name="cancel_url_target" value="1">
@@ -137,7 +169,7 @@ $free = $session->uid;
  <input type="hidden" name="new_window_redirect" value="1">
  <input type="hidden" name="dynamic_descriptor" value="Descriptor">
  <input type="hidden" name="language" value="DE">
- <input type="hidden" name="confirmation_note" value="Vielen Dank für deinen Einkauf! ">
+ <input type="hidden" name="confirmation_note" value="Vielen Dank fÃ¼r deinen Einkauf! ">
  <input type="hidden" name="merchant_fields" value="field1">
  <input type="hidden" name="title" value="">
  <input type="hidden" name="firstname" value="">
@@ -161,7 +193,7 @@ $free = $session->uid;
  <input type="hidden" name="detail1_text" value="Paket C : 600 Gold">
  <input type="hidden" name="detail2_description" value="Beschreibung:">
  <input type="hidden" name="detail2_text" value="Travian Gold ">
- <input type="hidden" name="detail3_description" value="Verkäufer-ID:">
+ <input type="hidden" name="detail3_description" value="VerkÃ¤ufer-ID:">
  <input type="hidden" name="detail3_text" value="37115003">
  <input type="hidden" name="detail4_description" value="Weitere Angaben:">
  <input type="hidden" name="detail4_text" value="5-6 Tage Leieferzeit">
@@ -180,6 +212,7 @@ $free = $session->uid;
 		</tr>
 	</tbody>
 </table>
+-->
 <br /><br /><br /><br /><br /><br />
 </div>
 

@@ -1,19 +1,24 @@
 <?php
+
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
-##  Project:       TravianZ                        		       	       		   ##
-##  Version:       01.09.2013 						       					   ##
+##  Project:       TravianZ                                                    ##
+##  Version:       22.06.2015                    			       ## 
 ##  Filename       Battle.php                                                  ##
-##  Developed by:  Dzoki & Dixie  											   ##
+##  Developed by:  Dzoki & Dixie   					       ## 
+##  Fixed by:      Shadow 				  		       ##
 ##  Thanks to:     Akakori & Elmar                                             ##
 ##  Reworked and Fix by:   ronix                                               ##
+##  Fixed by:      InCube - double troops				       ##
 ##  License:       TravianZ Project                                            ##
-##  Copyright:     TravianZ (c) 2010-2014. All rights reserved.                ##
-##  URLs:          http://travian.shadowss.ro 				       			   ##
-##  Source code:   http://github.com/Shadowss/TravianZ			    	       ##
+##  Copyright:     TravianZ (c) 2010-2015. All rights reserved.                ##
+##  URLs:          http://travian.shadowss.ro                		       ##
+##  Source code:   https://github.com/Shadowss/TravianZ		               ## 
 ##                                                                             ##
 #################################################################################
+
+
 class Battle {
 
 		public function procSim($post) {
@@ -49,7 +54,7 @@ class Battle {
 				if(isset($post['a1_1'])) {
 					$sum = $sum2 = $post['walllevel'] = 0;
 					for($i=1;$i<=10;$i++) {
-						$sum += $post['a1_'.$i];
+					    $sum += (!empty($post['a1_'.$i]) ? $post['a1_'.$i] : 0);
 					}
 					if($sum > 0) {
 						$post['palast'] = intval($post['palast']);
@@ -90,6 +95,11 @@ class Battle {
 		private function getBattleHero($uid) {
 		global $database;
 		$heroarray = $database->getHero($uid);
+
+		if (!count($heroarray)) {
+            return array('heroid'=> 0, 'unit'=>'','atk'=>0,'di'=>0,'dc'=>0,'ob'=>0,'db'=>0,'health'=>0);
+        }
+
 		$herodata = $GLOBALS["h".$heroarray[0]['unit']];
 		if(!isset($heroarray['health'])) $heroarray['health']=0;
 		$h_atk = $herodata['atk'] + ($heroarray[0]['attack'] * $herodata['atkp']);
@@ -97,7 +107,7 @@ class Battle {
 		$h_dc = $herodata['dc'] + 5 * floor($heroarray[0]['defence'] * $herodata['dcp'] / 5);
 		$h_ob = 1 + 0.010 * ($heroarray[0]['attackbonus']/5);
 		$h_db = 1 + 0.010 * ($heroarray[0]['defencebonus']/5);
-		return array('heroid'=>$heroarray[0]['heroid'],'unit'=>$heroarray[0]['unit'],'atk'=>$h_atk,'di'=>$h_di,'dc'=>$h_dc,'ob'=>$h_ob,'db'=>$h_db,'health'=>$heroarray['health']);
+		return array('heroid'=>(int) $heroarray[0]['heroid'],'unit'=>$heroarray[0]['unit'],'atk'=>$h_atk,'di'=>$h_di,'dc'=>$h_dc,'ob'=>$h_ob,'db'=>$h_db,'health'=>$heroarray['health']);
 		}
 		
 		private function getBattleHeroSim($attbonus) {
@@ -163,6 +173,13 @@ class Battle {
 				$walllevel=$post['walllevel'];
 				$wall = $walllevel;
 				$palast = $post['palast'];
+				
+				if($scout ==1 && $defscout==0) {
+					$walllevel = 0;
+					$wall = 0;
+					$palast = 0;
+				}
+				
 				if($scout ==1) {
 					$palast = 0; //no def point palace n residence when scout
 				}
@@ -221,7 +238,7 @@ class Battle {
 	}
 
 		//1 raid 0 normal
-		function calculateBattle($Attacker,$Defender,$def_wall,$att_tribe,$def_tribe,$residence,$attpop,$defpop,$type,$def_ab,$att_ab1,$att_ab2,$att_ab3,$att_ab4,$att_ab5,$att_ab6,$att_ab7,$att_ab8,$tblevel,$stonemason,$walllevel,$offhero,$hero_strenght,$deffhero,$AttackerID,$DefenderID,$AttackerWref,$DefenderWref,$conqureby) {
+		function calculateBattle($Attacker,$Defender,$def_wall,$att_tribe,$def_tribe,$residence,$attpop,$defpop,$type,$def_ab,$att_ab1,$att_ab2,$att_ab3,$att_ab4,$att_ab5,$att_ab6,$att_ab7,$att_ab8,$tblevel,$stonemason,$walllevel,$offhero,$hero_strenght,$deffhero,$AttackerID,$DefenderID,$AttackerWref,$DefenderWref,$conqureby, $defReinforcements = null, $villageOwners = array(), $userdataCache = array()) {
 			global $bid34,$bid35,$database;
 				
 			// Define the array, with the units
@@ -235,8 +252,7 @@ class Battle {
 			$winner = false;
 			// at 0 all partial results
 			$cap = $ap = $dp = $cdp = $rap = $rdp = 0;
-				
-		
+
 			$att_artefact = count($database->getOwnUniqueArtefactInfo2($AttackerID,3,3,0));
 			$att_artefact1 = count($database->getOwnUniqueArtefactInfo2($AttackerWref,3,1,1));
 			$att_artefact2 = count($database->getOwnUniqueArtefactInfo2($AttackerID,3,2,0));
@@ -287,12 +303,23 @@ class Battle {
 					$cdp *= $defenderhero['db'];
 				}
 			}
-            $DefendersAll = $database->getEnforceVillage($DefenderWref,0);
+            $DefendersAll = (!is_null($defReinforcements) ? $database->getEnforceVillage($DefenderWref,0) : $defReinforcements);
+
+			if (!isset($villageOwners[$DefenderWref])) {
+                $villageOwners[ $DefenderWref ] = $database->getVillageField( $DefenderWref, "owner" );
+            }
+
             if(!empty($DefendersAll) && $DefenderWref>0){
                 foreach($DefendersAll as $defenders) {
                     for ($i=1;$i<=50;$i++) {$def_ab[$i]=0;}
                     $fromvillage = $defenders['from'];
-                    $enforcetribe = $database->getUserField($database->getVillageField($fromvillage,"owner"),"tribe",0);
+
+                    if (!isset($villageOwners[$fromvillage])) {
+                        $villageOwners[$fromvillage] = $database->getVillageField($fromvillage,"owner");
+                        $userdataCache[$fromvillage] = $database->getUserArray($villageOwners[$fromvillage], 1);
+                    }
+
+                    $enforcetribe = $userdataCache[$fromvillage]["tribe"];
                     $ud=($enforcetribe-1)*10;                
                     if($defenders['from']>0) { //don't check nature tribe
                         $armory = $database->getABTech($defenders['from']); // Armory level every village enforcement
@@ -317,7 +344,7 @@ class Battle {
                         $cdp+=$datadef['cdp'];
                         $involve=$datadef['involve'];
                     }            
-                    $reinfowner = $database->getVillageField($fromvillage,"owner");
+                    $reinfowner = $villageOwners[$fromvillage];
                     $defhero = $this->getBattleHero($reinfowner);
                     //calculate def hero from enforcement
                     if($defenders['hero'] != 0){
@@ -372,28 +399,28 @@ class Battle {
 						$j = $i-$start+1;
 						if($abcount <= 8 && ${'att_ab'.$abcount} > 0) {
 							if(in_array($i,$calvary)) {
-								$cap += (${'u'.$i}['atk'] + (${'u'.$i}['atk'] + 300 * ${'u'.$i}['pop'] / 7) * (pow(1.007, ${'att_ab'.$abcount}) - 1)) * $Attacker['u'.$i];
+							    $cap += (int) (${'u'.$i}['atk'] + (${'u'.$i}['atk'] + 300 * ${'u'.$i}['pop'] / 7) * (pow(1.007, ${'att_ab'.$abcount}) - 1)) * (int) $Attacker['u'.$i];
 							}else{
-								$ap += (${'u'.$i}['atk'] + (${'u'.$i}['atk'] + 300 * ${'u'.$i}['pop'] / 7) * (pow(1.007, ${'att_ab'.$abcount}) - 1)) * $Attacker['u'.$i];
+							    $ap += (int) (${'u'.$i}['atk'] + (${'u'.$i}['atk'] + 300 * ${'u'.$i}['pop'] / 7) * (pow(1.007, ${'att_ab'.$abcount}) - 1)) * (int) $Attacker['u'.$i];
 							}
 						}else{
 							if(in_array($i,$calvary)) {
-								$cap += $Attacker['u'.$i]*${'u'.$i}['atk'];
+								$cap += (int) $Attacker['u'.$i]*${'u'.$i}['atk'];
 							}else{
-								$ap += $Attacker['u'.$i]*${'u'.$i}['atk'];
+								$ap += (int) $Attacker['u'.$i]*${'u'.$i}['atk'];
 							}
 						}
 						$abcount +=1;
 						// Points catapult the attacker
 						if(in_array($i,$catapult)) {
-							$catp += $Attacker['u'.$i];
+							$catp += (int) $Attacker['u'.$i];
 						}
 						// Points of the Rams attacker
 						if(in_array($i,$rams)){
-							$ram += $Attacker['u'.$i];
+						    $ram += (int) $Attacker['u'.$i];
 						}
-						$involve += $Attacker['u'.$i];
-						$units['Att_unit'][$i] = $Attacker['u'.$i];
+						$involve += (int) $Attacker['u'.$i];
+						$units['Att_unit'][$i] = (int) $Attacker['u'.$i];
 					}
 					if (isset($Attacker['uhero']) && $Attacker['uhero'] != 0){
 						$units['Att_unit']['hero'] = $Attacker['uhero'];
@@ -456,7 +483,7 @@ class Battle {
 			// Formula for calculating points attackers (Infantry & Cavalry)
 				
 			if($AttackerWref != 0){
-				$rap = ($ap+$cap)+(($ap+$cap)/100*$bid35[$this->getTypeLevel(35,$AttackerWref)]['attri']);
+			    $rap = ($ap+$cap)+(($ap+$cap)/100*(isset($bid35[$this->getTypeLevel(35,$AttackerWref)]) ? $bid35[$this->getTypeLevel(35,$AttackerWref)]['attri'] : 0));
 			}else{
 				$rap = $ap+$cap;
 			}
@@ -532,9 +559,9 @@ class Battle {
 				if ($result[2]>1) {$result[2]=1;$result['Winner'] = "attacker";$winner=true;}
 				// If attacked with "Hero"
 				$ku = ($att_tribe-1)*10+9;
-				$kings = $Attacker['u'.$ku];
+				$kings = (int) $Attacker['u'.$ku];
 
-				$aviables= $kings-round($kings*$result[1]);
+				$aviables= $kings-round($kings * (int) $result[1]);
 				if ($aviables>0){
 						switch($aviables){
 						case 1:$fealthy = rand(20,30);break;
@@ -553,7 +580,7 @@ class Battle {
 				$wctp = pow(($rap/$rdp),1.5);
 				$wctp = ($wctp >= 1)? 1-0.5/$wctp : 0.5*$wctp;
 				$wctp *= $catp+($att_ab8/1.5);
-				$artowner = $database->getVillageField($DefenderWref,"owner");
+				$artowner = $villageOwners[$DefenderWref];
 				$bartefact = count($database->getOwnUniqueArtefactInfo2($artowner,1,3,0));
 				$bartefact1 = count($database->getOwnUniqueArtefactInfo2($DefenderWref,1,1,1));
 				$bartefact2 = count($database->getOwnUniqueArtefactInfo2($artowner,1,2,0));
@@ -596,7 +623,7 @@ class Battle {
 				$wctp = pow(($rap/$rdp),1.5);
 				$wctp = ($wctp >= 1)? 1-0.5/$wctp : 0.5*$wctp;
 				$wctp *= ($ram/2) + ($att_ab7/1.5);
-				$artowner = $database->getVillageField($DefenderWref,"owner");
+				$artowner = $villageOwners[$DefenderWref];
 				$bartefact = count($database->getOwnUniqueArtefactInfo2($artowner,1,3,0));
 				$bartefact1 = count($database->getOwnUniqueArtefactInfo2($DefenderWref,1,1,1));
 				$bartefact2 = count($database->getOwnUniqueArtefactInfo2($artowner,1,2,0));
@@ -647,19 +674,18 @@ class Battle {
 
 			if (isset($units['Att_unit']['hero']) && $units['Att_unit']['hero'] >0){
 
-				$_result=mysql_query("select * from " . TB_PREFIX . "hero where `dead`='0' and `heroid`='".$atkhero['heroid']."'");
-				$fdb = mysql_fetch_array($_result);
-				$hero_id=$fdb['heroid'];
+			    $_result=mysqli_query($GLOBALS['link'],"select heroid, health from " . TB_PREFIX . "hero where `dead`='0' and `heroid`=".(int) $atkhero['heroid']);
+				$fdb = mysqli_fetch_array($_result);
+				$hero_id=(int) $fdb['heroid'];
 				$hero_health=$fdb['health'];
 				$damage_health=round(100*$result[1]);
 			
 				if ($hero_health<=$damage_health or $damage_health>90){
 					//hero die
 					$result['casualties_attacker']['11'] = 1;
-					mysql_query("update " . TB_PREFIX . "hero set `dead`='1' where `heroid`='".$hero_id."'");
-					mysql_query("update " . TB_PREFIX . "hero set `health`='0' where `heroid`='".$hero_id."'");
+					mysqli_query($GLOBALS['link'],"update " . TB_PREFIX . "hero set `dead` = 1, `health` = 0 where `heroid`=".(int) $hero_id);
 				}else{
-					mysql_query("update " . TB_PREFIX . "hero set `health`=`health`-".$damage_health." where `heroid`='".$hero_id."'");
+				    mysqli_query($GLOBALS['link'],"update " . TB_PREFIX . "hero set `health`=`health`-".(int) $damage_health." where `heroid`=".(int) $hero_id);
 				}
 			}
 			unset($_result,$fdb,$hero_id,$hero_health,$damage_health);
@@ -667,43 +693,44 @@ class Battle {
 
 			if (isset($units['Def_unit']['hero']) && $units['Def_unit']['hero'] >0){
 
-				$_result=mysql_query("select * from " . TB_PREFIX . "hero where `dead`='0' and `heroid`='".$defenderhero['heroid']."'");
-				$fdb = mysql_fetch_array($_result);
-				$hero_id=$fdb['heroid'];
+			    $_result=mysqli_query($GLOBALS['link'],"select heroid, health from " . TB_PREFIX . "hero where `dead`='0' and `heroid`=".(int) $defenderhero['heroid']);
+				$fdb = mysqli_fetch_array($_result);
+				$hero_id=(int) $fdb['heroid'];
 				$hero_health=$fdb['health'];
 				$damage_health=round(100*$result[2]);
 				if ($hero_health<=$damage_health or $damage_health>90){
 					//hero die
 					$result['deadherodef'] = 1;
-					mysql_query("update " . TB_PREFIX . "hero set `dead`='1' where `heroid`='".$hero_id."'");
-					mysql_query("update " . TB_PREFIX . "hero set `health`='0' where `heroid`='".$hero_id."'");
+					mysqli_query($GLOBALS['link'],"update " . TB_PREFIX . "hero set `dead` = 1, `health` = 0 where `heroid`=".(int) $hero_id);
 				}else{
 					$result['deadherodef'] = 0;
-					mysql_query("update " . TB_PREFIX . "hero set `health`=`health`-".$damage_health." where `heroid`='".$hero_id."'");
+					mysqli_query($GLOBALS['link'],"update " . TB_PREFIX . "hero set `health`=`health`-".(int) $damage_health." where `heroid`=".(int) $hero_id);
 				}
 			}
 			unset($_result,$fdb,$hero_id,$hero_health,$damage_health);
 
-			$DefendersAll = $database->getEnforceVillage($DefenderWref,0);
 			if(!empty($DefendersAll)){
+				$battleHeroesCache = [];
 				foreach($DefendersAll as $defenders) {
 					if($defenders['hero']>0) {
 						if(!empty($heroarray)) { reset($heroarray); }
-						$Reinforcer = $database->getVillageField($defenders['from'],"owner");
-						$heroarraydefender = $this->getBattleHero($Reinforcer);
-						$_result=mysql_query("select * from " . TB_PREFIX . "hero where `dead`='0' and `heroid`='".$heroarraydefender['heroid']."'");
-						$fdb = mysql_fetch_array($_result);
-						$hero_id=$fdb['heroid'];
+						if (!isset($villageOwners[$defenders['from']])) {
+							$villageOwners[$defenders['from']] = $database->getVillageField($defenders['from'],"owner");
+                            $battleHeroesCache[$defenders['from']] = $this->getBattleHero($villageOwners[$defenders['from']]);
+						}
+						$heroarraydefender = $battleHeroesCache[$defenders['from']];
+						$_result=mysqli_query($GLOBALS['link'],"select heroid, health from " . TB_PREFIX . "hero where `dead`='0' and `heroid`=".(int) $heroarraydefender['heroid']);
+						$fdb = mysqli_fetch_array($_result);
+						$hero_id=(int) $fdb['heroid'];
 						$hero_health=$fdb['health'];
 						$damage_health=round(100*$result[2]);
 						if ($hero_health<=$damage_health or $damage_health>90){
 							//hero die
 							$result['deadheroref'][$defenders['id']] = 1;
-							mysql_query("update " . TB_PREFIX . "hero set `dead`='1' where `heroid`='".$hero_id."'");
-							mysql_query("update " . TB_PREFIX . "hero set `health`='0' where `heroid`='".$hero_id."'");
+                            mysqli_query($GLOBALS['link'],"update " . TB_PREFIX . "hero set `dead` = 1, `health` = 0 where `heroid`=".(int) $hero_id);
 						}else{
 							$result['deadheroref'][$defenders['id']] = 0;
-							mysql_query("update " . TB_PREFIX . "hero set `health`=`health`-".$damage_health." where `heroid`='".$hero_id."'");
+							mysqli_query($GLOBALS['link'],"update " . TB_PREFIX . "hero set `health`=`health`-".(int) $damage_health." where `heroid`=".(int) $hero_id);
 						}
 					}
 				}
@@ -721,7 +748,7 @@ class Battle {
 				$j = $i-$start+1;
 				$y = $i-(($att_tribe-1)*10);
 
-				$max_bounty += ($Attacker['u'.$i]-$result['casualties_attacker'][$y])*${'u'.$i}['cap'];
+				$max_bounty += ((int) $Attacker['u'.$i] - (int) $result['casualties_attacker'][$y]) * (int) ${'u'.$i}['cap'];
 
 			}
 
@@ -786,6 +813,9 @@ class Battle {
 			for($y=1;$y<=50;$y++) {
 				global ${'u'.$y};
 				if ($defenders['u'.$y]>0) {
+					if (!isset($def_ab[$y])) {
+                        $def_ab[$y] = 0;
+					}
 					if ($def_ab[$y]>0) {
 						$dp +=  (${'u'.$y}['di'] + (${'u'.$y}['di'] + 300 * ${'u'.$y}['pop'] / 7) * (pow(1.007, $def_ab[$y]) - 1)) * $defenders['u'.$y];
 						$cdp += (${'u'.$y}['dc'] + (${'u'.$y}['dc'] + 300 * ${'u'.$y}['pop'] / 7) * (pow(1.007, $def_ab[$y]) - 1)) * $defenders['u'.$y];

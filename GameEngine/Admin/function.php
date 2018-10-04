@@ -20,7 +20,7 @@
 class funct {
 
   function CheckLogin(){
-	if($_SESSION['access'] >= MULTIHUNTER and $_SESSION['id']){
+      if(isset($_SESSION['access']) && $_SESSION['access'] >= MULTIHUNTER and $_SESSION['id']){
 	  return true;
 	}else{
 	  return false;
@@ -65,6 +65,7 @@ class funct {
         //add ban
       break;
       case "delOas":
+        $database->query('UPDATE '.TB_PREFIX.'odata SET conqured = 0, owner = 2, name = "Unoccupied Oasis" WHERE wref = '.$get['oid']);
         //oaza
       break;
       case "logout":
@@ -88,14 +89,21 @@ class funct {
         if ($killhero) {
             $database->KillMyHero($get['uid']);
             $error="&kc=1";
-        }else $error="&e=1";    
+        }else $error="&e=1";
         header("Location: admin.php?p=player&uid=".$get['uid'].$error);
         exit;
       case "reviveHero":
-        $result=$database->query("SELECT * FROM ".TB_PREFIX."hero WHERE uid='".$get['uid']."'");
-        $hdata=mysql_fetch_array($result);
-        $database->query("UPDATE ".TB_PREFIX."units SET hero = 1 WHERE vref = ".$hdata['wref']);
-        $database->query("UPDATE ".TB_PREFIX."hero SET `dead` = '0', `inrevive` = '0', `health` = '100', `lastupdate` = ".time()." WHERE `uid` = '".$get['uid']."'");
+          $livingHeroesCount = mysqli_fetch_array($database->query("SELECT Count(*) as Total FROM ".TB_PREFIX."hero WHERE uid=".(int) $get['uid']." AND (dead = 0 OR inrevive = 1)"), MYSQLI_ASSOC);
+
+          if ($livingHeroesCount['Total'] > 0) {
+              header("Location: admin.php?p=player&uid=".$get['uid']."&re=1");
+              exit;
+          }
+
+        $result=$database->query("SELECT * FROM ".TB_PREFIX."hero WHERE heroid = ".(int) $get['hid']." AND uid=".(int) $get['uid']);
+        $hdata=mysqli_fetch_array($result);
+        $database->query("UPDATE ".TB_PREFIX."units SET hero = 1 WHERE vref = ".(int) $hdata['wref']);
+        $database->query("UPDATE ".TB_PREFIX."hero SET `dead` = '0', `inrevive` = '0', `health` = '100', `lastupdate` = ".time()." WHERE `heroid` = ".(int) $get['hid']." AND `uid` = ".(int) $get['uid']);
         header("Location: admin.php?p=player&uid=".$get['uid']."&rc=1");
         exit;
       case "addHero":
@@ -104,10 +112,10 @@ class funct {
         
         $database->query("INSERT INTO ".TB_PREFIX."hero (`uid`, `wref`, `regeneration`, `unit`, `name`, `level`, `points`,
         `experience`, `dead`, `health`, `attack`, `defence`, `attackbonus`, `defencebonus`, `trainingtime`, `autoregen`,
-        `intraining`) VALUES ('".$get['uid']."', '" . $vilarray['wref'] . "', '0', '".$get['u']."', '".addslashes($user['username'])."',
+        `intraining`) VALUES (".(int) $get['uid'].", " . (int) $vilarray['wref'] . ", '0', ".(int) $get['u'].", '".addslashes($user['username'])."',
         '0', '5', '0', '0', '100', '0', '0', '0', '0', '".time()."', '50', '0')");
         
-        $database->query("UPDATE ".TB_PREFIX."units SET hero = 1 WHERE vref = ".$vilarray['wref']);
+        $database->query("UPDATE ".TB_PREFIX."units SET hero = 1 WHERE vref = ".(int) $vilarray['wref']);
         
         header("Location: admin.php?p=player&uid=".$get['uid']."&ac=1");
         exit;
@@ -123,8 +131,11 @@ class funct {
     global $admin,$database;
       switch($post['action']){
       case "DelPlayer":
-        $admin->DelPlayer($post['uid'],$post['pass']);
-        header("Location: ?p=search&msg=ursdel");
+          if ($admin->DelPlayer($post['uid'],$post['pass'])) {
+              header("Location: ?p=search&msg=ursdel");
+          } else {
+              die('Invalid Admin password, cannot delete player. Please go back and retry.');
+          }
       break;
       case "punish":
         $admin->Punish($post);
@@ -140,7 +151,7 @@ class funct {
   function LogIN($username,$password){
 	global $admin,$database;
 	if($admin->Login($username,$password)){
-	  //$_SESSION['username'] = $username;
+	  $_SESSION['admin_username'] = $username;
 	  $_SESSION['access'] = $database->getUserField($username,'access',1);
 	  $_SESSION['id'] = $database->getUserField($username,'id',1);
 	  header("Location: ".$_SERVER['HTTP_REFERER']);
@@ -199,6 +210,7 @@ class funct {
 			case 39: $build = "Great Granary"; break;
 			case 40: $build = "Wonder of the World"; break;
 			case 41: $build = "Horse Drinking Trough"; break;
+			case 42: $build = "Great Workshop"; break;
 			default: $build = "Error"; break;
 		}
 		return $build;
@@ -208,14 +220,14 @@ class funct {
 
 $funct = new funct;
 if($funct->CheckLogin()){
-  if($_GET['action']){
+    if(isset($_GET['action']) && $_GET['action']){
 	$funct->Act($_GET);
   }
-  if($_POST['action']){
+  if(isset($_POST['action']) && $_POST['action']){
 	$funct->Act2($_POST);
   }
 }
-if($_POST['action']=='login'){
+if(isset($_POST['action']) && $_POST['action']=='login'){
   $funct->LogIN($_POST['name'],$_POST['pw']);
 }
 ?>

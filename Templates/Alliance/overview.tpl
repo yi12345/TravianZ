@@ -11,7 +11,8 @@ $allianceinfo = $database->getAlliance($aid);
 $memberlist = $database->getAllMember($aid);
 $totalpop = 0;
 if($allianceinfo['tag']==""){
-header("Location: allianz.php");
+	header("Location: allianz.php");
+	exit;
 }
 foreach($memberlist as $member) {
     $totalpop += $database->getVSumField($member['id'],"pop");
@@ -88,7 +89,7 @@ include("alli_menu.tpl");
                 echo "</tr>";
                 } 
 				}
-			if($allianceinfo['forumlink'] != ''){
+			if($allianceinfo['forumlink'] != '' && $allianceinfo['forumlink'] != '0'){
                 echo "<tr>";
                 echo "<td><a href='".$allianceinfo['forumlink']."'>» to the forum</td>";
                 echo "</tr>";

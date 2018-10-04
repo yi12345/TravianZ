@@ -2,9 +2,10 @@
 <?php 
 $basearray = $database->getMInfo($_GET['d']);
 $uinfo = $database->getVillage($basearray['id']);
-$oasis1 = mysql_query('SELECT * FROM `' . TB_PREFIX . 'odata` WHERE `wref` = ' . mysql_real_escape_string($_GET['d']));
-$oasis = mysql_fetch_assoc($oasis1);
+$oasis1 = mysqli_query($GLOBALS['link'],'SELECT conqured, owner FROM `' . TB_PREFIX . 'odata` WHERE `wref` = ' . mysqli_real_escape_string($GLOBALS['link'],$_GET['d']));
+$oasis = mysqli_fetch_assoc($oasis1);
 $access=$session->access;
+$oasislink = '';
 ?>
 <h1><?php if($basearray['fieldtype']!=0){
 echo !$basearray['occupied']? ABANDVALLEY : $basearray['name']; echo " (".$basearray['x']."|".$basearray['y'].")";
@@ -128,6 +129,13 @@ if($oasis['owner'] == 2){
         $a = 0;
         for ($i = 31; $i <= 40; $i++) {
           if($unit['u'.$i]){
+          	// assemble oasis warsim link
+          	if ($basearray['fieldtype'] == 0) {
+          		if (!$oasislink) {
+          			$oasislink = rtrim(HOMEPAGE, '/').'/warsim.php?target=4';
+          		}
+          		$oasislink .= '&amp;u'.$i.'='.$unit['u'.$i];
+          	}
             echo '<tr>';
                       echo '<td class="ico"><img class="unit u'.$i.'" src="img/x.gif" alt="'.$unarray[$i].'" title="'.$unarray[$i].'" /></td>';
                       echo '<td class="val">'.$unit['u'.$i].'</td>';
@@ -159,10 +167,10 @@ if($session->uid == $database->getVillage($_GET['d'])){
     }
 $toWref = $_GET['d'];
 if($session->alliance!=0){
-$result = mysql_query("SELECT * FROM ".TB_PREFIX."ndata WHERE $limit AND ally = ".$session->alliance." AND toWref = ".$toWref." ORDER BY time DESC Limit 5");
-$query = mysql_num_rows($result);
+$result = mysqli_query($GLOBALS['link'],"SELECT data, ntype, id, topic, time FROM ".TB_PREFIX."ndata WHERE $limit AND ally = ".$session->alliance." AND toWref = ".$toWref." ORDER BY time DESC Limit 5");
+$query = mysqli_num_rows($result);
 if($query != 0){
-while($row = mysql_fetch_array($result)){
+while($row = mysqli_fetch_array($result)){
 	$dataarray = explode(",",$row['data']);
 	$type = $row['ntype'];
 	$topic=$row['topic'];
@@ -183,10 +191,10 @@ if($type==18 or $type==19 or $type==20 or $type==21){
 
 <?php }
 }else{
-$result = mysql_query("SELECT * FROM ".TB_PREFIX."ndata WHERE uid = ".$session->uid." AND toWref = ".$toWref." ORDER BY time DESC Limit 5");
-$query = mysql_num_rows($result);
+$result = mysqli_query($GLOBALS['link'],"SELECT data, ntype, id, topic, time FROM ".TB_PREFIX."ndata WHERE uid = ".$session->uid." AND toWref = ".$toWref." ORDER BY time DESC Limit 5");
+$query = mysqli_num_rows($result);
 if($query != 0){
-while($row = mysql_fetch_array($result)){
+while($row = mysqli_fetch_array($result)){
 	$dataarray = explode(",",$row['data']);
 	$type = $row['ntype'];
 	$topic=$row['topic'];
@@ -258,10 +266,10 @@ if($session->uid == $database->getVillage($_GET['d'])){
     }
 $toWref = $_GET['d'];
 if($session->alliance!=0){
-$result = mysql_query("SELECT * FROM ".TB_PREFIX."ndata WHERE $limit AND ally = ".$session->alliance." AND toWref = ".$toWref." ORDER BY time DESC Limit 5");
-$query = mysql_num_rows($result);
+$result = mysqli_query($GLOBALS['link'],"SELECT data, ntype, id, topic, time FROM ".TB_PREFIX."ndata WHERE $limit AND ally = ".$session->alliance." AND toWref = ".$toWref." ORDER BY time DESC Limit 5");
+$query = mysqli_num_rows($result);
 if($query != 0){
-while($row = mysql_fetch_array($result)){
+while($row = mysqli_fetch_array($result)){
 	$dataarray = explode(",",$row['data']);
 	$type = $row['ntype'];
 	$topic=$row['topic'];
@@ -282,10 +290,10 @@ if($type==18 or $type==19 or $type==20 or $type==21){
 
 <?php }
 }else{
-$result = mysql_query("SELECT * FROM ".TB_PREFIX."ndata WHERE uid = ".$session->uid." AND toWref = ".$toWref." ORDER BY time DESC Limit 5");
-$query = mysql_num_rows($result);
+$result = mysqli_query($GLOBALS['link'],"SELECT data, ntype, id, topic, time FROM ".TB_PREFIX."ndata WHERE uid = ".$session->uid." AND toWref = ".$toWref." ORDER BY time DESC Limit 5");
+$query = mysqli_num_rows($result);
 if($query != 0){
-while($row = mysql_fetch_array($result)){
+while($row = mysqli_fetch_array($result)){
 	$dataarray = explode(",",$row['data']);
 	$type = $row['ntype'];
 	$topic=$row['topic'];
@@ -384,10 +392,10 @@ if($session->uid == $database->getVillage($_GET['d'])){
     }
 $toWref = $_GET['d'];
 if($session->alliance!=0){
-$result = mysql_query("SELECT * FROM ".TB_PREFIX."ndata WHERE $limit AND ally = ".$session->alliance." AND toWref = ".$toWref." ORDER BY time DESC Limit 5");
-$query = mysql_num_rows($result);
+$result = mysqli_query($GLOBALS['link'],"SELECT data, ntype, id, topic, time FROM ".TB_PREFIX."ndata WHERE $limit AND ally = ".$session->alliance." AND toWref = ".$toWref." ORDER BY time DESC Limit 5");
+$query = mysqli_num_rows($result);
 if($query != 0){
-while($row = mysql_fetch_array($result)){
+while($row = mysqli_fetch_array($result)){
 	$dataarray = explode(",",$row['data']);
 	$type = $row['ntype'];
 	$topic=$row['topic'];
@@ -408,10 +416,10 @@ if($type==18 or $type==19 or $type==20 or $type==21 or $type==22){
 
 <?php }
 }else{
-$result = mysql_query("SELECT * FROM ".TB_PREFIX."ndata WHERE $limit AND uid = ".$session->uid." AND toWref = ".$toWref." ORDER BY time DESC Limit 5");
-$query = mysql_num_rows($result);
+$result = mysqli_query($GLOBALS['link'],"SELECT data, ntype, id, topic, time FROM ".TB_PREFIX."ndata WHERE $limit AND uid = ".$session->uid." AND toWref = ".$toWref." ORDER BY time DESC Limit 5");
+$query = mysqli_num_rows($result);
 if($query != 0){
-while($row = mysql_fetch_array($result)){
+while($row = mysqli_fetch_array($result)){
 	$dataarray = explode(",",$row['data']);
 	$type = $row['ntype'];
 	$topic=$row['topic'];
@@ -469,14 +477,29 @@ if($type==18 or $type==19 or $type==20 or $type==21){
         $test = "&raquo; ".FNEWVILLAGE." (".$village->unitarray['u'.$session->tribe.'0']."/3 ".SETTLERSAVAIL.")";
     }
  	
-	echo ($basearray['fieldtype']==0)? 
-		($village->resarray['f39']==0)? 
-		($basearray['owner'] == $session->uid)?
-			
-		"<a href=\"build.php?id=39\">&raquo; ".RAID." $otext ".OASIS." (".BUILDRALLY.")</a>" : 
-		"&raquo; ".RAID." $otext ".OASIS." (".BUILDRALLY.")" : 
-		"<a href=\"a2b.php?z=".$_GET['d']."&o\">&raquo; ".RAID." $otext</a>" :
-		"$test"
+ 	if ($basearray['fieldtype']==0) {
+ 		if ($village->resarray['f39']==0) {
+ 			if ($basearray['owner'] == $session->uid) {
+ 				echo "<a href=\"build.php?id=39\">&raquo; ".RAID." $otext ".OASIS." (".BUILDRALLY.")</a>";
+ 			} else {
+ 				echo "&raquo; ".RAID." $otext ".OASIS." (".BUILDRALLY.")";
+ 			}
+ 		} else {
+ 			echo "<a href=\"a2b.php?z=".$_GET['d']."&o\">&raquo; ".RAID." $otext</a>";
+ 		}
+ 		
+ 		if ($oasislink) {
+?>
+		</tr>
+		<tr>
+			<td>
+				<a href="<?php echo $oasislink; ?>">&raquo; Combat Simulator</a>
+			</td>
+<?php
+		}
+ 	} else {
+ 		echo "$test";
+ 	}
 	?>
 		</tr>
         <?php } 
@@ -485,14 +508,14 @@ if($type==18 or $type==19 or $type==20 or $type==21){
 					<td class="none">
           <?php 
 		  if($basearray['fieldtype'] == 0){
-          $query1 = mysql_query('SELECT * FROM `' . TB_PREFIX . 'odata` WHERE `wref` = ' . mysql_escape_string($_GET['d']));
+          $query1 = mysqli_query($GLOBALS['link'],'SELECT * FROM `' . TB_PREFIX . 'odata` WHERE `wref` = ' . mysqli_escape_string($GLOBALS['link'],$_GET['d']));
 		  }else{
-          $query1 = mysql_query('SELECT * FROM `' . TB_PREFIX . 'vdata` WHERE `wref` = ' . mysql_real_escape_string($_GET['d']));
+          $query1 = mysqli_query($GLOBALS['link'],'SELECT * FROM `' . TB_PREFIX . 'vdata` WHERE `wref` = ' . mysqli_real_escape_string($GLOBALS['link'],$_GET['d']));
 		  }
-          $data1 = mysql_fetch_assoc($query1);
-          $query2 = mysql_query('SELECT * FROM `' . TB_PREFIX . 'users` WHERE `id` = ' . $data1['owner']);
-          $data2 = mysql_fetch_assoc($query2);
-			if($data2['access']=='0' or $data2['access']=='8' or $data2['access']=='9') {
+          $data1 = mysqli_fetch_assoc($query1);
+          $query2 = mysqli_query($GLOBALS['link'],'SELECT * FROM `' . TB_PREFIX . 'users` WHERE `id` = ' . $data1['owner']);
+          $data2 = mysqli_fetch_assoc($query2);
+			if($data2['access']=='0' or $data2['access']=='8' or (!ADMIN_ALLOW_INCOMING_RAIDS && $data2['access']=='9')) {
 			echo "&raquo; ".SENDTROOP." (".BAN.")";
 		  } else if($data2['vac_mode']=='1') {
 			echo "&raquo; Send troops. (Vacation mode on)";
@@ -507,7 +530,7 @@ if($type==18 or $type==19 or $type==20 or $type==21){
 					    	<tr>
 					<td class="none">
 					<?php
-			if($data2['access']=='0' or $data2['access']=='8' or $data2['access']=='9') { 
+			if($data2['access']=='0' or $data2['access']=='8' or (!ADMIN_ALLOW_INCOMING_RAIDS && $data2['access']=='9')) { 
 			echo "&raquo; ".SENDMERC." (".BAN.")";
 			} else if($data2['vac_mode']=='1') {
 			echo "&raquo; Send merchant(s). (Vacation mode on)";

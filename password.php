@@ -9,15 +9,18 @@
 ##  Copyright:     TravianX (c) 2010-2011. All rights reserved.                ##
 ##                                                                             ##
 #################################################################################
-if(!file_exists('GameEngine/config.php')) {
+use App\Utils\AccessLogger;
+
+if(!file_exists('var/installed') && @opendir('install')) {
 	header("Location: install/");
 	exit;
 }
-include("GameEngine/config.php");
-include("GameEngine/Lang/" . LANG . ".php");
-include("GameEngine/Database.php");
-include("GameEngine/Mailer.php");
-include("GameEngine/Generator.php");
+include_once("GameEngine/config.php");
+include_once("GameEngine/Lang/" . LANG . ".php");
+include_once("GameEngine/Database.php");
+include_once("GameEngine/Mailer.php");
+include_once("GameEngine/Generator.php");
+AccessLogger::logRequest();
 
 if(!isset($_REQUEST['npw'])){
 	header("Location: login.php");
@@ -27,19 +30,19 @@ if(!isset($_REQUEST['npw'])){
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 	<head>
-	<title><?php echo SERVER_NAME; ?></title>
-		<link REL="shortcut icon" HREF="favicon.ico"/>
+	<title><?php echo SERVER_NAME; ?> - Forgotten Password</title>
+		<link rel="shortcut icon" href="favicon.ico"/>
 	<meta name="content-language" content="en" />
 	<meta http-equiv="cache-control" content="max-age=0" />
 	<meta http-equiv="imagetoolbar" content="no" />
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<script src="mt-core.js?0faaa" type="text/javascript"></script>
-	<script src="mt-more.js?0faaa" type="text/javascript"></script>
-	<script src="unx.js?0faaa" type="text/javascript"></script>
-	<script src="new.js?0faaa" type="text/javascript"></script>
-	<link href="<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7c" rel="stylesheet" type="text/css" />
-	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7c" rel="stylesheet" type="text/css" />
-	<link href="<?php echo GP_LOCATE ?>travian.css?f4b7c" rel="stylesheet" type="text/css" />
+	<script src="mt-core.js?0faab" type="text/javascript"></script>
+	<script src="mt-more.js?0faab" type="text/javascript"></script>
+	<script src="unx.js?f4b7g" type="text/javascript"></script>
+	<script src="new.js?0faab" type="text/javascript"></script>
+	<link href="<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7g" rel="stylesheet" type="text/css" />
+	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7d" rel="stylesheet" type="text/css" />
+	<link href="<?php echo GP_LOCATE ?>travian.css?f4b7d" rel="stylesheet" type="text/css" />
 		<link href="<?php echo GP_LOCATE ?>lang/en/lang.css" rel="stylesheet" type="text/css" />
 	   </head>
 
@@ -95,7 +98,7 @@ if(!isset($_REQUEST['npw'])){
 ?>
 		<p>Before you can request a new password you have to enter the email address that has been used to register the account.
 <br /><br />Afterwards you will receive an e-mail with a new password. The password will only work after confirming it, though.</p>
-		<form action="password.php" method="POST">
+		<form action="password.php" method="post">
 			<p>
 				<b>Email</b><br />
 				<input type="hidden" name="npw" value="<?php echo intval($_GET['npw']); ?>" />

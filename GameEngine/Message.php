@@ -17,7 +17,7 @@ class Message {
 	private $totalMessage, $totalNotice;
 	private $allNotice = array();
 
-	function Message() {
+	function __construct() {
 		$this->getMessages();
 		$this->getNotice();
 		if($this->totalMessage > 0) {
@@ -45,6 +45,7 @@ class Message {
 				$this->sendMessage($post['an'],$post['be'],addslashes($post['message']));
 				}
 				header("Location: nachrichten.php?t=2");
+				exit;
 					break;
 				case "m3":
 				case "m4":
@@ -88,6 +89,7 @@ class Message {
 			if($get['t'] == 5) {
 				if(!$session->plus){
 					header("Location: berichte.php");
+					exit;
 				} else {
 					$type = 9;
 				}
@@ -116,26 +118,32 @@ class Message {
 	public function quoteMessage($id) {
 		foreach($this->inbox as $message) {
 			if($message['id'] == $id) {
-			$message = preg_replace('/\[message\]/', '', $message);
-			$message = preg_replace('/\[\/message\]/', '', $message);
-			for($i=1;$i<=$message['alliance'];$i++){
-			$message = preg_replace('/\[alliance'.$i.'\]/', '[alliance0]', $message);
-			$message = preg_replace('/\[\/alliance'.$i.'\]/', '[/alliance0]', $message);
-			}
-			for($i=0;$i<=$message['player'];$i++){
-			$message = preg_replace('/\[player'.$i.'\]/', '[player0]', $message);
-			$message = preg_replace('/\[\/player'.$i.'\]/', '[/player0]', $message);
-			}
-			for($i=0;$i<=$message['coor'];$i++){
-			$message = preg_replace('/\[coor'.$i.'\]/', '[coor0]', $message);
-			$message = preg_replace('/\[\/coor'.$i.'\]/', '[/coor0]', $message);
-			}
-			for($i=0;$i<=$message['report'];$i++){
-			$message = preg_replace('/\[report'.$i.'\]/', '[report0]', $message);
-			$message = preg_replace('/\[\/report'.$i.'\]/', '[/report0]', $message);
-			}
-				$this->reply = $_SESSION['reply'] = $message;
-				header("Location: nachrichten.php?t=1&id=" . $message['owner']);
+    			$message = preg_replace('/\[message\]/', '', $message);
+    			$message = preg_replace('/\[\/message\]/', '', $message);
+
+    			for($i=1;$i<=$message['alliance'];$i++){
+        			$message = preg_replace('/\[alliance'.$i.'\]/', '[alliance0]', $message);
+        			$message = preg_replace('/\[\/alliance'.$i.'\]/', '[/alliance0]', $message);
+    			}
+
+    			for($i=0;$i<=$message['player'];$i++){
+        			$message = preg_replace('/\[player'.$i.'\]/', '[player0]', $message);
+        			$message = preg_replace('/\[\/player'.$i.'\]/', '[/player0]', $message);
+    			}
+
+    			for($i=0;$i<=$message['coor'];$i++){
+        			$message = preg_replace('/\[coor'.$i.'\]/', '[coor0]', $message);
+        			$message = preg_replace('/\[\/coor'.$i.'\]/', '[/coor0]', $message);
+    			}
+
+    			for($i=0;$i<=$message['report'];$i++){
+        			$message = preg_replace('/\[report'.$i.'\]/', '[report0]', $message);
+        			$message = preg_replace('/\[\/report'.$i.'\]/', '[/report0]', $message);
+    			}
+
+    			$this->reply = $_SESSION['reply'] = $message;
+				header("Location: nachrichten.php?t=1&id=" . $message['owner'] . "&mid=" . $message['id'] . "&tid=" . $message['target']);
+				exit;
 			}
 		}
 	}
@@ -208,10 +216,11 @@ class Message {
 
 	private function removeMessage($post) {
 		global $database,$session;
+		$post = $database->escape($post);
 		for($i = 1; $i <= 10; $i++) {
 			if(isset($post['n' . $i])) {
-			$message1 = mysql_query("SELECT * FROM " . TB_PREFIX . "mdata where id = ".$post['n' . $i]."");
-			$message = mysql_fetch_array($message1);
+			    $message1 = mysqli_query($GLOBALS['link'],"SELECT target, owner FROM " . TB_PREFIX . "mdata where id = ".(int) $post['n' . $i]."");
+			$message = mysqli_fetch_array($message1);
 			if($message['target'] == $session->uid && $message['owner'] == $session->uid){
 				$database->getMessage($post['n' . $i], 8);
 			}else if($message['target'] == $session->uid){
@@ -222,6 +231,7 @@ class Message {
 			}
 		}
 		header("Location: nachrichten.php");
+		exit;
 	}
 
 	private function archiveMessage($post) {
@@ -232,6 +242,7 @@ class Message {
 			}
 		}
 		header("Location: nachrichten.php");
+		exit;
 	}
 
 	private function unarchiveMessage($post) {
@@ -242,6 +253,7 @@ class Message {
 			}
 		}
 		header("Location: nachrichten.php");
+		exit;
 	}
 
 	private function removeNotice($post) {
@@ -252,6 +264,7 @@ class Message {
 			}
 		}
 		header("Location: berichte.php");
+		exit;
 	}
 
 	private function archiveNotice($post) {
@@ -262,6 +275,7 @@ class Message {
 			}
 		}
 		header("Location: berichte.php");
+		exit;
 	}
 
 	private function unarchiveNotice($post) {
@@ -272,6 +286,7 @@ class Message {
 			}
 		}
 		header("Location: berichte.php");
+		exit;
 	}
 
 	private function getReadNotice($id) {
@@ -320,17 +335,17 @@ class Message {
 		
 		// Vulnerability closed by Shadow
 
-		$q = "SELECT * FROM ".TB_PREFIX."mdata WHERE owner='".$session->uid."' AND time > ".time()." - 60";
-		$res = mysql_query($q) or die(mysql_error(). " query  ".$q);
-		$flood = mysql_num_rows($res);
+		$q = "SELECT Count(*) as Total FROM ".TB_PREFIX."mdata WHERE owner='".$session->uid."' AND time > ".(time() - 60);
+		$res = mysqli_fetch_array(mysqli_query($GLOBALS['link'],$q) or die(mysqli_error($database->dblink). " query  ".$q), MYSQLI_ASSOC);
+		$flood = $res['Total'];
 		if($flood > 5)
 		return; //flood
 
 		// Vulnerability closed by Shadow
 			
-		$allmembersQ = mysql_query("SELECT id FROM ".TB_PREFIX."users WHERE alliance='".$session->alliance."'");
+		$allmembersQ = mysqli_query($GLOBALS['link'],"SELECT id FROM ".TB_PREFIX."users WHERE alliance='".$session->alliance."'");
 		$userally = $database->getUserField($session->uid,"alliance",0);
-		$permission=mysql_fetch_array(mysql_query("SELECT opt7 FROM ".TB_PREFIX."ali_permission WHERE uid='".$session->uid."'"));
+		$permission=mysqli_fetch_array(mysqli_query($GLOBALS['link'],"SELECT opt7 FROM ".TB_PREFIX."ali_permission WHERE uid='".$session->uid."'"));
 		if(WORD_CENSOR) {
 		$topic = $this->wordCensor($topic);
 		$text = $this->wordCensor($text);
@@ -395,7 +410,7 @@ class Message {
 		}
 		if($permission[opt7]==1){
 		if ($userally != 0) {
-		while ($allmembers = mysql_fetch_array($allmembersQ)) {
+		while ($allmembers = mysqli_fetch_array($allmembersQ)) {
 		$database->sendMessage($allmembers[id],$session->uid,htmlspecialchars(addslashes($topic)),htmlspecialchars(addslashes($text)),0,$alliance,$player,$coor,$report);
 		}
 			}
@@ -403,17 +418,19 @@ class Message {
 		}
 	}
 
-	private function sendMessage($recieve, $topic, $text) {
+	private function sendMessage($recieve, $topic, $text, $security_check = true) {
 		global $session, $database;
 		$user = $database->getUserField($recieve, "id", 1);
 
 		// Vulnerability closed by Shadow
 
-		$q = "SELECT * FROM ".TB_PREFIX."mdata WHERE owner='".$session->uid."' AND time > ".time()." - 60";
-		$res = mysql_query($q) or die(mysql_error(). " query  ".$q);
-		$flood = mysql_num_rows($res);
-		if($flood > 5)
-		return; //flood
+		if ($security_check) {
+    		$q = "SELECT Count(*) as Total FROM ".TB_PREFIX."mdata WHERE owner='".$session->uid."' AND time > ".(time() - 60);
+    		$res = mysqli_fetch_array(mysqli_query($GLOBALS['link'],$q) or die(mysqli_error($database->dblink). " query  ".$q), MYSQLI_ASSOC);
+    		$flood = $res['Total'];
+    		if($flood > 5)
+    		return; //flood
+		}
 
 		// Vulnerability closed by Shadow
 
@@ -479,7 +496,10 @@ class Message {
 		}
 		}
 		}
-		$database->sendMessage($user, $session->uid, htmlspecialchars(addslashes($topic)), htmlspecialchars(addslashes($text)), 0, $alliance, $player, $coor, $report);
+		
+		// check if we're not sending this as support
+		$support_from_admin_allowed = (($session->access == MULTIHUNTER || $session->access == ADMIN) && ADMIN_RECEIVE_SUPPORT_MESSAGES);		
+		$database->sendMessage($user, ((!empty($_POST['as_support']) && $support_from_admin_allowed) ? 1 : $session->uid), htmlspecialchars(addslashes($topic)), htmlspecialchars(addslashes($text)), 0, $alliance, $player, $coor, $report);
 		}
 	}
 
@@ -592,6 +612,7 @@ class Message {
 		}
 		}
 		header("Location: nachrichten.php?t=1");
+		exit;
 	}
 
 }

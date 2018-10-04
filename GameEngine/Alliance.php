@@ -1,21 +1,44 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-|   PLEASE DO NOT REMOVE THIS COPYRIGHT NOTICE!
-|--------------------------------------------------------------------------
-|
-|   Project owner:   Dzoki < dzoki.travian@gmail.com >
-|
-|   This script is property of TravianX Project. You are allowed to change
-|   its source and release it under own name, not under name `TravianX`.
-|   You have no rights to remove copyright notices.
-|
-|   TravianX All rights reserved
-|
-*/
+#################################################################################
+##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
+## --------------------------------------------------------------------------- ##
+##  Project:       TravianZ                                                    ##
+##  Version:       22.06.2015                    			       ## 
+##  Filename       Alliance.php                                                ##
+##  Developed by:  Mr.php , Advocaite , brainiacX , yi12345 , Shadow , ronix   ## 
+##  Fixed by:      Shadow - STARVATION , HERO FIXED COMPL.  		       ##
+##  Fixed by:      InCube - double troops				       ##
+##  License:       TravianZ Project                                            ##
+##  Copyright:     TravianZ (c) 2010-2015. All rights reserved.                ##
+##  URLs:          http://travian.shadowss.ro                		       ##
+##  Source code:   https://github.com/Shadowss/TravianZ		               ## 
+##                                                                             ##
+#################################################################################
 
-	   class Alliance {
+use App\Entity\User;
+
+global $autoprefix;
+
+// even with autoloader created, we can't use it here yet, as it's not been created
+// ... so, let's see where it is and include it
+$autoloader_found = false;
+// go max 5 levels up - we don't have folders that go deeper than that
+$autoprefix = '';
+for ($i = 0; $i < 5; $i++) {
+    $autoprefix = str_repeat('../', $i);
+    if (file_exists($autoprefix.'autoloader.php')) {
+        $autoloader_found = true;
+        include_once $autoprefix.'autoloader.php';
+        break;
+    }
+}
+
+if (!$autoloader_found) {
+    die('Could not find autoloading class.');
+}
+
+class Alliance {
 
 		public $gotInvite = false;
 		public $inviteArray = array();
@@ -113,7 +136,7 @@
 				$form->addError("perm", NO_PERMISSION);
 			}elseif(!isset($post['a_name']) || $post['a_name'] == "") {
 				$form->addError("name1", NAME_EMPTY);
-			}elseif(!$database->checkExist(stripslashes($post['a_name']), 0)) {
+			}elseif(!User::exists($database, $post['a_name'])) {
 				$form->addError("name2", NAME_NO_EXIST."".stripslashes(stripslashes($post['a_name'])));
 			}elseif($UserData['id'] == $session->uid) {
 				$form->addError("name3", SAME_NAME);
@@ -128,9 +151,22 @@
 				$database->sendInvitation($UserData['id'], $aid, $session->uid);
 				// Log the notice
 				$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> has invited  <a href="spieler.php?uid=' . $UserData['id'] . '">' . addslashes($UserData['username']) . '</a> into the alliance.');
+				// send invitation via in-game messages
+				$database->sendMessage(
+				    $UserData['id'],
+				    4,
+				    'Alliance invitation.',
+				    $database->escape("Hi, ".$UserData['username']."!\n\nThis is to inform you that you have been invited to join an alliance. To accept this invitation, please visit your Embassy.\n\nYours sincerely,\n<i>Server Robot :)</i>"),
+				    0,
+				    0,
+				    0,
+				    0,
+				    0,
+				    true);
 			}
 			}else{
-			header("Location: banned.php");
+			    header("Location: banned.php");
+			    exit;
 			}
 		}
 
@@ -146,9 +182,11 @@
 					$database->insertAlliNotice($invite['alliance'], '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> has rejected the invitation.');
 				}
 			}
-			header("Location: build.php?id=".$get['id']);
+			    header("Location: build.php?id=".$get['id']);
+			    exit;
 			}else{
-			header("Location: banned.php");
+			    header("Location: banned.php");
+			    exit;
 			}
 		}
 
@@ -166,9 +204,11 @@
 					$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> has deleted the invitation for <a href="spieler.php?uid=' . $invitename['id'] . '">' . addslashes($invitename['username']) . '</a>.');
 				}
 			}
-			header("Location: allianz.php?delinvite");
+			    header("Location: allianz.php?delinvite");
+			    exit;
 			}else{
-			header("Location: banned.php");
+			    header("Location: banned.php");
+			    exit;
 			}
 		}
 
@@ -177,32 +217,36 @@
 		*****************************************/
 		private function acceptInvite($get) {
 			global $form, $database, $session;
-			if($session->access != BANNED){
-			foreach($this->inviteArray as $invite) {
-			if($session->alliance == 0){
-				if($invite['id'] == $get['d'] && $invite['uid'] == $session->uid) {
-				$memberlist = $database->getAllMember($invite['alliance']);
-				$alliance_info = $database->getAlliance($invite['alliance']);
-				if(count($memberlist) < $alliance_info['max']){
-					$database->removeInvitation($get['d']);
-					$database->updateUserField($invite['uid'], "alliance", $invite['alliance'], 1);
-					$database->createAlliPermissions($invite['uid'], $invite['alliance'], '', '0', '0', '0', '0', '0', '0', '0', '0');
-					// Log the notice
-					$database->insertAlliNotice($invite['alliance'], '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> has joined the alliance.');
-				}else{
-				$accept_error = 1;
-				$max = $alliance_info['max'];
-				}
-				}
-			}
-			}
-			if($accept_error == 1){
-			$form->addError("ally_accept", "The alliance can contain only ".$max." peoples right now.");
-			}else{
-			header("Location: build.php?id=" . $get['id']);
-			}
-			}else{
-			header("Location: banned.php");
+
+			if ($session->access != BANNED) {
+    			foreach ($this->inviteArray as $invite) {
+        			if ($session->alliance == 0) {
+        				if ($invite['id'] == $get['d'] && $invite['uid'] == $session->uid) {
+            				$memberlist = $database->getAllMember($invite['alliance']);
+            				$alliance_info = $database->getAlliance($invite['alliance']);
+            				if (count($memberlist) < $alliance_info['max']) {
+            					$database->removeInvitation($get['d']);
+            					$database->updateUserField($invite['uid'], "alliance", $invite['alliance'], 1);
+            					$database->createAlliPermissions($invite['uid'], $invite['alliance'], '', 0, 0, 0, 0, 0, 0, 0, 0);
+            					// Log the notice
+            					$database->insertAlliNotice($invite['alliance'], '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> has joined the alliance.');
+            				} else {
+            				    $accept_error = 1;
+            				    $max = $alliance_info['max'];
+            				}
+        				}
+        			}
+    			}
+
+    			if($accept_error == 1){
+    			    $form->addError("ally_accept", "The alliance can contain only ".$max." members at this moment.");
+    			}else{
+    			    header("Location: build.php?id=" . $get['id']);
+    			    exit;
+    			}
+			} else{
+			    header("Location: banned.php");
+			    exit;
 			}
 		}
 
@@ -229,6 +273,7 @@
 				$_SESSION['valuearray'] = $post;
 
 				header("Location: build.php?id=" . $post['id']);
+				exit;
 			} else {
 				$max = $bid18[$village->resarray['f' . $post['id']]]['attri'];
 				$aid = $database->createAlliance($post['ally1'], $post['ally2'], $session->uid, $max);
@@ -239,9 +284,11 @@
 				// log the notice
 				$database->insertAlliNotice($aid, 'The alliance has been founded by <a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a>.');
 				header("Location: build.php?id=" . $post['id']);
+				exit;
 			}
 			}else{
-			header("Location: banned.php");
+			    header("Location: banned.php");
+			    exit;
 			}
 		}
 
@@ -276,7 +323,8 @@
 				$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> has changed the alliance name.');
 			}
 			}else{
-			header("Location: banned.php");
+			    header("Location: banned.php");
+			    exit;
 			}
 		}
 
@@ -299,7 +347,8 @@
 				$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> has changed the alliance description.');
 			}
 			}else{
-			header("Location: banned.php");
+			    header("Location: banned.php");
+			    exit;
 			}
 		}
 
@@ -322,7 +371,8 @@
 				$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> has changed permissions.');
 			}
 			}else{
-			header("Location: banned.php");
+			    header("Location: banned.php");
+			    exit;
 			}
 		}
 		/*****************************************
@@ -331,7 +381,7 @@
 		private function kickAlliUser($post) {
 			global $database, $session, $form;
 			if($session->access != BANNED){
-			$UserData = $database->getUserArray($post['a_user'], 0);
+			$UserData = $database->getUserArray($post['a_user'], 1);
 			if($this->userPermArray['opt2'] == 0) {
 				$form->addError("perm", NO_PERMISSION);
 			} else if($UserData['id'] != $session->uid){
@@ -340,17 +390,18 @@
 				$database->deleteAlliance($session->alliance);
 				// log the notice
 				$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $UserData['id'] . '">' . addslashes($post['a_user']) . '</a> has quit the alliance.');
-				if($database->isAllianceOwner($UserData['id'])){
+				if($session->alliance && $database->isAllianceOwner($UserData['id']) == $session->alliance){
 				$newowner = $database->getAllMember2($session->alliance);
 				$newleader = $newowner['id'];
-				$q = "UPDATE " . TB_PREFIX . "alidata set leader = ".$newleader." where id = ".$session->alliance."";
+				$q = "UPDATE " . TB_PREFIX . "alidata set leader = ".(int) $newleader." where id = ".(int) $session->alliance."";
 				$database->query($q);
 				$database->updateAlliPermissions($newleader, 1, 1, 1, 1, 1, 1, 1, 1, 1);
-				$this->updateMax($newleader);
+				Automation::updateMax($newleader);
 				}
 				}
 			}else{
-			header("Location: banned.php");
+			    header("Location: banned.php");
+			    exit;
 			}
 		}
 		/*****************************************
@@ -360,11 +411,13 @@
 			global $database, $session;
 			if($session->access != BANNED){
 				if(isset($post['f_link'])){
-				$database->setAlliForumLink($session->alliance, $post['f_link']);
-				header("Location: allianz.php?s=5");
+				    $database->setAlliForumdblink($session->alliance, $post['f_link']);
+				    header("Location: allianz.php?s=5");
+				    exit;
 				}
 			}else{
-			header("Location: banned.php");
+			    header("Location: banned.php");
+			    exit;
 			}
 		}
 		/*****************************************
@@ -378,9 +431,11 @@
 			$text = ''.$survey['voted'].','.$session->uid.',';
 			$database->Vote($post['tid'], $post['vote'], $text);
 			}
-			header("Location: allianz.php?s=2&fid2=".$post['fid2']."&pid=".$post['pid']."&tid=".$post['tid']);
+			    header("Location: allianz.php?s=2&fid2=".$post['fid2']."&pid=".$post['pid']."&tid=".$post['tid']);
+			    exit;
 			}else{
-			header("Location: banned.php");
+			    header("Location: banned.php");
+			    exit;
 			}
 		}
 		/*****************************************
@@ -391,26 +446,71 @@
 			if($session->access != BANNED){
 			if(!isset($post['pw']) || $post['pw'] == "") {
 				$form->addError("pw1", PW_EMPTY);
-			} elseif(md5($post['pw']) !== $session->userinfo['password']) {
+			} elseif(!password_verify($post['pw'], $session->userinfo['password'])) {
 				$form->addError("pw2", PW_ERR);
 			} else {
-				$database->updateUserField($session->uid, 'alliance', 0, 1);
-				if($database->isAllianceOwner($session->uid)){
-				$newowner = $database->getAllMember2($session->alliance);
-				$newleader = $newowner['id'];
-				$q = "UPDATE " . TB_PREFIX . "alidata set leader = ".$newleader." where id = ".$session->alliance."";
-				$database->query($q);
-				$database->updateAlliPermissions($newleader, 1, 1, 1, 1, 1, 1, 1, 1, 1);
-				$this->updateMax($newleader);
+			    // check whether this is not the founder leaving and if he is, see whether
+			    // his replacement has been selected
+			    if (
+			        $session->alliance &&
+			        $database->isAllianceOwner($session->uid) == $session->alliance &&
+			        $database->countAllianceMembers($session->alliance) > 1
+			    ) {
+				    // check that we have a valid new founder
+				    if (!isset($post['new_founder'])) {
+				        $form->addError("founder", 'founder was not selected');
+				        return;
+				    } else {
+				        $post['new_founder'] = (int) $post['new_founder'];
+				    }
+
+    				$members = $database->getAllMember($session->alliance);
+    				$validMemberFound = false;
+
+    				foreach ($members as $member) {
+    				    if ($member['id'] == $post['new_founder']) {
+    				        $validMemberFound = true;
+    				        break;
+    				    }
+    				}
+
+    				if (!$validMemberFound) {
+    				    $form->addError("founder2", 'founder is not valid');
+    				    return;
+    				}
+
+    				$newleader = (int) $post['new_founder'];
+    				$q = "UPDATE " . TB_PREFIX . "alidata set leader = ".$newleader." where id = ".(int) $session->alliance;
+    				$_SESSION['alliance_user'] = 0;
+    				$database->query($q);
+    				$database->createAlliPermissions($newleader, $session->alliance, 'Alliance Leader', 1, 1, 1, 1, 1, 1, 1, 1);
+    				Automation::updateMax($newleader);
+
+    				// send the new founder an in-game message, notifying them of their election
+    				$database->sendMessage(
+    				    $newleader,
+    				    4,
+    				    'You are now leader of your alliance',
+    				    "Hi!\n\nThis is to inform you that the former leader of your alliance - <a href=\"".rtrim(SERVER, '/')."/spieler.php?uid=".(int) $session->uid."\">".$database->escape($session->username)."</a>, has decided to quit and elected you as his replacement. You now gain full access, administration and responsibilities to your alliance.\n\nGood luck!\n\nYours sincerely,\n<i>Server Robot :)</i>",
+    				    0,
+    				    0,
+    				    0,
+    				    0,
+    				    0,
+    				    true);
 				}
+
+				$database->updateUserField($session->uid, 'alliance', 0, 1);
 				$database->deleteAlliPermissions($session->uid);
 				// log the notice
 				$database->deleteAlliance($session->alliance);
 				$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> has quit the alliance.');
 				header("Location: spieler.php?uid=".$session->uid);
+				exit;
 			}
 			}else{
-			header("Location: banned.php");
+			    header("Location: banned.php");
+			    exit;
 			}
 		}
 
@@ -447,30 +547,8 @@
 				$form->addError("name", "Alliance does not exist");
 			}
 			}else{
-			header("Location: banned.php");
-			}
-		}
-		
-		private function updateMax($leader) {
-			global $bid18, $database;
-			$q = mysql_query("SELECT * FROM " . TB_PREFIX . "alidata where leader = $leader");
-			if(mysql_num_rows($q) > 0){
-			$villages = $database->getVillagesID2($leader);
-			$max = 0;
-			foreach($villages as $village){
-			$field = $database->getResourceLevel($village['wref']);
-			for($i=19;$i<=40;$i++){
-			if($field['f'.$i.'t'] == 18){
-			$level = $field['f'.$i];
-			$attri = $bid18[$level]['attri'];
-			}
-			}
-			if($attri > $max){
-			$max = $attri;
-			}
-			}
-			$q = "UPDATE ".TB_PREFIX."alidata set max = $max where leader = $leader";
-			$database->query($q);
+			    header("Location: banned.php");
+			    exit;
 			}
 		}
 	   }

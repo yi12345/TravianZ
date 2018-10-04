@@ -13,7 +13,6 @@ if (!isset($_SESSION)) {
 }
 if($_SESSION['access'] < ADMIN) die("Access Denied: You are not Admin!");
 $id = $_GET['uid'];
-$user = $database->getUserArray($id,1);
 $dur=$user['protect']-time();
 $protect=0;
 if($dur>43200) {
@@ -138,8 +137,10 @@ function go_url(url) {
 				</tbody>
 				<thead>
 				<tr>
-					<td style="border-right:none; text-align:left"><input name="back" type="image" id="btn_back" class="dynamic_img" src="img/x.gif" value="back" alt="back" onclick="return go_url('../Admin/admin.php?p=player&uid=<?php echo $_GET["uid"];?>')" /></td>
-					<td style="border-left:none; text-align:right" colspan="5"><input name="save" type="image" id="btn_save" class="dynamic_img" src="img/x.gif" value="save" alt="save" /></td>
+					<td colspan="2">
+						<input style="float: right" name="save" type="image" id="btn_save" class="dynamic_img" src="img/x.gif" value="save" alt="save" />
+						<input style="float: left" name="back" type="image" id="btn_back" class="dynamic_img" src="img/x.gif" value="back" alt="back" onclick="return go_url('../Admin/admin.php?p=player&uid=<?php echo $_GET["uid"];?>')" />
+					</td>
 				</tr>
 				</thead>				
 			</table>

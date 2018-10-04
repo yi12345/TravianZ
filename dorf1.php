@@ -9,33 +9,38 @@
 ##  Copyright:     TravianX (c) 2010-2011. All rights reserved.                ##
 ##                                                                             ##
 #################################################################################
+use App\Utils\AccessLogger;
+
 include("GameEngine/Village.php");
-$start = $generator->pageLoadTimeStart();
+AccessLogger::logRequest();
+
+$start_timer = $generator->pageLoadTimeStart();
 if(isset($_GET['ok'])){
-$database->updateUserField($session->uid,'ok','0','1'); $_SESSION['ok'] = '0';
+	$database->updateUserField($session->uid,'ok','0','1'); $_SESSION['ok'] = '0';
 }
 if(isset($_GET['newdid'])) {
     $_SESSION['wid'] = $_GET['newdid'];
-    $database->query("UPDATE ".TB_PREFIX."users SET village_select=".$_GET['newdid']." WHERE id=".$session->uid);  
+    $database->query("UPDATE ".TB_PREFIX."users SET village_select=".$database->escape((int) $_GET['newdid'])." WHERE id=".$session->uid);  
 	header("Location: ".$_SERVER['PHP_SELF']);
-}else{
-$building->procBuild($_GET);
+	exit;
+} else {
+	$building->procBuild($_GET);
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<title><?php echo SERVER_NAME ?></title>
-	<link REL="shortcut icon" HREF="favicon.ico"/>
+	<title><?php echo SERVER_NAME . ' - Village overview &raquo; ' . $village->vname; ?></title>
+	<link rel="shortcut icon" href="favicon.ico"/>
 	<meta http-equiv="cache-control" content="max-age=0" />
 	<meta http-equiv="pragma" content="no-cache" />
 	<meta http-equiv="expires" content="0" />
 	<meta http-equiv="imagetoolbar" content="no" />
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<script src="mt-full.js?0faaa" type="text/javascript"></script>
-	<script src="unx.js?0faaa" type="text/javascript"></script>
-	<script src="new.js?0faaa" type="text/javascript"></script>
-	<link href="<?php echo GP_LOCATE; ?>lang/en/compact.css?e21d2" rel="stylesheet" type="text/css" />
+	<script src="mt-full.js?0faab" type="text/javascript"></script>
+	<script src="unx.js?f4b7g" type="text/javascript"></script>
+	<script src="new.js?0faab" type="text/javascript"></script>
+	<link href="<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7g" rel="stylesheet" type="text/css" />
 	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?e21d2" rel="stylesheet" type="text/css" />
 	<?php
 	if($session->gpack == null || GP_ENABLE == false) {
@@ -64,12 +69,12 @@ $building->procBuild($_GET);
 <?php include("Templates/menu.tpl"); ?>
 <div id="content"  class="village1">
 <h1><?php echo $village->vname; if($village->loyalty!='100'){ if($village->loyalty>'33'){ $color="gr"; }else{ $color="re"; } ?><div id="loyality" class="<?php echo $color; ?>"><?php echo LOYALTY; ?> <?php echo floor($village->loyalty); ?>%</div><?php } ?></h1>
-<div id="cap" align="left"><?php if($village->capital!='0') { echo "<font color=gray>(Capital)</font>"; }else{ halt; } ?></div>
+<div id="cap" align="left"><?php if($village->capital!='0') { echo "<font color=gray>(Capital)</font>"; } ?></div>
 <?php include("Templates/field.tpl");
 $timer = 1;
 ?>
 <div id="map_details">
-</br></br>
+<br /><br />
 <?php
 include("Templates/movement.tpl");
 include("Templates/production.tpl");
@@ -80,7 +85,7 @@ if($building->NewBuilding) {
 }
 ?>
 </div>
-</br></br></br></br><div id="side_info">
+<br /><br /><br /><br /><div id="side_info">
 <?php
 include("Templates/multivillage.tpl");
 include("Templates/quest.tpl");
@@ -101,7 +106,7 @@ include("Templates/res.tpl");
 <div id="ltime">
 <div id="ltimeWrap">
 <?php echo CALCULATED_IN;?> <b><?php
-echo round(($generator->pageLoadTimeEnd()-$start)*1000);
+echo round(($generator->pageLoadTimeEnd()-$start_timer)*1000);
 ?></b> ms
 
 <br /><?php echo SEVER_TIME;?> <span id="tp1" class="b"><?php echo date('H:i:s'); ?></span>

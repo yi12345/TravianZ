@@ -1,10 +1,15 @@
 <?php
 
+use App\Utils\AccessLogger;
+
 include("GameEngine/Village.php");
-$start = $generator->pageLoadTimeStart();
+AccessLogger::logRequest();
+
+$start_timer = $generator->pageLoadTimeStart();
 if(isset($_GET['newdid'])) {
 	$_SESSION['wid'] = $_GET['newdid'];
 	header("Location: ".$_SERVER['PHP_SELF']);
+	exit;
 }
 else {
 	$building->procBuild($_GET);
@@ -14,18 +19,18 @@ else {
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<title><?php echo SERVER_NAME ?></title>
-    <link REL="shortcut icon" HREF="favicon.ico"/>
+	<title><?php echo SERVER_NAME ?> - PLUS Packages</title>
+    <link rel="shortcut icon" href="favicon.ico"/>
 	<meta http-equiv="cache-control" content="max-age=0" />
 	<meta http-equiv="pragma" content="no-cache" />
 	<meta http-equiv="expires" content="0" />
 	<meta http-equiv="imagetoolbar" content="no" />
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<script src="mt-full.js?0faaa" type="text/javascript"></script>
-	<script src="unx.js?0faaa" type="text/javascript"></script>
-	<script src="new.js?0faaa" type="text/javascript"></script>
-	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7c" rel="stylesheet" type="text/css" />
-	<link href="<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7c" rel="stylesheet" type="text/css" />
+	<script src="mt-full.js?0faab" type="text/javascript"></script>
+	<script src="unx.js?f4b7g" type="text/javascript"></script>
+	<script src="new.js?0faab" type="text/javascript"></script>
+	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7d" rel="stylesheet" type="text/css" />
+	<link href="<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7g" rel="stylesheet" type="text/css" />
 	<?php
 	if($session->gpack == null || GP_ENABLE == false) {
 	echo "
@@ -92,7 +97,7 @@ include("Templates/res.tpl");
 <div id="ltime">
 <div id="ltimeWrap">
 Calculated in <b><?php
-echo round(($generator->pageLoadTimeEnd()-$start)*1000);
+echo round(($generator->pageLoadTimeEnd()-$start_timer)*1000);
 ?></b> ms
  
 <br />Server time: <span id="tp1" class="b"><?php echo date('H:i:s'); ?></span>

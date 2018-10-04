@@ -10,6 +10,28 @@
 ##                                                                             ##
 #################################################################################
 
+global $autoprefix;
+
+// even with autoloader created, we can't use it here yet, as it's not been created
+// ... so, let's see where it is and include it
+$autoloader_found = false;
+// go max 5 levels up - we don't have folders that go deeper than that
+for ($i = 0; $i < 5; $i++) {
+    $autoprefix = str_repeat('../', $i);
+    if (file_exists($autoprefix.'autoloader.php')) {
+        $autoloader_found = true;
+        include_once $autoprefix.'autoloader.php';
+        break;
+    }
+}
+
+if (!$autoloader_found) {
+    die('Could not find autoloading class.');
+}
+
+// this is needed for installation, since the lang file would not be included yet
+include_once($autoprefix."GameEngine/Lang/en.php");
+
 class Technology {
 
 	public $unarray = array(1=>U1,U2,U3,U4,U5,U6,U7,U8,U9,U10,U11,U12,U13,U14,U15,U16,U17,U18,U19,U20,U21,U22,U23,U24,U25,U26,U27,U28,U29,U30,U31,U32,U33,U34,U35,U36,U37,U38,U39,U40,U41,U42,U43,U44,U45,U46,U47,U48,U49,U50,U99,U0);
@@ -143,23 +165,11 @@ class Technology {
 
 	public function getUnitList() {
 		global $database,$village;
-	//FIX BY MisterX
-  	$controlloTruppeInRinforzo = $database->getEnforceControllTroops($village->wid);
-     	for($i=1;$i<=50;$i++) {
-     	if($controlloTruppeInRinforzo['u'.$i] >= "30000000")
-     	mysql_query("UPDATE ".TB_PREFIX."enforcement set u".$i." = '0' where vref = $village->wid");
-     	}
-	//FIX BY Shadow and made by NIKO28
-	$controlloTruppe = $database->getUnit($village->wid);
-   	for($i=1;$i<=50;$i++) {
-   	if($controlloTruppe['u'.$i] >= "10000000")
-   	mysql_query("UPDATE ".TB_PREFIX."units set u".$i." = '0' where vref = $village->wid");
-   	}
 		$unitarray = func_num_args() == 1? $database->getUnit(func_get_arg(0)) : $village->unitall;
 		$listArray = array();
 		for($i=1;$i<count($this->unarray);$i++) {
 			$holder = array();
-			if($unitarray['u'.$i] != 0 && $unitarray['u'.$i] != "") {
+			if(!empty($unitarray['u'.$i]) && $unitarray['u'.$i] != 0 && $unitarray['u'.$i] != "") {
 				$holder['id'] = $i;
 				$holder['name'] = $this->unarray[$i];
 				$holder['amt'] = $unitarray['u'.$i];
@@ -179,7 +189,7 @@ class Technology {
 		global $village,$$unit;
 		$unitarray = $$unit;
 		$res = array();
-		$res = mysql_fetch_assoc(mysql_query("SELECT maxstore, maxcrop, wood, clay, iron, crop FROM ".TB_PREFIX."vdata WHERE wref = ".$village->wid)) or die(mysql_error());
+		$res = mysqli_fetch_assoc(mysqli_query($GLOBALS['link'],"SELECT maxstore, maxcrop, wood, clay, iron, crop FROM ".TB_PREFIX."vdata WHERE wref = ".(int) $village->wid)) or die(mysqli_error($database->dblink));
 		if ($res['wood'] > $res['maxstore']){$res['wood'] = $res['maxstore'];}
 		if ($res['clay'] > $res['maxstore']){$res['clay'] = $res['maxstore'];}
 		if ($res['iron'] > $res['maxstore']){$res['iron'] = $res['maxstore'];}
@@ -205,7 +215,7 @@ class Technology {
 		global $village,$$unit;
 		$unitarray = $$unit;
 		$res = array();
-		$res = mysql_fetch_assoc(mysql_query("SELECT maxstore, maxcrop, wood, clay, iron, crop FROM ".TB_PREFIX."vdata WHERE wref = ".$village->wid)) or die(mysql_error());
+		$res = mysqli_fetch_assoc(mysqli_query($GLOBALS['link'],"SELECT maxstore, maxcrop, wood, clay, iron, crop FROM ".TB_PREFIX."vdata WHERE wref = ".(int) $village->wid)) or die(mysqli_error($database->dblink));
 		$totalres = $res['wood']+$res['clay']+$res['iron']+$res['crop'];
 		$totalresunit = ($unitarray['wood'] * ($great?3:1))+($unitarray['clay'] * ($great?3:1))+($unitarray['iron'] * ($great?3:1))+($unitarray['crop'] * ($great?3:1));
 		$max =round($totalres/$totalresunit);
@@ -282,9 +292,16 @@ class Technology {
             $movement = $database->getVillageMovement($base);
             if(!empty($movement)) {
                 for($i=1;$i<=50;$i++) {
-                    $ownunit['u'.$i] += $movement['u'.$i];
+                    if (!isset($ownunit['u'.$i])) {
+                        $ownunit['u'.$i] = 0;
+                    }
+                    $ownunit['u'.$i] += (isset($movement['u'.$i]) ? $movement['u'.$i] : 0);
                 }
-                $ownunit['hero'] += $movement['hero'];
+
+                if (!isset($ownunit['hero'])) {
+                    $ownunit['hero'] = 0;
+                }
+                $ownunit['hero'] += (isset($movement['hero']) ? $movement['hero'] : 0);
             }
         }
         return $ownunit;
@@ -373,34 +390,54 @@ class Technology {
 
 	public function getTech($tech) {
 		global $village;
-		return ($village->techarray['t'.$tech] == 1);
+		return (isset($village->techarray['t'.$tech]) && $village->techarray['t'.$tech] == 1);
 	}
 
 	private function procTrain($post,$great=false) {
 		global $session;
 		if($session->access != BANNED){
-		$start = ($session->tribe-1)*10+1;
-		$end = ($session->tribe*10);
-		for($i=$start;$i<=($end);$i++) {
-			if(isset($post['t'.$i]) && $post['t'.$i] != 0) {
-				$amt = $post['t'.$i];
-				$amt = intval($amt);
-					if ($amt < 0) $amt = 1;
-					$this->trainUnit($i,$amt,$great);
-			}
-		}
-		if($session->tribe == 3){
-			if(isset($post['t99']) && $post['t99'] != 0) {
-				$amt = $post['t99'];
-				$amt = intval($amt);
-					if ($amt < 0) $amt = 1;
-					$this->trainUnit(99,$amt,$great);
-			}
-		}
-		header("Location: build.php?id=".$post['id']);
-	}else{
-		header("Location: banned.php");
-	}
+			// first of all, check if we're not trying to train chieftain
+            // and settlers together - which we cannot, since that can result
+            // in 1 chieftain and 3 settlers, then conquering a village, then
+            // founding a new one, all with only 1 available slot
+            if (
+                !(
+                    (!empty($post['t9']) && !empty($post['t10'])) ||
+                    (!empty($post['t19']) && !empty($post['t20'])) ||
+                    (!empty($post['t29']) && !empty($post['t30'])) ||
+                    (!empty($post['t39']) && !empty($post['t40'])) ||
+                    (!empty($post['t49']) && !empty($post['t50']))
+                )
+            ) {
+                $start = ( $session->tribe - 1 ) * 10 + 1;
+                $end   = ( $session->tribe * 10 );
+                for ( $i = $start; $i <= ( $end ); $i ++ ) {
+                    if ( isset( $post[ 't' . $i ] ) && $post[ 't' . $i ] != 0 ) {
+                        $amt = $post[ 't' . $i ];
+                        $amt = intval( $amt );
+                        if ( $amt < 0 ) {
+                            $amt = 1;
+                        }
+                        $this->trainUnit( $i, $amt, $great );
+                    }
+                }
+                if ( $session->tribe == 3 ) {
+                    if ( isset( $post['t99'] ) && $post['t99'] != 0 ) {
+                        $amt = $post['t99'];
+                        $amt = intval( $amt );
+                        if ( $amt < 0 ) {
+                            $amt = 1;
+                        }
+                        $this->trainUnit( 99, $amt, $great );
+                    }
+                }
+                header( "Location: build.php?id=" . $post['id'] );
+                exit;
+            }
+	    }else{
+		    header("Location: banned.php");
+		    exit;
+	    }
 	}
 
 	public function getUpkeep($array,$type,$vid=0,$prisoners=0) {
@@ -435,39 +472,68 @@ class Technology {
 			$end = 50;
 			break;
 		}
+
+		for($j=19;$j<=38;$j++) {
+		    if($buildarray['f'.$j.'t'] == 41) {
+		        $horsedrinking = $j;
+		        break;
+		    }
+		}
+
 		for($i=$start;$i<=$end;$i++) {
 			$k = $i-$start+1;
 			$unit = "u".$i;
 			$unit2 = "t".$k;
 			global $$unit;
 			$dataarray = $$unit;
-			for($j=19;$j<=38;$j++) {
-			if($buildarray['f'.$j.'t'] == 41) {
-			$horsedrinking = $j;
-			}
-			}
 			if($prisoners == 0){
-			if(isset($horsedrinking)){
-			if(($i==4 && $buildarray['f'.$horsedrinking] >= 10)
-			|| ($i==5 && $buildarray['f'.$horsedrinking] >= 15)
-			|| ($i==6 && $buildarray['f'.$horsedrinking] == 20)) {
-			$upkeep += ($dataarray['pop']-1) * $array[$unit];
+    			if(isset($horsedrinking)){
+    			     if(($i==4 && $buildarray['f'.$horsedrinking] >= 10)
+    			     || ($i==5 && $buildarray['f'.$horsedrinking] >= 15)
+    			     || ($i==6 && $buildarray['f'.$horsedrinking] == 20)
+    			     ) {
+    			         $upkeepDecrement = 0;
+    			         switch ($i) {
+    			             case 4: $upkeepDecrement = 2;
+    			                     break;
+    			                     
+    			             case 5: $upkeepDecrement = 3;
+    			             break;
+    			             
+    			             case 6: $upkeepDecrement = 4;
+    			             break;
+    			         }
+    			         $upkeep += ($dataarray['pop'] - $upkeepDecrement) * $array[$unit];
+    			     } else {
+    			         $upkeep += $dataarray['pop'] * $array[$unit];
+    			     }
+    			} else {
+    			     $upkeep += $dataarray['pop'] * $array[$unit];
+    			}
 			} else {
-			$upkeep += $dataarray['pop'] * $array[$unit];
-			}}else{
-			$upkeep += $dataarray['pop'] * $array[$unit];
-			}
-			}else{
-			if(isset($horsedrinking)){
-			if(($i==4 && $buildarray['f'.$horsedrinking] >= 10)
-			|| ($i==5 && $buildarray['f'.$horsedrinking] >= 15)
-			|| ($i==6 && $buildarray['f'.$horsedrinking] == 20)) {
-			$upkeep += ($dataarray['pop']-1) * $array[$unit2];
-			} else {
-			$upkeep += $dataarray['pop'] * $array[$unit2];
-			}}else{
-			$upkeep += $dataarray['pop'] * $array[$unit2];
-			}
+    			if(isset($horsedrinking)){
+        			if(($i==4 && $buildarray['f'.$horsedrinking] >= 10)
+            			|| ($i==5 && $buildarray['f'.$horsedrinking] >= 15)
+            			|| ($i==6 && $buildarray['f'.$horsedrinking] == 20)
+        			) {
+        			    $upkeepDecrement = 0;
+        			    switch ($i) {
+        			        case 4: $upkeepDecrement = 2;
+        			        break;
+        			        
+        			        case 5: $upkeepDecrement = 3;
+        			        break;
+        			        
+        			        case 6: $upkeepDecrement = 4;
+        			        break;
+        			    }
+        			    $upkeep += ($dataarray['pop'] - $upkeepDecrement) * $array[$unit2];
+        			} else {
+            			$upkeep += $dataarray['pop'] * $array[$unit2];
+        			}
+    			} else {
+    			     $upkeep += $dataarray['pop'] * $array[$unit2];
+    			}
 			}
 		}
 		 //   $unit = "hero";
@@ -675,6 +741,7 @@ private function trainUnit($unit,$amt,$great=false) {
 		}
 		$session->changeChecker();
 		header("Location: build.php?id=".$get['id']);
+		exit;
 	}
 
 	private function upgradeSword($get) {
@@ -693,6 +760,7 @@ private function trainUnit($unit,$amt,$great=false) {
 		}
 		$session->changeChecker();
 		header("Location: build.php?id=".$get['id']);
+		exit;
 	}
 
 	private function upgradeArmour($get) {
@@ -711,6 +779,7 @@ private function trainUnit($unit,$amt,$great=false) {
 		}
 		$session->changeChecker();
 		header("Location: build.php?id=".$get['id']);
+		exit;
 	}
 
 	public function getUnitName($i) {
@@ -719,9 +788,9 @@ private function trainUnit($unit,$amt,$great=false) {
 
 	public function finishTech() {
         	global $database,$village;
-        	$q = "UPDATE ".TB_PREFIX."research SET timestamp=".(time()-1)." WHERE vref = ".$village->wid;
+        	$q = "UPDATE ".TB_PREFIX."research SET timestamp=".(time()-1)." WHERE vref = ".(int) $village->wid;
         	$result = $database->query($q);
-        	return mysql_affected_rows();
+        	return mysqli_affected_rows($database->dblink);
     	}  
 
 	public function calculateAvaliable($id,$resarray=array()) {

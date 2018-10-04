@@ -14,8 +14,6 @@ if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 $id = $_GET['did'];
 if(isset($id))
 {
-	$village = $database->getVillage($id);
-	$user = $database->getUserArray($village['owner'],1);
 	$abtech = $database->getABTech($id); // Armory/blacksmith level	
 	$units = $database->getUnit($village['wref']);
 	$coor = $database->getCoor($village['wref']);
@@ -53,8 +51,10 @@ if(isset($id))
 	</tbody>
 	<thead>
 	<tr>
-		<td style="border-right:none; text-align:left"><input name="back" type="image" id="btn_back" class="dynamic_img" src="img/x.gif" value="back" alt="back" onclick="return go_url('../Admin/admin.php?p=village&did=<?php echo $_GET["did"];?>')" /></td>
-		<td style="border-left:none; text-align:right" colspan="5"><input name="save" type="image" id="btn_save" class="dynamic_img" src="img/x.gif" value="save" alt="save" /></td>
+		<td colspan="3">
+			<input style="float: right" name="save" type="image" id="btn_save" class="dynamic_img" src="img/x.gif" value="save" alt="save" />
+			<input style="float: left" name="back" type="image" id="btn_back" class="dynamic_img" src="img/x.gif" value="back" alt="back" onclick="return go_url('../Admin/admin.php?p=village&did=<?php echo $_GET["did"];?>')" />
+		</td>
 	</tr>
 	</thead>	
 	</table>

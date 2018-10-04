@@ -138,9 +138,9 @@ $tocoor = $database->getCoor($enforce['vref']);
 					}
 				}
 			if ($enforce['hero']>0){
-                $qh = "SELECT * FROM ".TB_PREFIX."hero WHERE uid = ".$to['owner'].""; 
-                $resulth = mysql_query($qh); 
-                $hero_f=mysql_fetch_array($resulth); 
+                $qh = "SELECT unit FROM ".TB_PREFIX."hero WHERE uid = ".(int) $to['owner']." AND dead = 0"; 
+                $resulth = mysqli_query($GLOBALS['link'],$qh); 
+                $hero_f=mysqli_fetch_array($resulth); 
                 $hero_unit=$hero_f['unit'];
                 $speeds[] = $GLOBALS['u'.$hero_unit]['speed']; 
 			}

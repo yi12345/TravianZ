@@ -13,12 +13,12 @@ $WrefY = $WrefCoor['y'];
 $type = $database->getVillageType2($Wref);
 $oasistype = $type['oasistype'];
 $vdata = $database->getVillage($Wref);
-}elseif($_POST['x']!="" && $_POST['y']!="" && is_numeric($_POST['x']) && is_numeric($_POST['y'])){
+}elseif($_POST['x']!="" && $_POST['y']!="" && is_numeric($_POST['x']) && is_numeric($_POST['y']) && $_POST['x']<= WORLD_MAX && $_POST['y']<= WORLD_MAX){
 $Wref = $database->getVilWref($_POST['x'], $_POST['y']);
 $WrefX = $_POST['x'];
 $WrefY = $_POST['y'];
 $type = $database->getVillageType2($Wref);
-$oasistype = $type['oasistype'];
+$oasistype = $type;
 $vdata = $database->getVillage($Wref);
 }
     if($_POST['x']=="" && $_POST['y']=="" && $_POST['target_id'] == ""){
@@ -62,6 +62,7 @@ $vdata = $database->getVillage($Wref);
         $database->addSlotFarm($_POST['lid'], $Wref, $WrefX, $WrefY, $distance, $_POST['t1'], $_POST['t2'], $_POST['t3'], $_POST['t4'], $_POST['t5'], $_POST['t6'], $_POST['t7'], $_POST['t8'], $_POST['t9'], $_POST['t10']);
         
         header("Location: build.php?id=39&t=99");
+		exit;
 }
 }
 ?>
@@ -85,8 +86,8 @@ $vdata = $database->getVillage($Wref);
                         <select name="lid">
 <?php
 
-$sql = mysql_query("SELECT * FROM ".TB_PREFIX."farmlist WHERE owner = $session->uid ORDER BY name ASC");
-while($row = mysql_fetch_array($sql)){ 
+$sql = mysqli_query($GLOBALS['link'],"SELECT id, name, owner, wref FROM ".TB_PREFIX."farmlist WHERE owner = ".(int) $session->uid." ORDER BY name ASC");
+while($row = mysqli_fetch_array($sql)){ 
 $lid = $row["id"];
 $lname = $row["name"];
 $lowner = $row["owner"];
@@ -120,10 +121,10 @@ $lvname = $database->getVillageField($row["wref"], 'name');
                             <label class="lastTargets">Last targets:</label>
 							<select name="target_id">
 <?php
-$getwref = "SELECT * FROM ".TB_PREFIX."raidlist WHERE lid = ".$_GET['lid']."";
+$getwref = "SELECT towref FROM ".TB_PREFIX."raidlist WHERE lid = ".$database->escape((int) $_GET['lid'])."";
 $arraywref = $database->query_return($getwref);
 	echo '<option value="">Select village</option>';
-if(mysql_num_rows(mysql_query($getwref)) != 0){
+if(mysqli_num_rows(mysqli_query($GLOBALS['link'],$getwref)) != 0){
 foreach($arraywref as $row){
 $towref = $row["towref"];
 $tocoor = $database->getCoor($towref);
@@ -159,5 +160,6 @@ $vill[$towref] = 1;
 <?php
 }else{
 header("Location: build.php?id=39&t=99");
+exit;
 }
 ?>

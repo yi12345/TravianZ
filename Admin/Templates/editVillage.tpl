@@ -10,8 +10,6 @@
 #################################################################################
 
 $id = $_GET['did'];
-$village = $database->getVillage($id);
-$user = $database->getUserArray($village['owner'],1);
 $coor = $database->getCoor($village['wref']);
 $varray = $database->getProfileVillages($village['owner']);
 $type = $database->getVillageType($village['wref']);
@@ -19,7 +17,7 @@ $fdata = $database->getResourceLevel($village['wref']);
 if(isset($id))
 {
 	include("search2.tpl"); ?>
-	<link href="../<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7c" rel="stylesheet" type="text/css">
+	<link href="../<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7g" rel="stylesheet" type="text/css">
 	<form action="../GameEngine/Admin/Mods/editBuildings.php" method="POST">
 		<input type="hidden" name="admid" id="admid" value="<?php echo $_SESSION['id']; ?>">
 		<input type="hidden" name="id" value="<?php echo $_GET['did']; ?>" />
@@ -73,7 +71,7 @@ if(isset($id))
 				</thead>
 				<tbody>
 					<?php
-						for($i =1; $i<=39; $i++)
+						for($i = 1; $i<=42; $i++)
 						{
 							$bu = $funct->procResType($i);
 							echo '
@@ -83,10 +81,6 @@ if(isset($id))
 							</tr>';
 						}
 					?>
-					<tr>
-						<td class="on">41.</td>
-						<td class="on">Horse Drinking Trough</td>
-					</tr>
 				</tbody>
 			</table>
 			<a href="#" onclick="hideStuff('instructions'); return false;">Hide Instructions</a>

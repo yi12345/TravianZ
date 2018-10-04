@@ -20,7 +20,7 @@ $to = array('x'=>$coor['x'], 'y'=>$coor['y']);
 			$fastertroops = 1;
 			}
 $time = round($generator->procDistanceTime($from,$to,300,0)/$fastertroops);
-$foolartefact = $database->getFoolArtefactInfo(2,$village->wid,$seesion->uid);
+$foolartefact = $database->getFoolArtefactInfo(2,$village->wid,$session->uid);
 if(count($foolartefact) > 0){
 foreach($foolartefact as $arte){
 if($arte['bad_effect'] == 1){
@@ -49,12 +49,30 @@ $ckey= $generator->generateRandStr(6);
  if (!isset($process['t10']) || $process['t10'] == ''){  $t10='0'; }else{  $t10=$process['t10']; } 
  if (!isset($process['t11']) || $process['t11'] == ''){  $t11='0'; }else{  $t11=$process['t11']; $showhero=1;} 
  if ($session->tribe == 3){
- $totalunits =$process['t1']+$process['t2']+$process['t4']+$process['t5']+$process['t6']+$process['t7']+$process['t8']+$process['t9']+$process['t10']+$process['t11'];
+ $totalunits = (!empty($process['t1']) ? $process['t1'] : 0) +
+               (!empty($process['t2']) ? $process['t2'] : 0) +
+               (!empty($process['t4']) ? $process['t4'] : 0) +
+               (!empty($process['t5']) ? $process['t5'] : 0) +
+               (!empty($process['t6']) ? $process['t6'] : 0) +
+               (!empty($process['t7']) ? $process['t7'] : 0) +
+               (!empty($process['t8']) ? $process['t8'] : 0) +
+               (!empty($process['t9']) ? $process['t9'] : 0) +
+               (!empty($process['t10']) ? $process['t10'] : 0) +
+               (!empty($process['t11']) ? $process['t11'] : 0);
  
  }else{
- $totalunits =$process['t1']+$process['t2']+$process['t3']+$process['t5']+$process['t6']+$process['t7']+$process['t8']+$process['t9']+$process['t10']+$process['t11'];
+ $totalunits = (!empty($process['t1']) ? $process['t1'] : 0) +
+               (!empty($process['t2']) ? $process['t2'] : 0) +
+               (!empty($process['t3']) ? $process['t3'] : 0) +
+               (!empty($process['t5']) ? $process['t5'] : 0) +
+               (!empty($process['t6']) ? $process['t6'] : 0) +
+               (!empty($process['t7']) ? $process['t7'] : 0) +
+               (!empty($process['t8']) ? $process['t8'] : 0) +
+               (!empty($process['t9']) ? $process['t9'] : 0) +
+               (!empty($process['t10']) ? $process['t10'] : 0) +
+               (!empty($process['t11']) ? $process['t11'] : 0);
  }
- if ($scout==1 && $totalunits==0) {
+ if (isset($scout) && $scout==1 && isset($totalunits) && $totalunits==0) {
 if ($process['c'] != 2){
 $process['c'] = 1;
 }
@@ -125,7 +143,7 @@ $end = ($tribe*10);
 
                         <td><?php echo $process[1]; ?></td>
 
-                        <td colspan="<?php if($process['t11'] != ''){ echo"11"; }else{ echo"10"; } ?>"><?php echo $actionType." to ".$process['1']; ?></td>
+                        <td colspan="<?php if(!empty($process['t11'])){ echo"11"; }else{ echo"10"; } ?>"><?php echo $actionType." to ".$process['1']; ?></td>
 
                     </tr>
 
@@ -139,7 +157,7 @@ $end = ($tribe*10);
                  <?php 
                 for($i=$start;$i<=($end);$i++) {
                       echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";    
-                  } if ($process['t11'] != ''){
+                  } if (!empty($process['t11'])){
                   echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";    
                   
                   }?>
@@ -193,7 +211,7 @@ $end = ($tribe*10);
             <?php if($process['c']=='3'){ ?><tbody class="cata">
                 <tr>
                     <th>Destination:</th>
-                    <td colspan="<?php if($process['t11'] != ''){ echo"11"; }else{ echo"10"; } ?>">
+                    <td colspan="<?php if(!empty($process['t11'])){ echo"11"; }else{ echo"10"; } ?>">
                     
                         <select name="ctar1" class="dropdown">
                             <option value="0">Random</option>
@@ -315,7 +333,7 @@ $end = ($tribe*10);
                 ?><tbody class="infos">  
                 <th>Destination:</th>
 
-            <td colspan="<?php if($process['t11'] != ''){ echo"11"; }else{ echo"10"; } ?>">
+            <td colspan="<?php if(!empty($process['t11'])){ echo"11"; }else{ echo"10"; } ?>">
                 <?PHP
                 
                 echo"Warning: Catapult will <b>ONLY</b> shoot with a normal attack (they dont shoot with raids!)";
@@ -362,9 +380,9 @@ $end = ($tribe*10);
                 else
                 {
                 //$uid
-                $q = "SELECT * FROM ".TB_PREFIX."hero WHERE uid = $uid";
-                $result = mysql_query($q);
-                $hero_f=mysql_fetch_array($result);
+                $q = "SELECT unit FROM ".TB_PREFIX."hero WHERE uid = ".(int) $uid." AND dead = 0";
+                $result = mysqli_query($GLOBALS['link'],$q);
+                $hero_f=mysqli_fetch_array($result);
                 $hero_unit=$hero_f['unit'];
                 $speeds[] = ${'u'.$hero_unit}['speed'];
                 }
@@ -402,7 +420,7 @@ $end = ($tribe*10);
 			$fastertroops = 1;
 			}
                 $time = round($generator->procDistanceTime($from,$to,min($speeds),1)/$fastertroops);
-				$foolartefact = $database->getFoolArtefactInfo(2,$village->wid,$seesion->uid);
+				$foolartefact = $database->getFoolArtefactInfo(2,$village->wid,$session->uid);
 				if(count($foolartefact) > 0){
 				foreach($foolartefact as $arte){
 				if($arte['bad_effect'] == 1){
@@ -418,7 +436,7 @@ $end = ($tribe*10);
 
             
 
-            <td colspan="<?php if($process['t11'] != ''){ echo"11"; }else{ echo"10"; } ?>">
+            <td colspan="<?php if(!empty($process['t11'])){ echo"11"; }else{ echo"10"; } ?>">
 
             <div class="in">in <?php echo $generator->getTimeFormat($time); ?></div>
 

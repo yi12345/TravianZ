@@ -23,13 +23,13 @@ $user = $database->getUserArray($session->uid, 1);
 		}
 
 		function copyElement(element) {
-			if (element == 'receiver') {
+			/*if (element == 'receiver') {
 				document.getElementById('copy_receiver').value = document.getElementById('receiver').value;
 			} else if (element == 'subject') {
 				document.getElementById('copy_subject').value = document.getElementById('subject').value;
 			} else if (element == 'body') {
-				document.getElementById('copy_igm').value = document.getElementById('message').value;
-			}
+				document.getElementById('copy_img').value = document.getElementById('message').value;
+			}*/
 		}
 
 		function submitDefault (type,uid) {
@@ -53,9 +53,9 @@ $user = $database->getUserArray($session->uid, 1);
    if (preg_match("/re([0-9]+)/i",$message->reply['topic'],$c)) 
    { 
        $c = $c[1]+1; 
-       echo $message->reply['topic'] = preg_replace("/re[0-9]+/i","re".($c),$message->reply['topic']); 
+       echo $message->reply['topic'] = strip_tags(preg_replace("/re[0-9]+/i","re".($c),$message->reply['topic'])); 
 }else{ 
-echo "re1:".$message->reply['topic']; }} ?>" maxlength="35" onkeyup="copyElement('subject')" tabindex=2/>
+echo "re1:".strip_tags($message->reply['topic']); }} ?>" maxlength="35" onkeyup="copyElement('subject')" tabindex=2/>
 	</div>
 <a id="adbook" href="#" onclick="toggleFriendsList(); return false;"><img src="img/x.gif" alt="Addressbook" title="Addressbook" /></a>
 <div class="clear"></div>
@@ -73,7 +73,9 @@ echo "re1:".$message->reply['topic']; }} ?>" maxlength="35" onkeyup="copyElement
 					<a href="javascript:void(0);" bbWin="resources" id="message_resourceButton"><div title="resources" alt="resources" class="bbButton bbResource"></div></a>
 					<a href="javascript:void(0);" bbWin="smilies" id="message_smilieButton"><div title="smilies" alt="smilies" class="bbButton bbSmilie"></div></a>
 					<a href="javascript:void(0);" bbWin="troops" id="message_troopButton"><div title="troops" alt="troops" class="bbButton bbTroop"></div></a>
-					<a href="javascript:void(0);" id="message_previewButton" bbArea="message"><div title="preview" alt="preview" class="bbButton bbPreview"></div></a>
+					<a href="javascript:void(0);" id="message_previewButton" bbArea="message">
+					<!--<div title="preview" alt="preview" class="bbButton bbPreview"></div>//-->
+					</a>
 					<div class="clear"></div>
 					<div id="message_toolbarWindows">
 						<div id="message_resources" name="message_resources"><a href="javascript:void(0);" bbType="o" bbTag="l" ><img src="img/x.gif" class="r1" title="Lumber" alt="Lumber" /></a><a href="javascript:void(0);" bbType="o" bbTag="cl" ><img src="img/x.gif" class="r2" title="Clay" alt="Clay" /></a><a href="javascript:void(0);" bbType="o" bbTag="i" ><img src="img/x.gif" class="r3" title="Iron" alt="Iron" /></a><a href="javascript:void(0);" bbType="o" bbTag="c" ><img src="img/x.gif" class="r4" title="Crop" alt="Crop" /></a></div>
@@ -94,7 +96,14 @@ Reply: ".$database->getUserField($id,'username',0)."
 			</script>
 					<p class="btn">
 		<input type="hidden" name="ft" value="m2" />
-		<input type="image" value="" name="s1" id="btn_send" class="dynamic_img" src="img/x.gif" alt="send" onclick="this.disabled=true;this.form.submit();" tabindex=4; />			
+		<input type="image" value="" name="s1" id="btn_send" class="dynamic_img" src="img/x.gif" alt="send" onclick="this.disabled=true;this.form.submit();" tabindex=4; />
+		<?php
+			if (($session->access == MULTIHUNTER || $session->access == ADMIN) && ADMIN_RECEIVE_SUPPORT_MESSAGES && !empty($_GET['mid'])) {
+		?><br />
+		<input type="checkbox" name="as_support"<?php echo ((!empty($_GET['tid']) && $_GET['tid'] == 1) ? ' checked="checked"' : ''); ?> /> Send as Support
+		<?php
+			}
+		?>			
 	</p>
 	</form>
 	<div id="adressbook" class="hide"><h2>Addressbook</h2>

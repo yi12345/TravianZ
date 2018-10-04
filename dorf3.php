@@ -11,15 +11,21 @@
 #################################################################################
 
 
+use App\Utils\AccessLogger;
+
 include("GameEngine/Village.php");
-$start = $generator->pageLoadTimeStart();
+AccessLogger::logRequest();
+
+$start_timer = $generator->pageLoadTimeStart();
 if(isset($_GET['newdid'])) {
     $_SESSION['wid'] = $_GET['newdid'];
-    $database->query("UPDATE ".TB_PREFIX."users SET village_select=".$_GET['newdid']." WHERE id=".$session->uid);  
+    $database->query("UPDATE ".TB_PREFIX."users SET village_select=".$database->escape((int) $_GET['newdid'])." WHERE id=".$session->uid);  
 	if(isset($_GET['s'])){
 	header("Location: ".$_SERVER['PHP_SELF']."?s=".$_GET['s']);
+	exit;
 	}else{
 	header("Location: ".$_SERVER['PHP_SELF']);
+	exit;
 }
 }
 ?>
@@ -27,18 +33,18 @@ if(isset($_GET['newdid'])) {
 
 <html>
 <head>
-	<title><?php echo SERVER_NAME ?></title>
-	<link REL="shortcut icon" HREF="favicon.ico"/>
+	<title><?php echo SERVER_NAME ?> - Cross-Village Totals</title>
+	<link rel="shortcut icon" href="favicon.ico"/>
 	<meta http-equiv="cache-control" content="max-age=0" />
 	<meta http-equiv="pragma" content="no-cache" />
 	<meta http-equiv="expires" content="0" />
 	<meta http-equiv="imagetoolbar" content="no" />
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<script src="mt-full.js?0faaa" type="text/javascript"></script>
-	<script src="unx.js?0faaa" type="text/javascript"></script>
-	<script src="new.js?0faaa" type="text/javascript"></script>
-	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7c" rel="stylesheet" type="text/css" />
-	<link href="<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7c" rel="stylesheet" type="text/css" />
+	<script src="mt-full.js?0faab" type="text/javascript"></script>
+	<script src="unx.js?f4b7g" type="text/javascript"></script>
+	<script src="new.js?0faab" type="text/javascript"></script>
+	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7d" rel="stylesheet" type="text/css" />
+	<link href="<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7g" rel="stylesheet" type="text/css" />
 	<?php
 	if($session->gpack == null || GP_ENABLE == false) {
 	echo "
@@ -88,7 +94,7 @@ if($session->plus){
 ?>
 </div>
 
-</br></br></br></br><div id="side_info">
+<br /><br /><br /><br /><div id="side_info">
 <?php
 include("Templates/multivillage.tpl");
 include("Templates/quest.tpl");
@@ -107,7 +113,7 @@ include("Templates/res.tpl");
 <div id="ltime">
 <div id="ltimeWrap">
 Calculated in <b><?php
-echo round(($generator->pageLoadTimeEnd()-$start)*1000);
+echo round(($generator->pageLoadTimeEnd()-$start_timer)*1000);
 ?></b> ms
 
 <br />Server time: <span id="tp1" class="b"><?php echo date('H:i:s'); ?></span>

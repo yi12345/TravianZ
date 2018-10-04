@@ -9,7 +9,7 @@
 ##                                                                             ##
 #################################################################################
 
-class Generator {
+class MyGenerator {
 
 	public function generateRandID(){
 		return md5($this->generateRandStr(16));
@@ -148,18 +148,19 @@ if (date('Ymd',time()) == date('Ymd',$time)) {
 	}
 
 	public function pageLoadTimeStart() {
-		$starttime = microtime();
+		if (isset($_SERVER["REQUEST_TIME_FLOAT"])) return $_SERVER["REQUEST_TIME_FLOAT"];
+		$starttime = microtime(true);
 		$startarray = explode(" ", $starttime);
 		//$starttime = $startarray[1] + $startarray[0];
 		return $startarray[0];
 	}
 
 	public function pageLoadTimeEnd() {
-		$endtime = microtime();
+		$endtime = microtime(true);
 		$endarray = explode(" ", $endtime);
 		//$endtime = $endarray[1] + $endarray[0];
 		return $endarray[0];
 	}
 
 };
-$generator = new Generator;
+$generator = new MyGenerator;

@@ -24,8 +24,8 @@ include("../GameEngine/Admin/database.php");
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-  <link REL="shortcut icon" HREF="favicon.ico"/>
-	<title>Admin Control Panel - TravianX</title>
+  <link rel="shortcut icon" href="favicon.ico"/>
+	<title>Admin Control Panel - TravianZ</title>
 	<link rel=stylesheet type="text/css" href="../img/admin/admin.css">
 	<link rel=stylesheet type="text/css" href="../img/admin/acp.css">
 	<link rel=stylesheet type="text/css" href="../img/../img.css">
@@ -118,7 +118,7 @@ if(conf){return true;}else{return false;}
 <div id="lright1"></div>
 
 <div id="ce"></div>
-
+</div>
 
 
 </body>

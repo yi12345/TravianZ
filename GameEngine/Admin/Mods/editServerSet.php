@@ -12,7 +12,7 @@
 if(!isset($_SESSION)) session_start();
 if($_SESSION['access'] < 9) die(ACCESS_DENIED_ADMIN);
 include_once("../../Database.php");
-$id = $_POST['id'];
+$id = (int) $_POST['id'];
 
 $myFile = "../../config.php";
 $fh = fopen($myFile, 'w') or die("<br/><br/><br/>Can't open file: GameEngine\config.php");
@@ -31,7 +31,8 @@ $fh = fopen($myFile, 'w') or die("<br/><br/><br/>Can't open file: GameEngine\con
 		$NEWSBOX3=(NEWSBOX3==false)? "false":"true";
 		$LIMIT_MAILBOX=(LIMIT_MAILBOX==false)? "false":"true";
 		$INCLUDE_ADMIN=(INCLUDE_ADMIN==false)? "false":"true";
-		
+		$SUPPORT_MSGS_IN_ADMIN = (ADMIN_RECEIVE_SUPPORT_MESSAGES == false ? 'false' : 'true');
+		$ADMINS_RAIDABLE = (ADMIN_ALLOW_INCOMING_RAIDS == false ? 'false' : 'true');
 				
 		$text = file_get_contents("constant_format.tpl");
 		$text = preg_replace("'%ERRORREPORT%'", $_POST['error'], $text);
@@ -63,8 +64,6 @@ $fh = fopen($myFile, 'w') or die("<br/><br/><br/>Can't open file: GameEngine\con
 		$text = preg_replace("'%NATURE_REGTIME%'", $_POST['nature_regtime'], $text);
 		$text = preg_replace("'%T4_COMING%'", $T4, $text);
 		$text = preg_replace("'%ACTIVATE%'", $_POST['activate'], $text);
-		$text = preg_replace("'%PLUS_TIME%'", $_POST['plus_time'], $text);
-		$text = preg_replace("'%PLUS_PRODUCTION%'", $_POST['plus_production'], $text);
 		$text = preg_replace("'%MEDALINTERVAL%'", $_POST['medalinterval'], $text);
 		$text = preg_replace("'%GREAT_WKS%'", $_POST['great_wks'], $text);
 		$text = preg_replace("'%TS_THRESHOLD%'", $_POST['ts_threshold'], $text);
@@ -82,6 +81,7 @@ $fh = fopen($myFile, 'w') or die("<br/><br/><br/>Can't open file: GameEngine\con
 		$text = preg_replace("'%BOX2%'", $NEWSBOX2, $text);
 		$text = preg_replace("'%BOX3%'", $NEWSBOX3, $text);
 		$text = preg_replace("'%SSERVER%'", SQL_SERVER, $text);
+		$text = str_replace("%SPORT%", SQL_PORT, $text);
 		$text = preg_replace("'%SUSER%'", SQL_USER, $text);
 		$text = preg_replace("'%SPASS%'", SQL_PASS, $text);
 		$text = preg_replace("'%SDB%'", SQL_DB, $text);
@@ -91,17 +91,35 @@ $fh = fopen($myFile, 'w') or die("<br/><br/><br/>Can't open file: GameEngine\con
 		$text = preg_replace("'%MAX_MAILS%'", MAX_MAIL, $text);
 		$text = preg_replace("'%ARANK%'", $INCLUDE_ADMIN, $text);		
 		$text = preg_replace("'%AEMAIL%'", ADMIN_EMAIL, $text);
+		$text = preg_replace("'%ASUPPMSGS%'", $SUPPORT_MSGS_IN_ADMIN, $text);
+		$text = preg_replace("'%ARAIDS%'", $ADMINS_RAIDABLE, $text);
 		$text = preg_replace("'%ANAME%'", ADMIN_NAME, $text);
 		$text = preg_replace("'%UTRACK%'", "", $text);
 		$text = preg_replace("'%UTOUT%'", "", $text);
 		$text = preg_replace("'%DOMAIN%'", DOMAIN, $text);
 		$text = preg_replace("'%HOMEPAGE%'", HOMEPAGE, $text);
-		$text = preg_replace("'%SERVER%'", SERVER, $text);		
+		$text = preg_replace("'%SERVER%'", SERVER, $text);
+		
+		// PLUS settings need to be kept intact
+		$text = preg_replace("'%PLUS_TIME%'", PLUS_TIME, $text);
+		$text = preg_replace("'%PLUS_PRODUCTION%'", PLUS_PRODUCTION, $text);
+		$text = preg_replace("'%PAYPAL_EMAIL%'", (defined('PAYPAL_EMAIL') ? PAYPAL_EMAIL : 'martin@martinambrus.com'), $text);
+		$text = preg_replace("'%PAYPAL_CURRENCY%'", (defined('PAYPAL_CURRENCY') ? PAYPAL_CURRENCY : 'EUR'), $text);
+		$text = preg_replace("'%PLUS_PACKAGE_A_PRICE%'", (defined('PLUS_PACKAGE_A_PRICE') ? PLUS_PACKAGE_A_PRICE : '1,99'), $text);
+		$text = preg_replace("'%PLUS_PACKAGE_A_GOLD%'", (defined('PLUS_PACKAGE_A_GOLD') ? PLUS_PACKAGE_A_GOLD : '60'), $text);
+		$text = preg_replace("'%PLUS_PACKAGE_B_PRICE%'", (defined('PLUS_PACKAGE_B_PRICE') ? PLUS_PACKAGE_B_PRICE : '4,99'), $text);
+		$text = preg_replace("'%PLUS_PACKAGE_B_GOLD%'", (defined('PLUS_PACKAGE_B_GOLD') ? PLUS_PACKAGE_B_GOLD : '120'), $text);
+		$text = preg_replace("'%PLUS_PACKAGE_C_PRICE%'", (defined('PLUS_PACKAGE_C_PRICE') ? PLUS_PACKAGE_C_PRICE : '9,99'), $text);
+		$text = preg_replace("'%PLUS_PACKAGE_C_GOLD%'", (defined('PLUS_PACKAGE_C_GOLD') ? PLUS_PACKAGE_C_GOLD : '360'), $text);
+		$text = preg_replace("'%PLUS_PACKAGE_D_PRICE%'", (defined('PLUS_PACKAGE_D_PRICE') ? PLUS_PACKAGE_D_PRICE : '19,99'), $text);
+		$text = preg_replace("'%PLUS_PACKAGE_D_GOLD%'", (defined('PLUS_PACKAGE_D_GOLD') ? PLUS_PACKAGE_D_GOLD : '1000'), $text);
+		$text = preg_replace("'%PLUS_PACKAGE_E_PRICE%'", (defined('PLUS_PACKAGE_E_PRICE') ? PLUS_PACKAGE_E_PRICE : '49,99'), $text);
+		$text = preg_replace("'%PLUS_PACKAGE_E_GOLD%'", (defined('PLUS_PACKAGE_E_GOLD') ? PLUS_PACKAGE_E_GOLD : '2000'), $text);
 	
 		fwrite($fh, $text);
 		fclose($fh);
 
-$database->query("Insert into ".TB_PREFIX."admin_log values (0,".$id.",'Changed server setting',".time().")");
+$database->query("Insert into ".TB_PREFIX."admin_log values (0,".$id.",'Changed General Server Settings',".time().")");
 
 header("Location: ../../../Admin/admin.php?p=config");
 

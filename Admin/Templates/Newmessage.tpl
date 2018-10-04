@@ -15,11 +15,10 @@ error_reporting(E_ALL ^ E_NOTICE);
 $id = $_GET['uid'];
 if(isset($id))
 {
-	$user = $database->getUserArray($id,1);
 	$varray = $database->getProfileVillages($id);
 	$varmedal = $database->getProfileMedal($id); ?>
 
-	<link href="../<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7c" rel="stylesheet" type="text/css">
+	<link href="../<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7g" rel="stylesheet" type="text/css">
 	<style type="text/css">
 		input.dynamic_img, img.dynamic_img
 		{

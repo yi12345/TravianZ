@@ -11,25 +11,29 @@
 #################################################################################
 
 
+use App\Utils\AccessLogger;
+
 include("GameEngine/Village.php");
-$start = $generator->pageLoadTimeStart();
+AccessLogger::logRequest();
+
+$start_timer = $generator->pageLoadTimeStart();
 $battle->procSim($_POST);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<title><?php echo SERVER_NAME ?></title>
-	<link REL="shortcut icon" HREF="favicon.ico"/>
+	<title><?php echo SERVER_NAME ?> - Combat Simulator</title>
+	<link rel="shortcut icon" href="favicon.ico"/>
 	<meta http-equiv="cache-control" content="max-age=0" />
 	<meta http-equiv="pragma" content="no-cache" />
 	<meta http-equiv="expires" content="0" />
 	<meta http-equiv="imagetoolbar" content="no" />
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<script src="mt-full.js?0faaa" type="text/javascript"></script>
-	<script src="unx.js?0faaa" type="text/javascript"></script>
-	<script src="new.js?0faaa" type="text/javascript"></script>
-	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7c" rel="stylesheet" type="text/css" />
-	<link href="<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7c" rel="stylesheet" type="text/css" />
+	<script src="mt-full.js?0faab" type="text/javascript"></script>
+	<script src="unx.js?f4b7g" type="text/javascript"></script>
+	<script src="new.js?0faab" type="text/javascript"></script>
+	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7d" rel="stylesheet" type="text/css" />
+	<link href="<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7g" rel="stylesheet" type="text/css" />
 	<?php
 	if($session->gpack == null || GP_ENABLE == false) {
 	echo "
@@ -101,7 +105,24 @@ if(isset($_POST['result'])) {
         }
     } 
 }
-$target = isset($_POST['target'])? $_POST['target'] : array();
+
+if (!empty($_GET['target'])) {
+    // this only works for Nature, as GET links like this one will come from an oasis
+    if (!$_GET['target'] != 4) {
+        $_GET['target'] = 4;
+    }
+
+    // fill-in session value-array data
+    foreach ($_GET as $key => $value) {
+        if ($key[0] === 'u' && is_numeric($value)) {
+            $form->setValue('a2_' . substr($key, 1), $value);
+        }
+    }
+    
+    
+}
+
+$target = isset($_POST['target'])? $_POST['target'] : (!empty($_GET['target']) ? array((int) $_GET['target']) : array());
 $tribe = isset($_POST['mytribe'])? $_POST['mytribe'] : $session->tribe;
 if(count($target) > 0) {
 	include("Templates/Simulator/att_".preg_replace("/[^a-zA-Z0-9_-]/","",$tribe).".tpl");
@@ -129,20 +150,20 @@ if(count($target) > 0) {
 </tr></thead>
 <tbody><tr>
 	<td>
-		<label><input class="radio" type="radio" name="a1_v" value="1" <?php if($tribe == 1) { echo "checked"; } ?>> Romans</label><br/>
-		<label><input class="radio" type="radio" name="a1_v" value="2" <?php if($tribe == 2) { echo "checked"; } ?>> Teutons</label><br/>
-		<label><input class="radio" type="radio" name="a1_v" value="3" <?php if($tribe == 3) { echo "checked"; } ?>> Gauls</label>
+		<label><input class="radio" type="radio" name="a1_v" value="1" <?php if($tribe == 1) { echo "checked"; } ?>/> Romans</label><br/>
+		<label><input class="radio" type="radio" name="a1_v" value="2" <?php if($tribe == 2) { echo "checked"; } ?>/> Teutons</label><br/>
+		<label><input class="radio" type="radio" name="a1_v" value="3" <?php if($tribe == 3) { echo "checked"; } ?>/> Gauls</label>
 	</td><td>
-		<label><input class="check" type="checkbox" name="a2_v1" value="1" <?php if(in_array(1,$target)) { echo "checked"; } ?>> Romans</label><br/>
+		<label><input class="check" type="checkbox" name="a2_v1" value="1" <?php if(in_array(1,$target)) { echo "checked"; } ?>/> Romans</label><br/>
 
-		<label><input class="check" type="checkbox" name="a2_v2" value="1" <?php if(in_array(2,$target)) { echo "checked"; } ?>> Teutons</label><br/>
-		<label><input class="check" type="checkbox" name="a2_v3" value="1" <?php if(in_array(3,$target)) { echo "checked"; } ?>> Gauls</label><br/>
-		<label><input class="check" type="checkbox" name="a2_v4" value="1" <?php if(in_array(4,$target)) { echo "checked"; } ?>> Nature</label>
+		<label><input class="check" type="checkbox" name="a2_v2" value="1" <?php if(in_array(2,$target)) { echo "checked"; } ?>/> Teutons</label><br/>
+		<label><input class="check" type="checkbox" name="a2_v3" value="1" <?php if(in_array(3,$target)) { echo "checked"; } ?>/> Gauls</label><br/>
+		<label><input class="check" type="checkbox" name="a2_v4" value="1" <?php if(in_array(4,$target)) { echo "checked"; } ?>/> Nature</label>
 		</td><td>
-		<label><input class="radio" type="radio" name="ktyp" value="0" <?php if($form->getValue('ktyp') == 0 || $form->getValue('ktyp') == "") { echo "checked"; } ?>> normal</label><br/>
+		<label><input class="radio" type="radio" name="ktyp" value="0" <?php if($form->getValue('ktyp') == 0 || $form->getValue('ktyp') == "") { echo "checked"; } ?>/> normal</label><br/>
 
-		<label><input class="radio" type="radio" name="ktyp" value="1" <?php if($form->getValue('ktyp') == 1) { echo "checked"; } ?>> raid</label><br/>
-		<label><input type="hidden" name="uid" value="<?php echo $session->uid; ?>"></label>
+		<label><input class="radio" type="radio" name="ktyp" value="1" <?php if($form->getValue('ktyp') == 1) { echo "checked"; } ?>/> raid</label><br/>
+		<label><input type="hidden" name="uid" value="<?php echo $session->uid; ?>" /></label>
 	</td>
 </tr></tbody>
 </table>
@@ -150,7 +171,7 @@ if(count($target) > 0) {
 <p class="btn"><input type="image" value="ok" name="s1" id="btn_ok" class="dynamic_img" src="img/x.gif" alt="OK" /></p>
 </form>
 </div>
-</br></br></br></br><div id="side_info">
+<br /><br /><br /><br /><div id="side_info">
 <?php
 include("Templates/multivillage.tpl");
 include("Templates/quest.tpl");
@@ -171,7 +192,7 @@ include("Templates/res.tpl");
 <div id="ltime">
 <div id="ltimeWrap">
 Calculated in <b><?php
-echo round(($generator->pageLoadTimeEnd()-$start)*1000);
+echo round(($generator->pageLoadTimeEnd()-$start_timer)*1000);
 ?></b> ms
 
 <br />Server time: <span id="tp1" class="b"><?php echo date('H:i:s'); ?></span>

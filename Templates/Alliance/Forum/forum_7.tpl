@@ -11,6 +11,7 @@ foreach($topics as $arr) {
 	<input type="hidden" name="s" value="2">
 	<input type="hidden" name="pid" value="<?php echo $_GET['pid']; ?>">
 	<input type="hidden" name="tid" value="<?php echo $_GET['tid']; ?>">
+	<input type="hidden" name="fid2" value="<?php echo $_GET['fid2']; ?>">
 	<input type="hidden" name="newpost" value="1">
 
 	<input type="hidden" name="checkstr" value="c0d"><table cellpadding="1" cellspacing="1" id="new_post"><thead>
@@ -72,5 +73,6 @@ foreach($topics as $arr) {
 <span style="color: #DD0000"><b>Warning:</b> you can't use the values <b>[message]</b> or <b>[/message]</b> in your post because it can cause problem with bbcode system.</span>
 <?php }else{
 header("Location: banned.php");
+exit;
 }
 ?>

@@ -64,6 +64,7 @@ $troops = "".$_POST['t1']."+".$_POST['t2']."+".$_POST['t3']."+".$_POST['t4']."+"
 		$database->editSlotFarm($_GET['eid'], $_POST['lid'], $Wref, $WrefX, $WrefY, $distance, $_POST['t1'], $_POST['t2'], $_POST['t3'], $_POST['t4'], $_POST['t5'], $_POST['t6'], $_POST['t7'], $_POST['t8'], $_POST['t9'], $_POST['t10']);
         
         header("Location: build.php?id=39&t=99");
+		exit;
 }
 }
 if($FLData['owner'] == $session->uid){
@@ -79,7 +80,7 @@ if($FLData['owner'] == $session->uid){
 		<div class="boxes boxesColor gray"><div class="boxes-tl"></div><div class="boxes-tr"></div><div class="boxes-tc"></div><div class="boxes-ml"></div><div class="boxes-mr"></div><div class="boxes-mc"></div><div class="boxes-bl"></div><div class="boxes-br"></div><div class="boxes-bc"></div><div class="boxes-contents cf">
 
 <?php
-$getlid = $database->getRaidList($_GET["eid"]);
+$getlid = $database->getRaidList($database->escape($_GET["eid"]));
 $lid2 = $getlid['lid'];
 ?>
 		<input type="hidden" name="action" value="editSlot">
@@ -92,8 +93,8 @@ $lid2 = $getlid['lid'];
 					<td>
 						<select onchange="getTargetsByLid();" id="lid" name="lid">
 <?php
-$sql = mysql_query("SELECT * FROM ".TB_PREFIX."farmlist WHERE owner = $session->uid ORDER BY name ASC");
-while($row = mysql_fetch_array($sql)){ 
+$sql = mysqli_query($GLOBALS['link'],"SELECT id, name, owner, wref FROM ".TB_PREFIX."farmlist WHERE owner = ".(int) $session->uid." ORDER BY name ASC");
+while($row = mysqli_fetch_array($sql)){ 
 $lid = $row["id"];
 $lname = $row["name"];
 $lowner = $row["owner"];
@@ -126,10 +127,10 @@ $lvname = $database->getVillageField($row["wref"], 'name');
 							<label class="lastTargets">Last targets:</label>
 							<select name="target_id">
 <?php
-$getwref = "SELECT * FROM ".TB_PREFIX."raidlist WHERE lid = $lid2";
+$getwref = "SELECT id, towref FROM ".TB_PREFIX."raidlist WHERE lid = ".(int) $lid2;
 $arraywref = $database->query_return($getwref);
 	echo '<option value="">Select village</option>';
-if(mysql_num_rows(mysql_query($getwref)) != 0){
+if(mysqli_num_rows(mysqli_query($GLOBALS['link'],$getwref)) != 0){
 foreach($arraywref as $row){
 $towref = $row["towref"];
 $tocoor = $database->getCoor($towref);
@@ -166,5 +167,6 @@ $vill[$towref] = 1;
 <?php
 }else{
 header("Location: build.php?id=39&t=99");
+exit;
 }
 ?>
