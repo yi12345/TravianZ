@@ -1,13 +1,19 @@
 <?php
 
-/** --------------------------------------------------- **\
-| ********* DO NOT REMOVE THIS COPYRIGHT NOTICE ********* |
-+---------------------------------------------------------+
-| Credits:     All the developers including the leaders:  |
-|              Advocaite & Dzoki & Donnchadh              |
-|                                                         |
-| Copyright:   TravianX Project All rights reserved       |
-\** --------------------------------------------------- **/
+#################################################################################
+##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
+## --------------------------------------------------------------------------- ##
+##  Project:       TravianZ                                                    ##
+##  Version:       01.09.2013                    			       			   ## 
+##  Filename       create_account.php                                          ##
+##  Developed by:  Dzoki , Advocaite , Donnchadh , yi12345 , Shadow , MisterX  ## 
+##  Fixed by:      Shadow & MisterX - Scouting all players , artefact names.   ##
+##  License:       TravianZ Project                                            ##
+##  Copyright:     TravianZ (c) 2010-2013. All rights reserved.                ##
+##  URLs:          http://travian.shadowss.ro                		           ##
+##  Source code:   http://github.com/Shadowss/TravianZ-by-Shadow/              ## 
+##                                                                             ##
+#################################################################################
 
 
 		include_once ("GameEngine/Session.php");
@@ -92,48 +98,93 @@ if($_POST['password'] != ""){
 		}
 
 /**
- * Creating account & capital village
- */
+ * Creating account & capital village - Fixed by Shadow - cata7007@gmail.com / Skype : cata7007
+ */ 
+
 		$username = "Natars";
 		$password = md5($_POST['password']);
 		$email = "natars@noreply.com";
 		$tribe = 5;
-		$desc = "********************
-					[#natars]
-				********************";
+		$desc = "***************************
+				[#natars]
+			***************************";
 
 		$q = "INSERT INTO " . TB_PREFIX . "users (id,username,password,access,email,timestamp,tribe,location,act,protect) VALUES (3, '$username', '$password', " . USER . ", '$email', ".time().", $tribe, '', '', 0)";
 		mysql_query($q);
 		unset($q);
 		$uid = $database->getUserField($username, 'id', 1);
-		generateBase(0, $uid, $username);
-		$wid = mysql_fetch_assoc(mysql_query("SELECT * FROM " . TB_PREFIX . "vdata WHERE owner = $uid"));
-		$q = "UPDATE " . TB_PREFIX . "vdata SET pop = 834 WHERE owner = $uid";
-		mysql_query($q) or die(mysql_error());
-		$q2 = "UPDATE " . TB_PREFIX . "users SET access = 2 WHERE id = $uid";
-		mysql_query($q2) or die(mysql_error());
-		if(SPEED > 3) {
-			$speed = 5;
-		} else {
-			$speed = SPEED;
-		}
-		$q3 = "UPDATE " . TB_PREFIX . "units SET u41 = " . (64700 * $speed) . ", u42 = " . (295231 * $speed) . ", u43 = " . (180747 * $speed) . ", u44 = " . (20000 * $speed) . ", u45 = " . (364401 * $speed) . ", u46 = " . (217602 * $speed) . ", u47 = " . (2034 * $speed) . ", u48 = " . (1040 * $speed) . " , u49 = " . (1 * $speed) . ", u50 = " . (9 * $speed) . " WHERE vref = " . $wid['wref'] . "";
-		mysql_query($q3) or die(mysql_error());
-		$q4 = "UPDATE " . TB_PREFIX . "users SET desc2 = '$desc' WHERE id = $uid";
-		mysql_query($q4) or die(mysql_error());
+		$arrayXY=array();
+        $arrayXY=array
+        (
+            array(WORLD_MAX, WORLD_MAX),
+            array(WORLD_MAX, -WORLD_MAX),
+            array(-WORLD_MAX, -WORLD_MAX),
+            array(WORLD_MAX-1, WORLD_MAX),
+            array(WORLD_MAX, WORLD_MAX-1),
+            array(-WORLD_MAX, WORLD_MAX-1),
+            array(WORLD_MAX-1, -WORLD_MAX),
+            array(WORLD_MAX-1, WORLD_MAX-1),
+            array(WORLD_MAX, -WORLD_MAX+1),
+            array(WORLD_MAX-1, -WORLD_MAX+1),
+            array(-WORLD_MAX+1, -WORLD_MAX+1),
+            array(WORLD_MAX-2, WORLD_MAX),
+            array(WORLD_MAX-2, -WORLD_MAX),
+            array(WORLD_MAX-2, WORLD_MAX-1),
+            array(WORLD_MAX-1, WORLD_MAX-2),
+            array(-WORLD_MAX+2, WORLD_MAX),
+            array(-WORLD_MAX+2, WORLD_MAX-1),
+            array(-WORLD_MAX+2, -WORLD_MAX+2)
+        );
+        $status=0;
+        $i=0;
+        while ($i<=17) {
+            $wid = $database->getVilWref($arrayXY[$i][0],$arrayXY[$i][1]);
+            $status = $database->getVillageState($wid);
+            $i++;
+            if ($status==0) break;
+        }
+        if($status != 0) { //have taken then random
+            generateBase(0, $uid, $username);
+            $status = 1;
+        }
+        if($status == 0) {
+            $database->setFieldTaken($wid);
+            $database->addVillage($wid, $uid, $username, 1);
+            $database->addResourceFields($wid, $database->getVillageType($wid));
+            $database->addUnits($wid);
+            $database->addTech($wid);
+            $database->addABTech($wid);
+            $database->updateUserField($uid, "access", USER, 1);
+        }
+                
+        $wid = mysql_fetch_assoc(mysql_query("SELECT * FROM " . TB_PREFIX . "vdata WHERE owner = $uid"));
+        $q = "UPDATE " . TB_PREFIX . "vdata SET pop = 834 WHERE owner = $uid";
+        mysql_query($q) or die(mysql_error());
+        $q2 = "UPDATE " . TB_PREFIX . "users SET access = 2 WHERE id = $uid";
+        mysql_query($q2) or die(mysql_error());
+        if(SPEED > 3) {
+            $speed = 5;
+        } else {
+            $speed = SPEED;
+        }
+        $q3 = "UPDATE " . TB_PREFIX . "units SET u41 = " . (64700 * $speed) . ", u42 = " . (295231 * $speed) . ", u43 = " . (180747 * $speed) . ", u44 = " . (20000 * $speed) . ", u45 = " . (364401 * $speed) . ", u46 = " . (217602 * $speed) . ", u47 = " . (2034 * $speed) . ", u48 = " . (1040 * $speed) . " , u49 = " . (1 * $speed) . ", u50 = " . (9 * $speed) . " WHERE vref = " . $wid['wref'] . "";
+        mysql_query($q3) or die(mysql_error());
+        $q4 = "UPDATE " . TB_PREFIX . "users SET desc2 = '$desc' WHERE id = $uid";
+        mysql_query($q4) or die(mysql_error());
 		
 /**
- * SCOUTING ALL PLAYERS
+ * SCOUTING ALL PLAYERS FIX BY MisterX
  */
  
-		$natar = mysql_fetch_array(mysql_query("SELECT * FROM " . TB_PREFIX . "vdata WHERE owner = $uid and capital = 1"));
-		$multiplier = NATARS_UNITS;
-		$q = "SELECT * FROM " . TB_PREFIX . "vdata WHERE capital = 1 and owner > 5";
-		$array = $database->query_return($q);
-		foreach($array as $vill){
-		$ref = $database->addAttack($natar['wref'], 0, 0, 0, 1500*$multiplier, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0, 0);
-		$database->addMovement(3, $natar['wref'], $vill['wref'], $ref, time(), time()+1);
-		}
+ 		$natar = mysql_fetch_array(mysql_query("SELECT * FROM " . TB_PREFIX . "vdata WHERE owner = $uid and capital = 1"));
+  		$multiplier = NATARS_UNITS;
+  		$q = "SELECT * FROM " . TB_PREFIX . "vdata WHERE capital = '1' and owner > '5'";
+  		$array = $database->query_return($q);
+        	$sendspytroops = 1500 * $multiplier;
+  		foreach($array as $vill){
+  		$ref = $database->addAttack($natar['wref'], 0, 0, 0, $sendspytroops, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0, 0);
+  		$database->addMovement(3, $natar['wref'], $vill['wref'], $ref, time(), time()+10000);
+  		}
 
 /**
  * SMALL ARTEFACTS
@@ -141,7 +192,7 @@ if($_POST['password'] != ""){
 		function Artefact($uid, $type, $size, $art_name, $village_name, $desc, $effect, $img) {
 			global $database;
 			$kid = rand(1, 4);
-			$wid = $database->generateBase($kid);
+			$wid = $database->generateBase($kid, 1);
 			$database->addArtefact($wid, $uid, $type, $size, $art_name, $desc, $effect, $img);
 			$database->setFieldTaken($wid);
 			$database->addVillage($wid, $uid, $village_name, '0');
@@ -172,31 +223,31 @@ if($_POST['password'] != ""){
  * THE ARCHITECTS
  */
 
-		$desc = 'All buildings in the area of effect are stronger. This means that you will need more catapults to damage buildings protected by this artifacts powers.';
+		$desc = ARCHITECTS_DESC;
 
 
-		$vname = 'Diamond Chisel';
+		$vname = ARCHITECTS_SMALLVILLAGE;
 		$effect = '(4x)';
 		for($i > 1; $i < 6; $i++) {
-			Artefact($uid, 1, 1, 'The architects slight secret', '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type1.gif');
+			Artefact($uid, 1, 1, ARCHITECTS_SMALL, '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type1.gif');
 		}
 
 		unset($i);
 		unset($vname);
 		unset($effect);
-		$vname = 'Giant Marble Hammer';
+		$vname = ARCHITECTS_LARGEVILLAGE;
 		$effect = '(3x)';
 		for($i > 1; $i < 4; $i++) {
-			Artefact($uid, 1, 2, 'The architects great secret', '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type1.gif');
+			Artefact($uid, 1, 2, ARCHITECTS_LARGE, '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type1.gif');
 		}
 
 		unset($i);
 		unset($vname);
 		unset($effect);
-		$vname = 'Hemons Scrolls';
+		$vname = ARCHITECTS_UNIQUEVILLAGE;
 		$effect = '(5x)';
 		for($i > 1; $i < 1; $i++) {
-			Artefact($uid, 1, 3, 'The architects unique secret', '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type1.gif');
+			Artefact($uid, 1, 3, ARCHITECTS_UNIQUE, '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type1.gif');
 		}
 
 /**
@@ -204,33 +255,33 @@ if($_POST['password'] != ""){
  */
 
 
-		$desc = 'All troops in the area of effect move faster.';
+		$desc = HASTE_DESC;
 
 		unset($i);
 		unset($vname);
 		unset($effect);
-		$vname = 'Opal Horseshoe';
+		$vname = HASTE_SMALLVILLAGE;
 		$effect = '(2x)';
 		for($i > 1; $i < 6; $i++) {
-			Artefact($uid, 2, 1, 'The slight titan boots', '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type2.gif');
+			Artefact($uid, 2, 1, HASTE_SMALL, '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type2.gif');
 		}
 
 		unset($i);
 		unset($vname);
 		unset($effect);
-		$vname = 'Golden Chariot';
+		$vname = HASTE_LARGEVILLAGE;
 		$effect = '(1.5x)';
 		for($i > 1; $i < 4; $i++) {
-			Artefact($uid, 2, 2, 'The great titan boots', '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type2.gif');
+			Artefact($uid, 2, 2, HASTE_LARGE, '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type2.gif');
 		}
 
 		unset($i);
 		unset($vname);
 		unset($effect);
-		$vname = 'Pheidippides Sandals';
+		$vname = HASTE_UNIQUEVILLAGE;
 		$effect = '(3x)';
 		for($i > 1; $i < 1; $i++) {
-			Artefact($uid, 2, 3, 'The unique titan boots', '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type2.gif');
+			Artefact($uid, 2, 3, HASTE_UNIQUE, '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type2.gif');
 		}
 
 /**
@@ -238,33 +289,33 @@ if($_POST['password'] != ""){
  */
 
 
-		$desc = 'All spies (Scouts, Pathfinders, and Equites Legati) increase their spying ability. In addition, with all versions of this artifact you can see the incoming TYPE of troops but not how many there are.';
+		$desc =  EYESIGHT_DESC;
 
 		unset($i);
 		unset($vname);
 		unset($effect);
-		$vname = 'Tale of a Rat';
+		$vname = EYESIGHT_SMALLVILLAGE;
 		$effect = '(5x)';
 		for($i > 1; $i < 6; $i++) {
-			Artefact($uid, 3, 1, 'The eagles slight eyes', '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type3.gif');
+			Artefact($uid, 3, 1, EYESIGHT_SMALL, '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type3.gif');
 		}
 
 		unset($i);
 		unset($vname);
 		unset($effect);
-		$vname = 'Generals Letter';
+		$vname = EYESIGHT_LARGEVILLAGE;
 		$effect = '(3x)';
 		for($i > 1; $i < 4; $i++) {
-			Artefact($uid, 3, 2, 'The eagles great eyes', '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type3.gif');
+			Artefact($uid, 3, 2, EYESIGHT_LARGE, '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type3.gif');
 		}
 
 		unset($i);
 		unset($vname);
 		unset($effect);
-		$vname = 'Diary of Sun Tzu';
+		$vname = EYESIGHT_UNIQUEVILLAGE;
 		$effect = '(10x)';
 		for($i > 1; $i < 1; $i++) {
-			Artefact($uid, 3, 3, 'The eagles unique eyes', '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type3.gif');
+			Artefact($uid, 3, 3, EYESIGHT_UNIQUE, '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type3.gif');
 		}
 
 /**
@@ -272,33 +323,33 @@ if($_POST['password'] != ""){
  */
 
 
-		$desc = 'All troops in the artifacts range consume less wheat, making it possible to maintain a larger army.';
+		$desc = DIET_DESC;
 
 		unset($i);
 		unset($vname);
 		unset($effect);
-		$vname = 'Silver Platter';
+		$vname = DIET_SMALLVILLAGE;
 		$effect = '(50%)';
 		for($i > 1; $i < 6; $i++) {
-			Artefact($uid, 4, 1, 'Slight diet control', '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type4.gif');
+			Artefact($uid, 4, 1, DIET_SMALL, '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type4.gif');
 		}
 
 		unset($i);
 		unset($vname);
 		unset($effect);
-		$vname = 'Sacred Hunting Bow';
+		$vname = DIET_LARGEVILLAGE;
 		$effect = '(25%)';
 		for($i > 1; $i < 4; $i++) {
-			Artefact($uid, 4, 2, 'Great diet control', '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type4.gif');
+			Artefact($uid, 4, 2, DIET_LARGE, '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type4.gif');
 		}
 
 		unset($i);
 		unset($vname);
 		unset($effect);
-		$vname = 'King Arthurs Chalice';
+		$vname = DIET_UNIQUEVILLAGE;
 		$effect = '(50%)';
 		for($i > 1; $i < 1; $i++) {
-			Artefact($uid, 4, 3, 'Unique diet control', '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type4.gif');
+			Artefact($uid, 4, 3, DIET_UNIQUE, '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type4.gif');
 		}
 
 
@@ -307,33 +358,33 @@ if($_POST['password'] != ""){
  */
 
 
-		$desc = 'Troops are built a certain percentage faster within the scope of the artifact.';
+		$desc = ACADEMIC_DESC;
 
 		unset($i);
 		unset($vname);
 		unset($effect);
-		$vname = 'Scribed Soldiers Oath';
+		$vname = ACADEMIC_SMALLVILLAGE;
 		$effect = '(50%)';
 		for($i > 1; $i < 6; $i++) {
-			Artefact($uid, 5, 1, 'The trainers slight talent', '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type5.gif');
+			Artefact($uid, 5, 1, ACADEMIC_SMALL, '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type5.gif');
 		}
 
 		unset($i);
 		unset($vname);
 		unset($effect);
-		$vname = 'Declaration of War';
+		$vname = ACADEMIC_LARGEVILLAGE;
 		$effect = '(25%)';
 		for($i > 1; $i < 4; $i++) {
-			Artefact($uid, 5, 2, 'The trainers great talent', '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type5.gif');
+			Artefact($uid, 5, 2, ACADEMIC_LARGE, '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type5.gif');
 		}
 
 		unset($i);
 		unset($vname);
 		unset($effect);
-		$vname = 'Memoirs of Alexander the Great';
+		$vname = ACADEMIC_UNIQUEVILLAGE;
 		$effect = '(50%)';
 		for($i > 1; $i < 1; $i++) {
-			Artefact($uid, 5, 3, 'The trainers unique talent', '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type5.gif');
+			Artefact($uid, 5, 3, ACADEMIC_UNIQUE, '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type5.gif');
 		}
 
 
@@ -342,24 +393,24 @@ if($_POST['password'] != ""){
  */
 
 
-		$desc = 'With this building plan you are able to build the Great Granary or Great Warehouse in the Village with the artifact, or the whole account depending on the artifact. As long as you posses that artifact you are able to build and enlarge those buildings.';
+		$desc = STORAGE_DESC;
 
 		unset($i);
 		unset($vname);
 		unset($effect);;
-		$vname = 'Builders Sketch';
-		$effect = '';
+		$vname = STORAGE_SMALLVILLAGE;
+		$effect = '(GG&GW)';
 		for($i > 1; $i < 6; $i++) {
-			Artefact($uid, 6, 1, 'Slight storage masterplan', '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type6.gif');
+			Artefact($uid, 6, 1, STORAGE_SMALL, '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type6.gif');
 		}
 
 		unset($i);
 		unset($vname);
 		unset($effect);
-		$vname = 'Babylonian Tablet';
-		$effect = '';
+		$vname = STORAGE_LARGEVILLAGE;
+		$effect = '(GG&GW)';
 		for($i > 1; $i < 4; $i++) {
-			Artefact($uid, 6, 2, 'Great storage masterplan', '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type6.gif');
+			Artefact($uid, 6, 2, STORAGE_LARGE, '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type6.gif');
 		}
 
 
@@ -368,33 +419,33 @@ if($_POST['password'] != ""){
  */
 
 
-		$desc = 'Cranny capacity is increased by a certain amount for each type of artifact. Catapults can only shoot random on villages within this artifacts power. Exceptions are the WW which can always be targeted and the treasure chamber which can always be targeted, except with the unique artifact. When aiming at a resource field only random resource fields can be hit, when aiming at a building only random buildings can be hit.';
+		$desc = CONFUSION_DESC;
 
 		unset($i);
 		unset($vname);
 		unset($effect);
-		$vname = 'Map of the Hidden Caverns';
+		$vname = CONFUSION_SMALLVILLAGE;
 		$effect = '(200)';
 		for($i > 1; $i < 6; $i++) {
-			Artefact($uid, 7, 1, 'Rivals slight confusion', '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type7.gif');
+			Artefact($uid, 7, 1, CONFUSION_SMALL, '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type7.gif');
 		}
 
 		unset($i);
 		unset($vname);
 		unset($effect);
-		$vname = 'Bottomless Satchel';
+		$vname = CONFUSION_LARGEVILLAGE;
 		$effect = '(100)';
 		for($i > 1; $i < 4; $i++) {
-			Artefact($uid, 7, 2, 'Rivals great confusion', '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type7.gif');
+			Artefact($uid, 7, 2, CONFUSION_LARGE, '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type7.gif');
 		}
 
 		unset($i);
 		unset($vname);
 		unset($effect);
-		$vname = 'Trojan Horse';
+		$vname = CONFUSION_UNIQUEVILLAGE;
 		$effect = '(500)';
 		for($i > 1; $i < 1; $i++) {
-			Artefact($uid, 7, 3, 'Rivals unique confusion', '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type7.gif');
+			Artefact($uid, 7, 3, CONFUSION_UNIQUE, '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type7.gif');
 		}
 
 
@@ -403,64 +454,35 @@ if($_POST['password'] != ""){
  */
 
 
-		$desc = 'Every 24 hours it gets a random effect, bonus, or penalty (all are possible with the exception of great warehouse, great granary and WW building plans). They change effect AND scope every 24 hours. The unique artifact will always take positive bonuses.';
+		$desc = FOOL_DESC;
 
 		unset($i);
 		unset($vname);
 		unset($effect);
-		$vname = 'Pendant of Mischief';
+		$vname = FOOL_SMALLVILLAGE;
 		for($i > 1; $i < 5; $i++) {
-			Artefact($uid, 8, 1, 'Artefact of the slight fool', '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type8.gif');
+			Artefact($uid, 8, 1, FOOL_SMALL, '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type8.gif');
 		}
 
 		unset($i);
 		unset($vname);
 		unset($effect);
-		$vname = 'Pendant of Mischief';
+		$vname = FOOL_SMALLVILLAGE;
 		for($i > 1; $i < 5; $i++) {
-			Artefact($uid, 8, 2, 'Artefact of the slight fool', '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type8.gif');
+			Artefact($uid, 8, 2, FOOL_SMALL, '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type8.gif');
 		}
 
 		unset($i);
 		unset($vname);
 		unset($effect);
-		$vname = 'Forbidden Manuscript';
+		$vname = FOOL_UNIQUEVILLAGE;
 		for($i > 1; $i < 1; $i++) {
-			Artefact($uid, 8, 3, 'Artefact of the unique fool', '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type8.gif');
+			Artefact($uid, 8, 3, FOOL_UNIQUE, '' . $vname . '', '' . $desc . '', '' . $effect . '', 'type8.gif');
 		}
 		$myFile = "Templates/text.tpl";
 		$fh = fopen($myFile, 'w') or die("<br/><br/><br/>Can't open file: templates/text.tpl");
 		$text = file_get_contents("Templates/text_format.tpl");
-		$text = preg_replace("'%TEKST%'","Construction plans
-
-
-
-Countless days have passed since the first battles upon the walls of the cursed villages of the Dread Natars, many armies of both the free ones and the Natarian empire struggled and died before the walls of the many strongholds from which the Natars had once ruled all creation. Now with the dust settled and a relative calm having settled in, armies began to count their losses and collect their dead, the stench of combat still lingering in the night air, a smell of a slaughter unforgettable in its extent and brutality yet soon to be dwarfed by yet others. The largest armies of the free ones and the Dread Natars were marshalling for yet another renewed assault upon the coveted former strongholds of the Natarian Empire.
-
-Soon scouts arrived telling of a most awesome sight and a chilling reminder, a dread army of an unfathomable size had been spotted marshalling at the end of the world, the Natarian capital, a force so great and unstoppable that the dust from their march would choke off all light, a force so brutal and ruthless that it would crush all hope. The free people knew that they had to race now, race against time and the endless hordes of the Natarian Empire to raise a Wonder of the World to restore the world to peace and vanquish the Natarian threat.
-
-But to raise such a great Wonder would be no easy task, one would need construction plans created in the distant past, plans of such an arcane nature that even the very wisest of sages knew not their contents or locations.
-
-Tens of thousands of scouts roamed across all existence searching in vain for these mystical plans, looking in all places but the dreaded Natarian Capital, yet could not find them. Today however, they return bearing good news, they return baring the locations of the plans, hidden by the armies of the Natars inside secret strongholds constructed to be hidden from the eyes of man.
-
-Now begins the final stretch, when the greatest armies of the Free people and the Natars will clash across the world for the fate of all that lies under heaven. This is the war that will echo across the eons, this is your war, and here you shall etch your name across history, here you shall become legend.
-
-
-Facts:
-To steal one, the following things must happen:
-you must attack the village (NO Raid!)
-WIN the Attack
-destroy the treasury
-an empty treasury lvl 10 MUST be in the village where that attack came from
-have a hero in an attack
-
-If not, the next attack on that village, winning with a hero and empty treasury will take the building plan.
-
-To build a WW, you must own a plan yourself (you = the WW village owner) from lvl 0 to 49, from 50 to 100 you need an additional plan in your alliance! Two plans in the WW village account would not work!
-
-The construction plans are conquerable immediately when they appear to the server. 
-
-There will be a countdown in game, showing the exact time of the release, 5 days prior to the launch." ,$text);
+		$text = preg_replace("'%TEKST%'",ARTEFACT ,$text);
 		fwrite($fh, $text);
 
 			$query="SELECT * FROM ".TB_PREFIX."users ORDER BY id + 0 DESC";
@@ -471,7 +493,13 @@ There will be a countdown in game, showing the exact time of the release, 5 days
 			}
 
 		echo "Done";
-}else{
+}elseif($database->checkExist('Natars', 0))    {
+?>
+<p>
+<span class="c2">Error: Natar account already exist</span>
+</p>
+<?php
+}else {
 ?>
 <form action="create_account.php" method="post">
 

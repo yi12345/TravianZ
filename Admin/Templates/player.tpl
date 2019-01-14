@@ -12,9 +12,14 @@
 $id = $_GET['uid'];
 if(isset($id))
 {
-	include("../GameEngine/Ranking.php");
+	include_once("../GameEngine/Ranking.php");
 	$varmedal = $database->getProfileMedal($id);
-	$user = $database->getUserArray($id,1);
+	$displayarray = $database->getUserArray($id,1);
+	$user=$displayarray;
+	$profiel="".$user['desc1']."".md5('skJkev3')."".$user['desc2']."";
+	$separator="../";
+	require("../Templates/Profile/medal.php");
+	$profiel=explode("".md5('skJkev3')."", $profiel);
 	$varray = $database->getProfileVillages($id);
 	$refreshicon  = "<img src=\"data:image/png;base64,
 	iVBORw0KGgoAAAANSUhEUgAAAAkAAAAKCAIAAADpZ+PpAAAAAXNSR0IArs4c6QAAAARnQU1BAACx
@@ -39,8 +44,9 @@ if(isset($id))
 			include("playerdeletion.tpl");
 		}
 
-		include("playerinfo.tpl");
-		include("playeradditionalinfo.tpl");
+        include("playerinfo.tpl");
+        include("playerheroinfo.tpl");
+        include("playeradditionalinfo.tpl");  
 		echo "<br />";
 		include("playermedals.tpl");
 		include ("villages.tpl"); ?>

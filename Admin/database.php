@@ -5,23 +5,26 @@
 ##                                                                             ##
 ## --------------------------------------------------------------------------- ##
 ##                                                                             ##
-##  Project:       ZravianX                                                    ##
-##  Version:       2011.11.07                                                  ##
-##  Filename:      GameEngine/Admin/database.php                               ##
+##  Project:       TravianZ                                                    ##
+##  Version:       05.03.2014                                                  ##
+##  Filename:      Admin/database.php      			                           ##
 ##  Developed by:  Dzoki                                                       ##
-##  Edited by:     ZZJHONS                                                     ##
+##  Edited by:     Shadow and ronix                                            ##
 ##  License:       Creative Commons BY-NC-SA 3.0                               ##
-##  Copyright:     ZravianX (c) 2011 - All rights reserved                     ##
-##  URLs:          http://zravianx.zzjhons.com                                 ##
-##  Source code:   http://www.github.com/ZZJHONS/ZravianX                      ##
+##  Copyright:     TravianZ (c) 2014 - All rights reserved                     ##
+##  URLs:          http://travian.shadowss/ro                                  ##
+##  Source code:   https://github.com/Shadowss/TravianZ	                       ##
 ##                                                                             ##
 #################################################################################
-if(!file_exists('GameEngine/config.php') && !file_exists('../../GameEngine/config.php') && !file_exists('../../config.php')){
-include("../../GameEngine/config.php");
-include("../../GameEngine/Data/buidata.php");
+if($gameinstall == 1){
+include_once("../../GameEngine/config.php");
+include_once("../../GameEngine/Data/buidata.php");
 }else{
-include("../GameEngine/config.php");
-include("../GameEngine/Data/buidata.php");
+include_once("../GameEngine/config.php");
+include_once("../GameEngine/Data/buidata.php");
+include_once("../GameEngine/Data/unitdata.php");
+include_once("../GameEngine/Technology.php");
+include_once("../GameEngine/Units.php");
 }
 class adm_DB {
 	var $connection;
@@ -52,6 +55,7 @@ class adm_DB {
 	for ($i = 0; $i <= count($villages)-1; $i++) {
 	  $vid = $villages[$i]['wref'];
 	  $this->recountPop($vid);
+	  $this->recountCP($vid);
 	}
   }
 
@@ -80,6 +84,33 @@ class adm_DB {
 	}
 	return $popT;
   }
+  
+          function buildingCP($f,$lvl){
+        $name = "bid".$f;
+        global $$name;
+                $popT = 0;
+                $dataarray = $$name;
+
+                for ($i = 0; $i <= $lvl; $i++) {
+                        $popT += $dataarray[$i]['cp'];
+                }
+        return $popT;
+        }
+  
+          function recountCP($vid){
+        global $database;
+        $fdata = $database->getResourceLevel($vid);
+        $popTot = 0;
+        for ($i = 1; $i <= 40; $i++) {
+                $lvl = $fdata["f".$i];
+                $building = $fdata["f".$i."t"];
+                if($building){
+                $popTot += $this->buildingCP($building,$lvl);
+                }
+        }
+        $q = "UPDATE ".TB_PREFIX."vdata set cp = $popTot where wref = $vid";
+        mysql_query($q, $this->connection);
+        }
 
 	function getWref($x,$y) {
 		$q = "SELECT id FROM ".TB_PREFIX."wdata where x = $x and y = $y";
@@ -165,19 +196,22 @@ class adm_DB {
 	  mysql_query($q, $this->connection);
   }
 
-	function DelPlayer($uid,$pass){
-	 global $database;
-	$ID = $_SESSION['id'];//$database->getUserField($_SESSION['username'],'id',1);
-	   if($this->CheckPass($pass,$ID)){
-		 $villages = $database->getProfileVillages($uid);
-		  for ($i = 0; $i <= count($villages)-1; $i++) {
-			$this->DelVillage($villages[$i]['wref']);
-		  }
-		$name = $database->getUserField($uid,"username",0);
-		mysql_query("Insert into ".TB_PREFIX."admin_log values (0,$ID,'Deleted user <a>$name</a>',".time().")");
-		$q = "DELETE FROM ".TB_PREFIX."users WHERE `id` = $uid;";
-		 mysql_query($q, $this->connection);
-	}
+    function DelPlayer($uid,$pass){
+     global $database;
+     $ID = $_SESSION['id'];
+       if($this->CheckPass($pass,$ID)){
+         $villages = $database->getProfileVillages($uid);
+          for ($i = 0; $i <= count($villages)-1; $i++) {
+            $this->DelVillage($villages[$i]['wref'], 1);
+          }
+         $q = "DELETE FROM ".TB_PREFIX."hero where uid = $uid";
+        mysql_query($q, $this->connection);
+ 
+        $name = $database->getUserField($uid,"username",0);
+        mysql_query("Insert into ".TB_PREFIX."admin_log values (0,$ID,'Deleted user <a>$name</a>',".time().")");
+        $q = "DELETE FROM ".TB_PREFIX."users WHERE `id` = $uid;";
+         mysql_query($q, $this->connection);
+    }
   }
 
   function getUserActive() {
@@ -198,33 +232,245 @@ class adm_DB {
 	}
   }
 
-	function DelVillage($wref){
-	  $q = "SELECT * FROM ".TB_PREFIX."vdata WHERE `wref` = $wref and capital = 0";
-	  $result = mysql_query($q, $this->connection);
-	if(mysql_num_rows($result) > 0){
-	mysql_query("Insert into ".TB_PREFIX."admin_log values (0,".$_SESSION['id'].",'Deleted village <b>$wref</b>',".time().")");
-	$q = "DELETE FROM ".TB_PREFIX."vdata WHERE `wref` = $wref";
-	  mysql_query($q, $this->connection);
-	$q = "DELETE FROM ".TB_PREFIX."units WHERE `vref` = $wref";
-	mysql_query($q, $this->connection);
-	$q = "DELETE FROM ".TB_PREFIX."bdata WHERE `wid` = $wref";
-	mysql_query($q, $this->connection);
-	$q = "DELETE FROM ".TB_PREFIX."abdata WHERE `wid` = $wref";
-	mysql_query($q, $this->connection);
-	$q = "DELETE FROM ".TB_PREFIX."fdata WHERE `vref` = $wref";
-	mysql_query($q, $this->connection);
-	$q = "DELETE FROM ".TB_PREFIX."training WHERE `vref` = $wref";
-	mysql_query($q, $this->connection);
-	$q = "DELETE FROM ".TB_PREFIX."movement WHERE `from` = $wref";
-	mysql_query($q, $this->connection);
-	$q = "UPDATE ".TB_PREFIX."wdata SET `occupied` = '0' WHERE `id` = $wref";
-	mysql_query($q, $this->connection);
-	}
-  }
+    function DelVillage($wref, $mode=0){
+        global $database;
+        if($mode==0){
+            $q = "SELECT * FROM ".TB_PREFIX."vdata WHERE `wref` = $wref and capital = 0";
+      }else{
+        $q = "SELECT * FROM ".TB_PREFIX."vdata WHERE `wref` = $wref";
+      }
+        $result = mysql_query($q, $this->connection);
+        if(mysql_num_rows($result) > 0){
+            mysql_query("Insert into ".TB_PREFIX."admin_log values (0,".$_SESSION['id'].",'Deleted village <b>$wref</b>',".time().")");
+
+            $database->clearExpansionSlot($wref);
+        
+            $q = "DELETE FROM ".TB_PREFIX."abdata where vref = $wref";
+            mysql_query($q, $this->connection);
+            $q = "DELETE FROM ".TB_PREFIX."bdata where wid = $wref";
+            mysql_query($q, $this->connection);
+            $q = "DELETE FROM ".TB_PREFIX."market where vref = $wref";
+            mysql_query($q, $this->connection);
+            $q = "DELETE FROM ".TB_PREFIX."odata where wref = $wref";
+            mysql_query($q, $this->connection);
+            $q = "DELETE FROM ".TB_PREFIX."research where vref = $wref";
+            mysql_query($q, $this->connection);
+            $q = "DELETE FROM ".TB_PREFIX."tdata where vref = $wref";
+            mysql_query($q, $this->connection);
+            $q = "DELETE FROM ".TB_PREFIX."fdata where vref = $wref";
+            mysql_query($q, $this->connection);
+            $q = "DELETE FROM ".TB_PREFIX."training where vref = $wref";
+            mysql_query($q, $this->connection);
+            $q = "DELETE FROM ".TB_PREFIX."units where vref = $wref";
+            mysql_query($q, $this->connection);
+            $q = "DELETE FROM ".TB_PREFIX."farmlist where wref = $wref";
+            mysql_query($q, $this->connection);
+            $q = "DELETE FROM ".TB_PREFIX."raidlist where towref = $wref";
+            mysql_query($q, $this->connection);
+        
+            $q = "DELETE FROM ".TB_PREFIX."movement where `from` = $wref and proc=0";
+            mysql_query($q, $this->connection);
+                
+            $getmovement = $database->getMovement(3,$wref,1);
+            foreach($getmovement as $movedata) {
+                $time = microtime(true);
+                $time2 = $time - $movedata['starttime'];
+                $database->setMovementProc($movedata['moveid']);
+                $database->addMovement(4,$movedata['to'],$movedata['from'],$movedata['ref'],$time,$time+$time2);
+            
+            }
+
+            //check    return enforcement from del village
+            $this->returnTroops($wref);
+        
+            $q = "DELETE FROM ".TB_PREFIX."vdata WHERE `wref` = $wref";
+            mysql_query($q, $this->connection);
+    
+            if (mysql_affected_rows()>0) {
+                $q = "UPDATE ".TB_PREFIX."wdata set occupied = 0 where id = $wref";
+                mysql_query($q, $this->connection);
+            
+                $getprisoners = $database->getPrisoners($wref);
+                foreach($getprisoners as $pris) {
+                    $troops = 0;
+                    for($i=1;$i<12;$i++){
+                        $troops += $pris['t'.$i];
+                    }
+                    $database->modifyUnit($pris['wref'],array("99o"),array($troops),array(0));
+                    $database->deletePrisoners($pris['id']);
+                }
+                $getprisoners = $database->getPrisoners3($wref);
+                foreach($getprisoners as $pris) {
+                    $troops = 0;
+                    for($i=1;$i<12;$i++){
+                        $troops += $pris['t'.$i];
+                    }
+                    $database->modifyUnit($pris['wref'],array("99o"),array($troops),array(0));
+                    $database->deletePrisoners($pris['id']);
+                }
+            }
+        }
+    }
+    
+        public function returnTroops($wref) {
+        global $database;
+
+        $getenforce=$database->getEnforceVillage($wref,0);
+        
+        foreach($getenforce as $enforce) {
+            
+            $to = $database->getVillage($enforce['from']);
+            $Gtribe = "";
+            if ($database->getUserField($to['owner'],'tribe',0) ==  '2'){ $Gtribe = "1"; }
+            else if ($database->getUserField($to['owner'],'tribe',0) == '3'){ $Gtribe =  "2"; }
+            else if ($database->getUserField($to['owner'],'tribe',0) ==  '4'){ $Gtribe = "3"; }
+            else if  ($database->getUserField($to['owner'],'tribe',0) == '5'){ $Gtribe =  "4"; }
+                    
+            $start = ($database->getUserField($to['owner'],'tribe',0)-1)*10+1;
+            $end = ($database->getUserField($to['owner'],'tribe',0)*10);
+
+            $from = $database->getVillage($enforce['from']);
+            $fromcoor = $database->getCoor($enforce['from']);
+            $tocoor = $database->getCoor($enforce['vref']);
+            $fromCor = array('x'=>$tocoor['x'], 'y'=>$tocoor['y']);
+            $toCor = array('x'=>$fromcoor['x'], 'y'=>$fromcoor['y']);
+
+            $speeds = array();
+
+            //find slowest unit.
+            for($i=$start;$i<=$end;$i++){
+                
+                if(intval($enforce['u'.$i]) > 0){
+                    if($unitarray) { reset($unitarray); }
+                    $unitarray = $GLOBALS["u".$i];
+                    $speeds[] = $unitarray['speed'];
+                    //echo print_r(array_keys($speeds))."unitspd\n".$i."trib\n";
+                    
+
+                } else {
+                    $enforce['u'.$i]='0';
+                }
+                
+            }
+            
+            if( intval($enforce['hero']) > 0){
+                $q = "SELECT * FROM ".TB_PREFIX."hero WHERE uid = ".$from['owner']."";
+                $result = mysql_query($q);
+                $hero_f=mysql_fetch_array($result);
+                $hero_unit=$hero_f['unit'];
+                $speeds[] = $GLOBALS['u'.$hero_unit]['speed'];
+            } else {
+                $enforce['hero']='0';
+            }
+            
+            $artefact = count($database->getOwnUniqueArtefactInfo2($from['owner'],2,3,0));
+            $artefact1 = count($database->getOwnUniqueArtefactInfo2($enforce['from'],2,1,1));
+            $artefact2 = count($database->getOwnUniqueArtefactInfo2($from['owner'],2,2,0));
+            if($artefact > 0){
+                $fastertroops = 3;
+            }else if($artefact1 > 0){
+                $fastertroops = 2;
+            }else if($artefact2 > 0){
+                $fastertroops = 1.5;
+            }else{
+                $fastertroops = 1;
+            }
+            $time = round($this->procDistanceTime($fromCor,$toCor,min($speeds),$enforce['from'])/$fastertroops);
+            
+            $foolartefact2 = $database->getFoolArtefactInfo(2,$enforce['from'],$from['owner']);
+            if(count($foolartefact2) > 0){
+                foreach($foolartefact2 as $arte){
+                    if($arte['bad_effect'] == 1){
+                        $time *= $arte['effect2'];
+                    }else{
+                        $time /= $arte['effect2'];
+                        $time = round($time);
+                    }
+                }
+            }
+            $reference =  $database->addAttack($enforce['from'],$enforce['u'.$start],$enforce['u'.($start+1)],$enforce['u'.($start+2)],$enforce['u'.($start+3)],$enforce['u'.($start+4)],$enforce['u'.($start+5)],$enforce['u'.($start+6)],$enforce['u'.($start+7)],$enforce['u'.($start+8)],$enforce['u'.($start+9)],$enforce['hero'],2,0,0,0,0);
+            $database->addMovement(4,$wref,$enforce['from'],$reference,time(),($time+time()));
+            $database->deleteReinf($enforce['id']);
+        }
+    }
+
+    public function getTypeLevel($tid,$vid) {
+        global $village,$database;
+        $keyholder = array();
+        
+        if($vid == 0) {
+            $resourcearray = $village->resarray;
+        } else {
+            $resourcearray = $database->getResourceLevel($vid);
+        }
+        foreach(array_keys($resourcearray,$tid) as $key) {
+            if(strpos($key,'t')) {
+                $key = preg_replace("/[^0-9]/", '', $key);
+                array_push($keyholder, $key);
+            }
+        }
+        $element = count($keyholder);
+        if($element >= 2) {
+            if($tid <= 4) {
+                $temparray = array();
+                for($i=0;$i<=$element-1;$i++) {
+                    array_push($temparray,$resourcearray['f'.$keyholder[$i]]);
+                }
+                foreach ($temparray as $key => $val) {
+                    if ($val == max($temparray))
+                    $target = $key;
+                }
+            }
+            else {
+                $target = 0;
+                for($i=1;$i<=$element-1;$i++) {
+                    if($resourcearray['f'.$keyholder[$i]] > $resourcearray['f'.$keyholder[$target]]) {
+                        $target = $i;
+                    }
+                }
+            }
+        }
+        else if($element == 1) {
+            $target = 0;
+        }
+        else {
+            return 0;
+        }
+        if($keyholder[$target] != "") {
+            return $resourcearray['f'.$keyholder[$target]];
+        }
+        else {
+            return 0;
+        }
+    }
+
+       public function procDistanceTime($coor,$thiscoor,$ref,$vid) {
+        global $bid28,$bid14;
+        
+        $xdistance = ABS($thiscoor['x'] - $coor['x']);
+        if($xdistance > WORLD_MAX) {
+            $xdistance = (2 * WORLD_MAX + 1) - $xdistance;
+        }
+        $ydistance = ABS($thiscoor['y'] - $coor['y']);
+        if($ydistance > WORLD_MAX) {
+            $ydistance = (2 * WORLD_MAX + 1) - $ydistance;
+        }
+        $distance = SQRT(POW($xdistance,2)+POW($ydistance,2));
+        $speed = $ref;
+        if($this->getTypeLevel(14,$vid) != 0 && $distance >= TS_THRESHOLD) {
+            $speed = $speed * ($bid14[$this->getTypeLevel(14,$vid)]['attri']/100) ;
+        }
+
+        if($speed!=0){
+        return round(($distance/$speed) * 3600 / INCREASE_SPEED);
+        }else{
+        return round($distance * 3600 / INCREASE_SPEED);
+        }
+    }
 
 	function DelBan($uid,$id){
 	 global $database;
-	$name = $database->getUserField($uid,"username",0);
+	$name = addslashes($database->getUserField($uid,"username",0));
 	mysql_query("Insert into ".TB_PREFIX."admin_log values (0,".$_SESSION['id'].",'Unbanned user <a href=\'admin.php?p=player&uid=$uid\'>$name</a>',".time().")");
 	$q = "UPDATE ".TB_PREFIX."users SET `access` = '".USER."' WHERE `id` = $uid;";
 	mysql_query($q, $this->connection);
@@ -234,13 +480,13 @@ class adm_DB {
 
   function AddBan($uid,$end,$reason){
 	global $database;
-	$name = $database->getUserField($uid,"username",0);
+	$name = addslashes($database->getUserField($uid,"username",0));
 	mysql_query("Insert into ".TB_PREFIX."admin_log values (0,".$_SESSION['id'].",'Banned user <a href=\'admin.php?p=player&uid=$uid\'>$name</a>',".time().")");
 	$q = "UPDATE ".TB_PREFIX."users SET `access` = '0' WHERE `id` = $uid;";
 	mysql_query($q, $this->connection);
 	$time = time();
 	$admin = $_SESSION['id'];  //$database->getUserField($_SESSION['username'],'id',1);
-	$name = $database->getUserField($uid,'username',0);
+	$name = addslashes($database->getUserField($uid,'username',0));
 	$q = "INSERT INTO ".TB_PREFIX."banlist (`uid`, `name`, `reason`, `time`, `end`, `admin`, `active`) VALUES ($uid, '$name' , '$reason', '$time', '$end', '$admin', '1');";
 	mysql_query($q, $this->connection);
   }

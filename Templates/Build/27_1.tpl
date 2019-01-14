@@ -1,7 +1,5 @@
 <?php
-
-        $artefact1 = $database->getOwnArtefactInfo2($village->wid);
-        $result = mysql_num_rows(mysql_query("SELECT * FROM " . TB_PREFIX . "artefacts WHERE vref = " . $village->wid . ""));
+        $artefact1 = $database->getOwnArtefactInfo3($session->uid);
         $wref = $village->wid;
        $coor = $database->getCoor($wref); 
         function getDistance($coorx1, $coory1, $coorx2, $coory2) {
@@ -34,7 +32,7 @@
         <tbody>
             <?php
 
-        if($result == 0) {
+        if (count($artefact1)==0){
         	echo '<tr><td colspan="4" class="none">You do not own any artefacts.</td></tr>';
         } else {
 		foreach($artefact1 as $artefact){
@@ -111,12 +109,12 @@
         		$coor2 = mysql_fetch_assoc($query);
 
         		
-        		$dist = haversine($coor['x'], $coor['y'], $coor2['x'], $coor2['y']);
+        		$dist = round(getDistance($coor['x'], $coor['y'], $coor2['x'], $coor2['y']),1);
 
         		$rows[$dist] = $row;
 
         	}
-        	ksort($rows, SORT_DESC);
+        	ksort($rows);
         	foreach($rows as $row) {
                 $wref = $village->wid;
                 $coor = $database->getCoor($wref);

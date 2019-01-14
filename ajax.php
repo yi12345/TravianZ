@@ -39,7 +39,19 @@ switch($_GET['f']) {
 	}else {
 	$qact2=null;
 	}
-		include("Templates/Ajax/quest_core.tpl");
-		break;
+	if (isset($_GET['qact3'])){
+        $qact3=preg_replace("/[^a-zA-Z0-9_-]/","",$_GET['qact3']);
+    	}else {
+        $qact3=null;
+    	}  
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+    if (isset($_SESSION['qtyp']) && $_SESSION['qtyp']==37) {
+        include("Templates/Ajax/quest_core.tpl");
+    }else{
+        include("Templates/Ajax/quest_core25.tpl");
+    }    
+        break;
 }
 ?>

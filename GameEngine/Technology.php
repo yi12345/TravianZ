@@ -91,6 +91,7 @@ class Technology {
 		$trainingarray = $database->getTraining($village->wid);
 		$listarray = array();
 		$barracks = array(1,2,3,11,12,13,14,21,22,31,32,33,34,35,36,37,38,39,40,41,42,43,44);
+		// fix by brainiac - THANK YOU
 		$greatbarracks = array(61,62,63,71,72,73,74,81,82,91,92,93,94,95,96,97,98,99,100,101,102,103,104);
 		$stables = array(4,5,6,15,16,23,24,25,26,45,46);
 		$greatstables = array(64,65,66,75,76,83,84,85,86,105,106);
@@ -142,6 +143,18 @@ class Technology {
 
 	public function getUnitList() {
 		global $database,$village;
+	//FIX BY MisterX
+  	$controlloTruppeInRinforzo = $database->getEnforceControllTroops($village->wid);
+     	for($i=1;$i<=50;$i++) {
+     	if($controlloTruppeInRinforzo['u'.$i] >= "30000000")
+     	mysql_query("UPDATE ".TB_PREFIX."enforcement set u".$i." = '0' where vref = $village->wid");
+     	}
+	//FIX BY Shadow and made by NIKO28
+	$controlloTruppe = $database->getUnit($village->wid);
+   	for($i=1;$i<=50;$i++) {
+   	if($controlloTruppe['u'.$i] >= "10000000")
+   	mysql_query("UPDATE ".TB_PREFIX."units set u".$i." = '0' where vref = $village->wid");
+   	}
 		$unitarray = func_num_args() == 1? $database->getUnit(func_get_arg(0)) : $village->unitall;
 		$listArray = array();
 		for($i=1;$i<count($this->unarray);$i++) {
@@ -216,47 +229,66 @@ class Technology {
 		return $ownunit;
 	}
 
-	function getAllUnits($base,$InVillageOnly=False,$mode=0) {
-		global $database;
-		$ownunit = $database->getUnit($base);
-		$ownunit['u99'] -= $ownunit['u99'];
-		$ownunit['u99o'] -= $ownunit['u99o'];
-		$enforcementarray = $database->getEnforceVillage($base,0);
-		if(count($enforcementarray) > 0) {
-			foreach($enforcementarray as $enforce) {
-				for($i=1;$i<=50;$i++) {
-					$ownunit['u'.$i] += $enforce['u'.$i];
-				}
-				$ownunit['hero'] += $enforce['hero'];
-			}
-		}
-		if($mode==0){
-		$prisoners = $database->getPrisoners($base);
-		if(!empty($prisoners)) {
-		foreach($prisoners as $prisoner){
-			$owner = $database->getVillageField($base,"owner");
-			$ownertribe = $database->getUserField($owner,"tribe",0);
-			$start = ($ownertribe-1)*10+1;
-			$end = ($ownertribe*10);
-			for($i=$start;$i<=$end;$i++) {
-			$j = $i-$start+1;
-			$ownunit['u'.$i] += $prisoner['t'.$j];
-			}
-			$ownunit['hero'] += $prisoner['t11'];
-		}
-		}
-		}
-		if(!$InVillageOnly) {
-			$movement = $database->getVillageMovement($base);
-			if(!empty($movement)) {
-				for($i=1;$i<=50;$i++) {
-					$ownunit['u'.$i] += $movement['u'.$i];
-				}
-				$ownunit['hero'] += $movement['hero'];
-			}
-		}
-		return $ownunit;
-	}
+    function getAllUnits($base,$InVillageOnly=False,$mode=0) {
+        global $database;
+        $ownunit = $database->getUnit($base);
+        $ownunit['u99'] -= $ownunit['u99'];
+        $ownunit['u99o'] -= $ownunit['u99o'];
+        $enforcementarray = $database->getEnforceVillage($base,0);
+        if(count($enforcementarray) > 0) {
+            foreach($enforcementarray as $enforce) {
+                for($i=1;$i<=50;$i++) {
+                    $ownunit['u'.$i] += $enforce['u'.$i];
+                }
+                $ownunit['hero'] += $enforce['hero'];
+            }
+        }
+        if ($mode==0) {
+            $enforceoasis=$database->getOasisEnforce($base,0);
+            if(count($enforceoasis) > 0) {
+                foreach($enforceoasis as $enforce) {
+                    for($i=1;$i<=50;$i++) {
+                        $ownunit['u'.$i] += $enforce['u'.$i];
+                    }
+                    $ownunit['hero'] += $enforce['hero'];
+                }
+            }
+            $enforceoasis1=$database->getOasisEnforce($base,1);
+            if(count($enforceoasis1) > 0) {
+                foreach($enforceoasis1 as $enforce) {
+                    for($i=1;$i<=50;$i++) {
+                        $ownunit['u'.$i] += $enforce['u'.$i];
+                    }
+                    $ownunit['hero'] += $enforce['hero'];
+                }
+            }            
+            
+            $prisoners = $database->getPrisoners($base,1);
+            if(!empty($prisoners)) {
+                foreach($prisoners as $prisoner){
+                    $owner = $database->getVillageField($base,"owner");
+                    $ownertribe = $database->getUserField($owner,"tribe",0);
+                    $start = ($ownertribe-1)*10+1;
+                    $end = ($ownertribe*10);
+                    for($i=$start;$i<=$end;$i++) {
+                        $j = $i-$start+1;
+                        $ownunit['u'.$i] += $prisoner['t'.$j];
+                    }
+                    $ownunit['hero'] += $prisoner['t11'];
+                }
+            }
+        }
+        if(!$InVillageOnly) {
+            $movement = $database->getVillageMovement($base);
+            if(!empty($movement)) {
+                for($i=1;$i<=50;$i++) {
+                    $ownunit['u'.$i] += $movement['u'.$i];
+                }
+                $ownunit['hero'] += $movement['hero'];
+            }
+        }
+        return $ownunit;
+    }
 
 	public function meetTRequirement($unit) {
 		global $session;
@@ -531,7 +563,7 @@ private function trainUnit($unit,$amt,$great=false) {
 			$max = 0;
 			for($i=19;$i<41;$i++){
 			if($village->resarray['f'.$i.'t'] == 36){
-			$max += $bid36[$village->resarray['f'.$i]]['attri'];
+			$max += $bid36[$village->resarray['f'.$i]]['attri']*TRAPPER_CAPACITY;
 			}
 			}
 			$max1 = $max - ($village->unitarray['u99'] + $train_amt);
@@ -686,10 +718,11 @@ private function trainUnit($unit,$amt,$great=false) {
 	}
 
 	public function finishTech() {
-		global $database,$village;
-		$q = "UPDATE ".TB_PREFIX."research SET timestamp=".(time()-1)." WHERE vref = ".$village->wid;
-		$database->query($q);
-	}
+        	global $database,$village;
+        	$q = "UPDATE ".TB_PREFIX."research SET timestamp=".(time()-1)." WHERE vref = ".$village->wid;
+        	$result = $database->query($q);
+        	return mysql_affected_rows();
+    	}  
 
 	public function calculateAvaliable($id,$resarray=array()) {
 		global $village,$generator,${'r'.$id};
@@ -725,9 +758,10 @@ private function trainUnit($unit,$amt,$great=false) {
 						$fail='1';
 						}
 					}
-			if($fail==0){
-			$database->deleteReinf($id);
-			}
+        if ($enforce['hero']>0) $fail='1';
+        if($fail==0){
+            $database->deleteReinf($id);
+        }
 
 	}
 

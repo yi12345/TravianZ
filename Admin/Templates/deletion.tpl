@@ -42,7 +42,7 @@ if($_GET['uid'])
 					</tr>
 					<tr>
 						<td>Rank:</td>
-						<td>???.</td>
+						<td><?php $ranking->procRankArray();echo $ranking->getUserRank($user['id']); ?></td>
 						<td>Population:</td>
 						<td><?php echo $totalpop;?></td>
 					</tr>
@@ -78,40 +78,6 @@ if($_GET['uid'])
 						<td colspan="2"><input type="submit" class="c5" value="Delete player"></td>
 					</tr>
 				</tbody>
-			</table>
-			<br /><br /><font color="Red"><b>NOTICE: DELETE ALL PLAYER VILLAGES BELLOW BEFORE DELETING PLAYER!</font></b><br /><br />
-
-			<table id="profile">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Population</th>
-						<th>Coordinates</th>
-						<th></th>
-					</tr>
-					<?php
-						for ($i = 0; $i <= count($varray)-1; $i++)
-						{
-							$coorproc = $database->getCoor($varray[$i]['wref']);
-							if($varray[$i]['capital'])
-							{
-								$capital = '<span class="c">(Capital)</span>';
-								$delLink = '<a href="?action=delVil&did='.$varray[$i]['wref'].'" onClick="return del(\'did\','.$varray[$i]['wref'].');"><img src="../img/Admin/del.gif" class="del"></a>';
-							}
-							else
-							{
-								$capital = '';
-								$delLink = '<a href="?action=delVil&did='.$varray[$i]['wref'].'" onClick="return del(\'did\','.$varray[$i]['wref'].');"><img src="../img/Admin/del.gif" class="del"></a>';
-							} echo '
-							<tr>
-								<td><a href="?p=village&did='.$varray[$i]['wref'].'">'.$varray[$i]['name'].'</a> '.$capital.'</td>
-								<td>'.$varray[$i]['pop'].' <a href="?action=recountPop&did='.$varray[$i]['wref'].'">Check<a/></td>
-								<td>('.$coorproc['x'].'|'.$coorproc['y'].')</td>
-								<td>'.$delLink.' </td>
-							</tr>';
-						}
-					?>
-				</thead>
 			</table>
 		</form><?php
 	}

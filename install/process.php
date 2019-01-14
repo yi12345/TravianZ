@@ -38,6 +38,8 @@ class Process {
 		$text = preg_replace("'%SERVERNAME%'", $_POST['servername'], $text);
 		$text = preg_replace("'%SSTARTDATE%'", $_POST['start_date'], $text);
 		$text = preg_replace("'%SSTARTTIME%'", $_POST['start_time'], $text);
+		$tz = explode(",",$_POST['tzone']);
+                $text = preg_replace("'%STIMEZONE%'", $tz[1], $text);
 		$text = preg_replace("'%LANG%'", $_POST['lang'], $text);
 		$text = preg_replace("'%SPEED%'", $_POST['speed'], $text);
 		$text = preg_replace("'%INCSPEED%'", $_POST['incspeed'], $text);
@@ -75,6 +77,7 @@ class Process {
 		$text = preg_replace("'%ACTIVATE%'", $_POST['activate'], $text);
 		$text = preg_replace("'%ARANK%'", $_POST['admin_rank'], $text);
 		$text = preg_replace("'%QUEST%'", $_POST['quest'], $text);
+		$text = preg_replace("'%QTYPE%'", $_POST['qtype'], $text);  
 		$text = preg_replace("'%BEGINNER%'", $_POST['beginner'], $text);
 		$text = preg_replace("'%STARTTIME%'", time(), $text);
 		$text = preg_replace("'%DOMAIN%'", $_POST['domain'], $text);
@@ -87,10 +90,12 @@ class Process {
 		$text = preg_replace("'%BOX2%'", $_POST['box2'], $text);
 		$text = preg_replace("'%BOX3%'", $_POST['box3'], $text);
 		$text = preg_replace("'%VILLAGE_EXPAND%'", $_POST['village_expand'], $text);
+		$text = preg_replace("'%ERRORREPORT%'", $_POST['error'], $text);
 		$text = preg_replace("'%ERROR%'", $_POST['error'], $text);
 		$text = preg_replace("'%GP_LOCATE%'", $_POST['gp_locate'], $text);
 		$text = preg_replace("'%PLUS_TIME%'", $_POST['plus_time'], $text);
 		$text = preg_replace("'%PLUS_PRODUCTION%'", $_POST['plus_production'], $text);
+		$text = preg_replace("'%MEDALINTERVAL%'", $_POST['medalinterval'], $text);
 		$text = preg_replace("'%GREAT_WKS%'", $_POST['great_wks'], $text);
 		$text = preg_replace("'%TS_THRESHOLD%'", $_POST['ts_threshold'], $text);
 		$text = preg_replace("'%WW%'", $_POST['ww'], $text);

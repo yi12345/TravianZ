@@ -483,7 +483,14 @@ class MYSQLi_DB {
 			if($OasisInfo['conqured'] == 0 || $OasisInfo['conqured'] != 0 && $OasisInfo['loyalty'] < 99 / min(3,(4-$this->VillageOasisCount($OasisInfo['conqured']))) && $troopcount == 0) {
 				$CoordsVillage = $this->getCoor($vref);
 				$CoordsOasis = $this->getCoor($wref);
-				if(abs($CoordsOasis['x']-$CoordsVillage['x'])<=3 && abs($CoordsOasis['y']-$CoordsVillage['y'])<=3) {
+								$max = 2 * WORLD_MAX + 1;
+                		$x1 = intval($CoordsOasis['x']);
+                		$y1 = intval($CoordsOasis['y']);
+                		$x2 = intval($CoordsVillage['x']);
+                		$y2 = intval($CoordsVillage['y']);
+                		$distanceX = min(abs($x2 - $x1), abs($max - abs($x2 - $x1)));
+                		$distanceY = min(abs($y2 - $y1), abs($max - abs($y2 - $y1)));
+                	if ($distanceX<=3 && $distanceY<=3) {
 					return True;
 				} else {
 					return False;
@@ -1053,6 +1060,55 @@ class MYSQLi_DB {
         $q = "INSERT into " . TB_PREFIX . "forum_topic values (0,'$title','$post','$date','$date','$cat','$owner','$alli','$ends','','','$alliance','$player','$coor','$report')";
         mysqli_query($this->connection, $q);
         return mysqli_insert_id($this->connection);
+    }
+
+	function createSurvey($topic, $title, $option1, $option2, $option3, $option4, $option5, $option6, $option7, $option8, $ends) {
+        $q = "INSERT into " . TB_PREFIX . "forum_survey (topic,title,option1,option2,option3,option4,option5,option6,option7,option8,ends) values ('$topic','$title','$option1','$option2','$option3','$option4','$option5','$option6','$option7','$option8','$ends')";
+        return mysqli_query($this->connection, $q);
+    }
+
+	function getSurvey($topic) {
+		$q = "SELECT * FROM " . TB_PREFIX . "forum_survey where topic = $topic";
+		$result = mysql_query($q, $this->connection);
+		return mysqli_fetch_array($result);
+	}
+
+	function checkSurvey($topic) {
+        $q = "SELECT * FROM " . TB_PREFIX . "forum_survey where topic = $topic";
+		$result = mysqli_query($this->connection, $q);
+		if(mysqli_num_rows($result)) {
+			return true;
+		} else {
+			return false;
+		}
+    }
+
+	function Vote($topic, $num, $text) {
+		$q = "UPDATE " . TB_PREFIX . "forum_survey set vote".$num." = vote".$num." + 1, voted = '$text' where topic = ".$topic."";
+		return mysqli_query($this->connection, $q);
+	}
+
+	function checkVote($topic, $uid) {
+        $q = "SELECT * FROM " . TB_PREFIX . "forum_survey where topic = $topic";
+		$result = mysqli_query($this->connection, $q);
+		$array = mysqli_fetch_array($result);
+		$text = $array['voted'];
+		if(preg_match('/,'.$uid.',/',$text)) {
+			return true;
+		} else {
+			return false;
+		}
+    }
+
+	function getVoteSum($topic) {
+        $q = "SELECT * FROM " . TB_PREFIX . "forum_survey where topic = $topic";
+		$result = mysqli_query($this->connection, $q);
+		$array = mysqli_fetch_array($result);
+		$sum = 0;
+		for($i=1;$i<=8;$i++){
+		$sum += $array['vote'.$i];
+		}
+		return $sum;
     }
 
     function CreatPost($post, $tids, $owner, $alliance, $player, $coor, $report) {
